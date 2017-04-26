@@ -2,6 +2,9 @@ package model;
 
 import java.util.Date;
 
+import org.uqbar.commons.utils.Observable;
+
+@Observable
 public class Cuenta {
 	
 	String nombre;
