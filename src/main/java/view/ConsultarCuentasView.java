@@ -32,9 +32,9 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		this.setTitle("Consultar cuentas");
 		
 		new Label(mainPanel).setText("Lista");
-		new List<Empresa>(mainPanel)
-		.bindValueToProperty("empresas")
-		.setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
+		new List<String>(mainPanel)
+		.bindValueToProperty("empresas");
+		//.setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		
 		new Label(mainPanel).setText("Ingrese la empresa");
 		new TextBox(mainPanel).bindValueToProperty("empresa");

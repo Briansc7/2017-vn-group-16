@@ -11,7 +11,8 @@ public class ConsultarCuentasViewModel {
 	private String empresa;
 	private double periodo;
 	
-	private List<Empresa> empresas;
+	private List<String> empresas;
+	
 	
 	public void consultar(){
 		
@@ -25,7 +26,7 @@ public class ConsultarCuentasViewModel {
 		return periodo;
 	}
 	
-	public List<Empresa> getEmpresas() {
+	public List<String> getEmpresas() {
 		return empresas;
 	}
 	
@@ -37,7 +38,7 @@ public class ConsultarCuentasViewModel {
 		this.periodo = periodo;
 	}
 	
-	public void setEmpresas(List<Empresa> empresas) {
+	public void setEmpresas(List<String> empresas) {
 		this.empresas = empresas;
 	}
 }
