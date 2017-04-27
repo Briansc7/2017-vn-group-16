@@ -5,10 +5,26 @@ import org.uqbar.commons.utils.Observable;
 @Observable
 public class ConsultarCuentasViewModel {
 	
-	String empresa;
-	double periodo;
+	private String empresa;
+	private double periodo;
 	
 	public void consultar(){
 		
+	}
+	
+	public String getEmpresa() {
+		return empresa;
+	}
+	
+	public double getPeriodo() {
+		return periodo;
+	}
+	
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
+	}
+	
+	public void setPeriodo(double periodo) {
+		this.periodo = periodo;
 	}
 }

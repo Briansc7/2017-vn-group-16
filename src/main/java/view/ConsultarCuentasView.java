@@ -20,11 +20,13 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
+		this.setTitle("Consultar cuentas");
+		
 		new Label(mainPanel).setText("Ingrese la empresa");
-		new TextBox(mainPanel);
+		new TextBox(mainPanel).bindValueToProperty("empresa");
 		
 		new Label(mainPanel).setText("Ingrese un periodo");
-		new TextBox(mainPanel);
+		new TextBox(mainPanel).bindValueToProperty("periodo");
 		
 		new Button(mainPanel).setCaption("Consultar")
 							.onClick(() -> this.getModelObject().consultar());
