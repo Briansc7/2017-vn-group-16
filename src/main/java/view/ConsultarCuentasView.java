@@ -1,9 +1,13 @@
 package view;
 
-import org.eclipse.swt.widgets.List;
+
+
+
+
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
+import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
