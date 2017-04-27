@@ -7,7 +7,7 @@ package view;
 import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
-import org.uqbar.arena.widgets.List;
+import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
@@ -32,7 +32,7 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		this.setTitle("Consultar cuentas");
 		
 		new Label(mainPanel).setText("Lista");
-		new List<String>(mainPanel)
+		new Selector<String>(mainPanel)
 		.bindValueToProperty("empresas");
 		//.setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		
