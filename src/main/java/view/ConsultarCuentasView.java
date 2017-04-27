@@ -1,5 +1,7 @@
 package view;
 
+import org.eclipse.swt.widgets.List;
+import org.uqbar.arena.bindings.PropertyAdapter;
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
@@ -9,8 +11,11 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+
 import model.Cuenta;
 import viewModel.ConsultarCuentasViewModel;
+
+import model.Empresa;
 
 public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
@@ -21,6 +26,11 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consultar cuentas");
+		
+		new Label(mainPanel).setText("Lista");
+		new List<Empresa>(mainPanel)
+		.bindValueToProperty("empresas")
+		.setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		
 		new Label(mainPanel).setText("Ingrese la empresa");
 		new TextBox(mainPanel).bindValueToProperty("empresa");
