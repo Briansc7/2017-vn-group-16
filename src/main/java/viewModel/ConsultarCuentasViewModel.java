@@ -1,5 +1,6 @@
 package viewModel;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
@@ -11,7 +12,7 @@ public class ConsultarCuentasViewModel {
 	private String empresa;
 	private double periodo;
 	
-	private List<String> empresas;
+	private List<String> empresas = Arrays.asList("empresa 1", "empresa 2", "empresa 3", "empresa 4", "empresa 5");
 	
 	
 	public void consultar(){

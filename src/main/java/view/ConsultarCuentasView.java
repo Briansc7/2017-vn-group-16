@@ -31,13 +31,13 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consultar cuentas");
 		
-		new Label(mainPanel).setText("Lista");
-		new Selector<String>(mainPanel)
-		.bindValueToProperty("empresas");
+		new Label(mainPanel).setText("Ingrese la empresa");
+		Selector<String> selectorEmpresas = new Selector<String>(mainPanel);
+		selectorEmpresas.bindValueToProperty("empresa");
+		selectorEmpresas.bindItemsToProperty("empresas");
 		//.setAdapter(new PropertyAdapter(Empresa.class, "nombre"));
 		
-		new Label(mainPanel).setText("Ingrese la empresa");
-		new TextBox(mainPanel).bindValueToProperty("empresa");
+
 		
 		new Label(mainPanel).setText("Ingrese un periodo");
 		new TextBox(mainPanel).bindValueToProperty("periodo");
