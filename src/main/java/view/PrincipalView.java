@@ -16,18 +16,19 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel>{
 	}
 	
 	//NotNullObservable elementSelected = new NotNullObservable("habilitarOpciones");
-	
+
 	@Override
 	protected void addActions(Panel panelActions) {
-		Button obtenerAsignaciones = new Button(panelActions)
+		Button _consultarCuentas = new Button(panelActions)
 		.setCaption("Consultar cuentas")
 		.onClick(() -> this.consultarCuentas());
 		
 		
 	}
-	
+
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
+		this.setTitle("Menu principal");
 		
 	}
 	
