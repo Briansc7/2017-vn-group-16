@@ -15,8 +15,6 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		super(parent, new PrincipalViewModel());
 	}
 	
-	//NotNullObservable elementSelected = new NotNullObservable("habilitarOpciones");
-
 	@Override
 	protected void addActions(Panel panelActions) {
 		new Button(panelActions)

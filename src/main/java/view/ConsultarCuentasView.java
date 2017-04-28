@@ -1,6 +1,5 @@
 package view;
 
-import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
@@ -20,18 +19,6 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		this.getModelObject().cargarEmpresas();
 	}
 	
-	//NotNullObservable observable = new NotNullObservable("habilitar");
-	
-	@Override
-	protected void createMainTemplate(Panel mainPanel) {
-		//this.setTaskDescription("Ingrese los parámetros de búsqueda");
-
-		super.createMainTemplate(mainPanel);
-
-		this.crearSelectorPeriodos(mainPanel);
-		//this.crearTablaDeCuentas(mainPanel);
-	}
-	
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consultar cuentas");
@@ -39,42 +26,32 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
 		new Label(mainPanel).setText("Ingrese la empresa");
 		Selector<Empresa> selectorEmpresas = new Selector<Empresa>(mainPanel);
-		//selectorEmpresas.allowNull(false);
 		selectorEmpresas.bindValueToProperty("empresaElegida");
 		selectorEmpresas.bindItemsToProperty("empresas");
-		//selectorEmpresas.onSelection(() -> this.getModelObject().cargarPeriodos());
+		selectorEmpresas.onSelection(() -> this.getModelObject().limpiarPeriodos());
 		
-		
-		//selectorPeriodo.bindEnabled(observable);
+		new Label(mainPanel).setText("Ingrese el periodo");
+		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);
+		selectorPeriodo.bindValueToProperty("periodoElegido");
+		selectorPeriodo.bindItemsToProperty("periodos");
 
-		
-		/*new Button(mainPanel).setCaption("Consultar")
-							.onClick(() -> this.getModelObject().consultar());
-		*/
-		/*Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
+
+		Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
 		tablaDeCuentas.setNumberVisibleRows(20);
-		//tablaDeCuentas.bindEnabled(observable);
 		
 		tablaDeCuentas.bindItemsToProperty("cuentas");
 
 		Column<Cuenta> columnaCuenta = new Column<Cuenta>(tablaDeCuentas);
 		columnaCuenta.setTitle("Cuenta");
-		columnaCuenta.setFixedSize(100);
+		columnaCuenta.setFixedSize(200);
 		columnaCuenta.bindContentsToProperty("nombre");
 		
 		Column<Cuenta> columnaValor = new Column<Cuenta>(tablaDeCuentas);
 		columnaValor.setTitle("Valor");
 		columnaValor.setFixedSize(100);
-		columnaValor.bindContentsToProperty("valor");*/
+		columnaValor.bindContentsToProperty("valor");
 		
 	}
 	
-	protected void crearSelectorPeriodos(Panel mainPanel) {
-		new Label(mainPanel).setText("Ingrese el periodo");
-		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);
-		//selectorPeriodo.allowNull(false);
-		selectorPeriodo.bindValueToProperty("periodoElegido");
-		selectorPeriodo.bindItemsToProperty("periodos");
-		selectorPeriodo.onSelection(() -> this.getModelObject().cargarTabla());
-	}
+	
 }

@@ -12,7 +12,7 @@ import model.Cuenta;
 import model.Empresa;
 
 @Observable
-public class ConsultarCuentasViewModel{
+public class ConsultarCuentasViewModel{// extends ObservableObject{
 	
 	private ConsultarCuentasModel model;
 	private Boolean habilitar;
@@ -20,36 +20,18 @@ public class ConsultarCuentasViewModel{
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
 	
-	private List<Cuenta> cuentas = Arrays.asList();
-	private List<Empresa> empresas;// = Arrays.asList("empresa 1", "empresa 2", "empresa 3", "empresa 4", "empresa 5");
-	private List<Integer> periodos = Arrays.asList(0);
-;
+	private List<Empresa> empresas;// = Arrays.asList();// = Arrays.asList("empresa 1", "empresa 2", "empresa 3", "empresa 4", "empresa 5");
+	private List<Integer> periodos = Arrays.asList();
 	
 	public void cargarEmpresas() {
 		this.model  = new ConsultarCuentasModel();
 		this.empresas = this.model.leerEmpresas();
 	}
 	
-	/*public void consultar(){
-		
-	}*/
-	
-	
-	
-	public void cargarPeriodos(){
-		this.periodos = this.empresaElegida.getPeriodos();
-		//this.setFieldValue("periodos", this.empresaElegida.getPeriodos());
-		
-	}
-	
-	/*@Dependencies("periodoElegido")
-	public List<Cuenta> getCuentas(){
-		return this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
-	}*/
-	
-	public void cargarTabla(){
-		this.cuentas = this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
-		//System.out.println(this.cuentas);
+	public void limpiarPeriodos(){
+		periodos = Arrays.asList();
+		//this.firePropertyChange("periodos", this.getPeriodos(), Arrays.asList());
+		//this.setFieldValue("periodos", Arrays.asList());
 	}
 	
 	public List<Empresa> getEmpresas() {
@@ -70,17 +52,21 @@ public class ConsultarCuentasViewModel{
 
 	@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
-		return periodos;
-	}
-	
-	
-	public void setPeriodos(List<Integer> periodos) {
-		this.periodos = periodos;
+		if(empresaElegida == null) {
+			return periodos;
+		} else{
+			periodos = this.empresaElegida.getPeriodos();
+			return periodos;
+		}
 	}
 
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {
-		return cuentas;
+		if(periodoElegido == null) {
+			return Arrays.asList();
+		} else{
+			return this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
+		}
 	}
 
 	public Integer getPeriodoElegido() {

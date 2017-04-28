@@ -1,5 +1,6 @@
 package model;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,7 +14,6 @@ public class Empresa {
 		List<Cuenta> list;
 		
 		list = this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
-		System.out.println(list);
 		return list;
 	}
 	
@@ -42,6 +42,7 @@ public class Empresa {
 		hs.addAll(periodos); 
 		periodos.clear();
 		periodos.addAll(hs);
+		Collections.sort(periodos);
 		return periodos;
 	}
 
