@@ -24,6 +24,12 @@ public class ConsultarCuentasModel {
 		}
 		return 	this.empresas;	
 	}
-	 
+	
+	public List<Empresa> getEmpresas() {
+		return empresas;
+	}
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
 	
 }
