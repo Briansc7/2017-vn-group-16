@@ -2,10 +2,17 @@ package model;
 
 import java.util.List;
 
+import org.joda.time.LocalDate;
+
 public class Empresa {
 	
 	String nombre;
 	List<Cuenta> cuentas;
+	
+	@Override
+	public String toString(){
+		return this.nombre;
+	}
 	
 	public String getNombre() {
 		return nombre;
@@ -20,5 +27,8 @@ public class Empresa {
 		this.cuentas = cuentas;
 	}
 	
+	public List<LocalDate> getPeriodos(){
+		this.cuentas
+	}
 
 }
