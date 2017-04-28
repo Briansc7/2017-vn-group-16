@@ -6,7 +6,7 @@ import org.junit.Assert;
 
 import model.Cuenta;
 
-public class ConsultaTest {
+public class CuentaTest {
 	private Cuenta cuentaPrueba;
 	
 	@Before
