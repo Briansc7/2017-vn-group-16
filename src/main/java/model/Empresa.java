@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.joda.time.LocalDate;
 
@@ -27,8 +28,8 @@ public class Empresa {
 		this.cuentas = cuentas;
 	}
 	
-	public List<LocalDate> getPeriodos(){
-		this.cuentas
+	public List<Integer> getPeriodos(){
+		return this.cuentas.stream().map((Cuenta cuenta)-> cuenta.getFecha().getYear()).collect(Collectors.toList());
 	}
 
 }
