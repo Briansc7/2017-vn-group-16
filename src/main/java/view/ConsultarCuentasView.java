@@ -23,29 +23,35 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	//NotNullObservable observable = new NotNullObservable("habilitar");
 	
 	@Override
+	protected void createMainTemplate(Panel mainPanel) {
+		//this.setTaskDescription("Ingrese los parámetros de búsqueda");
+
+		super.createMainTemplate(mainPanel);
+
+		this.crearSelectorPeriodos(mainPanel);
+		//this.crearTablaDeCuentas(mainPanel);
+	}
+	
+	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consultar cuentas");
 		
+	
 		new Label(mainPanel).setText("Ingrese la empresa");
 		Selector<Empresa> selectorEmpresas = new Selector<Empresa>(mainPanel);
 		//selectorEmpresas.allowNull(false);
 		selectorEmpresas.bindValueToProperty("empresaElegida");
 		selectorEmpresas.bindItemsToProperty("empresas");
-		selectorEmpresas.onSelection(() -> this.getModelObject().cargarPeriodos());
+		//selectorEmpresas.onSelection(() -> this.getModelObject().cargarPeriodos());
 		
-		new Label(mainPanel).setText("Ingrese el periodo");
-		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);
-		//selectorPeriodo.allowNull(false);
-		selectorPeriodo.bindValueToProperty("periodoElegido");
-		selectorPeriodo.bindItemsToProperty("periodos");
-		selectorPeriodo.onSelection(() -> this.getModelObject().cargarTabla());
+		
 		//selectorPeriodo.bindEnabled(observable);
 
 		
 		/*new Button(mainPanel).setCaption("Consultar")
 							.onClick(() -> this.getModelObject().consultar());
 		*/
-		Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
+		/*Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
 		tablaDeCuentas.setNumberVisibleRows(20);
 		//tablaDeCuentas.bindEnabled(observable);
 		
@@ -59,7 +65,16 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		Column<Cuenta> columnaValor = new Column<Cuenta>(tablaDeCuentas);
 		columnaValor.setTitle("Valor");
 		columnaValor.setFixedSize(100);
-		columnaValor.bindContentsToProperty("valor");
+		columnaValor.bindContentsToProperty("valor");*/
 		
+	}
+	
+	protected void crearSelectorPeriodos(Panel mainPanel) {
+		new Label(mainPanel).setText("Ingrese el periodo");
+		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);
+		//selectorPeriodo.allowNull(false);
+		selectorPeriodo.bindValueToProperty("periodoElegido");
+		selectorPeriodo.bindItemsToProperty("periodos");
+		selectorPeriodo.onSelection(() -> this.getModelObject().cargarTabla());
 	}
 }

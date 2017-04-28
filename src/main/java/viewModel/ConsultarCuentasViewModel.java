@@ -1,7 +1,9 @@
 package viewModel;
 
+import java.util.Arrays;
 import java.util.List;
 
+import org.uqbar.commons.model.ObservableObject;
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
@@ -10,17 +12,18 @@ import model.Cuenta;
 import model.Empresa;
 
 @Observable
-public class ConsultarCuentasViewModel {
+public class ConsultarCuentasViewModel{
 	
 	private ConsultarCuentasModel model;
 	private Boolean habilitar;
 	
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
-	private List<Cuenta> cuentas;
 	
+	private List<Cuenta> cuentas = Arrays.asList();
 	private List<Empresa> empresas;// = Arrays.asList("empresa 1", "empresa 2", "empresa 3", "empresa 4", "empresa 5");
-	private List<Integer> periodos;
+	private List<Integer> periodos = Arrays.asList(0);
+;
 	
 	public void cargarEmpresas() {
 		this.model  = new ConsultarCuentasModel();
@@ -32,8 +35,11 @@ public class ConsultarCuentasViewModel {
 	}*/
 	
 	
+	
 	public void cargarPeriodos(){
 		this.periodos = this.empresaElegida.getPeriodos();
+		//this.setFieldValue("periodos", this.empresaElegida.getPeriodos());
+		
 	}
 	
 	/*@Dependencies("periodoElegido")
