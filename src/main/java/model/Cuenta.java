@@ -23,6 +23,9 @@ public class Cuenta {
 	public void setValor(Integer valor) {
 		this.valor = valor;
 	}
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 	public LocalDate getFecha() {
 		return LocalDate.parse(this.fecha);
 	}
