@@ -1,14 +1,21 @@
 package model;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import org.joda.time.LocalDate;
 
 public class Empresa {
 	
 	String nombre;
 	List<Cuenta> cuentas;
+	
+	public List<Cuenta> cuentasDelPeriodo(Integer periodo){
+		List<Cuenta> list;
+		
+		list = this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
+		System.out.println(list);
+		return list;
+	}
 	
 	@Override
 	public String toString(){
@@ -29,7 +36,13 @@ public class Empresa {
 	}
 	
 	public List<Integer> getPeriodos(){
-		return this.cuentas.stream().map((Cuenta cuenta)-> cuenta.getFecha().getYear()).collect(Collectors.toList());
+		List<Integer> periodos = this.cuentas.stream().map((Cuenta cuenta)-> cuenta.getFecha().getYear()).collect(Collectors.toList());
+		
+		HashSet<Integer> hs = new HashSet<Integer>();
+		hs.addAll(periodos); 
+		periodos.clear();
+		periodos.addAll(hs);
+		return periodos;
 	}
 
 }

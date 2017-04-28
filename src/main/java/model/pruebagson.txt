@@ -16,7 +16,7 @@
 	{
 	  nombre: "EBOcosaloca",
 	  valor : 759834,
-	  fecha : 2017-01-01
+	  fecha : 2014-01-01
 	}
       ]
     },
@@ -32,6 +32,11 @@
 	  nombre: "CosaCuenta",
 	  valor : 920123,
 	  fecha : 2015-06-03
+	},
+	{
+	  nombre: "NombreCuentaLoca",
+	  valor : 759834,
+	  fecha : 2017-01-01
 	},
 	{
 	  nombre: "NombreCuentaLoca",

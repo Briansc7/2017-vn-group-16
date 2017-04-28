@@ -1,10 +1,9 @@
 package view;
 
-import org.uqbar.arena.widgets.Button;
+import org.uqbar.arena.bindings.NotNullObservable;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
-import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
@@ -21,26 +20,36 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		this.getModelObject().cargarEmpresas();
 	}
 	
+	//NotNullObservable observable = new NotNullObservable("habilitar");
+	
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Consultar cuentas");
 		
 		new Label(mainPanel).setText("Ingrese la empresa");
 		Selector<Empresa> selectorEmpresas = new Selector<Empresa>(mainPanel);
+		//selectorEmpresas.allowNull(false);
 		selectorEmpresas.bindValueToProperty("empresaElegida");
 		selectorEmpresas.bindItemsToProperty("empresas");
+		selectorEmpresas.onSelection(() -> this.getModelObject().cargarPeriodos());
 		
+		new Label(mainPanel).setText("Ingrese el periodo");
+		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);
+		//selectorPeriodo.allowNull(false);
+		selectorPeriodo.bindValueToProperty("periodoElegido");
+		selectorPeriodo.bindItemsToProperty("periodos");
+		selectorPeriodo.onSelection(() -> this.getModelObject().cargarTabla());
+		//selectorPeriodo.bindEnabled(observable);
+
 		
-		new Label(mainPanel).setText("Ingrese un periodo");
-		new TextBox(mainPanel).bindValueToProperty("periodo");
-		
-		new Button(mainPanel).setCaption("Consultar")
+		/*new Button(mainPanel).setCaption("Consultar")
 							.onClick(() -> this.getModelObject().consultar());
-		
+		*/
 		Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
 		tablaDeCuentas.setNumberVisibleRows(20);
+		//tablaDeCuentas.bindEnabled(observable);
 		
-		tablaDeCuentas.bindItemsToProperty("empresas");
+		tablaDeCuentas.bindItemsToProperty("cuentas");
 
 		Column<Cuenta> columnaCuenta = new Column<Cuenta>(tablaDeCuentas);
 		columnaCuenta.setTitle("Cuenta");
