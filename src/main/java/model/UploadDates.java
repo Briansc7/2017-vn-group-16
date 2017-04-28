@@ -38,7 +38,7 @@ public class UploadDates {
 	private void cargarCuentasDeEmpresa(JSONObject jObj, Empresa empresa) {
 
 		Cuenta cuenta = new Cuenta();
-		cuenta.setFecha((DateTime) jObj.get("fecha"));
+//		cuenta.setFecha((String) jObj.get("fecha"));
 		cuenta.setValor((Integer) jObj.get("valor"));
 		cuenta.setNombre((String) jObj.get("nombre"));
 		empresa.cuentas.add(cuenta);
@@ -59,8 +59,8 @@ public class UploadDates {
 	}
 
 	
-	public static void main(String[] args) throws FileNotFoundException {
-		String string = leerArchivo();
-		System.out.println(string);
-	}
+//	public static void main(String[] args) throws FileNotFoundException {
+//		String string = leerArchivo();
+//		System.out.println(string);
+//	}
 }

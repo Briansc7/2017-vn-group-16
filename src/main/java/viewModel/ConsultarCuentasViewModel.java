@@ -55,6 +55,7 @@ public class ConsultarCuentasViewModel{// extends ObservableObject{
 		if(empresaElegida == null) {
 			return periodos;
 		} else{
+			periodoElegido = null;
 			periodos = this.empresaElegida.getPeriodos();
 			return periodos;
 		}
