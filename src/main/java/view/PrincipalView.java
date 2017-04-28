@@ -9,7 +9,7 @@ import org.uqbar.arena.windows.WindowOwner;
 import viewModel.PrincipalViewModel;
 
 
-public class PrincipalView extends SimpleWindow<PrincipalViewModel>{
+public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	
 	public PrincipalView(WindowOwner parent) {
 		super(parent, new PrincipalViewModel());
@@ -19,7 +19,7 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel>{
 
 	@Override
 	protected void addActions(Panel panelActions) {
-		Button _consultarCuentas = new Button(panelActions)
+		new Button(panelActions)
 		.setCaption("Consultar cuentas")
 		.onClick(() -> this.consultarCuentas());
 		
@@ -33,7 +33,7 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel>{
 	}
 	
 
-	public void consultarCuentas(){
+	public void consultarCuentas() {
 		Dialog<?> dialog = new ConsultarCuentasView(this);
 		dialog.open();
 		dialog.onAccept(() -> {});

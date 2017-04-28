@@ -1,8 +1,6 @@
 package model;
 
-
-
-import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.uqbar.commons.utils.Observable;
 
 @Observable
@@ -10,7 +8,8 @@ public class Cuenta {
 	
 	String nombre;
 	Integer valor;
-	DateTime fecha;
+	String fecha;
+
 	
 	public String getNombre() {
 		return nombre;
@@ -24,11 +23,8 @@ public class Cuenta {
 	public void setValor(Integer valor) {
 		this.valor = valor;
 	}
-	public DateTime getFecha() {
-		return fecha;
+	public LocalDate getFecha() {
+		return LocalDate.parse(this.fecha);
 	}
-	public void setFecha(DateTime fecha) {
-		this.fecha = fecha;
-	}
-
+	
 }
