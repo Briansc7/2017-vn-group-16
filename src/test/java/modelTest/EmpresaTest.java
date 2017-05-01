@@ -1,17 +1,15 @@
 package modelTest;
 
-import org.junit.Test;
-import org.junit.Before;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 import model.Cuenta;
 import model.Empresa;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class EmpresaTest {
 	
@@ -21,29 +19,20 @@ public class EmpresaTest {
 	@Before
 	public void initialize(){
 		
-		// Creo las cuentas para hacer las pruebas
-		Cuenta cuenta1 = new Cuenta();
-		cuenta1.setNombre("CuentaFranco");
-		cuenta1.setValor(123);
-		cuenta1.setFecha("2016-01-05");
-		Cuenta cuenta2 = new Cuenta();
-		cuenta2.setNombre("CuentaBrians");
-		cuenta2.setValor(333);
-		cuenta2.setFecha("2015-11-20");
-		Cuenta cuenta3 = new Cuenta();
-		cuenta3.setNombre("CuentaFede");
-		cuenta3.setValor(222);
-		cuenta3.setFecha("2016-05-06");
+		// Creo la empresa de prueba
+		empresaPrueba = new Empresa("empresa Prueba", Arrays.asList(
+				new Cuenta("CuentaFranco", 123, "2016-01-05"),
+				new Cuenta("CuentaBrians", 333, "2015-11-20"),
+				new Cuenta("CuentaFede", 222, "2016-05-06")));
 		
-		// Lleno las cuentas a probar con todas las cuentas
-		List<Cuenta> cuentasPrueba = Arrays.asList(cuenta1,cuenta2,cuenta3);
-		empresaPrueba = new Empresa();
-		empresaPrueba.setCuentas(cuentasPrueba);
 		
 		// Lleno las cuentas a coincidir con las cuentas del 2016
-		List<Cuenta> cuentasACoincidir = Arrays.asList(cuenta1,cuenta3);
-		empresaACoincidir = new Empresa();
-		empresaACoincidir.setCuentas(cuentasACoincidir);
+		//List<Cuenta> cuentasACoincidir = Arrays.asList(cuenta1,cuenta3);
+		List<Cuenta> cuentasACoincidir = Arrays.asList(
+				new Cuenta("CuentaFranco", 123, "2016-01-05"),
+				new Cuenta("CuentaFede", 222, "2016-05-06"));
+		empresaACoincidir = new Empresa("empresa A Coincidir", cuentasACoincidir);
+		//empresaACoincidir.setCuentas(cuentasACoincidir);
 	}
 	
 	@Test 

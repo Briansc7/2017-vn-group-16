@@ -11,10 +11,8 @@ public class CuentaTest {
 	
 	@Before
 	public void initialize(){
-		cuentaPrueba = new Cuenta();
-		cuentaPrueba.setNombre("CuentaPrueba");
-		cuentaPrueba.setValor(123);
-		cuentaPrueba.setFecha("2016-01-05");
+		cuentaPrueba = new Cuenta("CuentaPrueba", 123, "2016-01-05");
+		
 	}
 	
 	@Test 

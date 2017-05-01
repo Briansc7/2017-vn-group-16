@@ -1,20 +1,27 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class Empresa {
 	
-	String nombre;
-	List<Cuenta> cuentas;
+	private String nombre;
+	private List<Cuenta> cuentas;
+	
+	/*public Empresa(){
+		super();
+	}*/
+	
+	public Empresa(String nombre, List<Cuenta> cuentas){
+		this.nombre = nombre;
+		this.cuentas = cuentas;
+	}
 	
 	public List<Cuenta> cuentasDelPeriodo(Integer periodo){
-		List<Cuenta> list;
 		
-		list = this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
-		return list;
+		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
 	}
 	
 	@Override
@@ -25,23 +32,16 @@ public class Empresa {
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
 	public List<Cuenta> getCuentas() {
 		return cuentas;
 	}
-	public void setCuentas(List<Cuenta> cuentas) {
-		this.cuentas = cuentas;
-	}
 	
 	public List<Integer> getPeriodos(){
-		List<Integer> periodos = this.cuentas.stream().map((Cuenta cuenta)-> cuenta.getFecha().getYear()).collect(Collectors.toList());
+		List<Integer> periodos = new ArrayList<Integer>(this.cuentas.stream()
+				.map((Cuenta cuenta)-> cuenta.getFecha().getYear())
+				.collect(Collectors.toSet()));
 		
-		HashSet<Integer> hs = new HashSet<Integer>();
-		hs.addAll(periodos); 
-		periodos.clear();
-		periodos.addAll(hs);
 		Collections.sort(periodos);
 		return periodos;
 	}

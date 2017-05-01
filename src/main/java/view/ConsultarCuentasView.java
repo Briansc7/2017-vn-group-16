@@ -14,8 +14,8 @@ import viewModel.ConsultarCuentasViewModel;
 
 public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
-	public ConsultarCuentasView(WindowOwner owner) {
-		super(owner, new ConsultarCuentasViewModel());
+	public ConsultarCuentasView(WindowOwner owner, String path) {
+		super(owner, new ConsultarCuentasViewModel(path));
 		this.getModelObject().cargarEmpresas();
 	}
 	
@@ -28,7 +28,6 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		Selector<Empresa> selectorEmpresas = new Selector<Empresa>(mainPanel);
 		selectorEmpresas.bindValueToProperty("empresaElegida");
 		selectorEmpresas.bindItemsToProperty("empresas");
-		selectorEmpresas.onSelection(() -> this.getModelObject().limpiarPeriodos());
 		
 		new Label(mainPanel).setText("Ingrese el periodo");
 		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);
@@ -38,7 +37,6 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 
 		Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
 		tablaDeCuentas.setNumberVisibleRows(20);
-		
 		tablaDeCuentas.bindItemsToProperty("cuentas");
 
 		Column<Cuenta> columnaCuenta = new Column<Cuenta>(tablaDeCuentas);

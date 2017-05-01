@@ -10,22 +10,20 @@ public class Cuenta {
 	private Integer valor;
 	private String fecha;
 
+	public Cuenta(String nombre, Integer valor, String fecha){
+		this.nombre = nombre;
+		this.valor = valor;
+		this.fecha = fecha;
+	}
 	
 	public String getNombre() {
 		return nombre;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	
 	public Integer getValor() {
 		return valor;
 	}
-	public void setValor(Integer valor) {
-		this.valor = valor;
-	}
-	public void setFecha(String fecha) {
-		this.fecha = fecha;
-	}
+	
 	public LocalDate getFecha() {
 		return LocalDate.parse(this.fecha);
 	}
