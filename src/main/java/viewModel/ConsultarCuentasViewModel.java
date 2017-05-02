@@ -1,6 +1,5 @@
 package viewModel;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,9 +13,10 @@ import model.Empresa;
 @Observable
 public class ConsultarCuentasViewModel{
 	
-	private BaseDeDatos model;
-	private String path;
+	private BaseDeDatos baseDeDatos;
+	//private String path;
 	
+	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
 	
@@ -24,34 +24,44 @@ public class ConsultarCuentasViewModel{
 	private List<Integer> periodos;// = Arrays.asList();
 	
 	public ConsultarCuentasViewModel(String path){
-		this.path = path;
+		//this.path = path;
+		this.baseDeDatos = new BaseDeDatos(path);
 	}
 	
-	public void cargarEmpresas() {
-		this.model = new BaseDeDatos();
-		this.model.setPath(path);
+	public void buscarEmpresa(){
+		//this.baseDeDatos = new BaseDeDatos(path);
+		this.empresaElegida = baseDeDatos.empresaLlamada(nombreEmpresaElegida);
+		this.periodoElegido = null;
+		this.periodos = this.empresaElegida.getPeriodos();
+	}
+	
+	/*public void cargarEmpresas() {
+		this.baseDeDatos = new BaseDeDatos();
+		this.baseDeDatos.setPath(path);
 		try {
-			this.empresas = this.model.leerEmpresas();
+			this.empresas = this.baseDeDatos.leerEmpresas();
 		} catch (IOException  e) {
 			e.getStackTrace();
 		}
 		
-	}
+	}*/
 	
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}
 	
 
-	public Empresa getEmpresaElegida() {
-		return empresaElegida;
+	public String getNombreEmpresaElegida() {
+		return nombreEmpresaElegida;
 	}
 
-	public void setEmpresaElegida(Empresa empresaElegida) {
-		this.empresaElegida = empresaElegida;
+	public void setNombreEmpresaElegida(String nombreEmpresaElegida) {
+		this.nombreEmpresaElegida = nombreEmpresaElegida;
 	}
 
-	@Dependencies("empresaElegida")
+	
+	
+	/*@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
 		if(empresaElegida == null) {
 			return periodos;
@@ -60,6 +70,10 @@ public class ConsultarCuentasViewModel{
 			periodos = this.empresaElegida.getPeriodos();
 			return periodos;
 		}
+	}*/
+
+	public List<Integer> getPeriodos() {
+		return periodos;
 	}
 
 	@Dependencies("periodoElegido")

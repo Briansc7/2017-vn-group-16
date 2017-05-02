@@ -38,7 +38,8 @@ public class Empresa {
 	}
 	
 	public List<Integer> getPeriodos(){
-		List<Integer> periodos = new ArrayList<Integer>(this.cuentas.stream()
+		List<Integer> periodos = new ArrayList<Integer>(
+				this.cuentas.stream()
 				.map((Cuenta cuenta)-> cuenta.getFecha().getYear())
 				.collect(Collectors.toSet()));
 		

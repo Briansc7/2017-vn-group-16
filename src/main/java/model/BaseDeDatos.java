@@ -1,9 +1,12 @@
 package model;
 
 import java.io.File;
-import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
+
+import org.uqbar.commons.model.UserException;
 
 import com.google.gson.Gson;
 
@@ -12,40 +15,51 @@ public class BaseDeDatos {
 	private List<Empresa> empresas;
 	private String path;
 	
-	/*public BaseDeDatos(String path){
+	public BaseDeDatos(String path){
 		this.path = path;
-	}*/
+	}
 	
-	public List<Empresa> leerEmpresas() throws IOException {
+	public Empresa empresaLlamada(String nombre){
+		this.leerEmpresas();
+		if(this.existeEmpresa(nombre)){
+			return this.primero(nombre).get();
+		} else {
+			throw new UserException("La empresa no existe");
+		}
 		
-		String content;
-		Scanner scanner = new Scanner(new File(this.path));
-		content = scanner.useDelimiter("\\Z").next();
-		this.empresas = new Gson().fromJson(content, BaseDeDatos.class).getEmpresas();
-		/*try {
+	}
+	
+	public Boolean existeEmpresa(String nombre){
+		return this.primero(nombre).isPresent();
+	}
+	
+	public Optional<Empresa> primero(String nombre){
+		return this.empresas.stream().filter(empresa -> empresa.getNombre().equals(nombre)).findFirst();
+	}
+	
+	public void leerEmpresas() {
+		
+		
+		try {
+			String content;
+			Scanner scanner = new Scanner(new File(this.path));
 			content = scanner.useDelimiter("\\Z").next();
-			//content = new Scanner(new File("src/main/java/model/pruebagson.txt")).useDelimiter("\\Z").next();
 			this.empresas = new Gson().fromJson(content, BaseDeDatos.class).getEmpresas();
-
-		} catch (FileNotFoundException e){
-			throw new UserException("Debe llenar algun dato");
-		} finally {
 			scanner.close();
-		}*/
-		scanner.close();
-		return 	this.empresas;	
+		} catch (FileNotFoundException e){
+			e.printStackTrace();
+			throw new UserException("No se encontro el archivo");
+		} 
+			
 	}
 	
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}
+	
 	public void setEmpresas(List<Empresa> empresas) {
 		this.empresas = empresas;
 	}
-
-	/*public String getPath() {
-		return path;
-	}*/
 
 	public void setPath(String path) {
 		this.path = path;
