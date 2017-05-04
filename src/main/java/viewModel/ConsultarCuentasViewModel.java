@@ -20,7 +20,7 @@ public class ConsultarCuentasViewModel{
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
 	
-	private List<Empresa> empresas;
+	//private List<Empresa> empresas = Arrays.asList();
 	private List<Integer> periodos;// = Arrays.asList();
 	
 	public ConsultarCuentasViewModel(String path){
@@ -28,12 +28,12 @@ public class ConsultarCuentasViewModel{
 		this.baseDeDatos = new BaseDeDatos(path);
 	}
 	
-	public void buscarEmpresa(){
+	/*public void buscarEmpresa(){
 		//this.baseDeDatos = new BaseDeDatos(path);
 		this.empresaElegida = baseDeDatos.empresaLlamada(nombreEmpresaElegida);
 		this.periodoElegido = null;
 		this.periodos = this.empresaElegida.getPeriodos();
-	}
+	}*/
 	
 	/*public void cargarEmpresas() {
 		this.baseDeDatos = new BaseDeDatos();
@@ -45,9 +45,15 @@ public class ConsultarCuentasViewModel{
 		}
 		
 	}*/
-	
+	@Dependencies("nombreEmpresaElegida")
 	public List<Empresa> getEmpresas() {
-		return empresas;
+		if (nombreEmpresaElegida == null || nombreEmpresaElegida.equals("")) {
+			return Arrays.asList();
+		} else {
+			
+			return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
+		}
+		
 	}
 	
 
@@ -61,7 +67,7 @@ public class ConsultarCuentasViewModel{
 
 	
 	
-	/*@Dependencies("empresaElegida")
+	@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
 		if(empresaElegida == null) {
 			return periodos;
@@ -70,11 +76,11 @@ public class ConsultarCuentasViewModel{
 			periodos = this.empresaElegida.getPeriodos();
 			return periodos;
 		}
-	}*/
-
-	public List<Integer> getPeriodos() {
-		return periodos;
 	}
+
+	/*public List<Integer> getPeriodos() {
+		return periodos;
+	}*/
 
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {
@@ -91,6 +97,14 @@ public class ConsultarCuentasViewModel{
 
 	public void setPeriodoElegido(Integer periodoElegido) {
 		this.periodoElegido = periodoElegido;
+	}
+
+	public Empresa getEmpresaElegida() {
+		return empresaElegida;
+	}
+
+	public void setEmpresaElegida(Empresa empresaElegida) {
+		this.empresaElegida = empresaElegida;
 	}
 
 	

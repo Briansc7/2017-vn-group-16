@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.UserException;
 
@@ -17,6 +18,11 @@ public class BaseDeDatos {
 	
 	public BaseDeDatos(String path){
 		this.path = path;
+	}
+	
+	public List<Empresa> buscarEmpresas(String nombre){
+		this.leerEmpresas();
+		return this.empresas.stream().filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
 	}
 	
 	public Empresa empresaLlamada(String nombre){
