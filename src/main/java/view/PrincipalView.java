@@ -1,10 +1,13 @@
 package view;
 
+import java.io.FileNotFoundException;
+
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.FileSelector;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
+import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
@@ -38,9 +41,22 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	
 
 	public void consultarCuentas() {
-		Dialog<?> dialog = new ConsultarCuentasView(this, this.getModelObject().getPath());
-		dialog.open();
-		dialog.onAccept(() -> {});
+		try{
+			this.getModelObject().verificarArchivo();	
+			Dialog<?> dialog = new ConsultarCuentasView(this, this.getModelObject().getPath());
+			dialog.open();
+			dialog.onAccept(() -> {});
+		}
+		catch(FileNotFoundException e){
+			showErrorMessageBox(e.getMessage());
+		}
+
+	}
+	
+	protected void showErrorMessageBox(String message) {
+		MessageBox messageBox = new MessageBox(this, MessageBox.Type.Error);
+		messageBox.setMessage(message);
+		messageBox.open();
 	}
 
 
