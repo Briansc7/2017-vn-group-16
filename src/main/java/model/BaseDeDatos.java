@@ -56,13 +56,13 @@ public class BaseDeDatos {
 			this.empresas = new Gson().fromJson(content, BaseDeDatos.class).getEmpresas();
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new UserException("No se encontro el archivo");
 		} catch (JsonSyntaxException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new JsonSyntaxException("El archivo leído no tiene un formato adecuado");
 		} catch (JsonParseException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 			throw new JsonParseException("El archivo leído no tiene un formato adecuado");
 		}
 

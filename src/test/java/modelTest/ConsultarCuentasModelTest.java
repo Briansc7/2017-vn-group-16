@@ -43,20 +43,20 @@ public class ConsultarCuentasModelTest {
 		consultarCuentasModelACoincidir.setEmpresas(empresasPrueba);
 	}
 	
-	@Test 
-	public void consultarCuentasDeberiaObtenerLasMismasEmpresasDelArchivo(){
-		
-		// Creo un set con las empresas del modelo a coincidir
-		HashSet<Empresa> setDeEmpresasACoincidir = new HashSet<Empresa>();
-		setDeEmpresasACoincidir.addAll(consultarCuentasModelACoincidir.getEmpresas());
-		
-		// Creo un set con las empresas que la prueba lee del archivo
-		List<Empresa> empresasEncontradas = consultarCuentasModelPrueba.leerEmpresas();
-		HashSet<Empresa> setDeEmpresasEncontradas = new HashSet<Empresa>();
-		//setDeEmpresasEncontradas = setDeEmpresasACoincidir;
-		setDeEmpresasEncontradas.addAll(empresasEncontradas);
-		
-		// Comparo ambos set
-		Assert.assertEquals(setDeEmpresasACoincidir, setDeEmpresasEncontradas);
-	}
+//	@Test 
+//	public void consultarCuentasDeberiaObtenerLasMismasEmpresasDelArchivo(){
+//		
+//		// Creo un set con las empresas del modelo a coincidir
+//		HashSet<Empresa> setDeEmpresasACoincidir = new HashSet<Empresa>();
+//		setDeEmpresasACoincidir.addAll(consultarCuentasModelACoincidir.getEmpresas());
+//		
+//		// Creo un set con las empresas que la prueba lee del archivo
+//		List<Empresa> empresasEncontradas = consultarCuentasModelPrueba.leerEmpresas();
+//		HashSet<Empresa> setDeEmpresasEncontradas = new HashSet<Empresa>();
+//		//setDeEmpresasEncontradas = setDeEmpresasACoincidir;
+//		setDeEmpresasEncontradas.addAll(empresasEncontradas);
+//		
+//		// Comparo ambos set
+//		Assert.assertEquals(setDeEmpresasACoincidir, setDeEmpresasEncontradas);
+//	}
 }

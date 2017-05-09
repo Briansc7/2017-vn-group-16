@@ -6,8 +6,6 @@ import java.util.List;
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
 
 import model.BaseDeDatos;
 import model.Cuenta;
@@ -49,19 +47,11 @@ public class ConsultarCuentasViewModel {
 	@Dependencies("nombreEmpresaElegida")
 	public List<Empresa> getEmpresas() {
 
-		try {
 			if (nombreEmpresaElegida == null || nombreEmpresaElegida.equals("")) {
 				return Arrays.asList();
 			} else {
 				return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
 			}
-		} catch (JsonSyntaxException e) {
-			e.printStackTrace();
-			throw new JsonSyntaxException("El archivo leído no tiene un formato adecuado");
-		} catch (JsonParseException e) {
-			e.printStackTrace();
-			throw new JsonParseException("El archivo leído no tiene un formato adecuado");
-		}
 
 	}
 

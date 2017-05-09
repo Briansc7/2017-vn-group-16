@@ -1,6 +1,5 @@
 package view;
 
-import java.io.FileNotFoundException;
 
 import org.uqbar.arena.widgets.Button;
 import org.uqbar.arena.widgets.FileSelector;
@@ -47,9 +46,10 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 			dialog.open();
 			dialog.onAccept(() -> {});
 		}
-		catch(FileNotFoundException e){
+		catch(Exception e){
 			showErrorMessageBox(e.getMessage());
 		}
+		
 
 	}
 	
