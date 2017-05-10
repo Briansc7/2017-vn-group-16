@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.UserException;
 
+import com.google.common.base.Function;
 import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
@@ -55,7 +56,8 @@ public class BaseDeDatos {
 
 	public void leerEmpresas() {
 		
-		List<String> inputList = new ArrayList<String>();
+		
+		List<filaTabla> inputList = new ArrayList<filaTabla>();
 		
 		/*
 		 * Se lee desde un archivo csv que debe tener las siguientes columnas:
@@ -74,10 +76,14 @@ public class BaseDeDatos {
 		      InputStream inputFS = new FileInputStream(inputF);
 		      BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
 		      // se salta la primera linea que tiene el encabezado
-		      // el map se debe usar para separar la primer fila en muchos elementos según la coma
-		      inputList = br.lines().skip(1).map(a->a).collect(Collectors.toList());
+		      // el map se usa para separar la primer fila en muchos elementos según la coma
+		      inputList = br.lines().skip(1).map(linea->mapToItem(linea)).collect(Collectors.toList());
 		      br.close();
-		      System.out.println(inputList.get(0));//muestra por consola la primer fila
+		    //muestra por consola la primer fila
+		      System.out.println(inputList.get(0).getEmpresa());
+		      System.out.println(inputList.get(0).getCuenta());
+		      System.out.println(inputList.get(0).getValor());
+		      System.out.println(inputList.get(0).getFecha());
 		      System.out.println(inputList.size());//muestra la cantidad de filas transformadas a objetos
 			
 		} catch (FileNotFoundException e) {
@@ -96,7 +102,15 @@ public class BaseDeDatos {
 
 	}
 	
-	
+	private filaTabla mapToItem(String line){
+		  String[] p = line.split(",");// Separa el string por las comas
+		  filaTabla item = new filaTabla();
+		  item.setEmpresa(p[0]);//p[0] es la primer columna
+		  item.setCuenta(p[1]);
+		  item.setValor(p[2]);
+		  item.setFecha(p[3]);
+		  return item;
+		};
 
 	public List<Empresa> getEmpresas() {
 		return empresas;
