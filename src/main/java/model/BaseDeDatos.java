@@ -20,6 +20,8 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonSyntaxException;
 
+
+
 public class BaseDeDatos {
 
 	private List<Empresa> empresas;
@@ -79,12 +81,20 @@ public class BaseDeDatos {
 		      // el map se usa para separar la primer fila en muchos elementos según la coma
 		      inputList = br.lines().skip(1).map(linea->mapToItem(linea)).collect(Collectors.toList());
 		      br.close();
+		      
 		    //muestra por consola la primer fila
 		      System.out.println(inputList.get(0).getEmpresa());
 		      System.out.println(inputList.get(0).getCuenta());
 		      System.out.println(inputList.get(0).getValor());
 		      System.out.println(inputList.get(0).getFecha());
 		      System.out.println(inputList.size());//muestra la cantidad de filas transformadas a objetos
+		      
+		      //Lista de empresas
+		      System.out.println(inputList.stream().map(fila->fila.getEmpresa()).distinct().collect(Collectors.toList()));
+		      //Lista de cuentas de Facebook
+		      System.out.println(inputList.stream().filter(fila->fila.getEmpresa().equals("Facebook")).map(fila->fila.getCuenta()).collect(Collectors.toList()));
+		      //Valores de la cuenta Ebitda de Facebook
+		      System.out.println(inputList.stream().filter(fila->fila.getEmpresa().equals("Facebook")).filter(fila->fila.getCuenta().equals("Ebitda")).map(fila->fila.getValor()).collect(Collectors.toList()));
 			
 		} catch (FileNotFoundException e) {
 //			e.printStackTrace();
