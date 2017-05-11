@@ -20,7 +20,7 @@ public class ConsultarCuentasModelTest {
 	@Before
 	public void initialize(){
 		
-		consultarCuentasModelPrueba = new BaseDeDatos();
+		consultarCuentasModelPrueba = new BaseDeDatos("");
 		
 		// Creo la empresa Facebook para el modelo a coincidir
 		Empresa empresaF = new Empresa("Twitter", Arrays.asList(
@@ -39,7 +39,7 @@ public class ConsultarCuentasModelTest {
 		
 		// Lleno al modelo a coincidir con los datos
 		List<Empresa>empresasPrueba = Arrays.asList(empresaF,empresaT);
-		consultarCuentasModelACoincidir = new BaseDeDatos();
+		consultarCuentasModelACoincidir = new BaseDeDatos("");
 		consultarCuentasModelACoincidir.setEmpresas(empresasPrueba);
 	}
 	
@@ -51,7 +51,7 @@ public class ConsultarCuentasModelTest {
 //		setDeEmpresasACoincidir.addAll(consultarCuentasModelACoincidir.getEmpresas());
 //		
 //		// Creo un set con las empresas que la prueba lee del archivo
-//		List<Empresa> empresasEncontradas = consultarCuentasModelPrueba.leerEmpresas();
+//		List<Empresa> empresasEncontradas = consultarCuentasModelPrueba.buscarEmpresas("");
 //		HashSet<Empresa> setDeEmpresasEncontradas = new HashSet<Empresa>();
 //		//setDeEmpresasEncontradas = setDeEmpresasACoincidir;
 //		setDeEmpresasEncontradas.addAll(empresasEncontradas);
@@ -59,4 +59,25 @@ public class ConsultarCuentasModelTest {
 //		// Comparo ambos set
 //		Assert.assertEquals(setDeEmpresasACoincidir, setDeEmpresasEncontradas);
 //	}
+	
+	@Test
+	public void lecturaCompletaTest()
+	{
+		BaseDeDatos basePrueba = new BaseDeDatos("Archivos de prueba/baseDatosUnaEmpresa.csv");
+		basePrueba.leerEmpresas();
+		int tamanio = basePrueba.getEmpresas().size();
+		Assert.assertEquals(tamanio, consultarCuentasModelACoincidir.getEmpresas().size());
+		Assert.assertEquals(basePrueba.getEmpresas().get(0).getNombre(), "Facebook");
+		Assert.assertEquals(basePrueba.getEmpresas().get(0).getCuentas().get(0).getNombre(), "EBOCuenta");
+		Assert.assertTrue(basePrueba.getEmpresas().get(0).getCuentas().get(0).getValor() == 123456789);
+	}
+	
+	@Test
+	public void lecturaArchivoVacioTest()
+	{
+		BaseDeDatos basePrueba = new BaseDeDatos("Archivos de prueba/baseDatosVaciaPrueba.csv");
+		basePrueba.leerEmpresas();
+		int tamanio = basePrueba.getEmpresas().size();
+		Assert.assertEquals(tamanio, 0);
+	}
 }

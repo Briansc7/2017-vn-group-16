@@ -35,20 +35,35 @@ public class EmpresaTest {
 		//empresaACoincidir.setCuentas(cuentasACoincidir);
 	}
 	
+//	@Test 
+//	public void empresaDeberiaDevolvermeSoloDosCuentasConsultandoPorElPeriodo2016(){
+//		
+//		// Creo un set con las cuentas que deberían coincidir
+//		HashSet<Cuenta> setDeCuentasACoincidir = new HashSet<Cuenta>();
+//		setDeCuentasACoincidir.addAll(empresaACoincidir.getCuentas());
+//		
+//		// Creo un set con las cuentas que devuelve la prueba al hacer cuentasDelPeriodo(2016)
+//		List<Cuenta> cuentasEncontradas = empresaPrueba.cuentasDelPeriodo(2016);
+//		HashSet<Cuenta> setDeCuentasEncontradas = new HashSet<Cuenta>();
+//		setDeCuentasEncontradas.addAll(cuentasEncontradas);
+//
+//		// Comparo ambos sets
+//		Assert.assertEquals(setDeCuentasACoincidir, setDeCuentasEncontradas);
+//	}
+	
 	@Test 
-	public void empresaDeberiaDevolvermeSoloDosCuentasConsultandoPorElPeriodo2016(){
+	public void busquedaPorPer�odoTest(){
 		
 		// Creo un set con las cuentas que deberían coincidir
-		HashSet<Cuenta> setDeCuentasACoincidir = new HashSet<Cuenta>();
-		setDeCuentasACoincidir.addAll(empresaACoincidir.getCuentas());
+		List<Cuenta> lista = empresaACoincidir.getCuentas();
 		
 		// Creo un set con las cuentas que devuelve la prueba al hacer cuentasDelPeriodo(2016)
 		List<Cuenta> cuentasEncontradas = empresaPrueba.cuentasDelPeriodo(2016);
-		HashSet<Cuenta> setDeCuentasEncontradas = new HashSet<Cuenta>();
-		setDeCuentasEncontradas.addAll(cuentasEncontradas);
+
 
 		// Comparo ambos sets
-		Assert.assertEquals(setDeCuentasACoincidir, setDeCuentasEncontradas);
+		Assert.assertEquals(lista.size(), cuentasEncontradas.size());
+		Assert.assertEquals(lista.get(0).getNombre(), cuentasEncontradas.get(0).getNombre());
 	}
 	
 	@Test 
