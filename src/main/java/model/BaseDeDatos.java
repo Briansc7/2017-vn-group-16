@@ -90,11 +90,11 @@ public class BaseDeDatos {
 		      System.out.println(inputList.size());//muestra la cantidad de filas transformadas a objetos
 		      
 		      //Lista de empresas
-		      System.out.println(inputList.stream().map(fila->fila.getEmpresa()).distinct().collect(Collectors.toList()));
+		      System.out.println(obtenerListaDeNombresDeEmpresas(inputList));
 		      //Lista de cuentas de Facebook
-		      System.out.println(inputList.stream().filter(fila->fila.getEmpresa().equals("Facebook")).map(fila->fila.getCuenta()).collect(Collectors.toList()));
+		      System.out.println(obtenerNombresCuentasEmpresa(inputList,"Facebook"));
 		      //Valores de la cuenta Ebitda de Facebook
-		      System.out.println(inputList.stream().filter(fila->fila.getEmpresa().equals("Facebook")).filter(fila->fila.getCuenta().equals("Ebitda")).map(fila->fila.getValor()).collect(Collectors.toList()));
+		      System.out.println(obtenerValoresDeEmpresaDeCuenta(inputList,"Facebook","Ebitda"));
 			
 		} catch (FileNotFoundException e) {
 //			e.printStackTrace();
@@ -111,6 +111,27 @@ public class BaseDeDatos {
 		}
 
 	}
+	
+	public List<String> obtenerListaDeNombresDeEmpresas(List<filaTabla> tabla){
+		return tabla.stream().map(fila->fila.getEmpresa()).distinct().collect(Collectors.toList());
+	}
+	
+	public List<filaTabla> obtenerFilasDeEmpresa(List<filaTabla> tabla,String empresa){
+		return tabla.stream().filter(fila->fila.getEmpresa().equals(empresa)).collect(Collectors.toList());
+	}
+	
+	public List<filaTabla> obtenerFilasDeEmpresaDeCuenta(List<filaTabla> tabla,String empresa,String cuenta){
+		return obtenerFilasDeEmpresa(tabla,empresa).stream().filter(fila->fila.getCuenta().equals(cuenta)).collect(Collectors.toList());
+	}
+	
+	public List<String> obtenerNombresCuentasEmpresa(List<filaTabla> tabla,String empresa){
+		return obtenerFilasDeEmpresa(tabla, empresa).stream().map(fila->fila.getCuenta()).distinct().collect(Collectors.toList());
+	}
+	
+	public List<String> obtenerValoresDeEmpresaDeCuenta(List<filaTabla> tabla,String empresa,String cuenta){
+		return obtenerFilasDeEmpresaDeCuenta(tabla,empresa,cuenta).stream().map(fila->fila.getValor()).collect(Collectors.toList());
+	}
+	
 	
 	private filaTabla mapToItem(String line){
 		  String[] p = line.split(",");// Separa el string por las comas
