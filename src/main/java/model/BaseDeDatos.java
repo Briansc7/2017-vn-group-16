@@ -31,14 +31,14 @@ public class BaseDeDatos {
 		this.path = path;
 	}
 
-	public List<Empresa> buscarEmpresas(String nombre) {
+	public List<Empresa> buscarEmpresas(String nombre) throws IOException {
 		this.leerEmpresas();
 		return this.empresas.stream()
 				.filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase()))
 				.collect(Collectors.toList());
 	}
 
-	public Empresa empresaLlamada(String nombre) {
+	public Empresa empresaLlamada(String nombre) throws IOException {
 		this.leerEmpresas();
 		if (this.existeEmpresa(nombre)) {
 			return this.primero(nombre).get();
@@ -56,7 +56,7 @@ public class BaseDeDatos {
 		return this.empresas.stream().filter(empresa -> empresa.getNombre().equals(nombre)).findFirst();
 	}
 
-	public void leerEmpresas() {
+	public void leerEmpresas() throws IOException  {
 		
 		
 		List<filaTabla> inputList = new ArrayList<filaTabla>();
@@ -98,16 +98,10 @@ public class BaseDeDatos {
 			
 		} catch (FileNotFoundException e) {
 //			e.printStackTrace();
-			throw new UserException("No se encontro el archivo");
-		} catch (JsonSyntaxException e) {
+			throw new FileNotFoundException("No se encontro el archivo");
+		} catch (UserException e) {
 //			e.printStackTrace();
-			throw new JsonSyntaxException("El archivo le�do no tiene un formato adecuado");
-		} catch (JsonParseException e) {
-//			e.printStackTrace();
-			throw new JsonParseException("El archivo le�do no tiene un formato adecuado");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			throw new UserException("El archivo le�do no tiene un formato adecuado");
 		}
 
 	}

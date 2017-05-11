@@ -1,5 +1,6 @@
 package modelTest;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -61,7 +62,7 @@ public class ConsultarCuentasModelTest {
 //	}
 	
 	@Test
-	public void lecturaCompletaTest()
+	public void lecturaCompletaTest() throws IOException
 	{
 		BaseDeDatos basePrueba = new BaseDeDatos("Archivos de prueba/baseDatosUnaEmpresa.csv");
 		basePrueba.leerEmpresas();
@@ -73,7 +74,7 @@ public class ConsultarCuentasModelTest {
 	}
 	
 	@Test
-	public void lecturaArchivoVacioTest()
+	public void lecturaArchivoVacioTest() throws IOException
 	{
 		BaseDeDatos basePrueba = new BaseDeDatos("Archivos de prueba/baseDatosVaciaPrueba.csv");
 		basePrueba.leerEmpresas();

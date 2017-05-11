@@ -1,5 +1,6 @@
 package viewModel;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ConsultarCuentasViewModel {
 	 * }
 	 */
 	@Dependencies("nombreEmpresaElegida")
-	public List<Empresa> getEmpresas() {
+	public List<Empresa> getEmpresas() throws IOException {
 
 			if (nombreEmpresaElegida == null || nombreEmpresaElegida.equals("")) {
 				return Arrays.asList();
