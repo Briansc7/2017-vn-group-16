@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,7 @@ import org.uqbar.commons.model.UserException;
 
 public class BaseDeDatos {
 
-	private List<Empresa> empresas = Arrays.asList();
+	private List<Empresa> empresas = new ArrayList<Empresa>();//Arrays.asList();
 	private String path;
 
 	public BaseDeDatos(String path) throws IOException {
@@ -66,7 +67,7 @@ public class BaseDeDatos {
 			// segun la coma
 			List<Empresa> listaMapeada = br.lines().skip(1).map((String linea) -> this.mapToEmpresa(linea))
 					.collect(Collectors.toList());
-			this.empresas = this.fusionarEmpresasDuplicadas(listaMapeada);
+			this.empresas.addAll(listaMapeada); //= this.fusionarEmpresasDuplicadas(listaMapeada);
 
 			br.close();
 
