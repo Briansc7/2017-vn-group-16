@@ -65,10 +65,19 @@ public class BaseDeDatos {
 			// se salta la primera linea que tiene el encabezado
 			// el map se usa para separar la primer fila en muchos elementos
 			// segun la coma
-			List<Empresa> listaMapeada = br.lines().skip(1).map((String linea) -> this.mapToEmpresa(linea))
+			/*List<Empresa> listaMapeada = br.lines().skip(1).map((String linea) -> this.mapToEmpresa(linea))
 					.collect(Collectors.toList());
 			this.empresas.addAll(listaMapeada); //= this.fusionarEmpresasDuplicadas(listaMapeada);
-
+*/
+			br.lines().skip(1).forEach(linea -> this.agregarDatosDeLinea(linea));
+			
+			//empresas.add(new Empresa("Facebook", Arrays.asList(new Cuenta("Ebitda", Integer.parseInt("123456"), "2016-10-05"))));
+			//primero("Facebook").get().agregarCuenta(new Cuenta("Ebitda", Integer.parseInt("123456"), "2017-10-05"));
+			//Empresa empresa = new Empresa("Facebook", Arrays.asList(new Cuenta("Ebitda", Integer.parseInt("123456"), "2016-10-05")));
+			//empresa.agregarCuenta(new Cuenta("Ebitda", Integer.parseInt("123456"), "2015-10-05"));
+			//List<Cuenta> cuentas = new ArrayList<Cuenta>();
+			//cuentas.add(new Cuenta("Ebitda", Integer.parseInt("123456"), "2017-10-05"));
+			
 			br.close();
 
 		} catch (FileNotFoundException e) {
@@ -79,6 +88,18 @@ public class BaseDeDatos {
 			throw new UserException("El archivo leido no tiene un formato adecuado");
 		}
 
+	}
+	
+	private void agregarDatosDeLinea(String linea){
+		String[] p = linea.split(",");// Separa el string por las comas
+		/*
+		 if(this.existeEmpresa(p[0])){
+		 this.primero(p[0]).get().getCuentas().add(new Cuenta(p[1],
+				 Integer.parseInt(p[2]), p[3]));
+		 }*/
+		 //else{
+			 this.empresas.add(new Empresa(p[0], Arrays.asList(new Cuenta(p[1], Integer.parseInt(p[2]), p[3]))));
+		 //}
 	}
 
 	private List<Empresa> fusionarEmpresasDuplicadas(List<Empresa> listaMapeada) {
