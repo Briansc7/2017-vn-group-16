@@ -19,7 +19,7 @@ public class ConsultarCuentasModelTest {
 	private BaseDeDatos consultarCuentasModelACoincidir;
 	
 	@Before
-	public void initialize(){
+	public void initialize() throws IOException{
 		
 		consultarCuentasModelPrueba = new BaseDeDatos("");
 		

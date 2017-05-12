@@ -8,9 +8,6 @@ import java.util.Scanner;
 import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 
-import com.google.gson.JsonParseException;
-import com.google.gson.JsonSyntaxException;
-
 import model.BaseDeDatos;
 
 @Observable
@@ -38,7 +35,7 @@ public class PrincipalViewModel {
 	}
 	
 	public String getPath() {
-		return path;//.replace("\\", "\\\\");
+		return path;
 	}
 
 	public void setPath(String path) {

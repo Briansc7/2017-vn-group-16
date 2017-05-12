@@ -34,8 +34,6 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		
 		new Label(mainPanel).setText("Seleccione el archivo").setWidth(250);
 		new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
-//		new TextBox(mainPanel).bindValueToProperty("path");
-		
 	}
 	
 

@@ -1,6 +1,8 @@
 package view;
 
 
+import java.io.IOException;
+
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
@@ -19,9 +21,8 @@ import viewModel.ConsultarCuentasViewModel;
 
 public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
-	public ConsultarCuentasView(WindowOwner owner, String path) {
+	public ConsultarCuentasView(WindowOwner owner, String path) throws IOException{
 		super(owner, new ConsultarCuentasViewModel(path));
-		//this.getModelObject().cargarEmpresas();
 	}
 	
 	@Override

@@ -16,35 +16,19 @@ import model.Empresa;
 public class ConsultarCuentasViewModel {
 
 	private BaseDeDatos baseDeDatos;
-	// private String path;
-
+	
 	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
 
-	// private List<Empresa> empresas = Arrays.asList();
 	private List<Integer> periodos;// = Arrays.asList();
 
-	public ConsultarCuentasViewModel(String path) {
+	public ConsultarCuentasViewModel(String path) throws IOException{
 
 		this.baseDeDatos = new BaseDeDatos(path);
 	}
 
-	/*
-	 * public void buscarEmpresa(){ //this.baseDeDatos = new BaseDeDatos(path);
-	 * this.empresaElegida = baseDeDatos.empresaLlamada(nombreEmpresaElegida);
-	 * this.periodoElegido = null; this.periodos =
-	 * this.empresaElegida.getPeriodos(); }
-	 */
-
-	/*
-	 * public void cargarEmpresas() { this.baseDeDatos = new BaseDeDatos();
-	 * this.baseDeDatos.setPath(path); try { this.empresas =
-	 * this.baseDeDatos.leerEmpresas(); } catch (IOException e) {
-	 * e.getStackTrace(); }
-	 * 
-	 * }
-	 */
+	
 	@Dependencies("nombreEmpresaElegida")
 	public List<Empresa> getEmpresas() throws IOException {
 
@@ -75,9 +59,6 @@ public class ConsultarCuentasViewModel {
 		}
 	}
 
-	/*
-	 * public List<Integer> getPeriodos() { return periodos; }
-	 */
 
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {

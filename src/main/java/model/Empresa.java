@@ -10,9 +10,6 @@ public class Empresa {
 	private String nombre;
 	private List<Cuenta> cuentas;
 	
-	/*public Empresa(){
-		super();
-	}*/
 	
 	public Empresa(String nombre, List<Cuenta> cuentas){
 		this.nombre = nombre;
