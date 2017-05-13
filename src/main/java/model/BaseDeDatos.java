@@ -92,14 +92,14 @@ public class BaseDeDatos {
 	
 	private void agregarDatosDeLinea(String linea){
 		String[] p = linea.split(",");// Separa el string por las comas
-		/*
+		
 		 if(this.existeEmpresa(p[0])){
 		 this.primero(p[0]).get().getCuentas().add(new Cuenta(p[1],
 				 Integer.parseInt(p[2]), p[3]));
-		 }*/
-		 //else{
+		 }
+		 else{
 			 this.empresas.add(new Empresa(p[0], Arrays.asList(new Cuenta(p[1], Integer.parseInt(p[2]), p[3]))));
-		 //}
+		 }
 	}
 
 	private List<Empresa> fusionarEmpresasDuplicadas(List<Empresa> listaMapeada) {

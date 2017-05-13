@@ -9,12 +9,11 @@ public class Empresa {
 	
 	private String nombre;
 	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
-	//private List<Cuenta> cuentas2 = new ArrayList<Cuenta>();
 	
 	
 	public Empresa(String nombre, List<Cuenta> cuentas){
 		this.nombre = nombre;
-		this.cuentas = cuentas;
+		this.cuentas.addAll(cuentas);
 	}
 	
 	public List<Cuenta> cuentasDelPeriodo(Integer periodo){
@@ -51,10 +50,6 @@ public class Empresa {
 	
 	public void agregarCuenta(Cuenta cuenta) {
 		cuentas.add(cuenta);
-		//cuentas = cuentas2;
-		//cuentas2.add(cuenta);
-		//agregarCuentas(cuentas2);
-		//cuentas2.add(new Cuenta("Ebitda", Integer.parseInt("123456"), "2017-10-05"));
 	}
 
 }
