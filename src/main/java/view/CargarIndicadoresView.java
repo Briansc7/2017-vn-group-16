@@ -19,7 +19,7 @@ public class CargarIndicadoresView extends Dialog<CargarIndicadoresViewModel>{
 		this.setTitle("Cargar Indicadores");
 		
 		new Label(mainPanel).setText("Seleccione el archivo de indicadores").setWidth(250);
-		new FileSelector(mainPanel).setCaption("Buscar archivo");//.bindValueToProperty("pathIndicadores");
+		new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("pathIndicadores");
 		
 	}
 
