@@ -7,16 +7,22 @@ public class CargarIndicadoresViewModel {
 	
 	private String pathIndicadores;
 	
+
+
+	public CargarIndicadoresViewModel(){
+		
+	}
+	
+	public void editarTxt(){
+		
+	}
+	
 	public String getPathIndicadores() {
 		return pathIndicadores;
 	}
 
 	public void setPathIndicadores(String pathIndicadores) {
 		this.pathIndicadores = pathIndicadores;
-	}
-
-	public CargarIndicadoresViewModel(){
-		
 	}
 
 }
