@@ -63,20 +63,10 @@ public class BaseDeDatos {
 			InputStream inputFS = new FileInputStream(inputF);
 			BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
 			// se salta la primera linea que tiene el encabezado
-			// el map se usa para separar la primer fila en muchos elementos
+			// el forEach se usa para separar la primer fila en muchos elementos
 			// segun la coma
-			/*List<Empresa> listaMapeada = br.lines().skip(1).map((String linea) -> this.mapToEmpresa(linea))
-					.collect(Collectors.toList());
-			this.empresas.addAll(listaMapeada); //= this.fusionarEmpresasDuplicadas(listaMapeada);
-*/
+
 			br.lines().skip(1).forEach(linea -> this.agregarDatosDeLinea(linea));
-			
-			//empresas.add(new Empresa("Facebook", Arrays.asList(new Cuenta("Ebitda", Integer.parseInt("123456"), "2016-10-05"))));
-			//primero("Facebook").get().agregarCuenta(new Cuenta("Ebitda", Integer.parseInt("123456"), "2017-10-05"));
-			//Empresa empresa = new Empresa("Facebook", Arrays.asList(new Cuenta("Ebitda", Integer.parseInt("123456"), "2016-10-05")));
-			//empresa.agregarCuenta(new Cuenta("Ebitda", Integer.parseInt("123456"), "2015-10-05"));
-			//List<Cuenta> cuentas = new ArrayList<Cuenta>();
-			//cuentas.add(new Cuenta("Ebitda", Integer.parseInt("123456"), "2017-10-05"));
 			
 			br.close();
 
@@ -102,47 +92,9 @@ public class BaseDeDatos {
 		 }
 	}
 
-	private List<Empresa> fusionarEmpresasDuplicadas(List<Empresa> listaMapeada) {
-//		for (int i = 0; i < listaMapeada.size(); i++) {
-//			for (int j = 0; j < i; j++) {
-//				if (listaMapeada.get(j).getNombre().equals(listaMapeada.get(i).getNombre())) {
-//					System.out.println(listaMapeada.get(j).getCuentas().size());
-//					System.out.println(listaMapeada.get(i).getCuentas().size());
-//					listaMapeada.get(i).agregarCuentas(listaMapeada.get(j).getCuentas());
-//					listaMapeada.remove(j);
-//					i--;
-//					j--;
-//				}
-//			}
-//
-//		}
-		return listaMapeada;
 
-	}
 
-	/*
-	 * en la linea 68 habiamos intentado hacer un forEach en vez de un map y que
-	 * este metodo que sea void y ejecute el if comentado, pero nos tira
-	 * "argument cannot be null" en add(o eso creemos)
-	 */
-	private Empresa mapToEmpresa(String line) {
 
-		String[] p = line.split(",");// Separa el string por las comas
-
-		// if(this.empresas.isEmpty()||this.existeEmpresa(p[0]))
-		// {
-		// empresaLlamada(p[0]).getCuentas().add(new Cuenta(p[1],
-		// Integer.parseInt(p[2]), p[3]));
-		// return empresaLlamada(p[0]);
-		// }
-		return new Empresa(p[0], Arrays.asList(new Cuenta(p[1], Integer.parseInt(p[2]), p[3])));
-		/*
-		 * if (this.empresas.isEmpty() || !this.existeEmpresa(p[0])) {
-		 * this.empresas.add(new Empresa(p[0], new
-		 * ArrayList<Cuenta>(Arrays.asList(cuenta)))); } else {
-		 * this.primero(p[0]).get().getCuentas().add(cuenta); }
-		 */
-	}
 
 	public List<Empresa> getEmpresas() {
 		return empresas;

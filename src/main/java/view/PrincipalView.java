@@ -24,6 +24,9 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		new Button(panelActions)
 		.setCaption("Consultar cuentas")
 		.onClick(() -> this.consultarCuentas());
+		new Button(panelActions)
+		.setCaption("Cargar Indicadores")
+		.onClick(() -> this.cargarIndicadores());
 		
 		
 	}
@@ -32,7 +35,7 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Menu principal");
 		
-		new Label(mainPanel).setText("Seleccione el archivo").setWidth(250);
+		new Label(mainPanel).setText("Seleccione el archivo de cuentas").setWidth(250);
 		new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
 	}
 	
@@ -55,6 +58,12 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		MessageBox messageBox = new MessageBox(this, MessageBox.Type.Error);
 		messageBox.setMessage(message);
 		messageBox.open();
+	}
+	
+	public void cargarIndicadores(){
+		Dialog<?> dialog = new CargarIndicadoresView(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
 	}
 
 
