@@ -11,6 +11,8 @@ import org.uqbar.commons.utils.Observable;
 import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
+import model.Indicador;
+import model.Planilla;
 
 @Observable
 public class ConsultarCuentasViewModel {
@@ -21,7 +23,7 @@ public class ConsultarCuentasViewModel {
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
 
-	private List<Integer> periodos;// = Arrays.asList();
+	private List<Integer> periodos = Arrays.asList();
 
 	public ConsultarCuentasViewModel(String path) throws IOException{
 
@@ -50,10 +52,11 @@ public class ConsultarCuentasViewModel {
 
 	@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
-		if (empresaElegida == null) {
+		if (this.empresaElegida == null) {
 			return periodos;
 		} else {
-			periodoElegido = null;
+			this.periodoElegido = null;
+			System.out.println("hola");
 			periodos = this.empresaElegida.getPeriodos();
 			return periodos;
 		}
@@ -62,13 +65,18 @@ public class ConsultarCuentasViewModel {
 
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {
-		if (periodoElegido == null) {
+		if (this.periodoElegido == null) {
 			return Arrays.asList();
 		} else {
 			return this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
 		}
 	}
-
+	
+	public List<Indicador> getIndicadores(){
+		return Planilla.instance.getIndicadores();
+	}
+	
+	
 	public Integer getPeriodoElegido() {
 		return periodoElegido;
 	}
@@ -78,7 +86,7 @@ public class ConsultarCuentasViewModel {
 	}
 
 	public Empresa getEmpresaElegida() {
-		return empresaElegida;
+		return this.empresaElegida;
 	}
 
 	public void setEmpresaElegida(Empresa empresaElegida) {

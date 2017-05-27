@@ -13,10 +13,9 @@ import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
-
-
 import model.Cuenta;
 import model.Empresa;
+import model.Indicador;
 import viewModel.ConsultarCuentasViewModel;
 
 public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
@@ -49,7 +48,7 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 
 
 		Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
-		tablaDeCuentas.setNumberVisibleRows(20);
+		tablaDeCuentas.setNumberVisibleRows(10);
 		tablaDeCuentas.bindItemsToProperty("cuentas");
 
 		Column<Cuenta> columnaCuenta = new Column<Cuenta>(tablaDeCuentas);
@@ -62,6 +61,22 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		columnaValor.setFixedSize(100);
 		columnaValor.bindContentsToProperty("valor");
 		
+		
+		//tabla de indicadores
+		/*Table<Indicador> tablaDeIndicadores = new Table<Indicador>(mainPanel, Indicador.class);
+		tablaDeIndicadores.setNumberVisibleRows(10);
+		tablaDeIndicadores.bindItemsToProperty("indicadores");
+
+		Column<Indicador> columnaIndicador = new Column<Indicador>(tablaDeIndicadores);
+		columnaIndicador.setTitle("Indicador");
+		columnaIndicador.setFixedSize(200);
+		columnaIndicador.bindContentsToProperty("nombre");
+		
+		Column<Indicador> columnaValorIndicador = new Column<Indicador>(tablaDeIndicadores);
+		columnaValorIndicador.setTitle("Valor");
+		columnaValorIndicador.setFixedSize(100);
+		columnaValorIndicador.bindContentsToProperty("valor");*/
 	}
+	
 	
 }

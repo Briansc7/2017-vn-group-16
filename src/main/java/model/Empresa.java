@@ -3,6 +3,7 @@ package model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class Empresa {
@@ -19,6 +20,21 @@ public class Empresa {
 	public List<Cuenta> cuentasDelPeriodo(Integer periodo){
 		
 		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
+	}
+	
+	public Boolean existeCuentaDel(String nombre, Integer periodo) {
+		return this.primero(nombre, periodo).isPresent();
+	}
+
+	public Optional<Cuenta> primero(String nombre, Integer periodo) {
+		return this.cuentasDelPeriodo(periodo).stream().filter(cuenta -> cuenta.getNombre().equalsIgnoreCase(nombre)).findFirst();
+	}
+
+	public Cuenta buscarCuenta(String nombre, Integer periodo){
+		if(!this.existeCuentaDel(nombre, periodo)){
+			throw new RuntimeException("No existe la cuenta " + nombre + " en el periodo " + periodo);
+		}
+		return this.primero(nombre, periodo).get();
 	}
 	
 	@Override
@@ -44,12 +60,12 @@ public class Empresa {
 		return periodos;
 	}
 
-	public void agregarCuentas(List<Cuenta> cuenta) {
+	/*public void agregarCuentas(List<Cuenta> cuenta) {
 		cuentas.addAll(cuenta);		
 	}
 	
 	public void agregarCuenta(Cuenta cuenta) {
 		cuentas.add(cuenta);
-	}
+	}*/
 
 }

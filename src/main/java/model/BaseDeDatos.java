@@ -93,9 +93,6 @@ public class BaseDeDatos {
 	}
 
 
-
-
-
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}

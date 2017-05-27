@@ -1,0 +1,91 @@
+options {
+	STATIC = false ;
+}
+
+PARSER_BEGIN(ParserTP)
+
+package parser;
+
+import java.io.Reader;
+import java.io.StringReader;
+
+import model.Empresa;
+import model.Planilla;
+
+public class ParserTP {
+	static public Integer parsear( String indicador, Empresa empresa, Integer periodo) throws ParseException, TokenMgrError, NumberFormatException {
+	  	Reader reader = new StringReader(indicador);
+		ParserTP parser = new ParserTP(reader);
+		return parser.Expression(empresa, periodo);
+	}
+}
+
+PARSER_END(ParserTP)
+
+
+SKIP : { " " | "\t" | "\n" | "\r" }
+TOKEN : { < MAS : "+" > | < MENOS : "-" > | < POR : "*" > | < DIVIDIDO : "/" > }
+TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
+TOKEN : { < NUMERO : (["0"-"9"])+ >}
+TOKEN : { < IDENTIFICADOR : ("i.")(<LETTER>)* > }
+TOKEN : { < CUENTA : ("c.")(<LETTER>)* > }
+TOKEN : { < #LETTER : ["a"-"z","A"-"Z"] > }
+
+
+Integer Expression(Empresa empresa, Integer periodo) throws NumberFormatException :
+{
+	Integer i;
+	Integer value;
+}
+{
+	value = Term(empresa, periodo)
+	(
+		<MAS>
+		i = Term(empresa, periodo)
+		{ value += i; }
+	|
+		<MENOS>
+		i = Term(empresa, periodo)
+		{ value -= i; }
+	)*
+	<EOF>
+	{ return value; }
+}
+
+Integer Term(Empresa empresa, Integer periodo) throws NumberFormatException :
+{
+	Integer i;
+	Integer value;
+}
+{
+	value = Primary(empresa, periodo)
+	(
+		<POR>
+		i = Primary(empresa, periodo)
+		{ value *= i; }
+	|
+		<DIVIDIDO>
+		i = Primary(empresa, periodo)
+		{ value /= i; }
+	)*
+	{ return value; }
+}
+
+Integer Primary(Empresa empresa, Integer periodo) throws NumberFormatException :
+{
+	Token t;
+	Integer d;
+}
+{
+	t=<NUMERO>
+	{ return Integer.parseInt(t.image); }
+	|
+	t=<IDENTIFICADOR>
+	{ return Planilla.instance.buscarIndicador(t.image.substring(2)).getValor(); }
+	|
+	t = <CUENTA>
+	{ return empresa.buscarCuenta(t.image.substring(2), periodo).getValor(); }
+	|
+	<OPENPAR> d=Expression(empresa, periodo) <CLOSEPAR>
+	{ return d; }
+}
