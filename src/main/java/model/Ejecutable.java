@@ -8,8 +8,10 @@ import view.PrincipalView;
 public class Ejecutable extends Application{
 	
 	public static void main(String[] args) {
+		//Planilla.instance.agregarIndicador(new Indicador("a", "c.van + 100"));
+		
 		new Ejecutable().start();
-
+		
 	}
 	
 	@Override

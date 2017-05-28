@@ -23,6 +23,7 @@ public class BaseDeDatos {
 	public BaseDeDatos(String path) throws IOException {
 		this.path = path;
 		this.leerEmpresas();
+		this.leerIndicadores();
 	}
 
 	public List<Empresa> buscarEmpresas(String nombre) throws IOException {
@@ -80,6 +81,7 @@ public class BaseDeDatos {
 
 	}
 	
+	
 	private void agregarDatosDeLinea(String linea){
 		String[] p = linea.split(",");// Separa el string por las comas
 		
@@ -92,6 +94,30 @@ public class BaseDeDatos {
 		 }
 	}
 
+	//lector de indicadores
+	public void leerIndicadores() throws IOException{
+		try {
+			File inputF = new File("./Archivos de prueba/indicadores.txt");
+			InputStream inputFS = new FileInputStream(inputF);
+			BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
+			
+			br.lines().forEach(linea -> this.verificarIndicador(linea));
+			
+			br.close();
+
+		} catch (FileNotFoundException e) {
+			// e.printStackTrace();
+			throw new FileNotFoundException("No se encontro el archivo");
+		} catch (UserException e) {
+			// e.printStackTrace();
+			throw new UserException("El archivo leido no tiene un formato adecuado");
+		}
+	}
+		
+	public void verificarIndicador(String indicador){
+		String[] p = indicador.split("=");
+		Planilla.instance.agregarIndicador(new Indicador(p[0].trim(), p[1]));
+	}
 
 	public List<Empresa> getEmpresas() {
 		return empresas;

@@ -52,12 +52,11 @@ public class ConsultarCuentasViewModel {
 
 	@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
-		if (this.empresaElegida == null) {
-			return periodos;
+		if (Planilla.instance.getEmpresaElegida() == null) {
+			return periodos;	
 		} else {
-			this.periodoElegido = null;
-			System.out.println("hola");
-			periodos = this.empresaElegida.getPeriodos();
+			Planilla.instance.setPeriodoElegido(null);// = null;
+			periodos = Planilla.instance.getEmpresaElegida().getPeriodos();
 			return periodos;
 		}
 	}
@@ -65,32 +64,41 @@ public class ConsultarCuentasViewModel {
 
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {
-		if (this.periodoElegido == null) {
+		if (Planilla.instance.getPeriodoElegido() == null) {
 			return Arrays.asList();
 		} else {
-			return this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
+			return Planilla.instance.getEmpresaElegida().cuentasDelPeriodo(Planilla.instance.getPeriodoElegido());
 		}
 	}
 	
+	@Dependencies("periodoElegido")
 	public List<Indicador> getIndicadores(){
-		return Planilla.instance.getIndicadores();
+		if (Planilla.instance.getPeriodoElegido() == null) {
+			return Arrays.asList();
+		} else {
+			return Planilla.instance.getIndicadores();
+		}
 	}
 	
 	
 	public Integer getPeriodoElegido() {
-		return periodoElegido;
+		return Planilla.instance.getPeriodoElegido();
 	}
 
 	public void setPeriodoElegido(Integer periodoElegido) {
+		Planilla.instance.setPeriodoElegido(periodoElegido);
 		this.periodoElegido = periodoElegido;
 	}
 
 	public Empresa getEmpresaElegida() {
-		return this.empresaElegida;
+		return Planilla.instance.getEmpresaElegida();
 	}
 
 	public void setEmpresaElegida(Empresa empresaElegida) {
+		Planilla.instance.setEmpresaElegida(empresaElegida);
+		Planilla.instance.setPeriodoElegido(null);
 		this.empresaElegida = empresaElegida;
+		this.periodoElegido = null;
 	}
 
 }
