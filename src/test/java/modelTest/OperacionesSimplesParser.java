@@ -60,6 +60,6 @@ public class OperacionesSimplesParser {
 	@Test
 	public void sumaConParentesis() throws NumberFormatException, ParseException, TokenMgrError{
 		resultado = new Indicador("sumPar","(1+1)");
-		Assert.assertEquals(resultado.getValor(),(1+1));
+		Assert.assertEquals(resultado.getValor(),1+1);
 	}
 }

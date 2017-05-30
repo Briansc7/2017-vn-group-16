@@ -46,7 +46,6 @@ public class ParserTP implements ParserTPConstants {
         throw new ParseException();
       }
     }
-    jj_consume_token(0);
           {if (true) return value;}
     throw new Error("Missing return statement in function");
   }
@@ -95,6 +94,12 @@ public class ParserTP implements ParserTPConstants {
       t = jj_consume_token(NUMERO);
           {if (true) return Integer.parseInt(t.image);}
       break;
+    case OPENPAR:
+      jj_consume_token(OPENPAR);
+      d = Expression(empresa, periodo);
+      jj_consume_token(CLOSEPAR);
+          {if (true) return d;}
+      break;
     case IDENTIFICADOR:
       t = jj_consume_token(IDENTIFICADOR);
           {if (true) return Planilla.instance.buscarIndicador(t.image.substring(2)).getValor();}
@@ -102,12 +107,6 @@ public class ParserTP implements ParserTPConstants {
     case CUENTA:
       t = jj_consume_token(CUENTA);
           {if (true) return empresa.buscarCuenta(t.image.substring(2), periodo).getValor();}
-      break;
-    case OPENPAR:
-      jj_consume_token(OPENPAR);
-      d = Expression(empresa, periodo);
-      jj_consume_token(CLOSEPAR);
-          {if (true) return d;}
       break;
     default:
       jj_la1[4] = jj_gen;

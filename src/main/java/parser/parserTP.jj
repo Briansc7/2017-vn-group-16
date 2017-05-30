@@ -48,7 +48,7 @@ Integer Expression(Empresa empresa, Integer periodo) throws NumberFormatExceptio
 		i = Term(empresa, periodo)
 		{ value -= i; }
 	)*
-	<EOF>
+	//<EOF>
 	{ return value; }
 }
 
@@ -80,12 +80,13 @@ Integer Primary(Empresa empresa, Integer periodo) throws NumberFormatException :
 	t=<NUMERO>
 	{ return Integer.parseInt(t.image); }
 	|
+	<OPENPAR> d=Expression(empresa, periodo) <CLOSEPAR>
+	{ return d; }
+	|
 	t=<IDENTIFICADOR>
 	{ return Planilla.instance.buscarIndicador(t.image.substring(2)).getValor(); }
 	|
 	t = <CUENTA>
 	{ return empresa.buscarCuenta(t.image.substring(2), periodo).getValor(); }
-	|
-	<OPENPAR> d=Expression(empresa, periodo) <CLOSEPAR>
-	{ return d; }
+
 }
