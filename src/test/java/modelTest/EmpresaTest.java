@@ -52,7 +52,7 @@ public class EmpresaTest {
 //	}
 	
 	@Test 
-	public void busquedaPorPeríodoTest(){
+	public void busquedaPorPeriodoTest(){
 		
 		// Creo un set con las cuentas que deberÃ­an coincidir
 		List<Cuenta> lista = empresaACoincidir.getCuentas();

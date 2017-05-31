@@ -62,4 +62,10 @@ public class OperacionesSimplesParser {
 		resultado = new Indicador("sumPar","(1+1)");
 		Assert.assertEquals(resultado.getValor(),1+1);
 	}
+	
+	@Test
+	public void romperPrecedenciaConParentesis() throws NumberFormatException, ParseException, TokenMgrError{
+		resultado = new Indicador("romperPrecedencia","5*(2+2)*10");
+		Assert.assertEquals(resultado.getValor(),5*(2+2)*10);
+	}
 }
