@@ -2,9 +2,9 @@ options {
 	STATIC = false ;
 }
 
-PARSER_BEGIN(ParserTP)
+PARSER_BEGIN(Calculadora)
 
-package parser;
+package calculadora;
 
 import java.io.Reader;
 import java.io.StringReader;
@@ -12,15 +12,15 @@ import java.io.StringReader;
 import model.Empresa;
 import model.Planilla;
 
-public class ParserTP {
-	static public Integer parsear( String indicador, Empresa empresa, Integer periodo) throws ParseException, TokenMgrError, NumberFormatException {
+public class Calculadora {
+	static public Integer calcular( String indicador, Empresa empresa, Integer periodo) throws ParseException, TokenMgrError, NumberFormatException {
 	  	Reader reader = new StringReader(indicador);
-		ParserTP parser = new ParserTP(reader);
+		Calculadora parser = new Calculadora(reader);
 		return parser.Expression(empresa, periodo);
 	}
 }
 
-PARSER_END(ParserTP)
+PARSER_END(Calculadora)
 
 
 SKIP : { " " | "\t" | "\n" | "\r" }

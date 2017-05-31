@@ -4,9 +4,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import calculadora.ParseException;
+import calculadora.TokenMgrError;
 import model.Indicador;
-import parser.ParseException;
-import parser.TokenMgrError;
 
 public class OperacionesSimplesParser {
 	Indicador resultado; 

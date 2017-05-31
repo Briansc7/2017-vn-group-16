@@ -1,7 +1,7 @@
 /ParseException.java
-/ParserTP.java
-/ParserTPConstants.java
-/ParserTPTokenManager.java
 /SimpleCharStream.java
 /Token.java
 /TokenMgrError.java
+/Calculadora.java
+/CalculadoraConstants.java
+/CalculadoraTokenManager.java
