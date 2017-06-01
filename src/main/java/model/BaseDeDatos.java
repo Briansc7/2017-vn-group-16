@@ -144,5 +144,9 @@ public class BaseDeDatos {
 	public void setPath(String path) {
 		this.path = path;
 	}
+	
+	public void borrarEmpresas(){
+		this.empresas.clear();
+	}
 
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
+import org.uqbar.lacar.ui.model.Action;
 
 import calculadora.ParseException;
 import calculadora.TokenMgrError;
@@ -23,16 +24,22 @@ public class ConsultarCuentasViewModel {
 	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
-	private String path2;
 
 	private List<Integer> periodos = Arrays.asList();
+	
+	private int contador = 1;
 
 	public ConsultarCuentasViewModel(String path) throws IOException{
-		path2 = path;
 		this.baseDeDatos = new BaseDeDatos(path);
 		this.baseDeDatos.leerEmpresas();
 		this.baseDeDatos.leerIndicadores();
 
+	}
+	
+	public Action borrarCuentasLeidas(){
+		this.baseDeDatos.borrarEmpresas();
+		Planilla.instance.borrarIndicadores();
+		return null;
 	}
 
 	
@@ -72,6 +79,7 @@ public class ConsultarCuentasViewModel {
 		if (Planilla.instance.getPeriodoElegido() == null) {
 			return Arrays.asList();
 		} else {
+
 			return Planilla.instance.getEmpresaElegida().cuentasDelPeriodo(Planilla.instance.getPeriodoElegido());
 		}
 	}
@@ -89,8 +97,21 @@ public class ConsultarCuentasViewModel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			Planilla.instance.indicadoresDelPeriodo().forEach(indicador->{
+				try {
+					System.out.println(indicador.getNombre()+" "+indicador.getValor());
+				} catch (NumberFormatException | ParseException | TokenMgrError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			if (contador == 2){
+				contador = 1;
+				return Planilla.instance.indicadoresDelPeriodo();
+			}
+			contador++;
+			return Planilla.instance.indicadoresDelPeriodo();
 			
-			return Planilla.instance.indicadoresDelPeriodo();//getIndicadores();
 		}
 	}
 	
