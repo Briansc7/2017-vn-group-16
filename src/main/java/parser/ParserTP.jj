@@ -1,0 +1,59 @@
+options {
+	STATIC = false ;
+}
+
+PARSER_BEGIN(ParserTP)
+
+package parser;
+
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ParserTP {
+	static public List<String> parsear(String indicador) throws ParseException, TokenMgrError, NumberFormatException {
+	  	Reader reader = new StringReader(indicador);
+		ParserTP parser = new ParserTP(reader);
+		return parser.Expression();
+	}
+}
+
+PARSER_END(ParserTP)
+
+
+SKIP : { " " | "\t" | "\n" | "\r" }
+TOKEN : { < OPERADOR : (["+","-","*","/"]){1} > }
+TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
+TOKEN : { < NUMERO : (["0"-"9"])+ >}
+TOKEN : { < PALABRA : (["a"-"z","A"-"Z"])+ > }
+
+
+List<String> Expression() throws NumberFormatException :
+{
+	List<String> palabras = new ArrayList<String>();
+}
+{
+	Primary(palabras)
+	(
+		<OPERADOR>
+		Primary(palabras)
+	)*
+	//<EOF>
+	{ return palabras; }
+}
+
+void Primary(List<String> lista) throws NumberFormatException :
+{
+	List<String> sublista;
+	Token t;
+}
+{
+	<NUMERO> 
+	|
+	t=<PALABRA>
+	{ lista.add(t.image); }
+	|
+	<OPENPAR> sublista=Expression() <CLOSEPAR>
+	{ lista.addAll(sublista); }
+}
