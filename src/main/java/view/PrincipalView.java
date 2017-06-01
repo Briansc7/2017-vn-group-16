@@ -24,11 +24,15 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		new Button(panelActions)
 		.setCaption("Consultar cuentas")
 		.onClick(() -> this.consultarCuentas());
+		
 		new Button(panelActions)
 		.setCaption("Cargar Indicadores")
 		.onClick(() -> this.cargarIndicadores());
 		
-		
+		new Button(panelActions)
+		.setCaption("Agregar Indicador")
+		.onClick(() -> this.agregarIndicador());
+
 	}
 
 	@Override
@@ -66,5 +70,10 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		dialog.onAccept(() -> {});
 	}
 
+	public void agregarIndicador() {
+		Dialog<?> dialog = new AgregarIndicadorView(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
 
 }
