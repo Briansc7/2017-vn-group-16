@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ParserTP {
-	static public List<String> parsear(String indicador) throws ParseException, TokenMgrError, NumberFormatException {
+	static public List<String> parsear(String indicador) throws ParseException, TokenMgrError {
 	  	Reader reader = new StringReader(indicador);
 		ParserTP parser = new ParserTP(reader);
 		return parser.Expression();
@@ -26,10 +26,10 @@ SKIP : { " " | "\t" | "\n" | "\r" }
 TOKEN : { < OPERADOR : (["+","-","*","/"]){1} > }
 TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
 TOKEN : { < NUMERO : (["0"-"9"])+ >}
-TOKEN : { < PALABRA : (["a"-"z","A"-"Z"])+ > }
+TOKEN : { < PALABRA : ("i." | "c.")(["a"-"z","A"-"Z"])+ > }
 
 
-List<String> Expression() throws NumberFormatException :
+List<String> Expression() :
 {
 	List<String> palabras = new ArrayList<String>();
 }
@@ -43,7 +43,7 @@ List<String> Expression() throws NumberFormatException :
 	{ return palabras; }
 }
 
-void Primary(List<String> lista) throws NumberFormatException :
+void Primary(List<String> lista) :
 {
 	List<String> sublista;
 	Token t;
@@ -52,7 +52,7 @@ void Primary(List<String> lista) throws NumberFormatException :
 	<NUMERO> 
 	|
 	t=<PALABRA>
-	{ lista.add(t.image); }
+	{ lista.add(t.image.substring(2)); }
 	|
 	<OPENPAR> sublista=Expression() <CLOSEPAR>
 	{ lista.addAll(sublista); }

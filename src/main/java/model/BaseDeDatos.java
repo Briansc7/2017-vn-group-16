@@ -15,15 +15,19 @@ import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.UserException;
 
+import parser.ParseException;
+import parser.TokenMgrError;
+
 public class BaseDeDatos {
 
 	private List<Empresa> empresas = new ArrayList<Empresa>();//Arrays.asList();
 	private String path;
 
 	public BaseDeDatos(String path) throws IOException {
+		System.out.println("GGGGGGGGGGGGGGG");
 		this.path = path;
-		this.leerEmpresas();
-		this.leerIndicadores();
+		//this.leerEmpresas();
+		//this.leerIndicadores();
 	}
 
 	public List<Empresa> buscarEmpresas(String nombre) throws IOException {
@@ -101,7 +105,17 @@ public class BaseDeDatos {
 			InputStream inputFS = new FileInputStream(inputF);
 			BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
 			
-			br.lines().forEach(linea -> this.verificarIndicador(linea));
+			br.lines().forEach(linea -> {
+				try {
+					Planilla.instance.verificarIndicador(linea);
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (TokenMgrError e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
 			
 			br.close();
 
@@ -114,10 +128,10 @@ public class BaseDeDatos {
 		}
 	}
 		
-	public void verificarIndicador(String indicador){
+	/*public void verificarIndicador(String indicador) throws ParseException, TokenMgrError{
 		String[] p = indicador.split("=");
 		Planilla.instance.agregarIndicador(new Indicador(p[0].trim(), p[1]));
-	}
+	}*/
 
 	public List<Empresa> getEmpresas() {
 		return empresas;

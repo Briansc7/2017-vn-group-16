@@ -13,8 +13,8 @@ import model.Empresa;
 import model.Planilla;
 
 public class Calculadora {
-	static public Integer calcular( String indicador, Empresa empresa, Integer periodo) throws ParseException, TokenMgrError, NumberFormatException {
-	  	Reader reader = new StringReader(indicador);
+	static public Integer calcular( String expresion, Empresa empresa, Integer periodo) throws ParseException, TokenMgrError, NumberFormatException {
+	  	Reader reader = new StringReader(expresion);
 		Calculadora parser = new Calculadora(reader);
 		return parser.Expression(empresa, periodo);
 	}

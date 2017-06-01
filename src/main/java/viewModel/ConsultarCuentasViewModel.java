@@ -28,6 +28,9 @@ public class ConsultarCuentasViewModel {
 	public ConsultarCuentasViewModel(String path) throws IOException{
 
 		this.baseDeDatos = new BaseDeDatos(path);
+		this.baseDeDatos.leerEmpresas();
+		this.baseDeDatos.leerIndicadores();
+
 	}
 
 	
@@ -76,7 +79,7 @@ public class ConsultarCuentasViewModel {
 		if (Planilla.instance.getPeriodoElegido() == null) {
 			return Arrays.asList();
 		} else {
-			return Planilla.instance.getIndicadores();
+			return Planilla.instance.indicadoresDelPeriodo();//getIndicadores();
 		}
 	}
 	

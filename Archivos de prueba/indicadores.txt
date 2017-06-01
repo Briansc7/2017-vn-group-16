@@ -1,2 +1,2 @@
-a = c.van + 100
-b = c.ebitda * 2
+a = c.ebitda + 100
+b = c.van +500

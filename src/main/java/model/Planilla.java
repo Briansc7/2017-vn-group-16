@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import parser.ParseException;
+import parser.ParserTP;
+import parser.TokenMgrError;
 
 public class Planilla {
 
@@ -32,11 +37,22 @@ public class Planilla {
 		return this.primero(nombre).get();
 	}
 	
+	public List<Indicador> indicadoresDelPeriodo() {
+		//return Arrays.asList();
+		return this.indicadores.stream().filter(indicador -> indicador.existePara(empresaElegida, periodoElegido)).collect(Collectors.toList());
+	}
+	
+	public void verificarIndicador(String indicador) throws ParseException, TokenMgrError{
+		String[] partes = indicador.split("=");
+		ParserTP.parsear(partes[1]);
+		Planilla.instance.agregarIndicador(new Indicador(partes[0], partes[1]));
+	}
+	
 	public void agregarIndicador(Indicador indicador){
 		this.indicadores.add(indicador);
 	}
 	public List<Indicador> getIndicadores() {
-		return indicadores;//.stream().filter(predicate);
+		return indicadores;
 	}
 
 	public Empresa getEmpresaElegida() {
