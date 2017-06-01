@@ -46,8 +46,10 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 
 	public void consultarCuentas() {
 		try{
-			this.getModelObject().verificarArchivo();	
+			this.getModelObject().verificarArchivo();
+			ConsultarCuentasView consultarCuentasView = new ConsultarCuentasView(this, this.getModelObject().getPath());
 			Dialog<?> dialog = new ConsultarCuentasView(this, this.getModelObject().getPath());
+			dialog.onCancel((consultarCuentasView.getModelObject()).borrarCuentasLeidas());
 			dialog.open();
 			dialog.onAccept(() -> {});
 		}
