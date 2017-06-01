@@ -15,6 +15,10 @@ public class Planilla {
 	public static Planilla instance = new Planilla();
 	private Empresa empresaElegida = null;
 	private Integer periodoElegido = null;
+	
+	public void borrarIndicadores(){
+		this.indicadores.clear();
+	}
 
 	
 	private List<Indicador> indicadores = new ArrayList<Indicador>();

@@ -23,7 +23,8 @@ public class Indicador {
 	}
 	
 	public int getValor() throws NumberFormatException, ParseException, TokenMgrError {
-		return 500;//Calculadora.calcular(this.expresion, Planilla.instance.getEmpresaElegida(), Planilla.instance.getPeriodoElegido());
+		//return 500;
+		return Calculadora.calcular(this.expresion, Planilla.instance.getEmpresaElegida(), Planilla.instance.getPeriodoElegido());
 	}
 	
 	public boolean existePara(Empresa empresa, Integer periodo) {

@@ -16,7 +16,7 @@ public class OperacionesSimplesParser {
 	}
 	
 	@Test
-	public void sumarNumeros() throws NumberFormatException, ParseException, TokenMgrError{
+	public void sumarNumeros() throws NumberFormatException, ParseException, TokenMgrError, parser.ParseException, parser.TokenMgrError{
 		resultado = new Indicador("suma","10+56");
 		Assert.assertEquals(resultado.getValor(),10+56);
 	}

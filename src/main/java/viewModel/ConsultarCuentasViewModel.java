@@ -7,7 +7,8 @@ import java.util.List;
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
-
+import calculadora.ParseException;
+import calculadora.TokenMgrError;
 import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
@@ -22,11 +23,12 @@ public class ConsultarCuentasViewModel {
 	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
 	private Integer periodoElegido;
+	private String path2;
 
 	private List<Integer> periodos = Arrays.asList();
 
 	public ConsultarCuentasViewModel(String path) throws IOException{
-
+		path2 = path;
 		this.baseDeDatos = new BaseDeDatos(path);
 		this.baseDeDatos.leerEmpresas();
 		this.baseDeDatos.leerIndicadores();
@@ -79,6 +81,15 @@ public class ConsultarCuentasViewModel {
 		if (Planilla.instance.getPeriodoElegido() == null) {
 			return Arrays.asList();
 		} else {
+
+			try {
+			Planilla.instance.borrarIndicadores();
+			this.baseDeDatos.leerIndicadores();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 			return Planilla.instance.indicadoresDelPeriodo();//getIndicadores();
 		}
 	}

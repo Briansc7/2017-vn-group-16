@@ -23,7 +23,7 @@ public class OperacionesParserConCuentas {
 	}
 	
 	@Test
-	public void leerUnaCuenta() throws NumberFormatException, ParseException, TokenMgrError, NullPointerException, IOException{
+	public void leerUnaCuenta() throws NumberFormatException, ParseException, TokenMgrError, NullPointerException, IOException, parser.ParseException, parser.TokenMgrError{
 		PrincipalViewModel principalViewModel = new PrincipalViewModel();
 		principalViewModel.setPath(".\\Archivos de prueba\\baseDatosPrueba.csv");
 		//System.out.println(principalViewModel.getPath());
