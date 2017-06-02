@@ -20,9 +20,9 @@ import parser.TokenMgrError;
 
 public class BaseDeDatos {
 
-	private List<Empresa> empresas = new ArrayList<Empresa>();//Arrays.asList();
+	private List<Empresa> empresas = new ArrayList<Empresa>();
 	private String path;
-	private String pathIndicadores = "./Archivos de prueba/indicadores.txt";
+	private String pathIndicadores = "./Archivos del sistema/indicadores.txt";
 
 	public BaseDeDatos(String path) {
 		this.path = path;
