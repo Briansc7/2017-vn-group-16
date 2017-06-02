@@ -24,8 +24,6 @@ public class ConsultarCuentasViewModel {
 	private Integer periodoElegido;
 
 	private List<Integer> periodos = Arrays.asList();
-	
-	//private int contador = 1;
 
 	public ConsultarCuentasViewModel(String path) throws IOException{
 		this.baseDeDatos = new BaseDeDatos(path);
@@ -65,7 +63,7 @@ public class ConsultarCuentasViewModel {
 		if (Planilla.instance.getEmpresaElegida() == null) {
 			return periodos;	
 		} else {
-			Planilla.instance.setPeriodoElegido(null);// = null;
+			Planilla.instance.setPeriodoElegido(null);
 			periodos = Planilla.instance.getEmpresaElegida().getPeriodos();
 			return periodos;
 		}
@@ -95,19 +93,7 @@ public class ConsultarCuentasViewModel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			/*Planilla.instance.indicadoresDelPeriodo().forEach(indicador->{
-				try {
-					System.out.println(indicador.getNombre()+" "+indicador.getValor());
-				} catch (NumberFormatException | ParseException | TokenMgrError e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			});*/
-			/*if (contador == 2){
-				contador = 1;
-				return Planilla.instance.indicadoresDelPeriodo();
-			}
-			contador++;*/
+
 			return Planilla.instance.indicadoresDelPeriodo();
 			
 		}

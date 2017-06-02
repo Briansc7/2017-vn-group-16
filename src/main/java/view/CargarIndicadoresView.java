@@ -34,7 +34,7 @@ public class CargarIndicadoresView extends Dialog<CargarIndicadoresViewModel>{
 	
 	public void cargarIndicadores(){
 		try{
-			this.getModelObject().editarTxt();
+			this.getModelObject().cargarIndicadoresDesdeTxt();
 		}
 		catch(Exception e){
 			showErrorMessageBox(e.getMessage());

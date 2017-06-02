@@ -12,7 +12,7 @@ public class CargarIndicadoresViewModel {
 		
 	}
 	
-	public void editarTxt(){
+	public void cargarIndicadoresDesdeTxt(){
 		
 	}
 	
