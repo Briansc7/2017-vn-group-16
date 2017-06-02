@@ -1,4 +1,4 @@
-<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>50</x><y>110</y><w>160</w><h>160</h></coordinates><panel_attributes>BaseDeDatos
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>610</x><y>280</y><w>160</w><h>160</h></coordinates><panel_attributes>BaseDeDatos
 --
 empresas
 path
@@ -7,20 +7,20 @@ buscarEmpresas(nombre)
 empresaLlamada(nombre)
 leerEmpresas()
 leerIndicadores()
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>130</y><w>220</w><h>200</h></coordinates><panel_attributes>Empresa
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>850</x><y>270</y><w>220</w><h>200</h></coordinates><panel_attributes>Empresa
 --
 nombre
 cuentas
 --
 cuentasDelPeriodo(periodo)
 existeCuentaDel(nombre, periodo)
-buscarCuenta(nombre, periodo)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>200</x><y>130</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>650</x><y>170</y><w>130</w><h>130</h></coordinates><panel_attributes>Cuenta
+buscarCuenta(nombre, periodo)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>270</y><w>110</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1210</x><y>310</y><w>130</w><h>130</h></coordinates><panel_attributes>Cuenta
 --
 nombre
 valor
 fecha
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>500</x><y>150</y><w>170</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>150;30;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>110</x><y>380</y><w>240</w><h>200</h></coordinates><panel_attributes>&lt;&lt;Singleton&gt;&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1060</x><y>290</y><w>170</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>150;30;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>520</y><w>240</w><h>200</h></coordinates><panel_attributes>&lt;&lt;Singleton&gt;&gt;
 Planilla
 --
 empresaElegida
@@ -31,9 +31,18 @@ existeIndicador(nombre)
 buscarIndicador(nombre)
 verificarIndicador(indicador)
 verificarSintaxisIndicador(indicador)
-agregarIndicadorAlArchivo(indicador)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>570</x><y>400</y><w>100</w><h>80</h></coordinates><panel_attributes>Indicador
+agregarIndicadorAlArchivo(indicador)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1010</x><y>570</y><w>100</w><h>80</h></coordinates><panel_attributes>Indicador
 --
 nombre
 expresion
 --
-existePara()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>340</x><y>400</y><w>250</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>230;10;10;60</additional_attributes></element></diagram>
+existePara()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>830</x><y>570</y><w>200</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>180;10;10;30</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>340</y><w>140</w><h>90</h></coordinates><panel_attributes>PrincipalViewModel
+--
+path
+--
+verificarArchivo()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>380</y><w>230</w><h>100</h></coordinates><panel_attributes>ConsultarCuentasViewModel
+--
+baseDeDatos
+nombreEmpresaElegida
+periodos
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>460</y><w>200</w><h>100</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>180;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>380</y><w>90</w><h>50</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>70;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>280</y><w>210</w><h>150</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>190;10;10;130</additional_attributes></element></diagram>

@@ -6,20 +6,16 @@ import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 
 import model.Planilla;
+import parser.ParseException;
+import parser.TokenMgrError;
 
 @Observable
 public class AgregarIndicadorViewModel {
 
 	private String indicador;
 	
-	public void verificarIndicador(){
-		try {
-			Planilla.instance.verificarIndicador(this.indicador);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new UserException("El archivo no existe");
-		}
+	public void verificarIndicador() throws ParseException, TokenMgrError, IOException{
+		Planilla.instance.verificarIndicador(this.indicador);
 	}
 	
 	public String getIndicador() {

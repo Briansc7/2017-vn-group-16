@@ -46,23 +46,14 @@ public class Planilla {
 		return this.indicadores.stream().filter(indicador -> indicador.existePara(empresaElegida, periodoElegido)).collect(Collectors.toList());
 	}
 	
-	public void verificarIndicador(String indicador) throws IOException{
+	public void verificarIndicador(String indicador) throws IOException, ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
-		try {
-			List<String> componentes = ParserTP.parsear(partes[1]);
+		List<String> componentes = ParserTP.parsear(partes[1]);
 			if(componentes.contains(partes[0].trim())) {
 				throw new RuntimeException("No se puede usar un indicador en su propia definicion");
 			}
 			this.agregarIndicadorAlArchivo(indicador);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
-		} catch (TokenMgrError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException(e.getMessage());
-		}
+		
 	}
 	
 	public void verificarSintaxisIndicador(String indicador) throws ParseException, TokenMgrError{
