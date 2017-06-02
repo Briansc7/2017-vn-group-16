@@ -22,12 +22,10 @@ public class BaseDeDatos {
 
 	private List<Empresa> empresas = new ArrayList<Empresa>();//Arrays.asList();
 	private String path;
+	private String pathIndicadores = "./Archivos de prueba/indicadores.txt";
 
-	public BaseDeDatos(String path) throws IOException {
-		//System.out.println("GGGGGGGGGGGGGGG");
+	public BaseDeDatos(String path) {
 		this.path = path;
-		//this.leerEmpresas();
-		//this.leerIndicadores();
 	}
 
 	public List<Empresa> buscarEmpresas(String nombre) throws IOException {
@@ -101,7 +99,7 @@ public class BaseDeDatos {
 	//lector de indicadores
 	public void leerIndicadores() throws IOException{
 		try {
-			File inputF = new File("./Archivos de prueba/indicadores.txt");
+			File inputF = new File(this.pathIndicadores);
 			InputStream inputFS = new FileInputStream(inputF);
 			BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
 			
@@ -128,11 +126,6 @@ public class BaseDeDatos {
 		}
 	}
 		
-	/*public void verificarIndicador(String indicador) throws ParseException, TokenMgrError{
-		String[] p = indicador.split("=");
-		Planilla.instance.agregarIndicador(new Indicador(p[0].trim(), p[1]));
-	}*/
-
 	public List<Empresa> getEmpresas() {
 		return empresas;
 	}
@@ -149,4 +142,7 @@ public class BaseDeDatos {
 		this.empresas.clear();
 	}
 
+	public void setPathIndicadores(String pathIndicadores) {
+		this.pathIndicadores = pathIndicadores;
+	}
 }

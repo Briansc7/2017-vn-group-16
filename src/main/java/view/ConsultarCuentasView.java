@@ -11,7 +11,6 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.widgets.tables.Column;
 import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
-import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
 
 import model.Cuenta;
@@ -32,15 +31,10 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
 		new Label(mainPanel).setText("Ingrese la empresa");
 		new TextBox(mainPanel).bindValueToProperty("nombreEmpresaElegida");
-		/*Selector<Empresa> selectorEmpresas = new Selector<Empresa>(mainPanel);
-		selectorEmpresas.bindValueToProperty("empresaElegida");
-		selectorEmpresas.bindItemsToProperty("empresas");*/
 		
 		List<Empresa> listaEmpresas = new List<Empresa>(mainPanel);
 		listaEmpresas.bindItemsToProperty("empresas");
 		listaEmpresas.bindValueToProperty("empresaElegida");
-		
-		//new Button(mainPanel).setCaption("Buscar empresa").onClick(() -> this.getModelObject().buscarEmpresa());
 		
 		new Label(mainPanel).setText("Ingrese el periodo");
 		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);

@@ -60,12 +60,4 @@ public class Empresa {
 		return periodos;
 	}
 
-	/*public void agregarCuentas(List<Cuenta> cuenta) {
-		cuentas.addAll(cuenta);		
-	}
-	
-	public void agregarCuenta(Cuenta cuenta) {
-		cuentas.add(cuenta);
-	}*/
-
 }

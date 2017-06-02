@@ -1,11 +1,12 @@
 Empresa,Cuenta,Valor,Fecha
 Facebook,Ebitda,14870,2016-06-26
-Facebook,Ingreso neto operaciones no continuas,4273,2016-10-05
+Facebook,IngresoNetoOperacionesNoContinuas,4273,2016-10-05
+Facebook,IngresoNetoOperacionesContinuas,6500,2016-9-12
 Twitter,Ebitda,12000,2016-05-20
-Twitter,Ingreso neto operaciones continuas,5000,2017-05-23
+Twitter,IngresoNetoOperacionesContinuas,5000,2017-05-23
 Facebook,Ebitda,15000,2017-01-11
-Facebook,Ingreso neto operaciones continuas,4273,2017-01-21
+Facebook,IngresoNetoOperacionesContinuasContinuas,4273,2017-01-21
 Twitter,Ebitda,14000,2017-04-10
-Twitter,Ingreso neto operaciones continuas,5000,2016-11-03
+Twitter,IngresoNetoOperacionesContinuas,5000,2016-11-03
 Facebook,Ebitda,14870,2015-05-05
 Twitter,Van,6589,2016-03-07

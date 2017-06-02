@@ -1,2 +1,3 @@
 indicadorA = c.ebitda + 100
 indicadorB = c.van * 2 + i.indicadorA
+ingresoNeto = c.IngresoNetoOperacionesNoContinuas + c.IngresoNetoOperacionesContinuas

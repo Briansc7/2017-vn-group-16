@@ -50,7 +50,6 @@ public class ConsultarCuentasModelTest {
 		int tamanio = basePrueba.getEmpresas().size();
 		Assert.assertEquals(tamanio, 1);
 		Assert.assertEquals(basePrueba.getEmpresas().get(0).getNombre(), "Facebook");
-		System.out.println(basePrueba.getEmpresas().get(0).getCuentas().get(0).getNombre());
 		Assert.assertEquals(basePrueba.getEmpresas().get(0).getCuentas().get(0).getNombre(), "Ebitda");
 		Assert.assertTrue(basePrueba.getEmpresas().get(0).getCuentas().get(0).getValor() == 14870);
 	}

@@ -8,7 +8,6 @@ public class CargarIndicadoresViewModel {
 	private String pathIndicadores;
 	
 
-
 	public CargarIndicadoresViewModel(){
 		
 	}

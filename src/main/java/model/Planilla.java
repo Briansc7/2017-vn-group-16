@@ -19,18 +19,13 @@ public class Planilla {
 	public static Planilla instance = new Planilla();
 	private Empresa empresaElegida = null;
 	private Integer periodoElegido = null;
+	private List<Indicador> indicadores = new ArrayList<Indicador>();
+	private String pathIndicadores = "./Archivos de prueba/indicadores.txt";
 	
 	public void borrarIndicadores(){
 		this.indicadores.clear();
 	}
 
-	
-	private List<Indicador> indicadores = new ArrayList<Indicador>();
-	
-	/*public Planilla(List<Indicador> indicadores){
-		this.indicadores.addAll(indicadores);
-	}*/
-	
 	
 	public Boolean existeIndicador(String nombre) {
 		return this.primero(nombre).isPresent();
@@ -48,7 +43,6 @@ public class Planilla {
 	}
 	
 	public List<Indicador> indicadoresDelPeriodo() {
-		//return Arrays.asList();
 		return this.indicadores.stream().filter(indicador -> indicador.existePara(empresaElegida, periodoElegido)).collect(Collectors.toList());
 	}
 	
@@ -77,10 +71,10 @@ public class Planilla {
 		Planilla.instance.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
 	}
 	
-	private void agregarIndicadorAlArchivo(String indicador) throws IOException{
-		File file = new File("./Archivos de prueba/indicadores.txt");
+	public void agregarIndicadorAlArchivo(String indicador) throws IOException{
+		File file = new File(this.pathIndicadores);
 		Writer output = new BufferedWriter(new FileWriter(file, true));
-		output.append("\r\n" + indicador);//.append(indicador);
+		output.append(indicador + "\r\n");
 		output.close();
 	}
 	
@@ -107,4 +101,7 @@ public class Planilla {
 		this.periodoElegido = periodoElegido;
 	}
 	
+	public void setPathIndicadores(String pathIndicadores) {
+		this.pathIndicadores = pathIndicadores;
+	}
 }

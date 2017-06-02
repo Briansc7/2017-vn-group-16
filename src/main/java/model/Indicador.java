@@ -23,13 +23,11 @@ public class Indicador {
 	}
 	
 	public int getValor() throws NumberFormatException, ParseException, TokenMgrError {
-		//return 500;
 		return Calculadora.calcular(this.expresion, Planilla.instance.getEmpresaElegida(), Planilla.instance.getPeriodoElegido());
 	}
 	
 	public boolean existePara(Empresa empresa, Integer periodo) {
-		//List<String> contenido =
-		return this.contenido.stream().allMatch(nombre -> this.existeComponente(nombre, empresa, periodo));//.findFirst().isPresent();
+		return this.contenido.stream().allMatch(nombre -> this.existeComponente(nombre, empresa, periodo));
 		
 	}
 	
@@ -37,7 +35,6 @@ public class Indicador {
 		if (nombre.substring(0,2).equalsIgnoreCase("c.")){
 			return empresa.existeCuentaDel(nombre.substring(2), periodo);
 		} else if (Planilla.instance.existeIndicador(nombre)){
-			//System.out.println(nombre);
 			return Planilla.instance.buscarIndicador(nombre).existePara(empresa, periodo);
 		}
 		return false;
