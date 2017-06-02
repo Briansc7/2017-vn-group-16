@@ -74,7 +74,7 @@ public class Planilla {
 	public void verificarSintaxisIndicador(String indicador) throws ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
 		ParserTP.parsear(partes[1]);
-		Planilla.instance.agregarIndicador(new Indicador(partes[0], partes[1]));
+		Planilla.instance.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
 	}
 	
 	private void agregarIndicadorAlArchivo(String indicador) throws IOException{

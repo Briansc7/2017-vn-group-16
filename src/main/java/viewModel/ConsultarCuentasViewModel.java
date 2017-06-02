@@ -8,8 +8,6 @@ import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.lacar.ui.model.Action;
 
-import calculadora.ParseException;
-import calculadora.TokenMgrError;
 import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
@@ -27,7 +25,7 @@ public class ConsultarCuentasViewModel {
 
 	private List<Integer> periodos = Arrays.asList();
 	
-	private int contador = 1;
+	//private int contador = 1;
 
 	public ConsultarCuentasViewModel(String path) throws IOException{
 		this.baseDeDatos = new BaseDeDatos(path);
@@ -97,19 +95,19 @@ public class ConsultarCuentasViewModel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			Planilla.instance.indicadoresDelPeriodo().forEach(indicador->{
+			/*Planilla.instance.indicadoresDelPeriodo().forEach(indicador->{
 				try {
 					System.out.println(indicador.getNombre()+" "+indicador.getValor());
 				} catch (NumberFormatException | ParseException | TokenMgrError e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			});
-			if (contador == 2){
+			});*/
+			/*if (contador == 2){
 				contador = 1;
 				return Planilla.instance.indicadoresDelPeriodo();
 			}
-			contador++;
+			contador++;*/
 			return Planilla.instance.indicadoresDelPeriodo();
 			
 		}

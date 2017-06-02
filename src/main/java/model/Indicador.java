@@ -29,10 +29,18 @@ public class Indicador {
 	
 	public boolean existePara(Empresa empresa, Integer periodo) {
 		//List<String> contenido =
-		return this.contenido.stream().allMatch((nombre -> (empresa.existeCuentaDel(nombre, periodo) 
-				/*|| Planilla.instance.buscarIndicador(nombre).existePara(empresa, periodo)*/)));//.findFirst().isPresent();
+		return this.contenido.stream().allMatch(nombre -> this.existeComponente(nombre, empresa, periodo));//.findFirst().isPresent();
 		
-		 
+	}
+	
+	private boolean existeComponente(String nombre, Empresa empresa, Integer periodo){
+		if (nombre.substring(0,2).equalsIgnoreCase("c.")){
+			return empresa.existeCuentaDel(nombre.substring(2), periodo);
+		} else if (Planilla.instance.existeIndicador(nombre)){
+			//System.out.println(nombre);
+			return Planilla.instance.buscarIndicador(nombre).existePara(empresa, periodo);
+		}
+		return false;
 	}
 	
 	public String getNombre() {

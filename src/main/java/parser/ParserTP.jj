@@ -52,7 +52,12 @@ void Primary(List<String> lista) :
 	<NUMERO> 
 	|
 	t=<PALABRA>
-	{ lista.add(t.image.substring(2)); }
+	{ if(t.image.substring(0,2).equalsIgnoreCase("i.")) {
+		 lista.add(t.image.substring(2));
+	  } else {
+	     lista.add(t.image);
+	  }
+	}
 	|
 	<OPENPAR> sublista=Expression() <CLOSEPAR>
 	{ lista.addAll(sublista); }

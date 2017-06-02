@@ -24,7 +24,7 @@ public class BaseDeDatos {
 	private String path;
 
 	public BaseDeDatos(String path) throws IOException {
-		System.out.println("GGGGGGGGGGGGGGG");
+		//System.out.println("GGGGGGGGGGGGGGG");
 		this.path = path;
 		//this.leerEmpresas();
 		//this.leerIndicadores();

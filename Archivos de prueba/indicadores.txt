@@ -1,2 +1,2 @@
-a = c.ebitda + 100
-b = c.van +500
+indicadorA = c.ebitda + 100
+indicadorB = c.van * 2 + i.indicadorA
