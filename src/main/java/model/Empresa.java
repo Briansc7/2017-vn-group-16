@@ -53,7 +53,8 @@ public class Empresa {
 	public List<Integer> getPeriodos(){
 		List<Integer> periodos = new ArrayList<Integer>(
 				this.cuentas.stream()
-				.map((Cuenta cuenta)-> cuenta.getFecha().getYear())
+				.map((Cuenta cuenta)-> cuenta.getFecha().getYear())//solo get year, que lo haga la cuenta
+				//usar localdate de java, hay clase llamada year
 				.collect(Collectors.toSet()));
 		
 		Collections.sort(periodos);

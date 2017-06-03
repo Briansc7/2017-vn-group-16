@@ -51,6 +51,11 @@ Integer Expression(Empresa empresa, Integer periodo) throws NumberFormatExceptio
 	//<EOF>
 	{ return value; }
 }
+//queremos estar el menor tiempo posible en cc. Entonces que devuelva el objeto suma.
+//nosotros queremos hacer calculos entonces no delegarlo a objeto extranjero con sintaxis entraña
+//entonces hacer parser que devuelva objetos del dominio
+
+//fusionar los dos parsers
 
 Integer Term(Empresa empresa, Integer periodo) throws NumberFormatException :
 {

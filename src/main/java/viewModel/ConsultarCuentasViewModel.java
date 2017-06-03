@@ -37,7 +37,7 @@ public class ConsultarCuentasViewModel {
 		Planilla.instance.borrarIndicadores();
 		return null;
 	}
-
+//solo se acepta null si el framework lo devuelve. No usar nulls
 	
 	@Dependencies("nombreEmpresaElegida")
 	public List<Empresa> getEmpresas() throws IOException {
@@ -64,7 +64,7 @@ public class ConsultarCuentasViewModel {
 			return periodos;	
 		} else {
 			Planilla.instance.setPeriodoElegido(null);
-			periodos = Planilla.instance.getEmpresaElegida().getPeriodos();
+			periodos = Planilla.instance.getEmpresaElegida().getPeriodos();//empresa elegida es solo de la vista, no del modelo
 			return periodos;
 		}
 	}
@@ -80,15 +80,15 @@ public class ConsultarCuentasViewModel {
 		}
 	}
 	
-	@Dependencies("periodoElegido")
+	@Dependencies("periodoElegido")//debe ser un atributo para que pueda monitorear su cambio(mirar su get)
 	public List<Indicador> getIndicadores(){
 		if (Planilla.instance.getPeriodoElegido() == null) {
 			return Arrays.asList();
 		} else {
 
 			try {
-			Planilla.instance.borrarIndicadores();
-			this.baseDeDatos.leerIndicadores();
+			Planilla.instance.borrarIndicadores();//estas 2 lineas se habian agregado por no poner monitorear bien el cambio de periodo elegido
+			this.baseDeDatos.leerIndicadores();		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -102,7 +102,7 @@ public class ConsultarCuentasViewModel {
 	
 	public Integer getPeriodoElegido() {
 		return Planilla.instance.getPeriodoElegido();
-	}
+	}//periodoElegido debe ser un atributo para que pueda ser monitoreado el cambio
 
 	public void setPeriodoElegido(Integer periodoElegido) {
 		Planilla.instance.setPeriodoElegido(periodoElegido);
@@ -121,3 +121,20 @@ public class ConsultarCuentasViewModel {
 	}
 
 }
+//mensaje de error del parser debe ser entendible por el usuario, ej que diga error de sintaxis y si es posible de mas informacion
+//que el parth del archivo indicadores.txt esté en un solo lugar
+//problema aun guarda los indicadores agregados en la carpeta de archivos de prueba, 
+//debe usar indicadores.txt de la carpeta archivos del sistema
+
+//en vista consultar cuentas
+//cuando en el text box no hay nada, poner en la lista de abajo por ejemplo las empresas mas consultadas
+//la idea es que esa lista no esté vacía y se pueda aprovechar
+
+//en la pantalla principal al elegir el archivo con las cuentas todo se ve exactamente igual a si no lo hubiera hecho
+//lo ideal es seleccionar el archivo en una pantalla y luego me abra otra ventana donde pueda usarlo
+
+//En la lista de indicadores se eligió no mostrar aquellos indicadores cuyas cuentas no tengan valores
+//Pero en lugar de ocultar la información, es mejor mostrar todos los indicadores, y en la columna de valores
+//mostrar por ejemplo un guion si el valor no esta disponible. Aun mejor seria mostrar ahí por qué no está disponible
+//(no esta disponible por faltar el valor de tales cuentas). De la forma anterior el usuario no sabe si no se muestran
+//los indicadores por no estar disponibles o por un error del sistema

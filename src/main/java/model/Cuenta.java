@@ -8,7 +8,7 @@ public class Cuenta {
 	
 	private String nombre;
 	private Integer valor;
-	private String fecha;
+	private String fecha;//debe ser un local date, no un string. Aca solo objetos del dominio
 
 	public Cuenta(String nombre, Integer valor, String fecha){
 		this.nombre = nombre;

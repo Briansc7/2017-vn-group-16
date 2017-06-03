@@ -1,0 +1,4 @@
+IndicadorC=c.van*2+c.van
+IndicadorA = 2
+IndicadorD = 2
+indicadorH = 3 + c.ebitda
