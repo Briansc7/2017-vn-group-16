@@ -1,5 +1,7 @@
 package model;
 
+import java.time.LocalDate;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,7 +19,7 @@ public class Empresa {
 		this.cuentas.addAll(cuentas);
 	}
 	
-	public List<Cuenta> cuentasDelPeriodo(Integer periodo){
+	public List<Cuenta> cuentasDelPeriodo(int periodo){
 		
 		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
 	}

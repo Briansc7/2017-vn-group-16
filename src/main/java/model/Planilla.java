@@ -11,16 +11,13 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import parser.ParseException;
-import parser.ParserTP;
+import parser.Parser;
 import parser.TokenMgrError;
 
 public class Planilla {
 
-	public static Planilla instance = new Planilla();
-	private Empresa empresaElegida = null;
-	private Integer periodoElegido = null;
 	private List<Indicador> indicadores = new ArrayList<Indicador>();
-	private String pathIndicadores = "./Archivos de prueba/indicadores.txt";
+	private String pathIndicadores = "./Archivos del sistema/indicadores.txt";
 	
 	public void borrarIndicadores(){
 		this.indicadores.clear();
@@ -42,13 +39,13 @@ public class Planilla {
 		return this.primero(nombre).get();
 	}
 	
-	public List<Indicador> indicadoresDelPeriodo() {
-		return this.indicadores.stream().filter(indicador -> indicador.existePara(empresaElegida, periodoElegido)).collect(Collectors.toList());
+	public List<Indicador> indicadoresDelPeriodo(Integer unPeriodo, Empresa unaEmpresa) {
+		return this.indicadores.stream().filter(indicador -> indicador.existePara(unaEmpresa, unPeriodo)).collect(Collectors.toList());
 	}
 	
 	public void verificarIndicador(String indicador) throws IOException, ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
-		List<String> componentes = ParserTP.parsear(partes[1]);
+		List<String> componentes = Parser.parsear(partes[1]);
 			if(componentes.contains(partes[0].trim())) {
 				throw new RuntimeException("No se puede usar un indicador en su propia definicion");
 			}
@@ -58,8 +55,8 @@ public class Planilla {
 	
 	public void verificarSintaxisIndicador(String indicador) throws ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
-		ParserTP.parsear(partes[1]);
-		Planilla.instance.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
+		Parser.parsear(partes[1]);
+		this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
 	}
 	
 	public void agregarIndicadorAlArchivo(String indicador) throws IOException{
@@ -76,22 +73,6 @@ public class Planilla {
 		return indicadores;
 	}
 
-	public Empresa getEmpresaElegida() {
-		return empresaElegida;
-	}
-
-	public void setEmpresaElegida(Empresa empresaElegida) {
-		this.empresaElegida = empresaElegida;
-	}
-
-	public Integer getPeriodoElegido() {
-		return periodoElegido;
-	}
-
-	public void setPeriodoElegido(Integer periodoElegido) {
-		this.periodoElegido = periodoElegido;
-	}
-	
 	public void setPathIndicadores(String pathIndicadores) {
 		this.pathIndicadores = pathIndicadores;
 	}

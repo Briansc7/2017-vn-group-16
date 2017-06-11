@@ -2,7 +2,7 @@ options {
 	STATIC = false ;
 }
 
-PARSER_BEGIN(ParserTP)
+PARSER_BEGIN(Parser)
 
 package parser;
 
@@ -11,15 +11,15 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParserTP {
+public class Parser {
 	static public List<String> parsear(String indicador) throws ParseException, TokenMgrError {
 	  	Reader reader = new StringReader(indicador);
-		ParserTP parser = new ParserTP(reader);
+		Parser parser = new Parser(reader);
 		return parser.Expression();
 	}
 }
 
-PARSER_END(ParserTP)
+PARSER_END(Parser)
 
 
 SKIP : { " " | "\t" | "\n" | "\r" }

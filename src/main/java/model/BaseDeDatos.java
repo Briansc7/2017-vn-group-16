@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -86,13 +87,14 @@ public class BaseDeDatos {
 	
 	private void agregarDatosDeLinea(String linea){
 		String[] p = linea.split(",");// Separa el string por las comas
+		LocalDate fecha = LocalDate.parse(p [3]);
 		
 		 if(this.existeEmpresa(p[0])){
 		 this.primero(p[0]).get().getCuentas().add(new Cuenta(p[1],
-				 Integer.parseInt(p[2]), p[3]));
+				 Integer.parseInt(p[2]), fecha));
 		 }
 		 else{
-			 this.empresas.add(new Empresa(p[0], Arrays.asList(new Cuenta(p[1], Integer.parseInt(p[2]), p[3]))));
+			 this.empresas.add(new Empresa(p[0], Arrays.asList(new Cuenta(p[1], Integer.parseInt(p[2]), fecha))));
 		 }
 	}
 
@@ -104,7 +106,7 @@ public class BaseDeDatos {
 			BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
 			
 			br.lines().forEach(linea -> {
-				try {
+				try {//FIXME : revisar instance de planilla
 					Planilla.instance.verificarSintaxisIndicador(linea);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block

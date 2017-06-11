@@ -7,11 +7,11 @@ import org.uqbar.commons.utils.Observable;
 import calculadora.Calculadora;
 import calculadora.ParseException;
 import calculadora.TokenMgrError;
-import parser.ParserTP;
+import parser.Parser;
 
 @Observable
-public class Indicador {
-	//indicador debe ser get valor en cierto año y de cierta empresa
+public class Indicador implements Factor{
+	//indicador debe ser get valor en cierto anio y de cierta empresa
 	
 	//parsear una sola vez, no N veces porque va a seguir dando lo mismo.
 	//vuelve a parsear muchas veces cambiando el periodo una y otra vez
@@ -23,13 +23,13 @@ public class Indicador {
 	public Indicador(String nombre, String expresion) throws parser.ParseException, parser.TokenMgrError{
 		this.nombre = nombre;
 		this.expresion = expresion;
-		this.contenido = ParserTP.parsear(this.expresion);//2 parsers entonces logica repetida
+		this.contenido = Parser.parsear(this.expresion);//2 parsers entonces logica repetida
 		//parser componente que transforma estructura de datos en otra
 		//segundo parser no es un parser, porque computa solamente
 		//parser debe devolver un conjunto de objetos del dominio y que esos sepan calcular
 	}
 	
-	public int getValor() throws NumberFormatException, ParseException, TokenMgrError {
+	public int getValor() throws NumberFormatException, ParseException, TokenMgrError {//FIXME : revisar instance de planilla
 		return Calculadora.calcular(this.expresion, Planilla.instance.getEmpresaElegida(), Planilla.instance.getPeriodoElegido());
 	}//empresa elegida es idea de vista, no existe este concepto en el modelo
 	//singleton planilla, todos a la larga dependen de ese objeto. Entonces si tiene bug se rompe todo
@@ -44,7 +44,7 @@ public class Indicador {
 		
 	}
 	
-	private boolean existeComponente(String nombre, Empresa empresa, Integer periodo){
+	private boolean existeComponente(String nombre, Empresa empresa, Integer periodo){//FIXME : revisar instance de planilla
 		if (nombre.substring(0,2).equalsIgnoreCase("c.")){
 			return empresa.existeCuentaDel(nombre.substring(2), periodo);
 		} else if (Planilla.instance.existeIndicador(nombre)){

@@ -1,6 +1,7 @@
 package viewModel;
 
 import java.io.IOException;
+import java.time.Year;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,10 +19,11 @@ import model.Planilla;
 public class ConsultarCuentasViewModel {
 
 	private BaseDeDatos baseDeDatos;
+	private Planilla planilla = new Planilla();
 	
 	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
-	private Integer periodoElegido;
+	private int periodoElegido;//FIXME: Ver si se lo puede convertir a tipo Year
 
 	private List<Integer> periodos = Arrays.asList();
 
@@ -34,7 +36,7 @@ public class ConsultarCuentasViewModel {
 	
 	public Action borrarCuentasLeidas(){
 		this.baseDeDatos.borrarEmpresas();
-		Planilla.instance.borrarIndicadores();
+		this.planilla.borrarIndicadores();
 		return null;
 	}
 //solo se acepta null si el framework lo devuelve. No usar nulls
@@ -43,8 +45,10 @@ public class ConsultarCuentasViewModel {
 	public List<Empresa> getEmpresas() throws IOException {
 
 			if (nombreEmpresaElegida == null || nombreEmpresaElegida.equals("")) {
+				
 				return Arrays.asList();
 			} else {
+				
 				return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
 			}
 
@@ -60,11 +64,12 @@ public class ConsultarCuentasViewModel {
 
 	@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
-		if (Planilla.instance.getEmpresaElegida() == null) {
+		if (this.empresaElegida == null) {
+			
 			return periodos;	
 		} else {
-			Planilla.instance.setPeriodoElegido(null);
-			periodos = Planilla.instance.getEmpresaElegida().getPeriodos();//empresa elegida es solo de la vista, no del modelo
+			
+			periodos = this.empresaElegida.getPeriodos();//empresa elegida es solo de la vista, no del modelo
 			return periodos;
 		}
 	}
@@ -72,50 +77,48 @@ public class ConsultarCuentasViewModel {
 
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {
-		if (Planilla.instance.getPeriodoElegido() == null) {
+		if (this.periodoElegido == null) {
+			
 			return Arrays.asList();
 		} else {
 
-			return Planilla.instance.getEmpresaElegida().cuentasDelPeriodo(Planilla.instance.getPeriodoElegido());
+			return this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
 		}
 	}
 	
 	@Dependencies("periodoElegido")//debe ser un atributo para que pueda monitorear su cambio(mirar su get)
 	public List<Indicador> getIndicadores(){
-		if (Planilla.instance.getPeriodoElegido() == null) {
+		if (this.periodoElegido == null) {
 			return Arrays.asList();
 		} else {
 
 			try {
-			Planilla.instance.borrarIndicadores();//estas 2 lineas se habian agregado por no poner monitorear bien el cambio de periodo elegido
+			this.planilla.borrarIndicadores();//FIXME:estas 2 lineas se habian agregado por no poner monitorear bien el cambio de periodo elegido
 			this.baseDeDatos.leerIndicadores();		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
-			return Planilla.instance.indicadoresDelPeriodo();
+			return this.planilla.indicadoresDelPeriodo(this.periodoElegido, this.empresaElegida);
 			
 		}
 	}
 	
 	
 	public Integer getPeriodoElegido() {
-		return Planilla.instance.getPeriodoElegido();
-	}//periodoElegido debe ser un atributo para que pueda ser monitoreado el cambio
+		return this.periodoElegido;
+	}
 
 	public void setPeriodoElegido(Integer periodoElegido) {
-		Planilla.instance.setPeriodoElegido(periodoElegido);
 		this.periodoElegido = periodoElegido;
 	}
 
 	public Empresa getEmpresaElegida() {
-		return Planilla.instance.getEmpresaElegida();
+		return this.empresaElegida;
 	}
 
 	public void setEmpresaElegida(Empresa empresaElegida) {
-		Planilla.instance.setEmpresaElegida(empresaElegida);
-		Planilla.instance.setPeriodoElegido(null);
 		this.empresaElegida = empresaElegida;
 		this.periodoElegido = null;
 	}
