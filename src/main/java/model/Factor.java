@@ -1,6 +1,12 @@
 package model;
 
-public interface Factor {
+import componentesMatematicos.Expresion;
+
+public abstract class Factor implements Expresion {
 	
-	public Integer getValor();
+	public String nombre;
+	
+	public Factor(String unNombre){
+		this.nombre = unNombre;
+	}
 }

@@ -1,18 +1,18 @@
 package model;
 
 import java.time.LocalDate;
+import java.time.Year;
 
 import org.uqbar.commons.utils.Observable;
 
 @Observable
-public class Cuenta implements Factor{
+public class Cuenta extends Factor{
 	
-	private String nombre;
 	private Integer valor;
 	private LocalDate fecha;
 
 	public Cuenta(String nombre, Integer valor, LocalDate fecha){
-		this.nombre = nombre;
+		super(nombre);
 		this.valor = valor;
 		this.fecha = fecha;
 	}
@@ -21,7 +21,7 @@ public class Cuenta implements Factor{
 		return nombre;
 	}
 	
-	public Integer getValor() {
+	public Integer getValor(Year unPeriodo, Empresa unaEmpresa) {
 		return valor;
 	}
 	
