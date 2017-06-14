@@ -6,5 +6,5 @@ import model.Empresa;
 
 public interface Expresion {
 	
-	public Integer getValor(Year unPeriodo, Empresa unaEmpresa);
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa);
 }

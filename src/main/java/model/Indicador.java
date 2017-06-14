@@ -9,10 +9,12 @@ import calculadora.Calculadora;
 import calculadora.ParseException;
 import calculadora.TokenMgrError;
 import componentesMatematicos.Expresion;
+import componentesMatematicos.FactorLiteral;
 import parser.Parser;
+import model.Atributo;
 
 @Observable
-public class Indicador extends Factor{
+public class Indicador extends Atributo{
 	//indicador debe ser get valor en cierto anio y de cierta empresa
 	
 	//parsear una sola vez, no N veces porque va a seguir dando lo mismo.
@@ -28,7 +30,7 @@ public class Indicador extends Factor{
 		//parser debe devolver un conjunto de objetos del dominio y que esos sepan calcular
 	}
 	
-	public Integer getValor(Year unPeriodo, Empresa unaEmpresa) {
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa) {
 		return this.expresion.getValor(unPeriodo, unaEmpresa);
 	}//empresa elegida es idea de vista, no existe este concepto en el modelo
 	//singleton planilla, todos a la larga dependen de ese objeto. Entonces si tiene bug se rompe todo

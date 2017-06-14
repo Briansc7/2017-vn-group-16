@@ -11,8 +11,18 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import componentesMatematicos;
+import model.Empresa;
+import model.Planilla;
+
 public class Parser {
-	static public List<String> parsear(String indicador) throws ParseException, TokenMgrError {
+/*	static public List<String> parsear(String indicador) throws ParseException, TokenMgrError {
+	  	Reader reader = new StringReader(indicador);
+		Parser parser = new Parser(reader);
+		return parser.Expression();
+	} */
+	
+	static public Expresion parsear(String indicador) throws ParseException, TokenMgrError {
 	  	Reader reader = new StringReader(indicador);
 		Parser parser = new Parser(reader);
 		return parser.Expression();
@@ -28,7 +38,72 @@ TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
 TOKEN : { < NUMERO : (["0"-"9"])+ >}
 TOKEN : { < PALABRA : ("i." | "c.")(["a"-"z","A"-"Z"])+ > }
 
+Expresion Expression() :
+{
+	Expresion miExpresion = new Expresion();	// no debería usarlo nunca
+	Expresion operandoIzquierdo = new Expresion();
+	Expresion operandoDerecho = new Expresion();
+	boolean hayOperandoDerecho = false;
+	Token operador;
+}
+{
+	operandoIzquierdo = Primary()
 
+	( 
+		operador=<OPERADOR>
+		hayOperandoDerecho = true;
+		operandoDerecho = expression();
+	)
+
+	if(hayOperandoDerecho!=0) {
+		if (operador.image.equalsIgnoreCase("+")) {
+			Suma miSuma = new Suma(operandoIzquierdo,operandoDerecho);
+			{ return miSuma; }
+		}
+		if (operador.image.equalsIgnoreCase("-")) {
+	  		Suma miResta = new Resta(operandoIzquierdo,operandoDerecho);
+			{ return miResta; }
+		}
+		if (operador.image.equalsIgnoreCase("*")) {
+		  	Suma miProducto = new Producto(operandoIzquierdo,operandoDerecho);
+			{ return miProducto; }
+		}
+		if (operador.image.equalsIgnoreCase("/")) {
+		  	Suma miDivision = new Division(operandoIzquierdo,operandoDerecho);
+			{ return miDivision; }
+		}   
+	} else {
+		{ return operandoIzquierdo; }
+	}    
+	
+	{ return miExpresion; } // no debería llegar nunca acá
+}
+
+Expresion Primary() :
+{
+	Expresion subExpresion;
+	Token t;
+}
+{
+	t=<NUMERO>
+	FactorNumerico miNumero = new FactorNumerico(Integer.parseInt(t.image));
+	{ return miNumero; }
+	|
+	t=<PALABRA>
+	{ if(t.image.substring(0,2).equalsIgnoreCase("i.")) {
+		 IndicadorCalculo miIndicador = new IndicadorCalculo(t.image.substring(2));
+		 { return miIndicador; }
+	  } else {
+  		 CuentaCalculo miCuenta = new CuentaCalculo(t.image.substring(2));
+		 { return miCuenta; }   
+	  }
+	}
+	|
+	<OPENPAR> subExpresion=Expression() <CLOSEPAR>
+	{ return subExpresion; }
+}
+
+/*
 List<String> Expression() :
 {
 	List<String> palabras = new ArrayList<String>();
@@ -62,3 +137,4 @@ void Primary(List<String> lista) :
 	<OPENPAR> sublista=Expression() <CLOSEPAR>
 	{ lista.addAll(sublista); }
 }
+*/

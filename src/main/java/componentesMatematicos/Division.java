@@ -14,7 +14,7 @@ public class Division extends Operador {
 		super(opIzq, opDer);
 	}
 	
-	public Integer getValor(Year unPeriodo, Empresa unaEmpresa) {
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa) {
 		
 		if(this.operandoDer.getValor(unPeriodo, unaEmpresa) != 0){
 			return this.operandoIzq.getValor(unPeriodo, unaEmpresa) / this.operandoDer.getValor(unPeriodo, unaEmpresa);

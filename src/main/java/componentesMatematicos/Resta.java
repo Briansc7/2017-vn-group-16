@@ -11,7 +11,7 @@ public class Resta extends Operador {
 		super(opIzq, opDer);
 	}
 	
-	public Integer getValor(Year unPeriodo, Empresa unaEmpresa) {
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa) {
 		
 		return this.operandoIzq.getValor(unPeriodo, unaEmpresa) - this.operandoDer.getValor(unPeriodo, unaEmpresa);
 	}
