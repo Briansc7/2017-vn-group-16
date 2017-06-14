@@ -15,4 +15,4 @@ public class Resta extends Operador {
 		
 		return this.operandoIzq.getValor(unPeriodo, unaEmpresa) - this.operandoDer.getValor(unPeriodo, unaEmpresa);
 	}
-}
+}//

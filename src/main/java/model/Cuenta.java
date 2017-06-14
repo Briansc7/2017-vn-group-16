@@ -24,6 +24,7 @@ public class Cuenta extends Atributo{
 		return nombre;
 	}
 	
+	//
 	public Integer getValor() {
 		return valor;
 	}
