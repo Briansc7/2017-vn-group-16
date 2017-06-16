@@ -23,14 +23,15 @@ public class ConsultarCuentasViewModel {
 	
 	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
-	private int periodoElegido;//FIXME: Ver si se lo puede convertir a tipo Year
+	private Integer periodoElegido;//FIXME: Ver si se lo puede convertir a tipo Year
 
 	private List<Integer> periodos = Arrays.asList();
 
 	public ConsultarCuentasViewModel(String path) throws IOException{
+		this.periodoElegido = 0;
 		this.baseDeDatos = new BaseDeDatos(path);
 		this.baseDeDatos.leerEmpresas();
-		this.baseDeDatos.leerIndicadores();
+		this.baseDeDatos.leerIndicadores(planilla);
 
 	}
 	
@@ -94,7 +95,7 @@ public class ConsultarCuentasViewModel {
 
 			try {
 			this.planilla.borrarIndicadores();//FIXME:estas 2 lineas se habian agregado por no poner monitorear bien el cambio de periodo elegido
-			this.baseDeDatos.leerIndicadores();		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
+			this.baseDeDatos.leerIndicadores(planilla);		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

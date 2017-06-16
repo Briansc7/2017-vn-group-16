@@ -41,6 +41,15 @@ public class Planilla {
 	
 	public List<Indicador> indicadoresDelPeriodo(Integer unPeriodo, Empresa unaEmpresa) {
 		return this.indicadores.stream().filter(indicador -> indicador.existePara(unaEmpresa, unPeriodo)).collect(Collectors.toList());
+		auxLista = todalacosaarriba;
+		auxLista2;
+		while not finLista{
+			auxIndicador.Nombre = auxLista.elemento.Nombre;
+			auxIndicador.Valor= auxLista.elemento.getValor(unPerido,unaEmpresa)
+			auxLista2.add(auxIndicador)		
+		}
+		return auxLista2;
+		
 	}
 	
 	public void verificarIndicador(String indicador) throws IOException, ParseException, TokenMgrError{

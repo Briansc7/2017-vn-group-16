@@ -11,7 +11,15 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import componentesMatematicos;
+import componentesMatematicos.CuentaCalculo;
+import componentesMatematicos.Expresion;
+import componentesMatematicos.Division;
+import componentesMatematicos.FactorNumerico;
+import componentesMatematicos.IndicadorCalculo;
+import componentesMatematicos.Producto;
+import componentesMatematicos.Resta;
+import componentesMatematicos.Suma;
+
 import model.Empresa;
 import model.Planilla;
 
@@ -31,52 +39,116 @@ public class Parser {
 
 PARSER_END(Parser)
 
-
+/*
 SKIP : { " " | "\t" | "\n" | "\r" }
 TOKEN : { < OPERADOR : (["+","-","*","/"]){1} > }
 TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
 TOKEN : { < NUMERO : (["0"-"9"])+ >}
 TOKEN : { < PALABRA : ("i." | "c.")(["a"-"z","A"-"Z"])+ > }
+*/
+
+SKIP : { " " | "\t" | "\n" | "\r" } 
+TOKEN : { < FACTORNUMERICO : (["0"-"9"])+ > }
+TOKEN : { < FACTORLITERAL : ("i." | "c." ) (["a"-"z","A"-"Z"])+ > }
+TOKEN : { < SUMA : "+" > | < RESTA : "-" > | < PRODUCTO : "*" > | < DIVISION : "/" > }
+TOKEN : { < ABRIRPAR : "(" > | < CERRARPAR : ")" > }
 
 Expresion Expression() :
 {
-	Expresion miExpresion = new Expresion();	// no debería usarlo nunca
-	Expresion operandoIzquierdo = new Expresion();
-	Expresion operandoDerecho = new Expresion();
+	Expresion expresionIzquierda;
+	Expresion expresionDerecha;
+}
+{
+	expresionIzquierda = Primary()
+	{return expresionIzquierda; }
+	|
+	expresionIzquierda = Primary()
+	< SUMA >
+	expresionDerecha = Expression()	{ return new Suma(expresionIzquierda, expresionDerecha); }
+	|
+	expresionIzquierda = Primary()
+	< RESTA >
+	expresionDerecha = Expression()
+	{ return new Resta(expresionIzquierda, expresionDerecha); }
+	|
+	expresionIzquierda = Primary()
+	< PRODUCTO >
+	expresionDerecha = Expression()
+	{ return new Producto(expresionIzquierda, expresionDerecha); }
+	|
+	expresionIzquierda = Primary()
+	< DIVISION >
+	expresionDerecha = Expression()
+	{ return new Division(expresionIzquierda, expresionDerecha); }
+}
+
+Expresion Primary() :
+{
+	Expresion subExpresion;
+	Token t;
+}
+{
+	t=<FACTORNUMERICO>
+	{ return new FactorNumerico(Integer.parseInt(t.image)); }
+	|
+	t=<FACTORLITERAL>
+	{ if(t.image.substring(0,2).equalsIgnoreCase("i.")) {
+		 { return new IndicadorCalculo(t.image.substring(2)); }
+	  } else {
+		 { return new CuentaCalculo(t.image.substring(2)); }   
+	  }
+	}
+	|
+	<ABRIRPAR> subExpresion=Expression() <CERRARPAR>
+	{ return subExpresion; }
+}
+
+//***********************************************************************
+/*
+Expresion Expression() :
+{
+	Expresion operandoIzquierdo;
+	Expresion operandoDerecho;
 	boolean hayOperandoDerecho = false;
 	Token operador;
 }
 {
+
 	operandoIzquierdo = Primary()
 
 	( 
 		operador=<OPERADOR>
-		hayOperandoDerecho = true;
-		operandoDerecho = expression();
+		operandoDerecho = Expression()
+		{
+			hayOperandoDerecho = true;
+		}  		
 	)
 
-	if(hayOperandoDerecho!=0) {
-		if (operador.image.equalsIgnoreCase("+")) {
-			Suma miSuma = new Suma(operandoIzquierdo,operandoDerecho);
-			{ return miSuma; }
-		}
-		if (operador.image.equalsIgnoreCase("-")) {
-	  		Suma miResta = new Resta(operandoIzquierdo,operandoDerecho);
-			{ return miResta; }
-		}
-		if (operador.image.equalsIgnoreCase("*")) {
-		  	Suma miProducto = new Producto(operandoIzquierdo,operandoDerecho);
-			{ return miProducto; }
-		}
-		if (operador.image.equalsIgnoreCase("/")) {
-		  	Suma miDivision = new Division(operandoIzquierdo,operandoDerecho);
-			{ return miDivision; }
-		}   
-	} else {
-		{ return operandoIzquierdo; }
-	}    
+	{
+	  
+		if(hayOperandoDerecho) {
+			if (operador.image.equalsIgnoreCase("+")) {
+				Suma miSuma = new Suma(operandoIzquierdo,operandoDerecho);
+				{ return miSuma; }
+			}
+			if (operador.image.equalsIgnoreCase("-")) {
+		  		Resta miResta = new Resta(operandoIzquierdo,operandoDerecho);
+				{ return miResta; }
+			}
+			if (operador.image.equalsIgnoreCase("*")) {
+			  	Producto miProducto = new Producto(operandoIzquierdo,operandoDerecho);
+				{ return miProducto; }
+			}
+			if (operador.image.equalsIgnoreCase("/")) {
+			  	Division miDivision = new Division(operandoIzquierdo,operandoDerecho);
+				{ return miDivision; }
+			}   
+		} else {
+			{ return operandoIzquierdo; }
+		}    
+	}
 	
-	{ return miExpresion; } // no debería llegar nunca acá
+	
 }
 
 Expresion Primary() :
@@ -86,8 +158,10 @@ Expresion Primary() :
 }
 {
 	t=<NUMERO>
-	FactorNumerico miNumero = new FactorNumerico(Integer.parseInt(t.image));
-	{ return miNumero; }
+	{ 
+		FactorNumerico miNumero = new FactorNumerico(Integer.parseInt(t.image));
+		{ return miNumero; }
+	}
 	|
 	t=<PALABRA>
 	{ if(t.image.substring(0,2).equalsIgnoreCase("i.")) {
@@ -102,7 +176,8 @@ Expresion Primary() :
 	<OPENPAR> subExpresion=Expression() <CLOSEPAR>
 	{ return subExpresion; }
 }
-
+*/
+//**********************************************************************
 /*
 List<String> Expression() :
 {

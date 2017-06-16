@@ -19,10 +19,16 @@ public class Empresa {
 		this.cuentas.addAll(cuentas);
 	}
 	
+	public List<Cuenta> cuentasDelPeriodo2(int periodo){
+		
+		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
+	}
+	
 	public List<Cuenta> cuentasDelPeriodo(int periodo){
 		
 		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
 	}
+	
 	
 	public Boolean existeCuentaDel(String nombre, Integer periodo) {
 		return this.primero(nombre, periodo).isPresent();

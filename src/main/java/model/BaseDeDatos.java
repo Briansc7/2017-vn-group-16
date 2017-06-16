@@ -99,15 +99,15 @@ public class BaseDeDatos {
 	}
 
 	//lector de indicadores
-	public void leerIndicadores() throws IOException{
+	public void leerIndicadores(Planilla unaPlanilla) throws IOException{
 		try {
 			File inputF = new File(this.pathIndicadores);
 			InputStream inputFS = new FileInputStream(inputF);
 			BufferedReader br = new BufferedReader(new InputStreamReader(inputFS));
 			
 			br.lines().forEach(linea -> {
-				try {//FIXME : revisar instance de planilla
-					Planilla.instance.verificarSintaxisIndicador(linea);
+				try {
+					unaPlanilla.verificarSintaxisIndicador(linea);
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
