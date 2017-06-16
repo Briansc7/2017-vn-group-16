@@ -13,9 +13,14 @@ import parser.TokenMgrError;
 public class AgregarIndicadorViewModel {
 
 	private String indicador;
+	private Planilla planilla;
+	
+	public AgregarIndicadorViewModel(Planilla unaPlanilla){
+		this.planilla = unaPlanilla;
+	}
 	
 	public void verificarIndicador() throws ParseException, TokenMgrError, IOException{
-		Planilla.instance.verificarIndicador(this.indicador);
+		planilla.verificarIndicador(this.indicador);
 	}
 	
 	public String getIndicador() {

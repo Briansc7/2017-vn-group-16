@@ -10,10 +10,13 @@ import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
+import model.Planilla;
 import viewModel.PrincipalViewModel;
 
 
 public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
+	
+	Planilla planilla = new Planilla();
 	
 	public PrincipalView(WindowOwner parent) {
 		super(parent, new PrincipalViewModel());
@@ -47,8 +50,8 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	public void consultarCuentas() {
 		try{
 			this.getModelObject().verificarArchivo();
-			ConsultarCuentasView consultarCuentasView = new ConsultarCuentasView(this, this.getModelObject().getPath());
-			Dialog<?> dialog = new ConsultarCuentasView(this, this.getModelObject().getPath());
+			ConsultarCuentasView consultarCuentasView = new ConsultarCuentasView(this, this.getModelObject().getPath(), planilla);
+			Dialog<?> dialog = new ConsultarCuentasView(this, this.getModelObject().getPath(), planilla);
 			dialog.onCancel((consultarCuentasView.getModelObject()).borrarCuentasLeidas());
 			dialog.open();
 			dialog.onAccept(() -> {});
@@ -73,7 +76,7 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	}
 
 	public void agregarIndicador() {
-		Dialog<?> dialog = new AgregarIndicadorView(this);
+		Dialog<?> dialog = new AgregarIndicadorView(this, planilla);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}

@@ -5,9 +5,6 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import calculadora.Calculadora;
-import calculadora.ParseException;
-import calculadora.TokenMgrError;
 import componentesMatematicos.Expresion;
 import componentesMatematicos.FactorLiteral;
 import parser.Parser;
@@ -15,12 +12,12 @@ import model.Atributo;
 
 @Observable
 public class Indicador extends Atributo{
-	//indicador debe ser get valor en cierto anio y de cierta empresa
 	
 	//parsear una sola vez, no N veces porque va a seguir dando lo mismo.
 	//vuelve a parsear muchas veces cambiando el periodo una y otra vez
 	//si empresa tiene 125 cuentas y 20 indicadores y los indicadores dependen de otros, esto se vuelve exponencial
 	private Expresion expresion;
+
 	//
 	public Indicador(String nombre, String formula) throws parser.ParseException, parser.TokenMgrError{
 		super(nombre);
@@ -30,8 +27,8 @@ public class Indicador extends Atributo{
 		//parser debe devolver un conjunto de objetos del dominio y que esos sepan calcular
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa) {
-		return this.expresion.getValor(unPeriodo, unaEmpresa);
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
+		return this.expresion.getValor(unPeriodo, unaEmpresa, unaPlanilla);
 	}//empresa elegida es idea de vista, no existe este concepto en el modelo
 	//singleton planilla, todos a la larga dependen de ese objeto. Entonces si tiene bug se rompe todo
 	//todos acoplados a esto, si lo rompo explota el sistema
@@ -39,27 +36,30 @@ public class Indicador extends Atributo{
 	
 	//no hay necesidad que el indicador conozca a la empresa pero si que lo use
 	//conocer es tenerlo como atributo. Usar es recibirlo como parametro. Se usa cuando se necesita
-	
-	public boolean existePara(Empresa empresa, Integer periodo) {//FIXME : Chequear esto, para que se usa contenido
-		return this.contenido.stream().allMatch(nombre -> this.existeComponente(nombre, empresa, periodo));
-		
-	}
-	
-	private boolean existeComponente(String nombre, Empresa empresa, Integer periodo){//FIXME : revisar instance de planilla
-		if (nombre.substring(0,2).equalsIgnoreCase("c.")){
-			return empresa.existeCuentaDel(nombre.substring(2), periodo);
-		} else if (Planilla.instance.existeIndicador(nombre)){
-			return Planilla.instance.buscarIndicador(nombre).existePara(empresa, periodo);
-		}//problema preguntamos de que tipo es con if para que hagan cosas distintas
-		//no hay polimorfismo porque faltan abstracciones, hay cosas que no estan separadas
-		//falta abstraccion de algo que puede ser de tipo cuenta o tipo indicador
-		//problema de nuevo acoplado con la vista
-		//modelo, persistencia, vista, son 3 mundos distintos.
-		//en el modelo estamos mezclando elementos de vista
-		return false;
-	}
-	
+
+
 	public String getNombre() {
 		return nombre;
 	}
 }
+
+/*	
+public boolean existePara(Empresa empresa, Integer periodo) {//FIXME : Chequear esto, para que se usa contenido
+	return this.contenido.stream().allMatch(nombre -> this.existeComponente(nombre, empresa, periodo));
+	
+}
+
+private boolean existeComponente(String nombre, Empresa empresa, Integer periodo){//FIXME : revisar instance de planilla
+	if (nombre.substring(0,2).equalsIgnoreCase("c.")){
+		return empresa.existeCuentaDel(nombre.substring(2), periodo);
+	} else if (Planilla.instance.existeIndicador(nombre)){
+		return Planilla.instance.buscarIndicador(nombre).existePara(empresa, periodo);
+	}//problema preguntamos de que tipo es con if para que hagan cosas distintas
+	//no hay polimorfismo porque faltan abstracciones, hay cosas que no estan separadas
+	//falta abstraccion de algo que puede ser de tipo cuenta o tipo indicador
+	//problema de nuevo acoplado con la vista
+	//modelo, persistencia, vista, son 3 mundos distintos.
+	//en el modelo estamos mezclando elementos de vista
+	return false;
+}
+*/

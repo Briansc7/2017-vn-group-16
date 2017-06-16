@@ -13,7 +13,7 @@ public class IndicadorCalculo extends FactorLiteral{
 		return this.nombre;
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa) {
-		return Planilla.buscarIndicador(this.nombre).getValor(unPeriodo, unaEmpresa);
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
+		return unaPlanilla.buscarIndicador(this.nombre).getValor(unPeriodo, unaEmpresa, unaPlanilla);
 	}
 }

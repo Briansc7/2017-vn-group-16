@@ -24,11 +24,6 @@ import model.Empresa;
 import model.Planilla;
 
 public class Parser {
-/*	static public List<String> parsear(String indicador) throws ParseException, TokenMgrError {
-	  	Reader reader = new StringReader(indicador);
-		Parser parser = new Parser(reader);
-		return parser.Expression();
-	} */
 	
 	static public Expresion parsear(String indicador) throws ParseException, TokenMgrError {
 	  	Reader reader = new StringReader(indicador);
@@ -39,113 +34,45 @@ public class Parser {
 
 PARSER_END(Parser)
 
-/*
+
 SKIP : { " " | "\t" | "\n" | "\r" }
 TOKEN : { < OPERADOR : (["+","-","*","/"]){1} > }
 TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
 TOKEN : { < NUMERO : (["0"-"9"])+ >}
 TOKEN : { < PALABRA : ("i." | "c.")(["a"-"z","A"-"Z"])+ > }
-*/
 
-SKIP : { " " | "\t" | "\n" | "\r" } 
-TOKEN : { < FACTORNUMERICO : (["0"-"9"])+ > }
-TOKEN : { < FACTORLITERAL : ("i." | "c." ) (["a"-"z","A"-"Z"])+ > }
-TOKEN : { < SUMA : "+" > | < RESTA : "-" > | < PRODUCTO : "*" > | < DIVISION : "/" > }
-TOKEN : { < ABRIRPAR : "(" > | < CERRARPAR : ")" > }
-
-Expresion Expression() :
-{
-	Expresion expresionIzquierda;
-	Expresion expresionDerecha;
-}
-{
-	expresionIzquierda = Primary()
-	{return expresionIzquierda; }
-	|
-	expresionIzquierda = Primary()
-	< SUMA >
-	expresionDerecha = Expression()	{ return new Suma(expresionIzquierda, expresionDerecha); }
-	|
-	expresionIzquierda = Primary()
-	< RESTA >
-	expresionDerecha = Expression()
-	{ return new Resta(expresionIzquierda, expresionDerecha); }
-	|
-	expresionIzquierda = Primary()
-	< PRODUCTO >
-	expresionDerecha = Expression()
-	{ return new Producto(expresionIzquierda, expresionDerecha); }
-	|
-	expresionIzquierda = Primary()
-	< DIVISION >
-	expresionDerecha = Expression()
-	{ return new Division(expresionIzquierda, expresionDerecha); }
-}
-
-Expresion Primary() :
-{
-	Expresion subExpresion;
-	Token t;
-}
-{
-	t=<FACTORNUMERICO>
-	{ return new FactorNumerico(Integer.parseInt(t.image)); }
-	|
-	t=<FACTORLITERAL>
-	{ if(t.image.substring(0,2).equalsIgnoreCase("i.")) {
-		 { return new IndicadorCalculo(t.image.substring(2)); }
-	  } else {
-		 { return new CuentaCalculo(t.image.substring(2)); }   
-	  }
-	}
-	|
-	<ABRIRPAR> subExpresion=Expression() <CERRARPAR>
-	{ return subExpresion; }
-}
-
-//***********************************************************************
-/*
+//----------------------------------Version pablistica------------------------------
 Expresion Expression() :
 {
 	Expresion operandoIzquierdo;
 	Expresion operandoDerecho;
-	boolean hayOperandoDerecho = false;
 	Token operador;
 }
 {
 
 	operandoIzquierdo = Primary()
 
-	( 
+	[
 		operador=<OPERADOR>
 		operandoDerecho = Expression()
 		{
-			hayOperandoDerecho = true;
-		}  		
-	)
-
-	{
-	  
-		if(hayOperandoDerecho) {
 			if (operador.image.equalsIgnoreCase("+")) {
-				Suma miSuma = new Suma(operandoIzquierdo,operandoDerecho);
-				{ return miSuma; }
+				return new Suma(operandoIzquierdo,operandoDerecho); 
 			}
 			if (operador.image.equalsIgnoreCase("-")) {
-		  		Resta miResta = new Resta(operandoIzquierdo,operandoDerecho);
-				{ return miResta; }
+		  		return new Resta(operandoIzquierdo,operandoDerecho); 
 			}
 			if (operador.image.equalsIgnoreCase("*")) {
-			  	Producto miProducto = new Producto(operandoIzquierdo,operandoDerecho);
-				{ return miProducto; }
+			  	return new Producto(operandoIzquierdo,operandoDerecho);
 			}
 			if (operador.image.equalsIgnoreCase("/")) {
-			  	Division miDivision = new Division(operandoIzquierdo,operandoDerecho);
-				{ return miDivision; }
-			}   
-		} else {
-			{ return operandoIzquierdo; }
-		}    
+			  	return new Division(operandoIzquierdo,operandoDerecho);
+			}  
+		}  		
+	]
+
+	{
+		return operandoIzquierdo;  
 	}
 	
 	
@@ -176,8 +103,7 @@ Expresion Primary() :
 	<OPENPAR> subExpresion=Expression() <CLOSEPAR>
 	{ return subExpresion; }
 }
-*/
-//**********************************************************************
+//--------------------------Version original-------------------------------
 /*
 List<String> Expression() :
 {

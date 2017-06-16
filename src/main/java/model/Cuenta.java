@@ -10,7 +10,6 @@ import model.Atributo;
 @Observable
 public class Cuenta extends Atributo{
 	
-	private String nombre;
 	private Integer valor;
 	private LocalDate fecha;
 
@@ -24,7 +23,6 @@ public class Cuenta extends Atributo{
 		return nombre;
 	}
 	
-	//
 	public Integer getValor() {
 		return valor;
 	}
@@ -33,4 +31,11 @@ public class Cuenta extends Atributo{
 		return this.fecha;
 	}
 	
+	public void setValor(Integer valor) {
+		this.valor = valor;
+	}
+	
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
 }

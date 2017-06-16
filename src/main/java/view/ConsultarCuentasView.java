@@ -16,12 +16,14 @@ import org.uqbar.arena.windows.WindowOwner;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
+import model.IndicadorAuxiliar;
+import model.Planilla;
 import viewModel.ConsultarCuentasViewModel;
 
 public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
-	public ConsultarCuentasView(WindowOwner owner, String path) throws IOException{
-		super(owner, new ConsultarCuentasViewModel(path));
+	public ConsultarCuentasView(WindowOwner owner, String path, Planilla planilla) throws IOException{
+		super(owner, new ConsultarCuentasViewModel(path, planilla));
 	}
 	
 	@Override
@@ -55,22 +57,22 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		columnaValor.setTitle("Valor");
 		columnaValor.setFixedSize(100);
 		columnaValor.bindContentsToProperty("valor");
-		
-		
+
 		//tabla de indicadores
-		Table<Indicador> tablaDeIndicadores = new Table<Indicador>(mainPanel, Indicador.class);
+		Table<IndicadorAuxiliar> tablaDeIndicadores = new Table<IndicadorAuxiliar>(mainPanel, IndicadorAuxiliar.class);
 		tablaDeIndicadores.setNumberVisibleRows(10);
 		tablaDeIndicadores.bindItemsToProperty("indicadores");
 
-		Column<Indicador> columnaIndicador = new Column<Indicador>(tablaDeIndicadores);
+		Column<IndicadorAuxiliar> columnaIndicador = new Column<IndicadorAuxiliar>(tablaDeIndicadores);
 		columnaIndicador.setTitle("Indicador");
 		columnaIndicador.setFixedSize(200);
 		columnaIndicador.bindContentsToProperty("nombre");
 		
-		Column<Indicador> columnaValorIndicador = new Column<Indicador>(tablaDeIndicadores);
+		Column<IndicadorAuxiliar> columnaValorIndicador = new Column<IndicadorAuxiliar>(tablaDeIndicadores);
 		columnaValorIndicador.setTitle("Valor");
 		columnaValorIndicador.setFixedSize(100);
 		columnaValorIndicador.bindContentsToProperty("valor");
+		
 	}
 	
 	

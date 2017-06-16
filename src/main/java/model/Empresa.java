@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+
 public class Empresa {
 	
 	private String nombre;
@@ -18,15 +19,11 @@ public class Empresa {
 		this.nombre = nombre;
 		this.cuentas.addAll(cuentas);
 	}
-	
-	public List<Cuenta> cuentasDelPeriodo2(int periodo){
-		
-		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
-	}
+
 	
 	public List<Cuenta> cuentasDelPeriodo(int periodo){
 		
-		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
+		return this.cuentas;//.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
 	}
 	
 	

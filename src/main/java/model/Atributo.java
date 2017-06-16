@@ -6,4 +6,8 @@ public class Atributo {
 	public Atributo(String unNombre){
 		this.nombre = unNombre;
 	}
+	
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
 }

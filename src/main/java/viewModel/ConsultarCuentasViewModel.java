@@ -2,6 +2,7 @@ package viewModel;
 
 import java.io.IOException;
 import java.time.Year;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,13 +14,14 @@ import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
+import model.IndicadorAuxiliar;
 import model.Planilla;
 
 @Observable
 public class ConsultarCuentasViewModel {
 
 	private BaseDeDatos baseDeDatos;
-	private Planilla planilla = new Planilla();
+	private Planilla planilla;
 	
 	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
@@ -27,7 +29,8 @@ public class ConsultarCuentasViewModel {
 
 	private List<Integer> periodos = Arrays.asList();
 
-	public ConsultarCuentasViewModel(String path) throws IOException{
+	public ConsultarCuentasViewModel(String path, Planilla unaPlanilla) throws IOException{
+		this.planilla = unaPlanilla;
 		this.periodoElegido = 0;
 		this.baseDeDatos = new BaseDeDatos(path);
 		this.baseDeDatos.leerEmpresas();
@@ -82,14 +85,15 @@ public class ConsultarCuentasViewModel {
 			
 			return Arrays.asList();
 		} else {
-
+			
 			return this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
 		}
 	}
 	
 	@Dependencies("periodoElegido")//debe ser un atributo para que pueda monitorear su cambio(mirar su get)
-	public List<Indicador> getIndicadores(){
-		if (this.periodoElegido == null) {
+	public List<IndicadorAuxiliar> getIndicadores(){
+		return null;
+		/*if (this.periodoElegido == null) {
 			return Arrays.asList();
 		} else {
 
@@ -100,10 +104,14 @@ public class ConsultarCuentasViewModel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			return this.planilla.indicadoresDelPeriodo(this.periodoElegido, this.empresaElegida);
+			List<Indicador> indicadoresReales = this.planilla.getIndicadores();
 			
-		}
+			List<IndicadorAuxiliar> indicadoresAuxiliares = new ArrayList<IndicadorAuxiliar>();
+			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValor(this.periodoElegido, this.empresaElegida, this.planilla))));
+
+			return indicadoresAuxiliares;
+			
+		}*/
 	}
 	
 	
