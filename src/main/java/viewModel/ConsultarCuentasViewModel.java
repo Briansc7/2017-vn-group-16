@@ -40,7 +40,7 @@ public class ConsultarCuentasViewModel {
 	
 	public Action borrarCuentasLeidas(){
 		this.baseDeDatos.borrarEmpresas();
-		this.planilla.borrarIndicadores();
+//		this.planilla.borrarIndicadores();
 		return null;
 	}
 //solo se acepta null si el framework lo devuelve. No usar nulls
@@ -49,10 +49,10 @@ public class ConsultarCuentasViewModel {
 	public List<Empresa> getEmpresas() throws IOException {
 
 			if (nombreEmpresaElegida == null || nombreEmpresaElegida.equals("")) {
+				//return null;
 				
 				return Arrays.asList();
-			} else {
-				
+			} else {		
 				return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
 			}
 
@@ -81,20 +81,22 @@ public class ConsultarCuentasViewModel {
 
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {
-		if (this.periodoElegido == null) {
-			
-			return Arrays.asList();
+		if (this.periodoElegido == 0) {
+			return null;
+		//	return Arrays.asList();
 		} else {
-			
 			return this.empresaElegida.cuentasDelPeriodo(this.periodoElegido);
 		}
 	}
 	
+	
+	
 	@Dependencies("periodoElegido")//debe ser un atributo para que pueda monitorear su cambio(mirar su get)
 	public List<IndicadorAuxiliar> getIndicadores(){
-		return null;
-		/*if (this.periodoElegido == null) {
-			return Arrays.asList();
+
+		if (this.periodoElegido == 0) {
+		//	return Arrays.asList();
+			return null;
 		} else {
 
 			try {
@@ -111,8 +113,9 @@ public class ConsultarCuentasViewModel {
 
 			return indicadoresAuxiliares;
 			
-		}*/
+		}
 	}
+	
 	
 	
 	public Integer getPeriodoElegido() {
@@ -129,7 +132,7 @@ public class ConsultarCuentasViewModel {
 
 	public void setEmpresaElegida(Empresa empresaElegida) {
 		this.empresaElegida = empresaElegida;
-		this.periodoElegido = null;
+		this.periodoElegido = 0;
 	}
 
 }

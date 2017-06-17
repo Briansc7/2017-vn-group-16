@@ -59,6 +59,7 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		columnaValor.bindContentsToProperty("valor");
 
 		//tabla de indicadores
+		
 		Table<IndicadorAuxiliar> tablaDeIndicadores = new Table<IndicadorAuxiliar>(mainPanel, IndicadorAuxiliar.class);
 		tablaDeIndicadores.setNumberVisibleRows(10);
 		tablaDeIndicadores.bindItemsToProperty("indicadores");

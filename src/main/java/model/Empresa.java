@@ -22,8 +22,7 @@ public class Empresa {
 
 	
 	public List<Cuenta> cuentasDelPeriodo(int periodo){
-		
-		return this.cuentas;//.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
+		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
 	}
 	
 	
