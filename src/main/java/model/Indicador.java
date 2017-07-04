@@ -1,5 +1,6 @@
 package model;
 
+import java.io.IOException;
 import java.time.Year;
 import java.util.List;
 
@@ -29,7 +30,18 @@ public class Indicador extends Atributo{
 	
 	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
 		return this.expresion.getValor(unPeriodo, unaEmpresa, unaPlanilla);
-	}//empresa elegida es idea de vista, no existe este concepto en el modelo
+	}
+	
+	public String getValorString(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla){
+		String valorAuxiliar;
+		try {
+			valorAuxiliar = String.valueOf(this.getValor(unPeriodo, unaEmpresa, unaPlanilla));
+		} catch (Exception ex) {
+			valorAuxiliar = "*";
+		}
+		return valorAuxiliar;
+	}
+	//empresa elegida es idea de vista, no existe este concepto en el modelo
 	//singleton planilla, todos a la larga dependen de ese objeto. Entonces si tiene bug se rompe todo
 	//todos acoplados a esto, si lo rompo explota el sistema
 	//no necesitamos singleton y menos singleton con elementos de vista

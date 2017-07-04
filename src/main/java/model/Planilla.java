@@ -42,19 +42,20 @@ public class Planilla {
 	
 	public void verificarIndicador(String indicador) throws IOException, ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
-		//List<String> componentes = Parser.parsear(partes[1]);
-			//if(componentes.contains(partes[0].trim())) {
-			if(partes[1].toLowerCase().contains(partes[1].trim().toLowerCase())){
-				throw new RuntimeException("No se puede usar un indicador en su propia definicion");
-			}
-			this.agregarIndicadorAlArchivo(indicador);
-		
+		if(partes[1].toLowerCase().contains(partes[0].trim().toLowerCase())){
+			 throw new RuntimeException("No se puede usar un indicador en su propia definicion");
+		}
+		this.agregarIndicadorAlArchivo(indicador);
 	}
 	
 	public void verificarSintaxisIndicador(String indicador) throws ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
-		Parser.parsear(partes[1]);
-		this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
+		if(partes[1].toLowerCase().contains(partes[0].trim().toLowerCase())){
+			//throw new RuntimeException("No se puede usar un indicador en su propia definicion");
+		} else {
+			this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
+		}
+		//this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
 	}
 	
 	public void agregarIndicadorAlArchivo(String indicador) throws IOException{

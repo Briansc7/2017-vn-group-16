@@ -40,10 +40,9 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		
 		new Label(mainPanel).setText("Ingrese el periodo");
 		Selector<Empresa> selectorPeriodo = new Selector<Empresa>(mainPanel);
-		selectorPeriodo.bindValueToProperty("periodoElegido");
 		selectorPeriodo.bindItemsToProperty("periodos");
-
-
+		selectorPeriodo.bindValueToProperty("periodoElegido");
+		
 		Table<Cuenta> tablaDeCuentas = new Table<Cuenta>(mainPanel, Cuenta.class);
 		tablaDeCuentas.setNumberVisibleRows(10);
 		tablaDeCuentas.bindItemsToProperty("cuentas");
@@ -57,11 +56,11 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		columnaValor.setTitle("Valor");
 		columnaValor.setFixedSize(100);
 		columnaValor.bindContentsToProperty("valor");
-
+		
 		//tabla de indicadores
 		
 		Table<IndicadorAuxiliar> tablaDeIndicadores = new Table<IndicadorAuxiliar>(mainPanel, IndicadorAuxiliar.class);
-		tablaDeIndicadores.setNumberVisibleRows(10);
+		tablaDeIndicadores.setNumberVisibleRows(20);
 		tablaDeIndicadores.bindItemsToProperty("indicadores");
 
 		Column<IndicadorAuxiliar> columnaIndicador = new Column<IndicadorAuxiliar>(tablaDeIndicadores);
@@ -72,7 +71,7 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		Column<IndicadorAuxiliar> columnaValorIndicador = new Column<IndicadorAuxiliar>(tablaDeIndicadores);
 		columnaValorIndicador.setTitle("Valor");
 		columnaValorIndicador.setFixedSize(100);
-		columnaValorIndicador.bindContentsToProperty("valor");
+		columnaValorIndicador.bindContentsToProperty("valorString");
 		
 	}
 	

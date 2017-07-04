@@ -6,10 +6,13 @@ import org.uqbar.commons.utils.Observable;
 public class IndicadorAuxiliar {
 	private String nombre;
 	private int valor;
+	private String valorString;
 	
-	public IndicadorAuxiliar(String unNombre, int unValor){
+//	public IndicadorAuxiliar(String unNombre, int unValor){
+	public IndicadorAuxiliar(String unNombre, String unValorString){	
 		this.nombre = unNombre;
-		this.valor = unValor;
+//		this.valor = unValor;
+		this.valorString = unValorString;
 	}
 	
 	public String getNombre() {
@@ -18,5 +21,9 @@ public class IndicadorAuxiliar {
 	
 	public int getValor() {
 		return valor;
+	}
+	
+	public String getValorString() {
+		return valorString;
 	}
 }

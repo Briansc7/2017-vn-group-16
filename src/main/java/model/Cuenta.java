@@ -31,6 +31,10 @@ public class Cuenta extends Atributo{
 		return this.fecha;
 	}
 	
+	public Integer getYear() {
+		return this.fecha.getYear();
+	}
+	
 	public void setValor(Integer valor) {
 		this.valor = valor;
 	}

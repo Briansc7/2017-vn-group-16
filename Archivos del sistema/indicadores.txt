@@ -1,5 +1,15 @@
 indicadorA = c.ebitda + 100
-indicadorB = c.van * 2 + i.indicadorA
+indicadorB = (c.van * 2) + i.indicadorA
 ingresoNeto = c.IngresoNetoOperacionesNoContinuas + c.IngresoNetoOperacionesContinuas
 IndicadorD = 2
-indicadorH = 3 + c.ebitda
+indicadorE = 3 + c.ebitda
+indicadorF = 2 * 3
+indicadorG = 2 * c.ebitda
+indicadorH =  c.ebitda / 2
+indicadorI =  c.ebitda / 0
+indicadorJ = (c.ebitda + 1000) / 2
+indicadorK = (((c.ebitda + 1000) / 2) * 3)+5
+indicadorL = i.indicadorD
+indicadorM = i.indicadorM
+indicadorN = (((i.indicadorN + 1000) / 2) * 3)+5
+indicadorO = 2*5

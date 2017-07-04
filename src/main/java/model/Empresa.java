@@ -22,7 +22,7 @@ public class Empresa {
 
 	
 	public List<Cuenta> cuentasDelPeriodo(int periodo){
-		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getFecha().getYear() == periodo).collect(Collectors.toList());
+		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getYear() == periodo).collect(Collectors.toList());
 	}
 	
 	
@@ -57,7 +57,7 @@ public class Empresa {
 	public List<Integer> getPeriodos(){
 		List<Integer> periodos = new ArrayList<Integer>(
 				this.cuentas.stream()
-				.map((Cuenta cuenta)-> cuenta.getFecha().getYear())//solo get year, que lo haga la cuenta
+				.map((Cuenta cuenta)-> cuenta.getYear())//solo get year, que lo haga la cuenta
 				//usar localdate de java, hay clase llamada year
 				.collect(Collectors.toSet()));
 		

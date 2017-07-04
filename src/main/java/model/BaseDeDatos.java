@@ -108,11 +108,14 @@ public class BaseDeDatos {
 			br.lines().forEach(linea -> {
 				try {
 					unaPlanilla.verificarSintaxisIndicador(linea);
+
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (TokenMgrError e) {
 					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			});

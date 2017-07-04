@@ -98,7 +98,7 @@ public class ConsultarCuentasViewModel {
 		//	return Arrays.asList();
 			return null;
 		} else {
-
+			
 			try {
 			this.planilla.borrarIndicadores();//FIXME:estas 2 lineas se habian agregado por no poner monitorear bien el cambio de periodo elegido
 			this.baseDeDatos.leerIndicadores(planilla);		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
@@ -108,11 +108,13 @@ public class ConsultarCuentasViewModel {
 			}
 			List<Indicador> indicadoresReales = this.planilla.getIndicadores();
 			
-			List<IndicadorAuxiliar> indicadoresAuxiliares = new ArrayList<IndicadorAuxiliar>();
-			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValor(this.periodoElegido, this.empresaElegida, this.planilla))));
-
-			return indicadoresAuxiliares;
 			
+			List<IndicadorAuxiliar> indicadoresAuxiliares = new ArrayList<IndicadorAuxiliar>();
+			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValor(this.periodoElegido, this.empresaElegida, this.planilla))));
+			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), 111)));
+			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida, this.planilla))));
+			return indicadoresAuxiliares;
+
 		}
 	}
 	
