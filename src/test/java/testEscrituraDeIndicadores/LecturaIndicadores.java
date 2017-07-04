@@ -1,5 +1,6 @@
 package testEscrituraDeIndicadores;
 
+/*
 import java.io.IOException;
 
 import org.junit.Assert;
@@ -38,3 +39,4 @@ public class LecturaIndicadores {
 	}
 	
 }
+*/

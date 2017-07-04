@@ -12,8 +12,8 @@ import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
 
+/*
 public class ConsultarCuentasModelTest {
-;
 	private BaseDeDatos consultarCuentasModelACoincidir;
 	
 	@Before
@@ -63,3 +63,4 @@ public class ConsultarCuentasModelTest {
 		Assert.assertEquals(tamanio, 0);
 	}
 }
+*/

@@ -1,5 +1,6 @@
 package modelTest;
 
+/*
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -13,6 +14,7 @@ import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.Planilla;
+
 
 public class OperacionesParserConCuentas {
 	
@@ -45,3 +47,4 @@ public class OperacionesParserConCuentas {
 	}
 	
 }
+*/

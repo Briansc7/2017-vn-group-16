@@ -6,6 +6,8 @@ import org.junit.Assert;
 
 import model.Cuenta;
 
+/*
+ 
 public class CuentaTest {
 	private Cuenta cuentaPrueba;
 	
@@ -23,3 +25,5 @@ public class CuentaTest {
 	}
 	
 }
+
+*/
