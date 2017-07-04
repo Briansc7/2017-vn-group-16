@@ -31,7 +31,11 @@ public class Indicador extends Atributo{
 	}
 	
 	public boolean esIdentico(String otroNombre, String otraFormula){
-		return this.nombre.equals(otroNombre) && this.formula.equals(otraFormula);
+		return tieneElMismoNombre(otroNombre) && this.formula.equals(otraFormula);
+	}
+	
+	public boolean tieneElMismoNombre(String otroNombre){
+		return this.nombre.equals(otroNombre);
 	}
 	
 	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {

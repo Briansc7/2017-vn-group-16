@@ -52,14 +52,9 @@ public class Planilla {
 		String[] partes = indicador.split("=");
 		
 		if(verificarSintaxisIndicador(partes[0].trim(), partes[1]) && verificarAusenteEnLista(partes[0].trim(), partes[1])){
-			/*
-			String auxiliar= "No encontrado pero valido ";
-			System.out.println(auxiliar);
-			System.out.println(partes[0].trim());
-			System.out.println(partes[1]);
-			*/
+			// REVISAR REMOVER SI HABIA OTRO INDICADOR CON EL MISMO NOMBRE
+			//this.indicadores.removeIf(indicador -> indicador.tieneElMismoNombre(partes[0].trim()));
 			this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
-			this.removerIndicadorModificado(partes[0].trim());
 		} 
 		//throw new RuntimeException("No se puede usar un indicador en su propia definicion");
 	}
@@ -72,21 +67,6 @@ public class Planilla {
 	// Verifica que el indicador no haya sido cargado en la lista con la misma formula (Evito asi parsear N veces)
 	public boolean verificarAusenteEnLista(String nombreIndicador, String contenidoFormula) throws ParseException, TokenMgrError{
 		return this.indicadores.stream().filter(indicador -> indicador.esIdentico(nombreIndicador,contenidoFormula)).collect(Collectors.toList()).isEmpty();
-	}
-	
-	// Remueve el indicador que ya no sirve porque hay uno con el mismo nombre pero distinta formula (es decir, fue actualizado)
-	public void removerIndicadorModificado(String nombreIndicador){
-		if ( this.indicadores.stream().filter(indicador -> indicador.nombre.equals(nombreIndicador)).count() >= 2) {
-			if (this.indicadores.remove(this.indicadores.stream().filter(indicador -> indicador.nombre.equals(nombreIndicador)).findFirst())){
-				String auxiliar= "Se removio elemento ";
-				System.out.println(auxiliar);
-				System.out.println(nombreIndicador);
-			} else {
-				String auxiliar= "Deberia haberse removido (pero no sucedio) el elemento ";
-				System.out.println(auxiliar);
-				System.out.println(nombreIndicador);
-			}	
-		}
 	}
 	
 	public void agregarIndicadorAlArchivo(String indicador) throws IOException{
