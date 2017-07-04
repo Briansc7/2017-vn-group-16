@@ -48,14 +48,28 @@ public class Planilla {
 		this.agregarIndicadorAlArchivo(indicador);
 	}
 	
-	public void verificarSintaxisIndicador(String indicador) throws ParseException, TokenMgrError{
+	public void verificarIndicadorParaAgregar(String indicador) throws ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
-		if(partes[1].toLowerCase().contains(partes[0].trim().toLowerCase())){
-			//throw new RuntimeException("No se puede usar un indicador en su propia definicion");
-		} else {
+		
+		if(verificarSintaxisIndicador(partes[0].trim(), partes[1]) && verificarAusenteEnLista(partes[0].trim(), partes[1])){
+			String auxiliar= "No encontrado pero valido ";
+			System.out.println(auxiliar);
+			System.out.println(partes[0].trim());
+			System.out.println(partes[1]);
+			
 			this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
-		}
-		//this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
+		} 
+		//throw new RuntimeException("No se puede usar un indicador en su propia definicion");
+	}
+	
+	// Verifica sintaxis = que el indicador no se llame a si mismo
+	public boolean verificarSintaxisIndicador(String nombreIndicador, String contenidoFormula) throws ParseException, TokenMgrError{
+		return !contenidoFormula.toLowerCase().contains(nombreIndicador.toLowerCase());
+	}
+	
+	// Verifica que el indicador no haya sido cargado en la lista con la misma formula (Evito asi parsear N veces)
+	public boolean verificarAusenteEnLista(String nombreIndicador, String contenidoFormula) throws ParseException, TokenMgrError{
+		return this.indicadores.stream().filter(indicador -> indicador.esIdentico(nombreIndicador,contenidoFormula)).collect(Collectors.toList()).isEmpty();
 	}
 	
 	public void agregarIndicadorAlArchivo(String indicador) throws IOException{

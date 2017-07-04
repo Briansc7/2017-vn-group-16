@@ -107,7 +107,7 @@ public class BaseDeDatos {
 			
 			br.lines().forEach(linea -> {
 				try {
-					unaPlanilla.verificarSintaxisIndicador(linea);
+					unaPlanilla.verificarIndicadorParaAgregar(linea);
 
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block

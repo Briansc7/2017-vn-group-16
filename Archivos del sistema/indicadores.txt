@@ -13,3 +13,4 @@ indicadorL = i.indicadorD
 indicadorM = i.indicadorM
 indicadorN = (((i.indicadorN + 1000) / 2) * 3)+5
 indicadorO = 2*5
+indicadorP = 3*2

@@ -18,14 +18,20 @@ public class Indicador extends Atributo{
 	//vuelve a parsear muchas veces cambiando el periodo una y otra vez
 	//si empresa tiene 125 cuentas y 20 indicadores y los indicadores dependen de otros, esto se vuelve exponencial
 	private Expresion expresion;
-
+	private String formula;
+	
 	//
 	public Indicador(String nombre, String formula) throws parser.ParseException, parser.TokenMgrError{
 		super(nombre);
+		this.formula = formula;
 		this.expresion = Parser.parsear(formula);//2 parsers entonces logica repetida
 		//parser componente que transforma estructura de datos en otra
 		//segundo parser no es un parser, porque computa solamente
 		//parser debe devolver un conjunto de objetos del dominio y que esos sepan calcular
+	}
+	
+	public boolean esIdentico(String otroNombre, String otraFormula){
+		return this.nombre.equals(otroNombre) && this.formula.equals(otraFormula);
 	}
 	
 	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
@@ -52,6 +58,10 @@ public class Indicador extends Atributo{
 
 	public String getNombre() {
 		return nombre;
+	}
+	
+	public String getFormula() {
+		return formula;
 	}
 }
 
