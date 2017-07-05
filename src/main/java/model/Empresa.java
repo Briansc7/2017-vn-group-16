@@ -1,12 +1,12 @@
 package model;
 
-import java.time.LocalDate;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import exceptions.NoExisteAtributoException;
 
 
 public class Empresa {
@@ -14,17 +14,14 @@ public class Empresa {
 	private String nombre;
 	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
 	
-	
 	public Empresa(String nombre, List<Cuenta> cuentas){
 		this.nombre = nombre;
 		this.cuentas.addAll(cuentas);
 	}
 
-	
 	public List<Cuenta> cuentasDelPeriodo(int periodo){
 		return this.cuentas.stream().filter((Cuenta cuenta) -> cuenta.getYear() == periodo).collect(Collectors.toList());
 	}
-	
 	
 	public Boolean existeCuentaDel(String nombre, Integer periodo) {
 		return this.primero(nombre, periodo).isPresent();
@@ -36,7 +33,7 @@ public class Empresa {
 
 	public Cuenta buscarCuenta(String nombre, Integer periodo){
 		if(!this.existeCuentaDel(nombre, periodo)){
-			throw new RuntimeException("No existe la cuenta " + nombre + " en el periodo " + periodo);
+			throw new NoExisteAtributoException("No existe la cuenta: " + nombre);
 		}
 		return this.primero(nombre, periodo).get();
 	}

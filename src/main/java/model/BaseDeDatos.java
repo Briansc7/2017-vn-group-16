@@ -19,11 +19,12 @@ import java.util.stream.Collectors;
 
 import org.uqbar.commons.model.UserException;
 
+import exceptions.NoExisteAtributoException;
 import parser.ParseException;
 import parser.TokenMgrError;
 
 public class BaseDeDatos {
-
+	
 	private List<Empresa> empresas = new ArrayList<Empresa>();
 	private List<Indicador> indicadores = new ArrayList<Indicador>();
 	private String path;
@@ -33,7 +34,7 @@ public class BaseDeDatos {
 		this.path = path;
 	}
 
-	public List<Empresa> buscarEmpresas(String nombre) throws IOException {
+	public List<Empresa> buscarEmpresas(String nombre) /*throws IOException */{
 		return this.empresas.stream()
 				.filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase()))
 				.collect(Collectors.toList());
@@ -48,11 +49,20 @@ public class BaseDeDatos {
 	}
 	
 	public Indicador buscarIndicador(String nombre) {
-		if(!this.existeIndicador(nombre)){
-			throw new RuntimeException("No existe el indicador");
+		if(this.existeIndicador(nombre)){
+			return this.primerIndicador(nombre).get();
 		}
-		return this.primerIndicador(nombre).get();
+		throw new NoExisteAtributoException("No existe el indicador: " + nombre);
 	}
+	
+	/*public Integer getValorDe(String nombre, Integer periodo, Empresa empresa){
+		if(this.existeIndicador(nombre)){
+			return this.primerIndicador(nombre).get().getValor(periodo, empresa, this);
+		} else if(empresa.existeCuentaDel(nombre, periodo)){
+			return empresa.buscarCuenta(nombre, periodo).getValor();
+		}
+		throw new NoExisteAtributoException("No existe el indicador: " + nombre);
+	}*/
 	
 	public Boolean existeEmpresa(String nombre) {
 		return this.primerEmpresa(nombre).isPresent();

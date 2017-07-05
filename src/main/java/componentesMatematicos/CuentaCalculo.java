@@ -1,4 +1,4 @@
-package componentesMatematicos;
+/*package componentesMatematicos;
 
 import model.BaseDeDatos;
 import model.Empresa;
@@ -19,3 +19,4 @@ public class CuentaCalculo extends FactorLiteral{
 	
 
 }
+*/

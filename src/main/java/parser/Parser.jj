@@ -11,11 +11,10 @@ import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 
-import componentesMatematicos.CuentaCalculo;
+import componentesMatematicos.AtributoCalculo;
 import componentesMatematicos.Expresion;
 import componentesMatematicos.Division;
 import componentesMatematicos.FactorNumerico;
-import componentesMatematicos.IndicadorCalculo;
 import componentesMatematicos.Producto;
 import componentesMatematicos.Resta;
 import componentesMatematicos.Suma;
@@ -39,7 +38,7 @@ SKIP : { " " | "\t" | "\n" | "\r" }
 TOKEN : { < OPERADOR : (["+","-","*","/"]){1} > }
 TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
 TOKEN : { < NUMERO : (["0"-"9"])+ >}
-TOKEN : { < PALABRA : ("i." | "c.")(["a"-"z","A"-"Z"])+ > }
+TOKEN : { < PALABRA : (["a"-"z","A"-"Z"])+ > }
 
 //----------------------------------Version pablistica------------------------------
 Expresion Expression() :
@@ -91,13 +90,8 @@ Expresion Primary() :
 	}
 	|
 	t=<PALABRA>
-	{ if(t.image.substring(0,2).equalsIgnoreCase("i.")) {
-		 IndicadorCalculo miIndicador = new IndicadorCalculo(t.image.substring(2));
-		 { return miIndicador; }
-	  } else {
-  		 CuentaCalculo miCuenta = new CuentaCalculo(t.image.substring(2));
-		 { return miCuenta; }   
-	  }
+	{
+	  return new AtributoCalculo(t.image);
 	}
 	|
 	<OPENPAR> subExpresion=Expression() <CLOSEPAR>

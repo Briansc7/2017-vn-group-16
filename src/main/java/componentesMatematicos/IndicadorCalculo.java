@@ -1,4 +1,4 @@
-package componentesMatematicos;
+/*package componentesMatematicos;
 
 import model.BaseDeDatos;
 import model.Empresa;
@@ -17,3 +17,4 @@ public class IndicadorCalculo extends FactorLiteral{
 		return unaBaseDeDatos.buscarIndicador(this.nombre).getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
 	}
 }
+*/

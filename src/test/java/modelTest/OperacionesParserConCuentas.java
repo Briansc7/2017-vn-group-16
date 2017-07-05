@@ -16,7 +16,6 @@ import parser.ParseException;
 import parser.TokenMgrError;
 
 public class OperacionesParserConCuentas {
-	
 	Indicador indicadorA;
 	Indicador indicadorB;
 	Empresa empresa;
@@ -30,15 +29,15 @@ public class OperacionesParserConCuentas {
 	
 	@Test
 	public void leerUnaCuenta() throws NumberFormatException, ParseException, TokenMgrError, NullPointerException, IOException, parser.ParseException, parser.TokenMgrError{
-		indicadorA = new Indicador("suma", "c.Ebitda");//fb ebitda 2015
+		indicadorA = new Indicador("suma", "Ebitda");//fb ebitda 2015
 		
 		Assert.assertEquals(new Integer(500), indicadorA.getValor(2015, empresa, baseDeDatos));
 	}
 	
 	@Test
 	public void leerCuenteEIndicador() throws parser.ParseException, parser.TokenMgrError, NumberFormatException, ParseException, TokenMgrError {
-		indicadorA = new Indicador("indicadorA", "c.Ebitda * 2");
-		indicadorB = new Indicador("indicadorB","(c.Ebitda + i.indicadorA) / 5");
+		indicadorA = new Indicador("indicadorA", "Ebitda * 2");
+		indicadorB = new Indicador("indicadorB","(Ebitda + indicadorA) / 5");
 		baseDeDatos.agregarIndicador(indicadorA);
 		baseDeDatos.agregarIndicador(indicadorB);
 		
