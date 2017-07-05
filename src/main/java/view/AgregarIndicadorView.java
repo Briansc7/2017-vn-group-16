@@ -8,20 +8,18 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MessageBox;
+import org.uqbar.arena.windows.MessageBox.Type;
 import org.uqbar.arena.windows.WindowOwner;
 
-import model.Planilla;
-
-import org.uqbar.arena.windows.MessageBox.Type;
-
+import model.BaseDeDatos;
 import parser.ParseException;
 import parser.TokenMgrError;
 import viewModel.AgregarIndicadorViewModel;
 
 public class AgregarIndicadorView extends Dialog<AgregarIndicadorViewModel>{
 
-	public AgregarIndicadorView(WindowOwner owner, Planilla unaPlanilla) {
-		super(owner, new AgregarIndicadorViewModel(unaPlanilla));
+	public AgregarIndicadorView(WindowOwner owner) {
+		super(owner, new AgregarIndicadorViewModel());
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package viewModel;
 
 import java.io.IOException;
-import java.time.Year;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,13 +14,11 @@ import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.IndicadorAuxiliar;
-import model.Planilla;
 
 @Observable
 public class ConsultarCuentasViewModel {
 
 	private BaseDeDatos baseDeDatos;
-	private Planilla planilla;
 	
 	private String nombreEmpresaElegida;
 	private Empresa empresaElegida;
@@ -29,13 +26,11 @@ public class ConsultarCuentasViewModel {
 
 	private List<Integer> periodos = Arrays.asList();
 
-	public ConsultarCuentasViewModel(String path, Planilla unaPlanilla) throws IOException{
-		this.planilla = unaPlanilla;
+	public ConsultarCuentasViewModel(String path) throws IOException{
 		this.periodoElegido = 0;
 		this.baseDeDatos = new BaseDeDatos(path);
 		this.baseDeDatos.leerEmpresas();
-		this.baseDeDatos.leerIndicadores(planilla);
-
+		this.baseDeDatos.leerIndicadores();
 	}
 	
 	public Action borrarCuentasLeidas(){
@@ -101,18 +96,18 @@ public class ConsultarCuentasViewModel {
 			
 			try {
 			//this.planilla.borrarIndicadores();//FIXME:estas 2 lineas se habian agregado por no poner monitorear bien el cambio de periodo elegido
-			this.baseDeDatos.leerIndicadores(planilla);		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
+			this.baseDeDatos.leerIndicadores();		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			List<Indicador> indicadoresReales = this.planilla.getIndicadores();
+			List<Indicador> indicadoresReales = this.baseDeDatos.getIndicadores();
 			
 			
 			List<IndicadorAuxiliar> indicadoresAuxiliares = new ArrayList<IndicadorAuxiliar>();
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValor(this.periodoElegido, this.empresaElegida, this.planilla))));
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), 111)));
-			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida, this.planilla))));
+			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida, this.baseDeDatos))));
 			return indicadoresAuxiliares;
 
 		}

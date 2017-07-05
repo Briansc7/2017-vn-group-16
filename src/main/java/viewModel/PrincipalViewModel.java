@@ -9,7 +9,6 @@ import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
-import model.Planilla;
 
 @Observable
 public class PrincipalViewModel {

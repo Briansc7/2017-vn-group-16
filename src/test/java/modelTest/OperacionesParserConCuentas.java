@@ -1,50 +1,49 @@
 package modelTest;
 
-/*
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import calculadora.ParseException;
-import calculadora.TokenMgrError;
+import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
-import model.Planilla;
-
+import parser.ParseException;
+import parser.TokenMgrError;
 
 public class OperacionesParserConCuentas {
 	
 	Indicador indicadorA;
 	Indicador indicadorB;
-
+	Empresa empresa;
+	BaseDeDatos baseDeDatos;
+	
 	@Before
 	public void initialize(){
-		Empresa empresa = new Empresa("Facebook", Arrays.asList(new Cuenta("ebitda", 500, "2015-01-21")));
-		Planilla.instance.setEmpresaElegida(empresa);
-		Planilla.instance.setPeriodoElegido(2015);
+		empresa = new Empresa("Facebook", Arrays.asList(new Cuenta("ebitda", 500, LocalDate.parse("2015-01-21"))));
+		baseDeDatos = new BaseDeDatos("");
 	}
 	
 	@Test
 	public void leerUnaCuenta() throws NumberFormatException, ParseException, TokenMgrError, NullPointerException, IOException, parser.ParseException, parser.TokenMgrError{
-		indicadorA = new Indicador("suma","c.Ebitda");//fb ebitda 2015
+		indicadorA = new Indicador("suma", "c.Ebitda");//fb ebitda 2015
 		
-		Assert.assertEquals(500,indicadorA.getValor());
+		Assert.assertEquals(new Integer(500), indicadorA.getValor(2015, empresa, baseDeDatos));
 	}
 	
 	@Test
 	public void leerCuenteEIndicador() throws parser.ParseException, parser.TokenMgrError, NumberFormatException, ParseException, TokenMgrError {
-		indicadorA = new Indicador("indicadorA","c.Ebitda * 2");
-		Planilla.instance.agregarIndicador(indicadorA);
+		indicadorA = new Indicador("indicadorA", "c.Ebitda * 2");
 		indicadorB = new Indicador("indicadorB","(c.Ebitda + i.indicadorA) / 5");
-		Planilla.instance.agregarIndicador(indicadorB);
+		baseDeDatos.agregarIndicador(indicadorA);
+		baseDeDatos.agregarIndicador(indicadorB);
 		
-		Assert.assertEquals(1000, indicadorA.getValor());
-		Assert.assertEquals(300, indicadorB.getValor());
+		Assert.assertEquals(new Integer(1000), indicadorA.getValor(2015, empresa, baseDeDatos));
+		Assert.assertEquals(new Integer(300), indicadorB.getValor(2015, empresa, baseDeDatos));
 	}
 	
 }
-*/

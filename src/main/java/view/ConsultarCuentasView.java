@@ -15,15 +15,13 @@ import org.uqbar.arena.windows.WindowOwner;
 
 import model.Cuenta;
 import model.Empresa;
-import model.Indicador;
 import model.IndicadorAuxiliar;
-import model.Planilla;
 import viewModel.ConsultarCuentasViewModel;
 
 public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
-	public ConsultarCuentasView(WindowOwner owner, String path, Planilla planilla) throws IOException{
-		super(owner, new ConsultarCuentasViewModel(path, planilla));
+	public ConsultarCuentasView(WindowOwner owner, String path) throws IOException{
+		super(owner, new ConsultarCuentasViewModel(path));
 	}
 	
 	@Override

@@ -1,4 +1,4 @@
-package model;
+/*package model;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -17,7 +17,7 @@ import parser.TokenMgrError;
 
 public class Planilla {
 
-	private List<Indicador> indicadores = new ArrayList<Indicador>();
+	/*private List<Indicador> indicadores = new ArrayList<Indicador>();
 	private String pathIndicadores = "./Archivos del sistema/indicadores.txt";
 	
 	public void borrarIndicadores(){
@@ -27,20 +27,20 @@ public class Planilla {
 	
 	public Boolean existeIndicador(String nombre) {
 		return this.primero(nombre).isPresent();
-	}
+	}*/
 
-	public Optional<Indicador> primero(String nombre) {
+	/*public Optional<Indicador> primero(String nombre) {
 		return this.indicadores.stream().filter(indicador -> indicador.getNombre().equalsIgnoreCase(nombre)).findFirst();
-	}
+	}*/
 	
-	public Indicador buscarIndicador(String nombre) {
+	/*public Indicador buscarIndicador(String nombre) {
 		if(!this.existeIndicador(nombre)){
 			throw new RuntimeException("No existe el indicador");
 		}
-		return this.primero(nombre).get();
-	}
+		return this.primerEmpresa(nombre).get();
+	}*/
 	
-	public void verificarIndicador(String indicador) throws IOException, ParseException, TokenMgrError{
+	/*public void verificarIndicador(String indicador) throws IOException, ParseException, TokenMgrError{
 		String[] partes = indicador.split("=");
 		if(partes[1].toLowerCase().contains(partes[0].trim().toLowerCase())){
 			 throw new RuntimeException("No se puede usar un indicador en su propia definicion");
@@ -57,9 +57,9 @@ public class Planilla {
 			this.agregarIndicador(new Indicador(partes[0].trim(), partes[1]));
 		} 
 		//throw new RuntimeException("No se puede usar un indicador en su propia definicion");
-	}
+	}*/
 	
-	// Verifica sintaxis = que el indicador no se llame a si mismo
+	/*// Verifica sintaxis = que el indicador no se llame a si mismo
 	public boolean verificarSintaxisIndicador(String nombreIndicador, String contenidoFormula) throws ParseException, TokenMgrError{
 		return !contenidoFormula.toLowerCase().contains(nombreIndicador.toLowerCase());
 	}
@@ -85,5 +85,5 @@ public class Planilla {
 
 	public void setPathIndicadores(String pathIndicadores) {
 		this.pathIndicadores = pathIndicadores;
-	}
-}
+	}*/
+//}

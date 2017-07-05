@@ -1,15 +1,9 @@
 package model;
 
-import java.io.IOException;
-import java.time.Year;
-import java.util.List;
-
 import org.uqbar.commons.utils.Observable;
 
 import componentesMatematicos.Expresion;
-import componentesMatematicos.FactorLiteral;
 import parser.Parser;
-import model.Atributo;
 
 @Observable
 public class Indicador extends Atributo{
@@ -38,14 +32,14 @@ public class Indicador extends Atributo{
 		return this.nombre.equals(otroNombre);
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
-		return this.expresion.getValor(unPeriodo, unaEmpresa, unaPlanilla);
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
+		return this.expresion.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
 	}
 	
-	public String getValorString(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla){
+	public String getValorString(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos){
 		String valorAuxiliar;
 		try {
-			valorAuxiliar = String.valueOf(this.getValor(unPeriodo, unaEmpresa, unaPlanilla));
+			valorAuxiliar = String.valueOf(this.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos));
 		} catch (Exception ex) {
 			valorAuxiliar = "*";
 		}

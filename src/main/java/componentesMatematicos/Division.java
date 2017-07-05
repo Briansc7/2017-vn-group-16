@@ -1,12 +1,8 @@
 package componentesMatematicos;
 
-import java.time.Year;
-
-import org.uqbar.commons.model.UserException;
-
 import exceptions.NoSePuedeDividirPorCeroException;
+import model.BaseDeDatos;
 import model.Empresa;
-import model.Planilla;
 
 public class Division extends Operador {
 	
@@ -15,10 +11,10 @@ public class Division extends Operador {
 		super(opIzq, opDer);
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
 		
-		if(this.operandoDer.getValor(unPeriodo, unaEmpresa, unaPlanilla) != 0){
-			return this.operandoIzq.getValor(unPeriodo, unaEmpresa, unaPlanilla) / this.operandoDer.getValor(unPeriodo, unaEmpresa, unaPlanilla);
+		if(this.operandoDer.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos) != 0){
+			return this.operandoIzq.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos) / this.operandoDer.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
 		}
 		else throw new NoSePuedeDividirPorCeroException("No se puede dividir por 0");
 	}

@@ -1,7 +1,7 @@
 package componentesMatematicos;
 
+import model.BaseDeDatos;
 import model.Empresa;
-import model.Planilla;
 
 public class IndicadorCalculo extends FactorLiteral{
 	
@@ -13,7 +13,7 @@ public class IndicadorCalculo extends FactorLiteral{
 		return this.nombre;
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
-		return unaPlanilla.buscarIndicador(this.nombre).getValor(unPeriodo, unaEmpresa, unaPlanilla);
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
+		return unaBaseDeDatos.buscarIndicador(this.nombre).getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
 	}
 }

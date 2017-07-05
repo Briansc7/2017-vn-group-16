@@ -21,7 +21,7 @@ import componentesMatematicos.Resta;
 import componentesMatematicos.Suma;
 
 import model.Empresa;
-import model.Planilla;
+import model.BaseDeDatos;
 
 public class Parser {
 	

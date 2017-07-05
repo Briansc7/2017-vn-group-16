@@ -1,9 +1,7 @@
 package componentesMatematicos;
 
-import java.time.Year;
-
+import model.BaseDeDatos;
 import model.Empresa;
-import model.Planilla;
 
 public class Suma extends Operador {
 	
@@ -12,8 +10,8 @@ public class Suma extends Operador {
 		super(opIzq, opDer);
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, Planilla unaPlanilla) {
+	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
 		
-		return this.operandoIzq.getValor(unPeriodo, unaEmpresa, unaPlanilla) + this.operandoDer.getValor(unPeriodo, unaEmpresa, unaPlanilla);
+		return this.operandoIzq.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos) + this.operandoDer.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
 	}
 }//

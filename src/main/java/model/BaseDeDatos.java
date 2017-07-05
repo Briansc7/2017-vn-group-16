@@ -1,12 +1,15 @@
 package model;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,9 +25,10 @@ import parser.TokenMgrError;
 public class BaseDeDatos {
 
 	private List<Empresa> empresas = new ArrayList<Empresa>();
+	private List<Indicador> indicadores = new ArrayList<Indicador>();
 	private String path;
 	private String pathIndicadores = "./Archivos del sistema/indicadores.txt";
-
+	
 	public BaseDeDatos(String path) {
 		this.path = path;
 	}
@@ -37,21 +41,35 @@ public class BaseDeDatos {
 
 	public Empresa empresaLlamada(String nombre) throws IOException {
 		if (this.existeEmpresa(nombre)) {
-			return this.primero(nombre).get();
+			return this.primerEmpresa(nombre).get();
 		} else {
 			throw new UserException("La empresa no existe");
 		}
-
 	}
-
+	
+	public Indicador buscarIndicador(String nombre) {
+		if(!this.existeIndicador(nombre)){
+			throw new RuntimeException("No existe el indicador");
+		}
+		return this.primerIndicador(nombre).get();
+	}
+	
 	public Boolean existeEmpresa(String nombre) {
-		return this.primero(nombre).isPresent();
+		return this.primerEmpresa(nombre).isPresent();
 	}
 
-	public Optional<Empresa> primero(String nombre) {
+	public Boolean existeIndicador(String nombre) {
+		return this.primerIndicador(nombre).isPresent();
+	}
+	
+	public Optional<Empresa> primerEmpresa(String nombre) {
 		return this.empresas.stream().filter(empresa -> empresa.getNombre().equalsIgnoreCase(nombre)).findFirst();
 	}
 
+	public Optional<Indicador> primerIndicador(String nombre) {
+		return this.indicadores.stream().filter(indicador -> indicador.getNombre().equalsIgnoreCase(nombre)).findFirst();
+	}
+	
 	public void leerEmpresas() throws IOException {
 
 		/*
@@ -90,7 +108,7 @@ public class BaseDeDatos {
 		LocalDate fecha = LocalDate.parse(p [3]);
 		
 		 if(this.existeEmpresa(p[0])){
-		 this.primero(p[0]).get().getCuentas().add(new Cuenta(p[1],
+		 this.primerEmpresa(p[0]).get().getCuentas().add(new Cuenta(p[1],
 				 Integer.parseInt(p[2]), fecha));
 		 }
 		 else{
@@ -99,7 +117,7 @@ public class BaseDeDatos {
 	}
 
 	//lector de indicadores
-	public void leerIndicadores(Planilla unaPlanilla) throws IOException{
+	public void leerIndicadores() throws IOException{
 		try {
 			File inputF = new File(this.pathIndicadores);
 			InputStream inputFS = new FileInputStream(inputF);
@@ -107,7 +125,7 @@ public class BaseDeDatos {
 			
 			br.lines().forEach(linea -> {
 				try {
-					unaPlanilla.verificarIndicadorParaAgregar(linea);
+					this.verificarIndicadorParaAgregar(linea);
 
 				} catch (ParseException e) {
 					// TODO Auto-generated catch block
@@ -131,14 +149,50 @@ public class BaseDeDatos {
 		}
 	}
 		
-	public List<Empresa> getEmpresas() {
+	public void verificarIndicador(String indicador) throws IOException, ParseException, TokenMgrError{
+		String[] partes = indicador.split("=");
+		if(partes[1].toLowerCase().contains(partes[0].trim().toLowerCase())){
+			 throw new RuntimeException("No se puede usar un indicador en su propia definicion");
+		}
+		this.agregarIndicadorAlArchivo(indicador);
+	}
+	
+	public void verificarIndicadorParaAgregar(String indicador) throws ParseException, TokenMgrError{
+		String[] partes = indicador.split("=");
+		
+		if(verificarSintaxisIndicador(partes[0].trim(), partes[1]) && verificarAusenteEnLista(partes[0].trim(), partes[1])){
+			// REVISAR REMOVER SI HABIA OTRO INDICADOR CON EL MISMO NOMBRE
+			//this.indicadores.removeIf(indicador -> indicador.tieneElMismoNombre(partes[0].trim()));
+			this.indicadores.add(new Indicador(partes[0].trim(), partes[1]));
+		} 
+		//throw new RuntimeException("No se puede usar un indicador en su propia definicion");
+	}
+	
+	// Verifica sintaxis = que el indicador no se llame a si mismo
+		public boolean verificarSintaxisIndicador(String nombreIndicador, String contenidoFormula) throws ParseException, TokenMgrError{
+			return !contenidoFormula.toLowerCase().contains(nombreIndicador.toLowerCase());
+		}
+		
+		// Verifica que el indicador no haya sido cargado en la lista con la misma formula (Evito asi parsear N veces)
+		public boolean verificarAusenteEnLista(String nombreIndicador, String contenidoFormula) throws ParseException, TokenMgrError{
+			return this.indicadores.stream().filter(indicador -> indicador.esIdentico(nombreIndicador,contenidoFormula)).collect(Collectors.toList()).isEmpty();
+		}
+		
+		public List<Empresa> getEmpresas() {
 		return empresas;
 	}
-
+		
+	public void agregarIndicadorAlArchivo(String indicador) throws IOException{
+		File file = new File(this.pathIndicadores);
+		Writer output = new BufferedWriter(new FileWriter(file, true));
+		output.append(indicador + "\r\n");
+		output.close();
+	}
+	
 	public void setEmpresas(List<Empresa> empresas) {
 		this.empresas = empresas;
 	}
-
+	
 	public void setPath(String path) {
 		this.path = path;
 	}
@@ -150,4 +204,16 @@ public class BaseDeDatos {
 	public void setPathIndicadores(String pathIndicadores) {
 		this.pathIndicadores = pathIndicadores;
 	}
+
+	public List<Indicador> getIndicadores() {
+		return indicadores;
+	}
+
+	public void agregarIndicador(Indicador indicador) {
+		this.indicadores.add(indicador);
+	}
+
+	/*public void setIndicadores(List<Indicador> indicadores) {
+		this.indicadores = indicadores;
+	}*/
 }
