@@ -201,6 +201,10 @@ public class BaseDeDatos {
 		this.empresas.clear();
 	}
 
+	public void borrarIndicadores(){
+		this.indicadores.clear();
+	}
+	
 	public void setPathIndicadores(String pathIndicadores) {
 		this.pathIndicadores = pathIndicadores;
 	}

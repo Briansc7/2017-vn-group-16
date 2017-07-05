@@ -33,6 +33,7 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		new TextBox(mainPanel).bindValueToProperty("nombreEmpresaElegida");
 		
 		List<Empresa> listaEmpresas = new List<Empresa>(mainPanel);
+		listaEmpresas.setHeight(70);
 		listaEmpresas.bindItemsToProperty("empresas");
 		listaEmpresas.bindValueToProperty("empresaElegida");
 		

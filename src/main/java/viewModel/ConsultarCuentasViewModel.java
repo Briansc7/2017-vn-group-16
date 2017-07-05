@@ -20,7 +20,7 @@ public class ConsultarCuentasViewModel {
 
 	private BaseDeDatos baseDeDatos;
 	
-	private String nombreEmpresaElegida;
+	private String nombreEmpresaElegida = "";
 	private Empresa empresaElegida;
 	private Integer periodoElegido;//FIXME: Ver si se lo puede convertir a tipo Year
 
@@ -35,30 +35,19 @@ public class ConsultarCuentasViewModel {
 	
 	public Action borrarCuentasLeidas(){
 		this.baseDeDatos.borrarEmpresas();
-//		this.planilla.borrarIndicadores();
+		this.baseDeDatos.borrarIndicadores();
 		return null;
 	}
 //solo se acepta null si el framework lo devuelve. No usar nulls
 	
 	@Dependencies("nombreEmpresaElegida")
 	public List<Empresa> getEmpresas() throws IOException {
-
-			if (nombreEmpresaElegida == null || nombreEmpresaElegida.equals("")) {
+			if (/*nombreEmpresaElegida == null || */nombreEmpresaElegida.equals("")) {
 				//return null;
-				
-				return Arrays.asList();
+				return baseDeDatos.buscarEmpresas("");
 			} else {		
 				return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
 			}
-
-	}
-
-	public String getNombreEmpresaElegida() {
-		return nombreEmpresaElegida;
-	}
-
-	public void setNombreEmpresaElegida(String nombreEmpresaElegida) {
-		this.nombreEmpresaElegida = nombreEmpresaElegida;
 	}
 
 	@Dependencies("empresaElegida")
@@ -73,7 +62,6 @@ public class ConsultarCuentasViewModel {
 		}
 	}
 
-
 	@Dependencies("periodoElegido")
 	public List<Cuenta> getCuentas() {
 		if (this.periodoElegido == 0) {
@@ -84,8 +72,6 @@ public class ConsultarCuentasViewModel {
 		}
 	}
 	
-	
-	
 	@Dependencies("periodoElegido")//debe ser un atributo para que pueda monitorear su cambio(mirar su get)
 	public List<IndicadorAuxiliar> getIndicadores(){
 
@@ -93,27 +79,21 @@ public class ConsultarCuentasViewModel {
 		//	return Arrays.asList();
 			return null;
 		} else {
-			
-			try {
+			/*try {
 			//this.planilla.borrarIndicadores();//FIXME:estas 2 lineas se habian agregado por no poner monitorear bien el cambio de periodo elegido
 			this.baseDeDatos.leerIndicadores();		// al solucionar ese problema ya no va a ser necesario esto ni el try catch
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
-			}
+			}*/
 			List<Indicador> indicadoresReales = this.baseDeDatos.getIndicadores();
-			
-			
 			List<IndicadorAuxiliar> indicadoresAuxiliares = new ArrayList<IndicadorAuxiliar>();
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValor(this.periodoElegido, this.empresaElegida, this.planilla))));
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), 111)));
-			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida, this.baseDeDatos))));
+			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add(new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida, this.baseDeDatos))));
 			return indicadoresAuxiliares;
-
 		}
 	}
-	
-	
 	
 	public Integer getPeriodoElegido() {
 		return this.periodoElegido;
@@ -121,6 +101,14 @@ public class ConsultarCuentasViewModel {
 
 	public void setPeriodoElegido(Integer periodoElegido) {
 		this.periodoElegido = periodoElegido;
+	}
+
+	public String getNombreEmpresaElegida() {
+		return nombreEmpresaElegida;
+	}
+
+	public void setNombreEmpresaElegida(String nombreEmpresaElegida) {
+		this.nombreEmpresaElegida = nombreEmpresaElegida;
 	}
 
 	public Empresa getEmpresaElegida() {
@@ -131,7 +119,6 @@ public class ConsultarCuentasViewModel {
 		this.empresaElegida = empresaElegida;
 		this.periodoElegido = 0;
 	}
-
 }
 //mensaje de error del parser debe ser entendible por el usuario, ej que diga error de sintaxis y si es posible de mas informacion
 //que el parth del archivo indicadores.txt esté en un solo lugar
