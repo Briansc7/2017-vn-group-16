@@ -10,7 +10,7 @@ public class CondicionTaxativa extends Condicion{
 	private Indicador IndicadorAComparar;//Nombre de otro con el que se compara el que hay que optimizar
 	
 	//TODO ¿Debería separar la que tiene constante de la de indicador?
-	public CondicionTaxativa(Integer periodo, Indicador indicadorAOptimizar, BooleanCondition criterioComparacion) {
+	public CondicionTaxativa(Integer periodo, String indicadorAOptimizar, BooleanCondition criterioComparacion) {
 		super(periodo, indicadorAOptimizar, criterioComparacion);
 		
 	}
