@@ -8,13 +8,23 @@ import model.metodologia.condiciones.BooleanCondition;
 //Comparar contra una constante u otro indicador de la misma empresa
 public class CondicionTaxativa extends Condicion{
 	private Integer valorAComparar;//Depende del tipo de comparacion, es la constante
-	private Indicador IndicadorAComparar;//Nombre de otro con el que se compara el que hay que optimizar
+	private String indicadorAComparar;//Nombre de otro con el que se compara el que hay que optimizar
 	
-	//TODO ¿Debería separar la que tiene constante de la de indicador?
-	public CondicionTaxativa(Integer periodo, String indicadorAOptimizar, BooleanCondition criterioComparacion) {
-		super(periodo, indicadorAOptimizar, criterioComparacion);
+	//Dos constructores, si se hace con un Ineger se sabe que es un valor contra el que se compara
+		public CondicionTaxativa(Integer periodo, String indicadorAOptimizar,
+				BooleanCondition criterioComparacion, Integer _valorAComparar) {
+			
+			super(periodo, indicadorAOptimizar, criterioComparacion);
+			valorAComparar = _valorAComparar;
+		}
 		
-	}
+		//Si se hace con un String se sabe que es otro indicador el que se usa
+		public CondicionTaxativa(Integer periodo, String indicadorAOptimizar,
+				BooleanCondition criterioComparacion, String _indicadorAComparar) {
+			
+			super(periodo, indicadorAOptimizar, criterioComparacion);
+			indicadorAComparar = _indicadorAComparar;
+		}
 	
 	// TODO Retorna true si la empresa cumple la condicion
 	public boolean aplicarCondicion(Empresa unaEmpresa, BaseDeDatos baseDeDatos) {

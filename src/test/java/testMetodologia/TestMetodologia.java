@@ -44,7 +44,7 @@ public class TestMetodologia {
 	
 	@Test
 	public void metodologiaBuffet(){
-		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan(), "ROE");
+		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan());
 		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(), Arrays.asList(condicionRoe));
 
 		Assert.assertTrue(condicionRoe.compararEmresas(empresa1, empresa2, base));
