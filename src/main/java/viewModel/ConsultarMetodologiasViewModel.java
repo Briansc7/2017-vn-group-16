@@ -16,6 +16,8 @@ public class ConsultarMetodologiasViewModel {
 private BaseDeDatos baseDeDatos;
 	
 	private String nombreMetodologiaElegida = "";	
+	
+
 	private Metodologia metodologiaElegida;
 	
 	
@@ -82,5 +84,9 @@ private BaseDeDatos baseDeDatos;
 
 	public void setCriterioElegido(CondicionNoTaxativa criterioElegido) {
 		this.criterioElegido = criterioElegido;
+	}
+	
+	public void setNombreMetodologiaElegida(String nombreMetodologiaElegida) {
+		this.nombreMetodologiaElegida = nombreMetodologiaElegida;
 	}
 }
