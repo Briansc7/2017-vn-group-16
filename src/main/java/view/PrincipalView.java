@@ -29,6 +29,19 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		new Button(panelActions)
 		.setCaption("Agregar Indicador")
 		.onClick(() -> this.agregarIndicador());
+				
+		new Button(panelActions)
+		.setCaption("Consultar Metodologías");
+		//.onClick(() -> this.agregarIndicador());
+		
+		new Button(panelActions)
+		.setCaption("Cargar Metodologías");
+		//.onClick(() -> this.agregarIndicador());
+		
+		new Button(panelActions)
+		.setCaption("Definir Nueva Metodología");
+		//.onClick(() -> this.agregarIndicador());
+		
 	}
 
 	@Override
@@ -37,6 +50,8 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		
 		new Label(mainPanel).setText("Seleccione el archivo de cuentas").setWidth(250);
 		new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
+		
+		
 	}
 	
 	public void consultarCuentas() {
