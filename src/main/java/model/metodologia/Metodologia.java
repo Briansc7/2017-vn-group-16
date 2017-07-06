@@ -36,7 +36,8 @@ public class Metodologia {
 
 	//TODO Retorna una lista de empresas ordenadas según las condiciones y su peso
 	private List<Empresa> aplicarCondicionesNoTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
-		return empresas.stream().sorted((empresa1, empresa2)-> this.mejorPuntaje(empresa1, empresa2, baseDeDatos)).collect(Collectors.toList());
+		empresas.sort((empresa1, empresa2)-> this.mejorPuntaje(empresa1, empresa2, baseDeDatos));
+		return empresas;
 	}
 	
 	private int mejorPuntaje(Empresa empresaUno, Empresa empresaDos, BaseDeDatos baseDeDatos){
@@ -47,6 +48,6 @@ public class Metodologia {
 			else
 				puntosE2 += condicion.getPesoEstimado();
 		}
-		return puntosE1 - puntosE2;
+		return Integer.compare(puntosE2, puntosE1);
 	}
 }
