@@ -19,7 +19,7 @@ public class LecturaIndicadores {
 	
 	@Test
 	public void escribirUnIndicador() throws IOException {
-		baseDeDatos.agregarIndicadorAlArchivo("indicadorEjemploA = c.ebitda + 500");
+		baseDeDatos.agregarIndicadorAlArchivo("indicadorEjemploA = ebitda + 500");
 		baseDeDatos.leerIndicadores();
 		
 		Assert.assertTrue(baseDeDatos.existeIndicador("indicadorEjemploA"));
@@ -27,8 +27,8 @@ public class LecturaIndicadores {
 	
 	@Test
 	public void escribirDosIndicadores() throws IOException {
-		baseDeDatos.agregarIndicadorAlArchivo("indicadorEjemploB = c.ebitda + 500");
-		baseDeDatos.agregarIndicadorAlArchivo("indicadorEjemploC = c.van + c.ebitda / 2");
+		baseDeDatos.agregarIndicadorAlArchivo("indicadorEjemploB = ebitda + 500");
+		baseDeDatos.agregarIndicadorAlArchivo("indicadorEjemploC = van + ebitda / 2");
 		baseDeDatos.leerIndicadores();
 		
 		Assert.assertTrue(baseDeDatos.existeIndicador("indicadorEjemploB"));

@@ -29,9 +29,9 @@ public class CondicionNoTaxativa extends Condicion{
 	public boolean compararEmresas(Empresa empresaUno, Empresa empresaDos, BaseDeDatos baseDeDatos) {
 		boolean resultado = true;
 		for(int i = 0; i < periodo; i++){
-			if(!(criterioComparacion.comprar(baseDeDatos.buscarIndicador(IndicadorAOptimizar).getValor(2017-i, empresaUno, baseDeDatos),  
-					baseDeDatos.buscarIndicador(IndicadorAOptimizar).getValor(2017-i, empresaDos, baseDeDatos)))) resultado = false;
-				
+			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, empresaUno),  
+					baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, empresaDos))))
+				resultado = false;
 		}
 		return resultado;
 	}

@@ -55,14 +55,13 @@ public class BaseDeDatos {
 		throw new NoExisteAtributoException("No existe el indicador: " + nombre);
 	}
 	
-	/*public Integer getValorDe(String nombre, Integer periodo, Empresa empresa){
+	public Integer valorDe(String nombre, Integer periodo, Empresa empresa){
 		if(this.existeIndicador(nombre)){
-			return this.primerIndicador(nombre).get().getValor(periodo, empresa, this);
-		} else if(empresa.existeCuentaDel(nombre, periodo)){
+			return this.buscarIndicador(nombre).getValor(periodo, empresa, this);
+		} else {
 			return empresa.buscarCuenta(nombre, periodo).getValor();
 		}
-		throw new NoExisteAtributoException("No existe el indicador: " + nombre);
-	}*/
+	}
 	
 	public Boolean existeEmpresa(String nombre) {
 		return this.primerEmpresa(nombre).isPresent();

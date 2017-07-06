@@ -1,0 +1,3 @@
+indicadorEjemploB = ebitda + 500
+indicadorEjemploC = van + ebitda / 2
+indicadorEjemploA = ebitda + 500

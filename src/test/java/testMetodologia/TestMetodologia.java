@@ -12,7 +12,9 @@ import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.metodologia.CondicionNoTaxativa;
+import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
+import model.metodologia.condiciones.Consistente;
 import model.metodologia.condiciones.GreaterThan;
 import parser.ParseException;
 import parser.TokenMgrError;
@@ -20,6 +22,7 @@ import parser.TokenMgrError;
 public class TestMetodologia {
 	Metodologia metodologiaBuffet;
 	CondicionNoTaxativa condicionRoe;
+	CondicionTaxativa condicionMargen;
 	BaseDeDatos base;
 	Empresa empresa1;
 	Empresa empresa2;
@@ -29,8 +32,6 @@ public class TestMetodologia {
 	
 	@Before
 	public void initialize() throws ParseException, TokenMgrError{
-		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan(), "ROE");
-		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(), Arrays.asList(condicionRoe));
 		base = new BaseDeDatos("");
 		cuenta1 = new Cuenta("van", 15, LocalDate.parse("2017-05-10"));
 		cuenta2 = new Cuenta("van", 10, LocalDate.parse("2017-05-10"));
@@ -43,6 +44,16 @@ public class TestMetodologia {
 	
 	@Test
 	public void metodologiaBuffet(){
+		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan(), "ROE");
+		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(), Arrays.asList(condicionRoe));
+
 		Assert.assertTrue(condicionRoe.compararEmresas(empresa1, empresa2, base));
+	}
+	
+	@Test
+	public void metodologiaTaxativa(){
+		condicionMargen = new CondicionTaxativa(1, "Margen", new Consistente());
+		
+		Assert.assertTrue(condicionMargen.aplicarCondicion(empresa1, base));
 	}
 }
