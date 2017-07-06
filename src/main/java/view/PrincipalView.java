@@ -31,8 +31,8 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		.onClick(() -> this.agregarIndicador());
 				
 		new Button(panelActions)
-		.setCaption("Consultar Metodologías");
-		//.onClick(() -> this.agregarIndicador());
+		.setCaption("Consultar Metodologías")
+		.onClick(() -> this.consultarMetodologias());
 		
 		new Button(panelActions)
 		.setCaption("Cargar Metodologías");
@@ -45,6 +45,20 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	}
 	
 	
+
+	private void consultarMetodologias() {
+		try{
+			this.getModelObject().verificarArchivo();
+			//ConsultarMetodologiasView consultarMetodologiasView = new ConsultarMetodologiasView(this, this.getModelObject().getPath());
+			Dialog<?> dialog = new ConsultarMetodologiasView(this, this.getModelObject().getPath());
+			//dialog.onCancel((consultarCuentasView.getModelObject()).borrarCuentasLeidas());
+			dialog.open();
+			dialog.onAccept(() -> {});
+		}
+		catch(Exception e){
+			showErrorMessageBox(e.getMessage());
+		}
+	}
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
