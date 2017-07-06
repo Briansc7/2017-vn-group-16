@@ -6,10 +6,12 @@ import model.metodologia.condiciones.BooleanCondition;
 
 //Mismo indicador pero para otra empresa, optimizar el indicador dado
 public class CondicionNoTaxativa extends Condicion{
-
+	private Integer pesoEstimado;
+	
 	public CondicionNoTaxativa(Integer periodo, String indicadorAOptimizar,
-			BooleanCondition criterioComparacion) {
+			BooleanCondition criterioComparacion, Integer pesoEstimado) {
 		super(periodo, indicadorAOptimizar, criterioComparacion);
+		this.pesoEstimado = pesoEstimado;
 	}
 
 	// TODO No taxativa, retorna al ganador
@@ -21,5 +23,9 @@ public class CondicionNoTaxativa extends Condicion{
 				resultado = false;
 		}
 		return resultado;
+	}
+	
+	public Integer getPesoEstimado() {
+		return pesoEstimado;
 	}
 }

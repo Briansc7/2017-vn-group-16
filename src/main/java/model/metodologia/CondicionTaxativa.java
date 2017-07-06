@@ -2,7 +2,6 @@ package model.metodologia;
 
 import model.BaseDeDatos;
 import model.Empresa;
-import model.Indicador;
 import model.metodologia.condiciones.BooleanCondition;
 
 //Comparar contra una constante u otro indicador de la misma empresa
@@ -32,14 +31,8 @@ public class CondicionTaxativa extends Condicion {
 	// TODO Retorna true si la empresa cumple la condicion
 	public boolean aplicarCondicion(Empresa unaEmpresa, BaseDeDatos baseDeDatos) {
 		boolean resultado = true;
-<<<<<<< HEAD
-		for (int i = 0; i < periodo; i++) {
-			if (!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017 - i, unaEmpresa),
-					baseDeDatos.valorDe(indicadorAOptimizar, 2017 - (i + 1), unaEmpresa))))
-=======
 		for(int i = 0; i < periodo-1; i++){
 			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, unaEmpresa), baseDeDatos.valorDe(indicadorAOptimizar, 2017-(i+1), unaEmpresa))))
->>>>>>> cc6e5df749df80298e8b479021891c5d2eb4acf2
 				resultado = false;
 		}
 		return resultado;
