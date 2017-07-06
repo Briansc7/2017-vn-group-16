@@ -14,7 +14,7 @@ public class LecturaIndicadores {
 	@Before
 	public void initialize()  {
 		baseDeDatos = new BaseDeDatos("");
-		baseDeDatos.setPathIndicadores("./Archivos de prueba/indicadoresDePrueba.txt");
+		baseDeDatos.setPathIndicadores("./Archivos de prueba/indicadoresPruebaDeEscritura.txt");
 	}
 	
 	@Test

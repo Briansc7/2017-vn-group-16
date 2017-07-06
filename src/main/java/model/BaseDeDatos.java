@@ -40,7 +40,7 @@ public class BaseDeDatos {
 				.collect(Collectors.toList());
 	}
 
-	public Empresa empresaLlamada(String nombre) throws IOException {
+	public Empresa empresaLlamada(String nombre) {
 		if (this.existeEmpresa(nombre)) {
 			return this.primerEmpresa(nombre).get();
 		} else {
@@ -114,14 +114,14 @@ public class BaseDeDatos {
 	
 	private void agregarDatosDeLinea(String linea){
 		String[] p = linea.split(",");// Separa el string por las comas
-		LocalDate fecha = LocalDate.parse(p [3]);
+		LocalDate fecha = LocalDate.parse(p[3].trim());
 		
-		 if(this.existeEmpresa(p[0])){
-		 this.primerEmpresa(p[0]).get().getCuentas().add(new Cuenta(p[1],
-				 Integer.parseInt(p[2]), fecha));
+		 if(this.existeEmpresa(p[0].trim())){
+		 this.primerEmpresa(p[0].trim()).get().getCuentas().add(new Cuenta(p[1].trim(),
+				 Integer.parseInt(p[2].trim()), fecha));
 		 }
 		 else{
-			 this.empresas.add(new Empresa(p[0], Arrays.asList(new Cuenta(p[1], Integer.parseInt(p[2]), fecha))));
+			 this.empresas.add(new Empresa(p[0].trim(), Arrays.asList(new Cuenta(p[1].trim(), Integer.parseInt(p[2].trim()), fecha))));
 		 }
 	}
 

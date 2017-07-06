@@ -1,0 +1,5 @@
+ingresNeto = IngresoNetoOperacionesNoContinuas + IngresoNetoOperacionesContinuas
+roe = (ingresNeto - dividendos) / capitalTotal
+debtEquityRatio = totalLiabilities / shareholdersEquity
+shareholdersEquity = capitalTotal - totalLiabilities
+margen = (ingresNeto - gastos) / ingresNeto

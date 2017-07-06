@@ -20,7 +20,7 @@ import model.metodologia.condiciones.LessThan;
 import parser.ParseException;
 import parser.TokenMgrError;
 
-public class TestMetodologia {
+public class TestUnAnio {
 	Metodologia metodologiaBuffet;
 	CondicionNoTaxativa condicionRoe;
 	CondicionNoTaxativa condicionDeuda;
@@ -40,13 +40,13 @@ public class TestMetodologia {
 	@Before
 	public void initialize() throws ParseException, TokenMgrError{
 		empresaUno = new Empresa("Facebook", Arrays.asList(new Cuenta("ingresoNeto", 15, LocalDate.parse("2017-05-10")), 
-														 new Cuenta("capitalTotal", 30, LocalDate.parse("2017-05-10")),
-														 new Cuenta("totalLiabilities", 40, LocalDate.parse("2017-05-10")),
-														 new Cuenta("longevidad", 7, LocalDate.parse("2017-05-10"))));
+														   new Cuenta("capitalTotal", 30, LocalDate.parse("2017-05-10")),
+														   new Cuenta("totalLiabilities", 40, LocalDate.parse("2017-05-10")),
+														   new Cuenta("longevidad", 7, LocalDate.parse("2017-05-10"))));
 		empresaDos = new Empresa("twitter", Arrays.asList(new Cuenta("ingresoNeto", 10, LocalDate.parse("2017-05-10")),
-														new Cuenta("capitalTotal", 20, LocalDate.parse("2017-05-10")),
-														new Cuenta("totalLiabilities", 30, LocalDate.parse("2017-05-10")),
-														new Cuenta("longevidad", 5, LocalDate.parse("2017-05-10"))));
+														  new Cuenta("capitalTotal", 20, LocalDate.parse("2017-05-10")),
+														  new Cuenta("totalLiabilities", 30, LocalDate.parse("2017-05-10")),
+														  new Cuenta("longevidad", 5, LocalDate.parse("2017-05-10"))));
 		empresaTres = new Empresa("google", Arrays.asList(new Cuenta("ingresoNeto", 100, LocalDate.parse("2017-05-10")),
 														  new Cuenta("capitalTotal", 200, LocalDate.parse("2017-05-10")),
 														  new Cuenta("totalLiabilities", 300, LocalDate.parse("2017-05-10")),
