@@ -32,7 +32,7 @@ public class CondicionTaxativa extends Condicion {
 	public boolean aplicarCondicion(Empresa unaEmpresa, BaseDeDatos baseDeDatos) {
 		boolean resultado = true;
 		for(int i = 0; i < periodo-1; i++){
-			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, unaEmpresa), baseDeDatos.valorDe(indicadorAOptimizar, 2017-(i+1), unaEmpresa))))
+			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, unaEmpresa), baseDeDatos.valorDe(indicadorAComparar, 2017-(i+1), unaEmpresa))))
 				resultado = false;
 		}
 		return resultado;

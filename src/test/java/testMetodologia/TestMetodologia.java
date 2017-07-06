@@ -30,6 +30,7 @@ public class TestMetodologia {
 	BaseDeDatos base;
 	Empresa empresaUno;
 	Empresa empresaDos;
+	Empresa empresaTres;
 	Indicador indicadorRoe;
 	Indicador indicadorMargen;
 	Indicador indicadorDeuda;
@@ -38,7 +39,6 @@ public class TestMetodologia {
 	
 	@Before
 	public void initialize() throws ParseException, TokenMgrError{
-		base = new BaseDeDatos("");
 		empresaUno = new Empresa("Facebook", Arrays.asList(new Cuenta("ingresoNeto", 15, LocalDate.parse("2017-05-10")), 
 														 new Cuenta("capitalTotal", 30, LocalDate.parse("2017-05-10")),
 														 new Cuenta("totalLiabilities", 40, LocalDate.parse("2017-05-10")),
@@ -46,35 +46,43 @@ public class TestMetodologia {
 		empresaDos = new Empresa("twitter", Arrays.asList(new Cuenta("ingresoNeto", 10, LocalDate.parse("2017-05-10")),
 														new Cuenta("capitalTotal", 20, LocalDate.parse("2017-05-10")),
 														new Cuenta("totalLiabilities", 30, LocalDate.parse("2017-05-10")),
-														 new Cuenta("longevidad", 5, LocalDate.parse("2017-05-10"))));
+														new Cuenta("longevidad", 5, LocalDate.parse("2017-05-10"))));
+		empresaTres = new Empresa("google", Arrays.asList(new Cuenta("ingresoNeto", 100, LocalDate.parse("2017-05-10")),
+														  new Cuenta("capitalTotal", 200, LocalDate.parse("2017-05-10")),
+														  new Cuenta("totalLiabilities", 300, LocalDate.parse("2017-05-10")),
+														  new Cuenta("longevidad", 10, LocalDate.parse("2017-05-10"))));
+		
+		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan(), 1);
+		condicionDeuda = new CondicionNoTaxativa(1, "debtEquityRatio", new LessThan(), 2);
+		condicionMargen = new CondicionTaxativa(1, "Margen", new Consistente(), "margen");
+		
 		indicadorEquity = new Indicador("shareholdersEquity", "capitalTotal - totalLiabilities");
+		indicadorRoe = new Indicador("roe", "2 * ingresoNeto");
+		indicadorDeuda = new Indicador("debtEquityRatio", "totalLiabilities / shareholdersEquity");
+		indicadorMargen = new Indicador("margen", "(ingresoNeto - 50 - 20 - 15) / ingresoNeto");
+		
+		base = new BaseDeDatos("");
+		base.setEmpresas(Arrays.asList(empresaUno, empresaDos, empresaTres));
 		base.agregarIndicador(indicadorEquity);
-		base.setEmpresas(Arrays.asList(empresaUno, empresaDos));
+		base.agregarIndicador(indicadorRoe);
+		base.agregarIndicador(indicadorDeuda);
+		base.agregarIndicador(indicadorMargen);
 	}
 	
 	@Test
 	public void condicion1Buffet() throws ParseException, TokenMgrError{
-		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan(), 1);
-		indicadorRoe = new Indicador("roe", "2 * ingresoNeto");
-		base.agregarIndicador(indicadorRoe);
 		
 		Assert.assertTrue(condicionRoe.compararEmpresas(empresaUno, empresaDos, base));
 	}
 	
 	@Test
 	public void condicion2Buffet() throws ParseException, TokenMgrError{
-		condicionDeuda = new CondicionNoTaxativa(1, "debtEquityRatio", new LessThan(), 2);
-		indicadorDeuda = new Indicador("debtEquityRatio", "totalLiabilities / shareholdersEquity");
-		base.agregarIndicador(indicadorDeuda);
 		
 		Assert.assertTrue(condicionDeuda.compararEmpresas(empresaUno, empresaDos, base));
 	}
 	
 	@Test
 	public void condicion3Buffet() throws ParseException, TokenMgrError{
-		condicionMargen = new CondicionTaxativa(1, "Margen", new Consistente(), "");
-		indicadorMargen = new Indicador("margen", "(ingresoNeto - 50 - 20 - 15) / ingresoNeto");
-		base.agregarIndicador(indicadorMargen);
 		
 		Assert.assertTrue(condicionMargen.aplicarCondicion(empresaUno, base));
 	}
@@ -83,6 +91,13 @@ public class TestMetodologia {
 	public void condicion4Buffet() throws ParseException, TokenMgrError{
 		condicionLongevidad1 = new CondicionTaxativa(3, "longevidad", new GreaterThan(), 3);
 		
-		Assert.assertTrue(condicionLongevidad1.aplicarCondicion(empresaUno, base));
+		//Assert.assertTrue(condicionLongevidad1.aplicarCondicion(empresaUno, base));
+	}
+	
+	@Test
+	public void metodologiaBuffet() throws ParseException, TokenMgrError{
+		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen), Arrays.asList(condicionRoe, condicionDeuda));
+		
+		Assert.assertEquals("Facebook", metodologiaBuffet.aplicarCondiciones(Arrays.asList(empresaUno, empresaDos, empresaTres), base).get(0).getNombre());
 	}
 }
