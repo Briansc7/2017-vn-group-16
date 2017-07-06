@@ -12,10 +12,6 @@ public class AtributoCalculo extends FactorLiteral{
 		return this.nombre;
 	}
 	
-	public Integer getValor(){
-		return 10;
-	}
-	
 	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
 		if(unaBaseDeDatos.existeIndicador(nombre)){
 			return unaBaseDeDatos.buscarIndicador(nombre).getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
