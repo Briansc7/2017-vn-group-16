@@ -43,6 +43,8 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		//.onClick(() -> this.agregarIndicador());
 		
 	}
+	
+	
 
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
