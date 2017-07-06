@@ -17,6 +17,9 @@ private BaseDeDatos baseDeDatos;
 	
 	private String nombreMetodologiaElegida = "";	
 	private Metodologia metodologiaElegida;
+	
+	
+
 	private CondicionNoTaxativa criterioElegido;
 	
 	private List<String> criterios = Arrays.asList();
@@ -49,6 +52,18 @@ private BaseDeDatos baseDeDatos;
 		}
 	}
 	
+	@Dependencies("criterioElegido")
+	public List<Empresa> getEmpresas() throws IOException {
+			if (criterioElegido == null) {
+				
+				//return baseDeDatos.buscarEmpresas("");
+			} else {		
+				//return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
+			}
+			
+			return null;
+	}
+	
 	public Metodologia getMetodologiaElegida() {
 		return metodologiaElegida;
 	}
@@ -61,5 +76,11 @@ private BaseDeDatos baseDeDatos;
 		return criterioElegido;
 	}
 
-	
+	public void setMetodologiaElegida(Metodologia metodologiaElegida) {
+		this.metodologiaElegida = metodologiaElegida;
+	}
+
+	public void setCriterioElegido(CondicionNoTaxativa criterioElegido) {
+		this.criterioElegido = criterioElegido;
+	}
 }

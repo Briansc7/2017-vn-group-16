@@ -48,6 +48,10 @@ public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewM
 		Selector<Metodologia> selectorCriterio = new Selector<Metodologia>(mainPanel);
 		selectorCriterio.bindItemsToProperty("criterios");
 		selectorCriterio.bindValueToProperty("criterioElegido");
+		
+		List<Empresa> listaEmpresas = new List<Empresa>(mainPanel);
+		listaEmpresas.setHeight(70);
+		listaEmpresas.bindItemsToProperty("empresas");
 	}
 
 }
