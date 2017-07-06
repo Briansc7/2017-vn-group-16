@@ -17,14 +17,16 @@ private BaseDeDatos baseDeDatos;
 	
 	private String nombreMetodologiaElegida = "";	
 	private Metodologia metodologiaElegida;
-	private CondicionNoTaxativa condNoTaxativaElegida;
+	private CondicionNoTaxativa criterioElegido;
+	
+	private List<String> criterios = Arrays.asList();
 	
 	
 	public ConsultarMetodologiasViewModel(String path) throws IOException{
 		
 	}
 	
-	@Dependencies("nombreEmpresaElegida")
+	@Dependencies("nombreMetodologiaElegida")
 	public List<Metodologia> getMetodologias() throws IOException {
 			if (nombreMetodologiaElegida.equals("")) {
 				//return baseDeDatos.buscarMetodologias("");
@@ -35,6 +37,18 @@ private BaseDeDatos baseDeDatos;
 			return null;
 	}
 	
+	@Dependencies("metodologiaElegida")
+	public List<String> getCriterios() {
+		if (this.metodologiaElegida == null) {
+			
+			return criterios;	
+		} else {
+			
+			//criterios = this.metodologiaElegida.getCriterios();
+			return criterios;
+		}
+	}
+	
 	public Metodologia getMetodologiaElegida() {
 		return metodologiaElegida;
 	}
@@ -42,4 +56,10 @@ private BaseDeDatos baseDeDatos;
 	public String getNombreMetodologiaElegida() {
 		return nombreMetodologiaElegida;
 	}
+
+	public CondicionNoTaxativa getCriterioElegido() {
+		return criterioElegido;
+	}
+
+	
 }
