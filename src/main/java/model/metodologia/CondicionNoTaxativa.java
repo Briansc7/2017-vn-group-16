@@ -13,7 +13,7 @@ public class CondicionNoTaxativa extends Condicion{
 	}
 
 	// TODO No taxativa, retorna al ganador
-	public boolean compararEmresas(Empresa empresaUno, Empresa empresaDos, BaseDeDatos baseDeDatos) {
+	public boolean compararEmpresas(Empresa empresaUno, Empresa empresaDos, BaseDeDatos baseDeDatos) {
 		boolean resultado = true;
 		for(int i = 0; i < periodo; i++){
 			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, empresaUno),  
