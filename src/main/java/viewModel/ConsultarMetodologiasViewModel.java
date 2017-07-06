@@ -1,14 +1,17 @@
 package viewModel;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.uqbar.commons.utils.Dependencies;
 
 import model.BaseDeDatos;
+import model.Cuenta;
 import model.Empresa;
 import model.metodologia.CondicionNoTaxativa;
+import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
 
 public class ConsultarMetodologiasViewModel {
@@ -21,6 +24,11 @@ private BaseDeDatos baseDeDatos;
 	private Metodologia metodologiaElegida;
 	
 	
+	
+	private List<Metodologia> listaMetodologias = new ArrayList<Metodologia>();	
+	private List<CondicionTaxativa> condicionesTaxativas = new ArrayList<CondicionTaxativa>();	
+	private List<CondicionNoTaxativa> condicionesNoTaxativas = new ArrayList<CondicionNoTaxativa>();	
+	private Metodologia buffet = new Metodologia("Buffet",condicionesTaxativas,condicionesNoTaxativas);
 
 	private CondicionNoTaxativa criterioElegido;
 	
@@ -28,7 +36,7 @@ private BaseDeDatos baseDeDatos;
 	
 	
 	public ConsultarMetodologiasViewModel(String path) throws IOException{
-		
+		listaMetodologias.add(buffet);
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")
@@ -39,7 +47,7 @@ private BaseDeDatos baseDeDatos;
 				//return baseDeDatos.buscarMetodologias(nombreMetodologiaElegida);
 			}
 			
-			return null;
+			return listaMetodologias;
 	}
 	
 	@Dependencies("metodologiaElegida")
@@ -71,7 +79,7 @@ private BaseDeDatos baseDeDatos;
 	}
 
 	public String getNombreMetodologiaElegida() {
-		return nombreMetodologiaElegida;
+		return metodologiaElegida.getNombre();
 	}
 
 	public CondicionNoTaxativa getCriterioElegido() {

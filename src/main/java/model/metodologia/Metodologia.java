@@ -13,6 +13,10 @@ public class Metodologia {
 	List<CondicionTaxativa> condicionesTaxativas;
 	List<CondicionNoTaxativa> condicionesNoTaxativas;
 	
+	public String getNombre() {
+		return nombre;
+	}
+
 	public Metodologia(String nombre, List<CondicionTaxativa> condicionesTaxativas,
 			List<CondicionNoTaxativa> condicionesNoTaxativas) {
 		
@@ -34,7 +38,7 @@ public class Metodologia {
 		return empresas.stream().filter(empresa -> condicionesTaxativas.stream().allMatch(condicion -> condicion.aplicarCondicion(empresa, baseDeDatos))).collect(Collectors.toList());
 	}
 
-	//TODO Retorna una lista de empresas ordenadas según las condiciones y su peso
+	//TODO Retorna una lista de empresas ordenadas segï¿½n las condiciones y su peso
 	private List<Empresa> aplicarCondicionesNoTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
 		empresas.sort((empresa1, empresa2)-> this.mejorPuntaje(empresa1, empresa2, baseDeDatos));
 		return empresas;
