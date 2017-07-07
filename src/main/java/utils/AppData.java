@@ -13,13 +13,13 @@ import providers.MetodologiaProvider;
 
 public class AppData implements AppDataI{
 	private static AppData instance;
-	private List<MetodologiaProvider> providersMetodologia = new ArrayList<MetodologiaProvider>();//new ArrayList<>();
+	private List<MetodologiaProvider> providersMetodologia = new ArrayList<MetodologiaProvider>();
 	private PathFile inicializacionMetodologias = new PathFileTxtJson("./Archivos del sistema/Metodologias.txt");
 
 	// Singleton
 	private AppData() {
 		providersMetodologia.add(new FileProvider());
-		inicializarMetodologias();
+		//inicializarMetodologias();
 	}
 
 	public synchronized static AppData getInstance() {
