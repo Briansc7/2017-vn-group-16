@@ -56,7 +56,7 @@ public class AgregarMetodologiaViewModel {
 		tiposParaComparar = Arrays.asList("Constante", "Indicador propio", "Indicador de otra empresa");
 		indicadores = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
 		indicadores.add("Longevidad");
-		AppData.getInstance().setInicializacionMetodologias(new PathFileTxtJson("./Archivos del sistema/Metodologias.txt"));
+		//AppData.getInstance().setInicializacionMetodologias(new PathFileTxtJson("./Archivos del sistema/Metodologias.txt"));
 	}
 
 	public void agregarCondicion() {

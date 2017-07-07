@@ -43,8 +43,8 @@ public class Indicador extends Atributo{
 		try {
 			valorAuxiliar = String.valueOf(this.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos));
 		} catch (Exception ex) {
-			valorAuxiliar = "*";
-			//valorAuxiliar = ex.getMessage();
+			//valorAuxiliar = "*";
+			valorAuxiliar = ex.getMessage();
 		}
 		return valorAuxiliar;
 	}
