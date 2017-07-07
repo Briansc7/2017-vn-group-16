@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dtos.PathFile;
+import dtos.PathFileTxtJson;
 import mockObjects.AppDataI;
 import model.metodologia.Metodologia;
 import model.repositories.RepositorioDeMetodologias;
@@ -13,7 +14,7 @@ import providers.MetodologiaProvider;
 public class AppData implements AppDataI{
 	private static AppData instance;
 	private List<MetodologiaProvider> providersMetodologia = new ArrayList<MetodologiaProvider>();//new ArrayList<>();
-	private PathFile inicializacionMetodologias;
+	private PathFile inicializacionMetodologias = new PathFileTxtJson("./Archivos del sistema/Metodologias.txt");
 
 	// Singleton
 	private AppData() {
@@ -27,7 +28,8 @@ public class AppData implements AppDataI{
 	}
 
 	public void guardarMetodologias(List<Metodologia> metodologias) {
-		new Archivo(inicializacionMetodologias.getPathFile()).archivarObjetos(metodologias);
+		Archivo archivo = new Archivo(inicializacionMetodologias.getPathFile());
+		archivo.archivarObjetos(metodologias);
 		;
 	}
 
