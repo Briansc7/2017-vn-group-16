@@ -15,6 +15,9 @@ import exceptions.EseYaExisteException;
 import exceptions.NoSeEncuentraException;
 import mockObjects.MockAppData;
 import model.repositories.RepositorioDeMetodologias;
+import utils.AppData;
+import utils.FilesManager;
+import utils.JsonCreator;
 import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
@@ -49,6 +52,22 @@ public class RepositorioDeMetodologiasTest {
 	//TODO
 	@Test
 	public void agregarMetodologiasGeneraArchivo() {
+		AppData realAppData = AppData.getInstance();
+		String path = "./Archivos de prueba/ArchivoDePruebaParaTestsDeGrabacion.txt";
+		FilesManager file = new FilesManager(path);
+		repositorio.limpiarRepositorio();
+		
+		repositorio.setAppData(realAppData);
+		realAppData.setInicializacionMetodologias(
+				new PathFileTxtJson(path));
+		
+		repositorio.agregarMetodologias(metodologias);
+		String contenidoDelArchivo = file.leerArchivo();
+		file.borrarArchivo();
+		
+		//System.out.println(contenidoDelArchivo);
+		
+		assertEquals(contenidoDelArchivo, new JsonCreator().getJson(metodologias));
 	}
 
 
