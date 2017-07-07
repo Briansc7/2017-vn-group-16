@@ -19,6 +19,7 @@ public class AppData implements AppDataI{
 	// Singleton
 	private AppData() {
 		providersMetodologia.add(new FileProvider());
+		inicializarMetodologias();
 	}
 
 	public synchronized static AppData getInstance() {
@@ -30,7 +31,6 @@ public class AppData implements AppDataI{
 	public void guardarMetodologias(List<Metodologia> metodologias) {
 		Archivo archivo = new Archivo(inicializacionMetodologias.getPathFile());
 		archivo.archivarObjetos(metodologias);
-		;
 	}
 
 	public void inicializarMetodologias() {
