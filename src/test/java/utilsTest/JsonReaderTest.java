@@ -43,7 +43,7 @@ public class JsonReaderTest {
 
 		assertEquals(jsonObject.getArtibutoUno(),"StringUno");
 	}
-
+	
 	@Test(expected = ErrorSintacticoEnElJSONException.class)
 	public void elJsonDeUnObjetoMalHechoTiraError() {
 		String jsonStringMalo = "{\"artibutoUno\"\"StringUno\"\"artibutoDos\":27,\"artibutlista\":[1,2,3,4,5,6,7]}";

@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import exceptions.NoSePuedeLeerException;
 import exceptions.RutaDeArchivoInvalidaException;
 
 public class FilesManager {
@@ -36,7 +37,7 @@ public class FilesManager {
 				contenidoDelArchivo += (char) caracter;
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new RuntimeException("Error en la lectura del archivo");
+			throw new NoSePuedeLeerException("Error en la lectura del archivo");
 		}
 
 		try {
@@ -57,7 +58,7 @@ public class FilesManager {
 			file = new FileWriter(path);
 		} catch (IOException e) {
 			e.printStackTrace();
-			throw new RutaDeArchivoInvalidaException("Archivo no encontrado");
+			throw new RutaDeArchivoInvalidaException("La ruta \"" + path + "\" es invalida");
 		}
 
 		PrintWriter pw = new PrintWriter(file);
