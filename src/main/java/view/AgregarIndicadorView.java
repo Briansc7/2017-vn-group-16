@@ -11,7 +11,6 @@ import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.MessageBox.Type;
 import org.uqbar.arena.windows.WindowOwner;
 
-import model.BaseDeDatos;
 import parser.ParseException;
 import parser.TokenMgrError;
 import viewModel.AgregarIndicadorViewModel;

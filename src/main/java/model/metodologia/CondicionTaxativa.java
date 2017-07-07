@@ -1,12 +1,14 @@
 package model.metodologia;
 
+import java.math.BigDecimal;
+
 import model.BaseDeDatos;
 import model.Empresa;
 import model.metodologia.condiciones.BooleanCondition;
 
 //Comparar contra una constante u otro indicador de la misma empresa
 public class CondicionTaxativa extends Condicion {
-	private Integer valorAComparar;// Depende del tipo de comparacion, es la
+	protected BigDecimal valorAComparar;// Depende del tipo de comparacion, es la
 									// constante
 	private String indicadorAComparar;// Nombre de otro con el que se compara el
 										// que hay que optimizar
@@ -14,7 +16,7 @@ public class CondicionTaxativa extends Condicion {
 	// Dos constructores, si se hace con un Ineger se sabe que es un valor
 	// contra el que se compara
 	public CondicionTaxativa(Integer periodo, String indicadorAOptimizar,
-			BooleanCondition criterioComparacion, Integer _valorAComparar) {
+			BooleanCondition criterioComparacion, BigDecimal _valorAComparar) {
 
 		super(periodo, indicadorAOptimizar, criterioComparacion);
 		valorAComparar = _valorAComparar;
@@ -32,7 +34,7 @@ public class CondicionTaxativa extends Condicion {
 	public boolean aplicarCondicion(Empresa unaEmpresa, BaseDeDatos baseDeDatos) {
 		boolean resultado = true;
 		for(int i = 0; i < periodo-1; i++){
-			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, unaEmpresa), baseDeDatos.valorDe(indicadorAComparar, 2017-(i+1), unaEmpresa))))
+			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, unaEmpresa), baseDeDatos.valorDe(indicadorAOptimizar, 2017-(i+1), unaEmpresa))))
 				resultado = false;
 		}
 		return resultado;

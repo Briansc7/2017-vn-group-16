@@ -1,5 +1,7 @@
 package model;
 
+import java.math.BigDecimal;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +38,10 @@ public class Empresa {
 			throw new NoExisteAtributoException("No existe la cuenta: " + nombre);
 		}
 		return this.primero(nombre, periodo).get();
+	}
+	
+	public BigDecimal longevidad() {
+		return new BigDecimal(Year.now().getValue() - this.getPeriodos().stream().min((a, b) -> a.compareTo(b)).get());
 	}
 	
 	@Override

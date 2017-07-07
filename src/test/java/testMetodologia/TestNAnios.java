@@ -1,9 +1,6 @@
 package testMetodologia;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -14,7 +11,7 @@ import model.BaseDeDatos;
 import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
-import model.metodologia.condiciones.Consistente;
+import model.metodologia.condiciones.GreaterAndEqualThan;
 import model.metodologia.condiciones.GreaterThan;
 import model.metodologia.condiciones.LessThan;
 import parser.ParseException;
@@ -36,7 +33,7 @@ public class TestNAnios {
 		
 		condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
 		condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
-		condicionMargen = new CondicionTaxativa(2, "Margen", new Consistente(), "margen");
+		condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
 	}
 	
 	@Test
@@ -48,8 +45,6 @@ public class TestNAnios {
 	
 	@Test
 	public void condicionUnoBuffet() throws ParseException, TokenMgrError{
-		BigDecimal b = base.valorDe("margen", 2017, base.empresaLlamada("facebook")).round(new MathContext(2, RoundingMode.CEILING));
-		System.out.println(b);
 		
 	}
 }

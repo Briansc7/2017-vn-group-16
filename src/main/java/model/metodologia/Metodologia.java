@@ -1,17 +1,20 @@
 package model.metodologia;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import model.BaseDeDatos;
 import model.Empresa;
-import scala.collection.parallel.ParIterableLike.Collect;
+import model.metodologia.condiciones.LessThan;
 
 public class Metodologia {
 	String nombre;
 	List<CondicionTaxativa> condicionesTaxativas;
 	List<CondicionNoTaxativa> condicionesNoTaxativas;
+	List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	
 	public String getNombre() {
 		return nombre;

@@ -14,3 +14,4 @@ indicadorM = indicadorM
 indicadorN = (((indicadorN + 1000) / 2) * 3)+5
 indicadorO = 2*30
 indicadorP = 3*2
+indicadorQ = ebitda *10

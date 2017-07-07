@@ -15,6 +15,7 @@ public class AgregarIndicadorViewModel {
 	private BaseDeDatos baseDeDatos;
 	
 	public AgregarIndicadorViewModel(){
+		this.baseDeDatos = new BaseDeDatos("");
 	}
 	
 	public void verificarIndicador() throws ParseException, TokenMgrError, IOException{
