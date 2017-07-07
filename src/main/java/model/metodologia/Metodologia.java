@@ -19,7 +19,16 @@ public class Metodologia {
 	public String getNombre() {
 		return nombre;
 	}
-
+	
+	@Override
+	public boolean equals(Object o){
+		if(!o.getClass().equals(Metodologia.class))
+			return false;
+		
+		Metodologia other = (Metodologia) o;
+        return other.getNombre().equals(getNombre());
+	}
+	
 	public Metodologia(String nombre, List<CondicionTaxativa> condicionesTaxativas,
 			List<CondicionNoTaxativa> condicionesNoTaxativas) {
 		

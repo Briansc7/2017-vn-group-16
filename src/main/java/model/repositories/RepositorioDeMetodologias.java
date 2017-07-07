@@ -43,7 +43,6 @@ public class RepositorioDeMetodologias {
 		archivarRepositorio();
 	}
 	
-	//TODO implementar .equals() en metodologia
 	private void comprobarNombre(Metodologia metodologia) {
 		if(metodologias.contains(metodologia))
 				throw new EseYaExisteException("Ya existe una metodologia con el nombre: "
