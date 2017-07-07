@@ -20,6 +20,7 @@ import model.metodologia.TaxativaLongevidad;
 import model.metodologia.condiciones.GreaterAndEqualThan;
 import model.metodologia.condiciones.GreaterThan;
 import model.metodologia.condiciones.LessThan;
+import model.repositories.RepositorioDeMetodologias;
 
 @Observable
 public class ConsultarMetodologiasViewModel {
@@ -38,21 +39,24 @@ private BaseDeDatos baseDeDatos;
 	
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
 
-	
+	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
 	
 	public ConsultarMetodologiasViewModel(String path) throws IOException{
 		baseDeDatos = new BaseDeDatos(path);
 		baseDeDatos.leerEmpresas();
 		baseDeDatos.leerIndicadores();
-		metodologias.add(buffet);
-		//RepositorioDeMetodologias.getInstance().agregarMetodologia(buffet);
+		//metodologias.add(buffet);
+		  
+		 repositorio.agregarMetodologia(buffet);
+		//System.out.println(repositorio.size());
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")
 	public List<Metodologia> getMetodologias() {
-			
-			return this.metodologias.stream().filter(metodologia -> metodologia.getNombre().contains(nombreMetodologiaElegida)).collect(Collectors.toList());
+			//return repositorio.getMetodologias();
+		return repositorio.filtrarPorNombre(nombreMetodologiaElegida);
+			//return this.metodologias.stream().filter(metodologia -> metodologia.getNombre().contains(nombreMetodologiaElegida)).collect(Collectors.toList());
 			
 	}
 	

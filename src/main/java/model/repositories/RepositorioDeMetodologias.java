@@ -12,7 +12,7 @@ import model.metodologia.Metodologia;
 import utils.AppData;
 
 public class RepositorioDeMetodologias {
-	private static RepositorioDeMetodologias instance;
+	private static RepositorioDeMetodologias instance = null;
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();
 	private AppDataI appData = AppData.getInstance();
 	
@@ -23,7 +23,7 @@ public class RepositorioDeMetodologias {
 	
 	public synchronized static RepositorioDeMetodologias getInstance(){
 		if(instance == null)
-			return new RepositorioDeMetodologias();
+		return new RepositorioDeMetodologias();
 		return instance;
 	}
 	
@@ -54,10 +54,10 @@ public class RepositorioDeMetodologias {
 				metodologia -> metodologia.getNombre().contains(nombre))
 				.collect(Collectors.toList());
 		
-		if(_metodologias.isEmpty())
-			throw new NoSeEncuentraException("La metodolog�a con nombre: \""
+		/*if(_metodologias.isEmpty())
+			throw new NoSeEncuentraException("La metodologia con nombre: \""
 						+ nombre
-						+ "\" no se encuentra en el repositprio");
+						+ "\" no se encuentra en el repositprio");*/
 
 		return _metodologias;
 	}

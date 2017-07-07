@@ -38,6 +38,7 @@ public class AgregarMetodologiaViewModel {
 	private String valor;
 	private String nombre;
 	private BaseDeDatos baseDeDatos = new BaseDeDatos("");
+	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
 	private List<CondicionTaxativa> condicionesTaxativas = new ArrayList<CondicionTaxativa>();
 	private List<CondicionNoTaxativa> condicionesNoTaxativas = new ArrayList<CondicionNoTaxativa>();
@@ -116,7 +117,9 @@ public class AgregarMetodologiaViewModel {
 		
 		Metodologia unaMetodologia = new Metodologia(nombre, condicionesTaxativas, condicionesNoTaxativas);
 		
-		RepositorioDeMetodologias.getInstance().agregarMetodologia(unaMetodologia);
+		repositorio.agregarMetodologia(unaMetodologia);
+		
+		System.out.println(repositorio.size());
 		
 	}
 	

@@ -96,8 +96,8 @@ public class RepositorioDeMetodologiasTest {
 		repositorio.agregarMetodologia(metodologia);
 	}
 	
-	@Test(expected = NoSeEncuentraException.class)
+	/*@Test(expected = NoSeEncuentraException.class)
 	public void filtrarPorUnNombreQueNoExisteDaError() {
 		repositorio.filtrarPorNombre("404");
-	}
+	}*/
 }
