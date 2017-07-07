@@ -119,7 +119,6 @@ public class AgregarMetodologiaViewModel {
 		
 		repositorio.agregarMetodologia(unaMetodologia);
 		
-		System.out.println(repositorio.size());
 		
 	}
 	

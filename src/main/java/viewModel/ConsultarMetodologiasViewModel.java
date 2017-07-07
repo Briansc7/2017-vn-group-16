@@ -30,12 +30,6 @@ private BaseDeDatos baseDeDatos;
 	private String nombreMetodologiaElegida = "";	
 	private Metodologia metodologiaElegida;
 	
-	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
-	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
-	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
-	private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
-	private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
-	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidad1), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidad2));	
 	
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
 
@@ -46,17 +40,12 @@ private BaseDeDatos baseDeDatos;
 		baseDeDatos = new BaseDeDatos(path);
 		baseDeDatos.leerEmpresas();
 		baseDeDatos.leerIndicadores();
-		//metodologias.add(buffet);
-		  
-		 repositorio.agregarMetodologia(buffet);
-		//System.out.println(repositorio.size());
+		
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")
 	public List<Metodologia> getMetodologias() {
-			//return repositorio.getMetodologias();
 		return repositorio.filtrarPorNombre(nombreMetodologiaElegida);
-			//return this.metodologias.stream().filter(metodologia -> metodologia.getNombre().contains(nombreMetodologiaElegida)).collect(Collectors.toList());
 			
 	}
 	

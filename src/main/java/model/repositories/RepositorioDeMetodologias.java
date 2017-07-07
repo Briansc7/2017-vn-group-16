@@ -1,6 +1,8 @@
 package model.repositories;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,22 +10,40 @@ import java.util.stream.Collectors;
 import exceptions.EseYaExisteException;
 import exceptions.NoSeEncuentraException;
 import mockObjects.AppDataI;
+import model.metodologia.CondicionNoTaxativa;
+import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
+import model.metodologia.NoTaxativaLongevidad;
+import model.metodologia.TaxativaLongevidad;
+import model.metodologia.condiciones.GreaterAndEqualThan;
+import model.metodologia.condiciones.GreaterThan;
+import model.metodologia.condiciones.LessThan;
 import utils.AppData;
 
 public class RepositorioDeMetodologias {
-	private static RepositorioDeMetodologias instance = null;
+	private static RepositorioDeMetodologias instance = new RepositorioDeMetodologias();
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();
 	private AppDataI appData = AppData.getInstance();
+	
+	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
+	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
+	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
+	private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
+	private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
+	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidad1), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidad2));	
+	
 	
 	
 	//Singleton
 	private RepositorioDeMetodologias(){
+		
+		metodologias.add(buffet);
+		archivarRepositorio();
 	}
 	
 	public synchronized static RepositorioDeMetodologias getInstance(){
 		if(instance == null)
-		return new RepositorioDeMetodologias();
+			return new RepositorioDeMetodologias();
 		return instance;
 	}
 	
