@@ -12,7 +12,7 @@ import providers.MetodologiaProvider;
 
 public class AppData implements AppDataI{
 	private static AppData instance;
-	private List<MetodologiaProvider> providersMetodologia = new ArrayList<>();
+	private List<MetodologiaProvider> providersMetodologia = new ArrayList<MetodologiaProvider>();//new ArrayList<>();
 	private PathFile inicializacionMetodologias;
 
 	// Singleton

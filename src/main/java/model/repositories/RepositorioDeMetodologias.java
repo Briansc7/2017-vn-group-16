@@ -13,7 +13,7 @@ import utils.AppData;
 
 public class RepositorioDeMetodologias {
 	private static RepositorioDeMetodologias instance;
-	private List<Metodologia> metodologias = new ArrayList<>();;
+	private List<Metodologia> metodologias = new ArrayList<Metodologia>();
 	private AppDataI appData = AppData.getInstance();
 	
 	
@@ -47,19 +47,19 @@ public class RepositorioDeMetodologias {
 	}
 	
 	// Filtrar metodologias del repositorio
-	public Metodologia filtrarPorNombre(String nombre) {
+	public List<Metodologia> filtrarPorNombre(String nombre) {
 		List<Metodologia> _metodologias;
 		
 		_metodologias = metodologias.stream().filter(
-				metodologia -> nombre.equals(metodologia.getNombre()))
+				metodologia -> metodologia.getNombre().contains(nombre))
 				.collect(Collectors.toList());
 		
 		if(_metodologias.isEmpty())
-			throw new NoSeEncuentraException("La metodología con nombre: \""
+			throw new NoSeEncuentraException("La metodologï¿½a con nombre: \""
 						+ nombre
 						+ "\" no se encuentra en el repositprio");
 
-		return _metodologias.get(0);
+		return _metodologias;
 	}
 
 	// Devuelven una lista ordenada de determinada manera, sin alterar las

@@ -37,23 +37,18 @@ public class BaseDeDatos {
 	private String path;
 	private String pathIndicadores = "./Archivos del sistema/indicadores.txt";
 	
-	
-
-	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
-	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
-	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
-	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen), Arrays.asList(condicionRoe, condicionDeuda));;
-	
-	public Metodologia getBuffet() {
-		return buffet;
-	}
-	
 	public BaseDeDatos(String path) {
 		this.path = path;
 		
 	}
 
 	public List<Empresa> buscarEmpresas(String nombre) /*throws IOException */{
+		return this.empresas.stream()
+				.filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase()))
+				.collect(Collectors.toList());
+	}
+	
+	public List<Empresa> buscarMetodologias(String nombre) /*throws IOException */{
 		return this.empresas.stream()
 				.filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase()))
 				.collect(Collectors.toList());

@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.uqbar.commons.utils.Dependencies;
+import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
 import model.Cuenta;
@@ -16,17 +17,20 @@ import model.metodologia.Metodologia;
 import model.metodologia.condiciones.GreaterAndEqualThan;
 import model.metodologia.condiciones.GreaterThan;
 import model.metodologia.condiciones.LessThan;
+import model.repositories.RepositorioDeMetodologias;
 
+@Observable
 public class ConsultarMetodologiasViewModel {
 	
 private BaseDeDatos baseDeDatos;
 	
 	private String nombreMetodologiaElegida = "";	
-	
-
 	private Metodologia metodologiaElegida;
 	
-		
+	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
+	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
+	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
+	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen), Arrays.asList(condicionRoe, condicionDeuda));	
 
 	private List<Metodologia> listaMetodologias = new ArrayList<Metodologia>();	
 
@@ -37,18 +41,14 @@ private BaseDeDatos baseDeDatos;
 	
 	public ConsultarMetodologiasViewModel(String path) throws IOException{
 		baseDeDatos = new BaseDeDatos(path);
-		listaMetodologias.add(baseDeDatos.getBuffet());
+		//listaMetodologias.add(buffet);
+		RepositorioDeMetodologias.getInstance().agregarMetodologia(buffet);
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")
-	public List<Metodologia> getMetodologias() throws IOException {
-			if (nombreMetodologiaElegida.equals("")) {
-				//return baseDeDatos.buscarMetodologias("");
-			} else {		
-				//return baseDeDatos.buscarMetodologias(nombreMetodologiaElegida);
-			}
-			
-			return listaMetodologias;
+	public List<Metodologia> getMetodologias() {
+			return RepositorioDeMetodologias.getInstance().filtrarPorNombre(nombreMetodologiaElegida);
+			//return listaMetodologias;
 	}
 	/*
 	@Dependencies("metodologiaElegida")
@@ -80,7 +80,7 @@ private BaseDeDatos baseDeDatos;
 	}
 
 	public String getNombreMetodologiaElegida() {
-		return metodologiaElegida.getNombre();
+		return nombreMetodologiaElegida;
 	}
 /*
 	public CondicionNoTaxativa getCriterioElegido() {
