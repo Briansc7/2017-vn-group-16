@@ -1,17 +1,19 @@
 package componentesMatematicos;
 
+import java.math.BigDecimal;
+
 import model.BaseDeDatos;
 import model.Empresa;
 
 public class FactorNumerico extends Factor {
 	
-	public Integer valor;
+	public BigDecimal valor;
 	
-	public FactorNumerico(Integer unValor){
+	public FactorNumerico(BigDecimal unValor){
 		this.valor = unValor;
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
+	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
 		return valor;
 	}
 }

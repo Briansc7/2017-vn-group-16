@@ -1,9 +1,10 @@
 package model.metodologia.condiciones;
 
+import java.math.BigDecimal;
+
 public class Consistente implements BooleanCondition{
-	public boolean comparar(Integer valorUno, Integer valorDos){
-		float valor1 = valorUno;
-		float valor2 = valorDos;
-		return (valor1/valor2) >= valor1*0.9 && (valor1/valor2) <= valor1*1.1;
+	public boolean comparar(BigDecimal valorUno, BigDecimal valorDos){
+		return valorDos.compareTo(valorUno.multiply(BigDecimal.valueOf(0.9))) >= 0 && 
+				valorDos.compareTo(valorUno.multiply(BigDecimal.valueOf(1.1))) <= 0;
 	}
 }

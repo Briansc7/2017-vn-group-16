@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -55,7 +56,7 @@ public class BaseDeDatos {
 		throw new NoExisteAtributoException("No existe el indicador: " + nombre);
 	}
 	
-	public Integer valorDe(String nombre, Integer periodo, Empresa empresa){
+	public BigDecimal valorDe(String nombre, Integer periodo, Empresa empresa){
 		if(this.existeIndicador(nombre)){
 			return this.buscarIndicador(nombre).getValor(periodo, empresa, this);
 		} else {
@@ -118,10 +119,10 @@ public class BaseDeDatos {
 		
 		 if(this.existeEmpresa(p[0].trim())){
 		 this.primerEmpresa(p[0].trim()).get().getCuentas().add(new Cuenta(p[1].trim(),
-				 Integer.parseInt(p[2].trim()), fecha));
+				 new BigDecimal(p[2].trim()), fecha));
 		 }
 		 else{
-			 this.empresas.add(new Empresa(p[0].trim(), Arrays.asList(new Cuenta(p[1].trim(), Integer.parseInt(p[2].trim()), fecha))));
+			 this.empresas.add(new Empresa(p[0].trim(), Arrays.asList(new Cuenta(p[1].trim(), new BigDecimal(p[2].trim()), fecha))));
 		 }
 	}
 

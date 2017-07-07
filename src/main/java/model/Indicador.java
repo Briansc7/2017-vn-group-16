@@ -1,5 +1,7 @@
 package model;
 
+import java.math.BigDecimal;
+
 import org.uqbar.commons.utils.Observable;
 
 import componentesMatematicos.Expresion;
@@ -32,7 +34,7 @@ public class Indicador extends Atributo{
 		return this.nombre.equals(otroNombre);
 	}
 	
-	public Integer getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
+	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
 		return this.expresion.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
 	}
 	

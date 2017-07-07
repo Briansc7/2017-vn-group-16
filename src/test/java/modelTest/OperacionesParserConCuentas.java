@@ -1,6 +1,7 @@
 package modelTest;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -23,7 +24,7 @@ public class OperacionesParserConCuentas {
 	
 	@Before
 	public void initialize(){
-		empresa = new Empresa("Facebook", Arrays.asList(new Cuenta("ebitda", 500, LocalDate.parse("2015-01-21"))));
+		empresa = new Empresa("Facebook", Arrays.asList(new Cuenta("ebitda", new BigDecimal(500), LocalDate.parse("2015-01-21"))));
 		baseDeDatos = new BaseDeDatos("");
 	}
 	
@@ -31,7 +32,7 @@ public class OperacionesParserConCuentas {
 	public void leerUnaCuenta() throws NumberFormatException, ParseException, TokenMgrError, NullPointerException, IOException, parser.ParseException, parser.TokenMgrError{
 		indicadorA = new Indicador("suma", "Ebitda");//fb ebitda 2015
 		
-		Assert.assertEquals(new Integer(500), indicadorA.getValor(2015, empresa, baseDeDatos));
+		Assert.assertEquals(new BigDecimal(500), indicadorA.getValor(2015, empresa, baseDeDatos));
 	}
 	
 	@Test
@@ -41,8 +42,8 @@ public class OperacionesParserConCuentas {
 		baseDeDatos.agregarIndicador(indicadorA);
 		baseDeDatos.agregarIndicador(indicadorB);
 		
-		Assert.assertEquals(new Integer(1000), indicadorA.getValor(2015, empresa, baseDeDatos));
-		Assert.assertEquals(new Integer(300), indicadorB.getValor(2015, empresa, baseDeDatos));
+		Assert.assertEquals(new BigDecimal(1000), indicadorA.getValor(2015, empresa, baseDeDatos));
+		Assert.assertEquals(new BigDecimal(300), indicadorB.getValor(2015, empresa, baseDeDatos));
 	}
 	
 }

@@ -1,5 +1,6 @@
 package testMetodologia;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Arrays;
 
@@ -39,18 +40,18 @@ public class TestUnAnio {
 	
 	@Before
 	public void initialize() throws ParseException, TokenMgrError{
-		empresaUno = new Empresa("Facebook", Arrays.asList(new Cuenta("ingresoNeto", 15, LocalDate.parse("2017-05-10")), 
-														   new Cuenta("capitalTotal", 30, LocalDate.parse("2017-05-10")),
-														   new Cuenta("totalLiabilities", 40, LocalDate.parse("2017-05-10")),
-														   new Cuenta("longevidad", 7, LocalDate.parse("2017-05-10"))));
-		empresaDos = new Empresa("twitter", Arrays.asList(new Cuenta("ingresoNeto", 10, LocalDate.parse("2017-05-10")),
-														  new Cuenta("capitalTotal", 20, LocalDate.parse("2017-05-10")),
-														  new Cuenta("totalLiabilities", 30, LocalDate.parse("2017-05-10")),
-														  new Cuenta("longevidad", 5, LocalDate.parse("2017-05-10"))));
-		empresaTres = new Empresa("google", Arrays.asList(new Cuenta("ingresoNeto", 100, LocalDate.parse("2017-05-10")),
-														  new Cuenta("capitalTotal", 200, LocalDate.parse("2017-05-10")),
-														  new Cuenta("totalLiabilities", 300, LocalDate.parse("2017-05-10")),
-														  new Cuenta("longevidad", 10, LocalDate.parse("2017-05-10"))));
+		empresaUno = new Empresa("Facebook", Arrays.asList(new Cuenta("ingresoNeto", new BigDecimal(15), LocalDate.parse("2017-05-10")), 
+														   new Cuenta("capitalTotal", new BigDecimal(30), LocalDate.parse("2017-05-10")),
+														   new Cuenta("totalLiabilities", new BigDecimal(40), LocalDate.parse("2017-05-10")),
+														   new Cuenta("longevidad", new BigDecimal(7), LocalDate.parse("2017-05-10"))));
+		empresaDos = new Empresa("twitter", Arrays.asList(new Cuenta("ingresoNeto", new BigDecimal(10), LocalDate.parse("2017-05-10")),
+														  new Cuenta("capitalTotal", new BigDecimal(20), LocalDate.parse("2017-05-10")),
+														  new Cuenta("totalLiabilities", new BigDecimal(30), LocalDate.parse("2017-05-10")),
+														  new Cuenta("longevidad", new BigDecimal(5), LocalDate.parse("2017-05-10"))));
+		empresaTres = new Empresa("google", Arrays.asList(new Cuenta("ingresoNeto", new BigDecimal(100), LocalDate.parse("2017-05-10")),
+														  new Cuenta("capitalTotal", new BigDecimal(200), LocalDate.parse("2017-05-10")),
+														  new Cuenta("totalLiabilities", new BigDecimal(300), LocalDate.parse("2017-05-10")),
+														  new Cuenta("longevidad", new BigDecimal(10), LocalDate.parse("2017-05-10"))));
 		
 		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan(), 1);
 		condicionDeuda = new CondicionNoTaxativa(1, "debtEquityRatio", new LessThan(), 2);

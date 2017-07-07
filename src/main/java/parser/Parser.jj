@@ -8,8 +8,7 @@ package parser;
 
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 import componentesMatematicos.AtributoCalculo;
 import componentesMatematicos.Expresion;
@@ -18,9 +17,6 @@ import componentesMatematicos.FactorNumerico;
 import componentesMatematicos.Producto;
 import componentesMatematicos.Resta;
 import componentesMatematicos.Suma;
-
-import model.Empresa;
-import model.BaseDeDatos;
 
 public class Parser {
 	
@@ -85,7 +81,7 @@ Expresion Primary() :
 {
 	t=<NUMERO>
 	{ 
-		FactorNumerico miNumero = new FactorNumerico(Integer.parseInt(t.image));
+		FactorNumerico miNumero = new FactorNumerico(new BigDecimal(t.image));
 		{ return miNumero; }
 	}
 	|

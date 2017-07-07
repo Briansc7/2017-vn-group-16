@@ -1,19 +1,17 @@
 package model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.Year;
 
 import org.uqbar.commons.utils.Observable;
-
-import model.Atributo;
 
 @Observable
 public class Cuenta extends Atributo{
 	
-	private Integer valor;
+	private BigDecimal valor;
 	private LocalDate fecha;
 
-	public Cuenta(String nombre, Integer valor, LocalDate fecha){
+	public Cuenta(String nombre, BigDecimal valor, LocalDate fecha){
 		super(nombre);
 		this.valor = valor;
 		this.fecha = fecha;
@@ -23,7 +21,7 @@ public class Cuenta extends Atributo{
 		return nombre;
 	}
 	
-	public Integer getValor() {
+	public BigDecimal getValor() {
 		return valor;
 	}
 	
@@ -35,7 +33,7 @@ public class Cuenta extends Atributo{
 		return this.fecha.getYear();
 	}
 	
-	public void setValor(Integer valor) {
+	public void setValor(BigDecimal valor) {
 		this.valor = valor;
 	}
 	

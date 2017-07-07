@@ -1,6 +1,9 @@
 package testMetodologia;
 
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Arrays;
 
 import org.junit.Assert;
@@ -39,12 +42,14 @@ public class TestNAnios {
 	@Test
 	public void metodologiaBuffet() throws ParseException, TokenMgrError{
 		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen), Arrays.asList(condicionRoe, condicionDeuda));
-
+		//System.out.println(metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).size());
 		Assert.assertEquals("facebook", metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).get(0).getNombre());
 	}
 	
 	@Test
 	public void condicionUnoBuffet() throws ParseException, TokenMgrError{
-		//System.out.println(base.buscarIndicador("margen").getValor(2017, base.empresaLlamada("facebook"), base));
+		BigDecimal b = base.valorDe("margen", 2017, base.empresaLlamada("facebook")).round(new MathContext(2, RoundingMode.CEILING));
+		System.out.println(b);
+		
 	}
 }
