@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 
 import org.junit.Test;
 
-import exceptions.ErrorSintacticoEnElJSONExeption;
+import exceptions.ErrorSintacticoEnElJSONException;
 import mockObjects.JsonObject;
 import utils.JsonReader;
 
@@ -44,14 +44,14 @@ public class JsonReaderTest {
 		assertEquals(jsonObject.getArtibutoUno(),"StringUno");
 	}
 
-	@Test(expected = ErrorSintacticoEnElJSONExeption.class)
+	@Test(expected = ErrorSintacticoEnElJSONException.class)
 	public void elJsonDeUnObjetoMalHechoTiraError() {
 		String jsonStringMalo = "{\"artibutoUno\"\"StringUno\"\"artibutoDos\":27,\"artibutlista\":[1,2,3,4,5,6,7]}";
 		Type tipoObjeto = new TypeToken<JsonObject>() {}.getType();
 		new JsonReader<JsonObject>(tipoObjeto).obtenerUnObjeto(jsonStringMalo);
 	}
 	
-	@Test(expected = ErrorSintacticoEnElJSONExeption.class)
+	@Test(expected = ErrorSintacticoEnElJSONException.class)
 	public void elJsonDeObjetosMalHechoTiraError() {
 		String jsonStringMalo = "{\"artibutoUno\"\"StringUno\"\"artibutoDos\":27,\"artibutlista\":[1,2,3,4,5,6,7]}";
 		Type tipoLista = new TypeToken<List<JsonObject>>() {}.getType();

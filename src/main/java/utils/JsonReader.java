@@ -7,7 +7,7 @@ import java.util.List;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-import exceptions.ErrorSintacticoEnElJSONExeption;
+import exceptions.ErrorSintacticoEnElJSONException;
 
 public class JsonReader <T>{
 	Type objectsType;
@@ -24,7 +24,7 @@ public class JsonReader <T>{
 			return gson.fromJson(jsonString, objectsType);
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
-			throw new ErrorSintacticoEnElJSONExeption("Error Sintactico en el JSON: " + jsonString);
+			throw new ErrorSintacticoEnElJSONException("Error Sintactico en el JSON: " + jsonString);
 		}
 	}
 	
@@ -35,7 +35,7 @@ public class JsonReader <T>{
 			return gson.fromJson(jsonString, objectsType);
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
-			throw new ErrorSintacticoEnElJSONExeption("Error Sintactico en el JSON: " + jsonString);
+			throw new ErrorSintacticoEnElJSONException("Error Sintactico en el JSON: " + jsonString);
 		}
 	}
 }
