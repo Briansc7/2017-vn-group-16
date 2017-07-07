@@ -10,6 +10,7 @@ import org.uqbar.arena.widgets.TextBox;
 import org.uqbar.arena.windows.WindowOwner;
 
 import model.Empresa;
+import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.Metodologia;
 
 import org.uqbar.arena.windows.Dialog;
@@ -45,7 +46,7 @@ public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewM
 		listaMetodologias.bindValueToProperty("metodologiaElegida");
 		
 		new Label(mainPanel).setText("Seleccione el Criterio por el cual ordenar la lista de empresas");
-		Selector<Metodologia> selectorCriterio = new Selector<Metodologia>(mainPanel);
+		Selector<CondicionNoTaxativa> selectorCriterio = new Selector<CondicionNoTaxativa>(mainPanel);
 		selectorCriterio.bindItemsToProperty("criterios");
 		selectorCriterio.bindValueToProperty("criterioElegido");
 		

@@ -28,4 +28,9 @@ public class CondicionNoTaxativa extends Condicion{
 	public Integer getPesoEstimado() {
 		return pesoEstimado;
 	}
+	
+	@Override
+	public String toString(){
+		return "Periodo: "+periodo+" Indicador: "+indicadorAOptimizar;
+	}
 }
