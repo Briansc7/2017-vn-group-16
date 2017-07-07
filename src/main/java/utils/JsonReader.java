@@ -1,30 +1,41 @@
 package utils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.lang.reflect.Type;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 import exceptions.ErrorSintacticoEnElJSONExeption;
 
-public class JsonReader{
+public class JsonReader <T>{
+	Type objectsType;
 	
-	//La unica manera que se me ocurrio de hacerlo para que soporte de todo
-	public <T> List<T> obtenerMetodologias(String jsonString) {
-		List<T> objetos = new ArrayList<T>();
+	public JsonReader(Type _objectsType){
+		objectsType = _objectsType;
+	}
+
+	//Lo mejor que pude hacer para hacerlo generico
+	public List<T> obtenerObjetos(String jsonString) {
 		Gson gson = new Gson();
 		
-		
 		try {
-			
+			return gson.fromJson(jsonString, objectsType);
 		} catch (JsonSyntaxException e) {
 			e.printStackTrace();
 			throw new ErrorSintacticoEnElJSONExeption("Error Sintactico en el JSON: " + jsonString);
 		}
-
-		return objetos;
+	}
+	
+	public T obtenerUnObjeto(String jsonString) {
+		Gson gson = new Gson();
+		
+		try {
+			return gson.fromJson(jsonString, objectsType);
+		} catch (JsonSyntaxException e) {
+			e.printStackTrace();
+			throw new ErrorSintacticoEnElJSONExeption("Error Sintactico en el JSON: " + jsonString);
+		}
 	}
 }
