@@ -16,9 +16,7 @@ public class Metodologia {
 	List<CondicionNoTaxativa> condicionesNoTaxativas;
 	List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	
-	public String getNombre() {
-		return nombre;
-	}
+	
 	
 	@Override
 	public boolean equals(Object o){
@@ -65,5 +63,14 @@ public class Metodologia {
 				puntosE2 += condicion.getPesoEstimado();
 		}
 		return Integer.compare(puntosE2, puntosE1);
+	}
+	
+	@Override
+	public String toString(){
+		return this.nombre;
+	}
+	
+	public String getNombre() {
+		return nombre;
 	}
 }
