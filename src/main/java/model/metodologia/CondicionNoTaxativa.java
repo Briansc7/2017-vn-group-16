@@ -1,10 +1,13 @@
 package model.metodologia;
 
+import org.uqbar.commons.utils.Observable;
+
 import model.BaseDeDatos;
 import model.Empresa;
 import model.metodologia.condiciones.BooleanCondition;
 
 //Mismo indicador pero para otra empresa, optimizar el indicador dado
+@Observable
 public class CondicionNoTaxativa extends Condicion{
 	private Integer pesoEstimado;
 	

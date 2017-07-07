@@ -2,7 +2,9 @@ package testMetodologia;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -30,6 +32,7 @@ public class TestUnAnio {
 	CondicionTaxativa condicionMargen;
 	TaxativaLongevidad condicionLongevidad1;
 	NoTaxativaLongevidad condicionLongevidad2;
+	List<CondicionNoTaxativa> l;
 	BaseDeDatos base;
 	Empresa empresaUno;
 	Empresa empresaDos;
@@ -60,7 +63,8 @@ public class TestUnAnio {
 		condicionMargen = new CondicionTaxativa(1, "Margen", new GreaterAndEqualThan(), "margen");
 		condicionLongevidad1 = new TaxativaLongevidad(0, "", new GreaterAndEqualThan(), new BigDecimal(2));
 		condicionLongevidad2 = new NoTaxativaLongevidad(0, "", new GreaterThan(), 5);
-		
+		l = new ArrayList<CondicionNoTaxativa>();// Arrays.asList();
+		l.add(condicionDeuda);
 		indicadorEquity = new Indicador("shareholdersEquity", "capitalTotal - totalLiabilities");
 		indicadorRoe = new Indicador("roe", "2 * ingresoNeto");
 		indicadorDeuda = new Indicador("debtEquityRatio", "totalLiabilities / shareholdersEquity");

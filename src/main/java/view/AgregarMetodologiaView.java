@@ -2,12 +2,10 @@ package view;
 
 import org.uqbar.arena.layout.ColumnLayout;
 import org.uqbar.arena.widgets.Button;
-import org.uqbar.arena.widgets.CheckBox;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
-import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.MessageBox.Type;
@@ -16,8 +14,6 @@ import org.uqbar.arena.windows.WindowOwner;
 import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
-import model.Indicador;
-import model.metodologia.Condicion;
 import model.metodologia.condiciones.BooleanCondition;
 import viewModel.AgregarMetodologiaViewModel;
 
@@ -41,7 +37,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		new Label(tabla).setText("Indicador").setWidth(120);
 		new Label(tabla).setText("Criterio").setWidth(120);
 		new Label(tabla).setText("Comparar \ncontra tipo").setHeight(60).setWidth(120);
-		new Label(tabla).setText("Valor a \ncomparar").setHeight(60).setWidth(120);
+		new Label(tabla).setText("Valor").setHeight(60).setWidth(120);
 		
 	    new TextBox(tabla).setWidth(80).bindValueToProperty("periodo");
 	    Selector<String> selectorIndicadores = new Selector<String>(tabla);
@@ -58,7 +54,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 	    selectorTipos.bindValueToProperty("tipoAComparar");
 
 	    
-	    new TextBox(tabla).setWidth(80).bindValueToProperty("valorAComparar");
+	    new TextBox(tabla).setWidth(80).bindValueToProperty("valor");
 	    
 	    new Button(mainPanel).setCaption("Agregar condicion").onClick(() -> this.agregarCondicion());
 	    
@@ -73,7 +69,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 	    
 	}
 	
-	public void agregarCondicion() {
+	private void agregarCondicion() {
 		
 		try{
 			
@@ -89,7 +85,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		
 	}
 	
-	public void agregarMetodologia() {
+	private void agregarMetodologia() {
 		
 		try{
 			
