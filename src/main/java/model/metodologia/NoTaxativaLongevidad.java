@@ -3,7 +3,7 @@ package model.metodologia;
 import model.BaseDeDatos;
 import model.Empresa;
 import model.metodologia.condiciones.BooleanCondition;
-
+/*
 public class NoTaxativaLongevidad extends CondicionNoTaxativa {
 
 	public NoTaxativaLongevidad(Integer periodo, String indicadorAOptimizar,
@@ -16,3 +16,4 @@ public class NoTaxativaLongevidad extends CondicionNoTaxativa {
 		return criterioComparacion.comparar(empresaUno.longevidad(), empresaDos.longevidad());
 	}
 }
+*/

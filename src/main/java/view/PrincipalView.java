@@ -23,24 +23,16 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		.onClick(() -> this.consultarCuentas());
 		
 		new Button(panelActions)
-		.setCaption("Cargar Indicadores")
-		.onClick(() -> this.cargarIndicadores());
-		
-		new Button(panelActions)
 		.setCaption("Agregar Indicador")
 		.onClick(() -> this.agregarIndicador());
 				
 		new Button(panelActions)
-		.setCaption("Consultar Metodologías")
+		.setCaption("Consultar Metodologias")
 		.onClick(() -> this.consultarMetodologias());
 		
 		new Button(panelActions)
-		.setCaption("Cargar Metodologías");
-		//.onClick(() -> this.agregarIndicador());
-		
-		new Button(panelActions)
-		.setCaption("Definir Nueva Metodología");
-		//.onClick(() -> this.agregarIndicador());
+		.setCaption("Definir Nueva Metodologia")
+		.onClick(() -> this.agregarMetodologia());
 		
 	}
 	
@@ -89,16 +81,17 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		messageBox.setMessage(message);
 		messageBox.open();
 	}
-	
-	public void cargarIndicadores(){
-		Dialog<?> dialog = new CargarIndicadoresView(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
-	}
 
 	public void agregarIndicador() {
 		Dialog<?> dialog = new AgregarIndicadorView(this);
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
+	
+	public void agregarMetodologia() {
+		Dialog<?> dialog = new AgregarMetodologiaView(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
+	}
+	
 }
