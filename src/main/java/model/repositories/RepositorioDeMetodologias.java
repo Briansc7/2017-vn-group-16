@@ -21,7 +21,7 @@ import model.metodologia.condiciones.LessThan;
 import utils.AppData;
 
 public class RepositorioDeMetodologias {
-	private static RepositorioDeMetodologias instance = new RepositorioDeMetodologias();
+	private static RepositorioDeMetodologias instance;
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();
 	private AppDataI appData = AppData.getInstance();
 	
@@ -43,7 +43,7 @@ public class RepositorioDeMetodologias {
 	
 	public synchronized static RepositorioDeMetodologias getInstance(){
 		if(instance == null)
-			return new RepositorioDeMetodologias();
+			instance = new RepositorioDeMetodologias();
 		return instance;
 	}
 	
