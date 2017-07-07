@@ -18,8 +18,7 @@ import viewModel.ConsultarMetodologiasViewModel;
 
 public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewModel>{
 	
-	public ConsultarMetodologiasView(WindowOwner owner, String path) throws IOException{
-		//super();
+	public ConsultarMetodologiasView(WindowOwner owner, String path) throws IOException{		
 		super(owner, new ConsultarMetodologiasViewModel(path));
 	}
 	
@@ -35,11 +34,7 @@ public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewM
 		listaMetodologias.setHeight(70);
 		listaMetodologias.bindItemsToProperty("metodologias");
 		listaMetodologias.bindValueToProperty("metodologiaElegida");
-		
-		/*new Label(mainPanel).setText("Seleccione el Criterio por el cual ordenar la lista de empresas");
-		Selector<CondicionNoTaxativa> selectorCriterio = new Selector<CondicionNoTaxativa>(mainPanel);
-		selectorCriterio.bindItemsToProperty("criterios");
-		selectorCriterio.bindValueToProperty("criterioElegido");*/
+				
 		
 		new Label(mainPanel).setText("Empresas que cumplen con la metodología:");
 		

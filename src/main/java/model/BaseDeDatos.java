@@ -48,11 +48,7 @@ public class BaseDeDatos {
 				.collect(Collectors.toList());
 	}
 	
-	public List<Empresa> buscarMetodologias(String nombre) /*throws IOException */{
-		return this.empresas.stream()
-				.filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase()))
-				.collect(Collectors.toList());
-	}
+	
 
 	public Empresa empresaLlamada(String nombre) {
 		if (this.existeEmpresa(nombre)) {
