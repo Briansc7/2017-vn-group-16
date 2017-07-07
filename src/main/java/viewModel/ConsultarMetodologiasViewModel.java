@@ -34,7 +34,7 @@ private BaseDeDatos baseDeDatos;
 
 	private CondicionNoTaxativa criterioElegido;
 	
-	private List<String> criterios = Arrays.asList();
+	private List<CondicionNoTaxativa> criterios = Arrays.asList();
 	
 	
 	public ConsultarMetodologiasViewModel(String path) throws IOException{
@@ -54,14 +54,14 @@ private BaseDeDatos baseDeDatos;
 	}
 	
 	@Dependencies("metodologiaElegida")
-	public List<String> getCriterios() {
+	public List<CondicionNoTaxativa> getCriterios() {
 		if (this.metodologiaElegida == null) {
 			
 			return criterios;	
 		} else {
 			
 			//criterios = this.metodologiaElegida.getCriterios();
-			return criterios;
+			return this.metodologiaElegida.getCriterios();
 		}
 	}
 	
@@ -69,12 +69,12 @@ private BaseDeDatos baseDeDatos;
 	public List<Empresa> getEmpresas() throws IOException {
 			if (criterioElegido == null) {
 				
-				//return baseDeDatos.buscarEmpresas("");
+				return baseDeDatos.buscarEmpresas("");
 			} else {		
-				//return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
+				//return baseDeDatos.getEmpresas().filter();
+				return metodologiaElegida.aplicarCondiciones(baseDeDatos.getEmpresas(), baseDeDatos);
 			}
 			
-			return null;
 	}
 	
 	public Metodologia getMetodologiaElegida() {

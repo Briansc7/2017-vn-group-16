@@ -73,4 +73,9 @@ public class Metodologia {
 	public String getNombre() {
 		return nombre;
 	}
+
+	public List<CondicionNoTaxativa> getCriterios() {
+		
+		return condicionesNoTaxativas;
+	}
 }
