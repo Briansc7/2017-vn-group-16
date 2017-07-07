@@ -13,6 +13,9 @@ import model.Empresa;
 import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
+import model.metodologia.condiciones.GreaterAndEqualThan;
+import model.metodologia.condiciones.GreaterThan;
+import model.metodologia.condiciones.LessThan;
 
 public class ConsultarMetodologiasViewModel {
 	
@@ -25,10 +28,9 @@ private BaseDeDatos baseDeDatos;
 	
 	
 	
+	
+	
 	private List<Metodologia> listaMetodologias = new ArrayList<Metodologia>();	
-	private List<CondicionTaxativa> condicionesTaxativas = new ArrayList<CondicionTaxativa>();	
-	private List<CondicionNoTaxativa> condicionesNoTaxativas = new ArrayList<CondicionNoTaxativa>();	
-	private Metodologia buffet = new Metodologia("Buffet",condicionesTaxativas,condicionesNoTaxativas);
 
 	private CondicionNoTaxativa criterioElegido;
 	
@@ -36,7 +38,8 @@ private BaseDeDatos baseDeDatos;
 	
 	
 	public ConsultarMetodologiasViewModel(String path) throws IOException{
-		listaMetodologias.add(buffet);
+		baseDeDatos = new BaseDeDatos(path);
+		listaMetodologias.add(baseDeDatos.getBuffet());
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")

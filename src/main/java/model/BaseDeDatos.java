@@ -21,6 +21,12 @@ import java.util.stream.Collectors;
 import org.uqbar.commons.model.UserException;
 
 import exceptions.NoExisteAtributoException;
+import model.metodologia.CondicionNoTaxativa;
+import model.metodologia.CondicionTaxativa;
+import model.metodologia.Metodologia;
+import model.metodologia.condiciones.GreaterAndEqualThan;
+import model.metodologia.condiciones.GreaterThan;
+import model.metodologia.condiciones.LessThan;
 import parser.ParseException;
 import parser.TokenMgrError;
 
@@ -31,8 +37,20 @@ public class BaseDeDatos {
 	private String path;
 	private String pathIndicadores = "./Archivos del sistema/indicadores.txt";
 	
+	
+
+	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
+	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
+	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
+	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen), Arrays.asList(condicionRoe, condicionDeuda));;
+	
+	public Metodologia getBuffet() {
+		return buffet;
+	}
+	
 	public BaseDeDatos(String path) {
 		this.path = path;
+		
 	}
 
 	public List<Empresa> buscarEmpresas(String nombre) /*throws IOException */{
