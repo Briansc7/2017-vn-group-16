@@ -63,8 +63,7 @@ public class TestUnAnio {
 		condicionMargen = new CondicionTaxativa(1, "Margen", new GreaterAndEqualThan(), "margen");
 		condicionLongevidad1 = new TaxativaLongevidad(0, "", new GreaterAndEqualThan(), new BigDecimal(2));
 		condicionLongevidad2 = new NoTaxativaLongevidad(0, "", new GreaterThan(), 5);
-		l = new ArrayList<CondicionNoTaxativa>();// Arrays.asList();
-		l.add(condicionDeuda);
+		
 		indicadorEquity = new Indicador("shareholdersEquity", "capitalTotal - totalLiabilities");
 		indicadorRoe = new Indicador("roe", "2 * ingresoNeto");
 		indicadorDeuda = new Indicador("debtEquityRatio", "totalLiabilities / shareholdersEquity");

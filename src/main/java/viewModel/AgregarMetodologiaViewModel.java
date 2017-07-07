@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
+import dtos.PathFileTxtJson;
 import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
@@ -24,6 +25,7 @@ import model.metodologia.condiciones.GreaterThan;
 import model.metodologia.condiciones.LessAndEqualThan;
 import model.metodologia.condiciones.LessThan;
 import model.repositories.RepositorioDeMetodologias;
+import utils.AppData;
 
 
 @Observable
@@ -54,6 +56,7 @@ public class AgregarMetodologiaViewModel {
 		tiposParaComparar = Arrays.asList("Constante", "Indicador propio", "Indicador de otra empresa");
 		indicadores = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
 		indicadores.add("Longevidad");
+		AppData.getInstance().setInicializacionMetodologias(new PathFileTxtJson("./Archivos del sistema/Metodologias.txt"));
 	}
 
 	public void agregarCondicion() {

@@ -16,15 +16,6 @@ import model.metodologia.Metodologia;
 import org.uqbar.arena.windows.Dialog;
 import viewModel.ConsultarMetodologiasViewModel;
 
-
-
-
-
-
-
-
-
-
 public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewModel>{
 	
 	public ConsultarMetodologiasView(WindowOwner owner, String path) throws IOException{

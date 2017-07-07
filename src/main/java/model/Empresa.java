@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import exceptions.NoExisteAtributoException;
 
-
 public class Empresa {
 	
 	private String nombre;

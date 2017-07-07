@@ -73,9 +73,9 @@ public class RepositorioDeMetodologiasTest {
 
 	@Test
 	public void filtrarMetodologiasPorNombre() {
-		Metodologia metodologia = repositorio.filtrarPorNombre("A");
+		List<Metodologia> metodologia = repositorio.filtrarPorNombre("A");
 
-		assertEquals("A",metodologia.getNombre());
+		assertEquals("A",metodologia.get(0).getNombre());
 	}
 	
 	@Test
