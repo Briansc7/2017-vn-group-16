@@ -49,7 +49,14 @@ public class RepositorioDeMetodologiasTest {
 		repositorio.limpiarRepositorio();
 	}
 	
-	//TODO
+	@Test
+	public void repositorioEsSingleton() {
+		RepositorioDeMetodologias repositorio1 = RepositorioDeMetodologias.getInstance();
+		RepositorioDeMetodologias repositorio2 = RepositorioDeMetodologias.getInstance();
+		
+		assertEquals(repositorio1, repositorio2);
+	}
+	
 	@Test
 	public void agregarMetodologiasGeneraArchivo() {
 		AppData realAppData = AppData.getInstance();
