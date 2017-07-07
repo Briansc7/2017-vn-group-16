@@ -2,14 +2,19 @@ package providers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.reflect.TypeToken;
 
 import utils.JsonReader;
+import utils.Archivo;
 import utils.FilesManager;
 import dtos.PathFile;
+import dtos.PathFileTxtJson;
 import exceptions.RutaDeArchivoInvalidaException;
+import model.metodologia.CondicionNoTaxativa;
+import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
 
 public class FileProvider implements MetodologiaProvider {
@@ -31,5 +36,29 @@ public class FileProvider implements MetodologiaProvider {
 		List<Metodologia> metodologias = new JsonReader<Metodologia>(tipoLista).obtenerObjetos(json);
 
 		return metodologias;
+	}
+	public static void main(String... args){
+		/*FileProvider provider = new FileProvider();
+		String path = "./Archivos de prueba/ArchivoDePruebaParaTestsDeGrabacion.txt";
+		PathFile dto = new PathFileTxtJson(path);
+		FilesManager file = new FilesManager(path);
+		Archivo archivo = new Archivo(path);
+		
+		List<CondicionTaxativa> condicionesTaxativas = new ArrayList<>();
+		List<CondicionNoTaxativa> condicionesNoTaxativas = new ArrayList<>();
+		
+		Metodologia metodologia1 = new Metodologia("A", condicionesTaxativas, condicionesNoTaxativas);
+		Metodologia metodologia2 = new Metodologia("B", condicionesTaxativas, condicionesNoTaxativas);
+		Metodologia metodologia3 = new Metodologia("C", condicionesTaxativas, condicionesNoTaxativas);
+		Metodologia metodologia4 = new Metodologia("D", condicionesTaxativas, condicionesNoTaxativas);
+		
+		List<Metodologia> metodologias = new ArrayList<>(Arrays
+				.asList(metodologia1, metodologia2, metodologia3, metodologia4));
+		
+		archivo.archivarObjetos(metodologias);
+		
+		System.out.println(file.leerArchivo());
+		
+		List<Metodologia> metodologiasProvider = provider.getInformationMetodologia(dto);*/
 	}
 }

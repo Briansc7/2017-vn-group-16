@@ -7,6 +7,10 @@ public class GreaterThan implements BooleanCondition{
 		return valorUno.compareTo(valorDos) > 0;
 	}
 	
+	public GreaterThan() {
+		super();
+	}
+	
 	@Override
 	public String toString(){
 		return "Mayor";

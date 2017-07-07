@@ -7,6 +7,10 @@ public class EqualThan implements BooleanCondition{
 		return valorUno.compareTo(valorDos) == 0;
 	}
 	
+	public EqualThan() {
+		super();
+	}
+
 	@Override
 	public String toString(){
 		return "Igual";

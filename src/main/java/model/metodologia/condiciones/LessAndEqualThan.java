@@ -7,6 +7,10 @@ public class LessAndEqualThan implements BooleanCondition{
 		return valorUno.compareTo(valorDos) <= 0;
 	}
 	
+	public LessAndEqualThan() {
+		super();
+	}
+	
 	@Override
 	public String toString(){
 		return "Menor o igual";
