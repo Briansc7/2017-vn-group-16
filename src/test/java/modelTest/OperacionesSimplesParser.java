@@ -43,7 +43,7 @@ public class OperacionesSimplesParser {
 	@Test
 	public void dividirNumeros() throws NumberFormatException, ParseException, TokenMgrError, parser.ParseException, parser.TokenMgrError{
 		resultado = new Indicador("division","33/3");
-		Assert.assertEquals(new BigDecimal(11), resultado.getValor(2017, empresa, baseDeDatos));
+		Assert.assertEquals(0, new BigDecimal(11.00).compareTo(resultado.getValor(2017, empresa, baseDeDatos)));
 	}
 	
 	@Test
@@ -61,7 +61,7 @@ public class OperacionesSimplesParser {
 	@Test
 	public void dividirYSumar() throws NumberFormatException, ParseException, TokenMgrError, parser.ParseException, parser.TokenMgrError{
 		resultado = new Indicador("divsum","(10/2)+(14/7)");
-		Assert.assertEquals(new BigDecimal(7), resultado.getValor(2017, empresa, baseDeDatos));
+		Assert.assertEquals(0, new BigDecimal(7.00).compareTo(resultado.getValor(2017, empresa, baseDeDatos)));
 	}
 	
 	@Test

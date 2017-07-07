@@ -1,48 +1,42 @@
-<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>610</x><y>280</y><w>160</w><h>160</h></coordinates><panel_attributes>BaseDeDatos
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>0</x><y>307</y><w>300</w><h>230</h></coordinates><panel_attributes>BaseDeDatos
 --
-empresas
-path
+indicadores: List&lt;Indicador&gt;
+empresas: List&lt;Empresa&gt;
+path: String
 --
-buscarEmpresas(nombre)
-empresaLlamada(nombre)
-leerEmpresas()
-leerIndicadores()
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>850</x><y>270</y><w>220</w><h>200</h></coordinates><panel_attributes>Empresa
+buscarEmpresas(nombre: String): List&lt;Empresa&gt;
+empresaLlamada(nombre: String): Empresa
+leerEmpresas(): void
+leerIndicadores(): void
+verificarIndicador(indicador: String): void
+agregarIndicadorAlArchivo(indicador: String): void
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>530</x><y>477</y><w>390</w><h>200</h></coordinates><panel_attributes>Empresa
 --
-nombre
-cuentas
+nombre: String
+cuentas: List&lt;Cuenta&gt;
 --
-cuentasDelPeriodo(periodo)
-existeCuentaDel(nombre, periodo)
-buscarCuenta(nombre, periodo)</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>760</x><y>270</y><w>110</w><h>60</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>90;10;10;40</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1210</x><y>310</y><w>130</w><h>130</h></coordinates><panel_attributes>Cuenta
+cuentasDelPeriodo(periodo: Integer): List&lt;Cuenta&gt;
+existeCuentaDel(nombre: String, periodo: Integer): boolean
+buscarCuenta(nombre: String, periodo: Integer): Cuenta
+longevidad(): BigDecimal</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1040</x><y>397</y><w>180</w><h>130</h></coordinates><panel_attributes>Cuenta
 --
-nombre
-valor
-fecha
+valor: BigDecimal
+fecha: LocalDate
 --
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1060</x><y>290</y><w>170</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>150;30;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>600</x><y>520</y><w>240</w><h>200</h></coordinates><panel_attributes>&lt;&lt;Singleton&gt;&gt;
-Planilla
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>337</y><w>260</w><h>180</h></coordinates><panel_attributes>lt=&lt;-
+m1=*</panel_attributes><additional_attributes>240;150;90;130;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>290</x><y>197</y><w>200</w><h>160</h></coordinates><panel_attributes>lt=&lt;-
+m1=*  </panel_attributes><additional_attributes>180;10;10;140</additional_attributes></element><element><id>UMLClass</id><coordinates><x>470</x><y>197</y><w>450</w><h>200</h></coordinates><panel_attributes>Indicador
 --
-empresaElegida
-periodoElegido
-indicadores
+expresion: Expresion
+formula: String
 --
-existeIndicador(nombre)
-buscarIndicador(nombre)
-verificarIndicador(indicador)
-verificarSintaxisIndicador(indicador)
-agregarIndicadorAlArchivo(indicador)</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1010</x><y>570</y><w>100</w><h>80</h></coordinates><panel_attributes>Indicador
+esIdentico(otroNombre: String, otraFormula: String): boolean
+getValor(periodo: Integer, empresa: Empresa, base: BaseDeDatos): BigDecimal
+getValorString(periodo: Integer, empresa: Empresa, base: BaseDeDatos): String</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>814</x><y>0</y><w>310</w><h>110</h></coordinates><panel_attributes>/AbstractClass/
+Atributo
 --
-nombre
-expresion
+nombre: String
 --
-existePara()</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>830</x><y>570</y><w>200</w><h>50</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>180;10;10;30</additional_attributes></element><element><id>UMLClass</id><coordinates><x>0</x><y>340</y><w>140</w><h>90</h></coordinates><panel_attributes>PrincipalViewModel
---
-path
---
-verificarArchivo()</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>200</x><y>380</y><w>230</w><h>100</h></coordinates><panel_attributes>ConsultarCuentasViewModel
---
-baseDeDatos
-nombreEmpresaElegida
-periodos
-</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>460</y><w>200</w><h>100</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>180;80;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>130</x><y>380</y><w>90</w><h>50</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>70;10;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>420</x><y>280</y><w>210</w><h>150</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>190;10;10;130</additional_attributes></element></diagram>
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>910</x><y>400</y><w>150</w><h>140</h></coordinates><panel_attributes>lt=&lt;-
+m1=*  </panel_attributes><additional_attributes>130;10;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>680</x><y>101</y><w>300</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>280;10;280;60;10;60;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>950</x><y>100</y><w>190</w><h>320</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;60;170;60;170;300</additional_attributes></element></diagram>

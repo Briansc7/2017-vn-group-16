@@ -76,7 +76,7 @@ public class TestUnAnio {
 	
 	@Test
 	public void condicion1Buffet() throws ParseException, TokenMgrError{
-		
+
 		Assert.assertTrue(condicionRoe.compararEmpresas(empresaUno, empresaDos, base));
 	}
 	

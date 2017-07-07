@@ -7,12 +7,14 @@ import java.util.stream.Collectors;
 
 import exceptions.EseYaExisteException;
 import exceptions.NoSeEncuentraException;
+import mockObjects.AppDataI;
 import model.metodologia.Metodologia;
 import utils.AppData;
 
 public class RepositorioDeMetodologias {
 	private static RepositorioDeMetodologias instance;
 	private List<Metodologia> metodologias = new ArrayList<>();;
+	private AppDataI appData = AppData.getInstance();
 	
 	
 	//Singleton
@@ -25,10 +27,6 @@ public class RepositorioDeMetodologias {
 		return instance;
 	}
 	
-	public List<Metodologia> getMetodologias(){
-		return metodologias;
-	}
-	
 	public void inicializar(List<Metodologia> _metodologias){
 		metodologias.addAll(_metodologias);
 	}
@@ -36,17 +34,11 @@ public class RepositorioDeMetodologias {
 	public void agregarMetodologias(List<Metodologia> _metodologias) {
 		_metodologias.stream().forEach(metodologia -> agregarMetodologia(metodologia));
 	}
-
+	
 	public void agregarMetodologia(Metodologia metodologia) {
 		comprobarNombre(metodologia);
 		metodologias.add(metodologia);
 		archivarRepositorio();
-	}
-	
-	private void comprobarNombre(Metodologia metodologia) {
-		if(metodologias.contains(metodologia))
-				throw new EseYaExisteException("Ya existe una metodologia con el nombre: "
-							+ metodologia.getNombre());
 	}
 
 	public void removerMetodologia(Metodologia metodologia) {
@@ -55,7 +47,6 @@ public class RepositorioDeMetodologias {
 	}
 	
 	// Filtrar metodologias del repositorio
-
 	public Metodologia filtrarPorNombre(String nombre) {
 		List<Metodologia> _metodologias;
 		
@@ -73,7 +64,6 @@ public class RepositorioDeMetodologias {
 
 	// Devuelven una lista ordenada de determinada manera, sin alterar las
 	// propias del repositorio
-
 	public List<Metodologia> getOrdenadasPorNombre() {
 		List<Metodologia> _metodologias = metodologias.stream()
 				.sorted(Comparator.comparing(Metodologia::getNombre))
@@ -82,7 +72,6 @@ public class RepositorioDeMetodologias {
 	}
 	
 	//Utilidades
-	
 	public int size() {
 		return metodologias.size();
 	}
@@ -92,7 +81,22 @@ public class RepositorioDeMetodologias {
 		metodologias = new ArrayList<Metodologia>();
 	}
 
-	public void archivarRepositorio() {
-		AppData.getInstance().guardarMetodologias(metodologias);
+	private void archivarRepositorio() {
+		appData.guardarMetodologias(metodologias);
+	}
+	
+	//Setters y getters
+	public List<Metodologia> getMetodologias(){
+		return metodologias;
+	}
+	
+	public void setAppData(AppDataI _appData){
+		appData = _appData;
+	}
+	
+	private void comprobarNombre(Metodologia metodologia) {
+		if(metodologias.contains(metodologia))
+			throw new EseYaExisteException("Ya existe una metodologia con el nombre: "
+					+ metodologia.getNombre());
 	}
 }
