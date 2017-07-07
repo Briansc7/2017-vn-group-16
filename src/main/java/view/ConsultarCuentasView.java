@@ -73,7 +73,4 @@ public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 		columnaValorIndicador.bindContentsToProperty("valorString");
 		
 	}
-	
-	
-	
 }

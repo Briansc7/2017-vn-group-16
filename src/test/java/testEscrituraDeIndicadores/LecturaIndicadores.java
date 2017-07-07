@@ -2,11 +2,13 @@ package testEscrituraDeIndicadores;
 
 import java.io.IOException;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import model.BaseDeDatos;
+import utils.FilesManager;
 
 public class LecturaIndicadores {
 	BaseDeDatos baseDeDatos;
@@ -15,6 +17,11 @@ public class LecturaIndicadores {
 	public void initialize()  {
 		baseDeDatos = new BaseDeDatos("");
 		baseDeDatos.setPathIndicadores("./Archivos de prueba/indicadoresPruebaDeEscritura.txt");
+	}
+	
+	@After
+	public void borrarArchivo(){
+		new FilesManager("./Archivos de prueba/indicadoresPruebaDeEscritura.txt").borrarArchivo();
 	}
 	
 	@Test

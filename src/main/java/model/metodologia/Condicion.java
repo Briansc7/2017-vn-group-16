@@ -12,6 +12,4 @@ public class Condicion {
 		this.indicadorAOptimizar = indicadorAOptimizar;
 		this.criterioComparacion = criterioComparacion;
 	}
-	
-	
 }
