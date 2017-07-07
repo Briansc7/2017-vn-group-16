@@ -45,10 +45,12 @@ public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewM
 		listaMetodologias.bindItemsToProperty("metodologias");
 		listaMetodologias.bindValueToProperty("metodologiaElegida");
 		
-		new Label(mainPanel).setText("Seleccione el Criterio por el cual ordenar la lista de empresas");
+		/*new Label(mainPanel).setText("Seleccione el Criterio por el cual ordenar la lista de empresas");
 		Selector<CondicionNoTaxativa> selectorCriterio = new Selector<CondicionNoTaxativa>(mainPanel);
 		selectorCriterio.bindItemsToProperty("criterios");
-		selectorCriterio.bindValueToProperty("criterioElegido");
+		selectorCriterio.bindValueToProperty("criterioElegido");*/
+		
+		new Label(mainPanel).setText("Empresas que cumplen con la metodología:");
 		
 		List<Empresa> listaEmpresas = new List<Empresa>(mainPanel);
 		listaEmpresas.setHeight(70);

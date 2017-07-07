@@ -145,7 +145,7 @@ public class BaseDeDatos {
 	}
 
 	//lector de indicadores
-	public void leerIndicadores() throws IOException{
+	public void leerIndicadores() {
 		try {
 			File inputF = new File(this.pathIndicadores);
 			InputStream inputFS = new FileInputStream(inputF);
@@ -156,11 +156,13 @@ public class BaseDeDatos {
 					this.verificarIndicadorParaAgregar(linea);
 
 				} catch (ParseException e) {
-					// TODO Auto-generated catch block
+					// TODO
 					e.printStackTrace();
+					throw new UserException("Error en la formula");
 				} catch (TokenMgrError e) {
-					// TODO Auto-generated catch block
+					// TODO 
 					e.printStackTrace();
+					throw new UserException("Error en la formula");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -169,11 +171,13 @@ public class BaseDeDatos {
 			br.close();
 
 		} catch (FileNotFoundException e) {
-			// e.printStackTrace();
-			throw new FileNotFoundException("No se encontro el archivo");
+			// TODO e.printStackTrace();
+			throw new UserException("No se encontro el archivo");
 		} catch (UserException e) {
-			// e.printStackTrace();
+			// TODO e.printStackTrace();
 			throw new UserException("El archivo leido no tiene un formato adecuado");
+		} catch (IOException e) {
+			throw new UserException("Error al leer el archivo");
 		}
 	}
 		
@@ -243,6 +247,10 @@ public class BaseDeDatos {
 
 	public void agregarIndicador(Indicador indicador) {
 		this.indicadores.add(indicador);
+	}
+
+	public List<String> getNombreIndicadores() {
+		return indicadores.stream().map(indicador -> indicador.getNombre()).collect(Collectors.toList());
 	}
 
 	/*public void setIndicadores(List<Indicador> indicadores) {

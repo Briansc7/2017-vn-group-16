@@ -7,7 +7,7 @@ import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.WindowOwner;
-
+/*
 import viewModel.CargarIndicadoresViewModel;
 
 public class CargarIndicadoresView extends Dialog<CargarIndicadoresViewModel>{
@@ -48,3 +48,4 @@ public class CargarIndicadoresView extends Dialog<CargarIndicadoresViewModel>{
 	}
 
 }
+*/
