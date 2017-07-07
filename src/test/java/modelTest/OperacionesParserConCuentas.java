@@ -43,7 +43,7 @@ public class OperacionesParserConCuentas {
 		baseDeDatos.agregarIndicador(indicadorB);
 		
 		Assert.assertEquals(new BigDecimal(1000), indicadorA.getValor(2015, empresa, baseDeDatos));
-		Assert.assertEquals(new BigDecimal(300), indicadorB.getValor(2015, empresa, baseDeDatos));
+		Assert.assertEquals(0, new BigDecimal(300).compareTo(indicadorB.getValor(2015, empresa, baseDeDatos)));
 	}
 	
 }
