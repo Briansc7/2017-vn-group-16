@@ -4,6 +4,7 @@ import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
 import model.Empresa;
+import model.Indicador;
 import model.metodologia.condiciones.BooleanCondition;
 
 //Mismo indicador pero para otra empresa, optimizar el indicador dado
@@ -11,8 +12,8 @@ import model.metodologia.condiciones.BooleanCondition;
 public class CondicionNoTaxativa extends Condicion{
 	private Integer pesoEstimado;
 	
-	public CondicionNoTaxativa(Integer periodo, String indicadorAOptimizar,
-			BooleanCondition criterioComparacion, Integer pesoEstimado) {
+	public CondicionNoTaxativa(Integer periodo, Indicador indicadorAOptimizar,
+			BooleanCondition criterioComparacion/*, Integer pesoEstimado*/) {
 		super(periodo, indicadorAOptimizar, criterioComparacion);
 		this.pesoEstimado = pesoEstimado;
 	}
@@ -21,8 +22,8 @@ public class CondicionNoTaxativa extends Condicion{
 	public boolean compararEmpresas(Empresa empresaUno, Empresa empresaDos, BaseDeDatos baseDeDatos) {
 		boolean resultado = true;
 		for(int i = 0; i < periodo; i++){
-			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, empresaUno),  
-					baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, empresaDos))))
+			if(!(criterioComparacion.comparar(indicadorAOptimizar.getValor(2017-i, empresaUno, baseDeDatos),  
+					indicadorAOptimizar.getValor(2017-i, empresaDos, baseDeDatos))))
 				resultado = false;
 		}
 		return resultado;

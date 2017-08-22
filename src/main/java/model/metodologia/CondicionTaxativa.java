@@ -4,18 +4,19 @@ import java.math.BigDecimal;
 
 import model.BaseDeDatos;
 import model.Empresa;
+import model.Indicador;
 import model.metodologia.condiciones.BooleanCondition;
 
 //Comparar contra una constante u otro indicador de la misma empresa
 public class CondicionTaxativa extends Condicion {
 	protected BigDecimal valorAComparar;// Depende del tipo de comparacion, es la
 									// constante
-	private String indicadorAComparar;// Nombre de otro con el que se compara el
+	private Indicador indicadorAComparar;// Nombre de otro con el que se compara el
 										// que hay que optimizar
 
 	// Dos constructores, si se hace con un Ineger se sabe que es un valor
 	// contra el que se compara
-	public CondicionTaxativa(Integer periodo, String indicadorAOptimizar,
+	public CondicionTaxativa(Integer periodo, Indicador indicadorAOptimizar,
 			BooleanCondition criterioComparacion, BigDecimal _valorAComparar) {
 
 		super(periodo, indicadorAOptimizar, criterioComparacion);
@@ -23,8 +24,8 @@ public class CondicionTaxativa extends Condicion {
 	}
 
 	// Si se hace con un String se sabe que es otro indicador el que se usa
-	public CondicionTaxativa(Integer periodo, String indicadorAOptimizar,
-			BooleanCondition criterioComparacion, String _indicadorAComparar) {
+	public CondicionTaxativa(Integer periodo, Indicador indicadorAOptimizar,
+			BooleanCondition criterioComparacion, Indicador _indicadorAComparar) {
 
 		super(periodo, indicadorAOptimizar, criterioComparacion);
 		indicadorAComparar = _indicadorAComparar;
@@ -34,7 +35,7 @@ public class CondicionTaxativa extends Condicion {
 	public boolean aplicarCondicion(Empresa unaEmpresa, BaseDeDatos baseDeDatos) {
 		boolean resultado = true;
 		for(int i = 0; i < periodo-1; i++){
-			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar, 2017-i, unaEmpresa), baseDeDatos.valorDe(indicadorAOptimizar, 2017-(i+1), unaEmpresa))))
+			if(!(criterioComparacion.comparar(indicadorAOptimizar.getValor(2017-i, unaEmpresa, baseDeDatos), indicadorAOptimizar.getValor(2017-(i+1), unaEmpresa, baseDeDatos))))
 				resultado = false;
 		}
 		return resultado;

@@ -14,7 +14,7 @@ public class Metodologia {
 	String nombre;
 	List<CondicionTaxativa> condicionesTaxativas;
 	List<CondicionNoTaxativa> condicionesNoTaxativas;
-	List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
+	//List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	
 	
 	

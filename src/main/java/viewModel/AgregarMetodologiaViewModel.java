@@ -8,11 +8,11 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import dtos.PathFileTxtJson;
 import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
 import model.BaseDeDatos;
+import model.Indicador;
 import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
@@ -25,17 +25,16 @@ import model.metodologia.condiciones.GreaterThan;
 import model.metodologia.condiciones.LessAndEqualThan;
 import model.metodologia.condiciones.LessThan;
 import model.repositories.RepositorioDeMetodologias;
-import utils.AppData;
 
 
 @Observable
 public class AgregarMetodologiaViewModel {
 
 	private String periodo;
-	private String indicador;
+	private Indicador indicador;
 	private BooleanCondition criterio;
 	private String tipoAComparar;
-	private String valor;
+	private String valor;//TODO: antes era string, creo que no deberia molestar que sea bigDecimal
 	private String nombre;
 	private BaseDeDatos baseDeDatos = new BaseDeDatos("");
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
@@ -45,7 +44,7 @@ public class AgregarMetodologiaViewModel {
 	
 	private List<BooleanCondition> criterios;// = Arrays.asList(new EqualThan(), new GreaterThan(), new GreaterAndEqualThan(), new LessThan(), new LessAndEqualThan());
 	private List<String> tiposParaComparar;// = Arrays.asList("constante", "indicador propio", "indicador de otra empresa");
-	private List<String> indicadores;// = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
+	private List<Indicador> indicadores;// = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
 	
 	public AgregarMetodologiaViewModel() {
 		this.inicializarDatos();
@@ -55,8 +54,8 @@ public class AgregarMetodologiaViewModel {
 		baseDeDatos.leerIndicadores();
 		criterios = Arrays.asList(new EqualThan(), new GreaterThan(), new GreaterAndEqualThan(), new LessThan(), new LessAndEqualThan());
 		tiposParaComparar = Arrays.asList("Constante", "Indicador propio", "Indicador de otra empresa");
-		indicadores = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
-		indicadores.add("Longevidad");
+		indicadores = new ArrayList<Indicador>(baseDeDatos.getIndicadores());
+		//indicadores.add("Longevidad"); TODO:ver como agregar la longevidad
 		//AppData.getInstance().setInicializacionMetodologias(new PathFileTxtJson("./Archivos del sistema/Metodologias.txt"));
 	}
 
@@ -85,19 +84,19 @@ public class AgregarMetodologiaViewModel {
 		} 
 		
 		if(tipoAComparar.equalsIgnoreCase("constante")){
-			if(indicador.equalsIgnoreCase("Longevidad"))
+			if(indicador.getNombre().equalsIgnoreCase("Longevidad"))
 				this.condicionesTaxativas.add(new TaxativaLongevidad(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
 			else
 				this.condicionesTaxativas.add(new CondicionTaxativa(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
 			
 		} else if(tipoAComparar.equals("Indicador de otra empresa")) {
-			if(indicador.equalsIgnoreCase("Longevidad"))
-				this.condicionesNoTaxativas.add(new NoTaxativaLongevidad(new Integer(periodo), indicador, criterio, new Integer(valor)));
+			if(indicador.getNombre().equalsIgnoreCase("Longevidad"))
+				this.condicionesNoTaxativas.add(new NoTaxativaLongevidad(new Integer(periodo), indicador, criterio));
 			else
-				this.condicionesNoTaxativas.add(new CondicionNoTaxativa(new Integer(periodo), indicador, criterio, new Integer(valor)));
+				this.condicionesNoTaxativas.add(new CondicionNoTaxativa(new Integer(periodo), indicador, criterio));
 		} else {
 			
-			this.condicionesTaxativas.add( new CondicionTaxativa(new Integer(periodo), indicador, criterio, valor));
+			this.condicionesTaxativas.add( new CondicionTaxativa(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
 			
 		}
 		
@@ -122,11 +121,11 @@ public class AgregarMetodologiaViewModel {
 		
 	}
 	
-	public String getIndicador() {
+	public Indicador getIndicador() {
 		return indicador;
 	}
 	
-	public void setIndicador(String indicador) {
+	public void setIndicador(Indicador indicador) {
 		this.indicador = indicador;
 	}
 
@@ -186,11 +185,11 @@ public class AgregarMetodologiaViewModel {
 		this.tiposParaComparar = tiposParaComparar;
 	}
 
-	public List<String> getIndicadores() {
+	public List<Indicador> getIndicadores() {
 		return indicadores;
 	}
 
-	public void setIndicadores(List<String> indicadores) {
+	public void setIndicadores(List<Indicador> indicadores) {
 		this.indicadores = indicadores;
 	}
 	

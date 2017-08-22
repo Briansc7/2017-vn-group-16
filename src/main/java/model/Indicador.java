@@ -64,6 +64,11 @@ public class Indicador extends Atributo{
 	public String getFormula() {
 		return formula;
 	}
+	
+	@Override
+	public String toString(){
+		return nombre;
+	}
 }
 
 /*	
