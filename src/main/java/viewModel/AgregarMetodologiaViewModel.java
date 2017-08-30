@@ -1,6 +1,5 @@
 package viewModel;
 
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,15 +25,13 @@ import model.metodologia.condiciones.LessAndEqualThan;
 import model.metodologia.condiciones.LessThan;
 import model.repositories.RepositorioDeMetodologias;
 
-
 @Observable
 public class AgregarMetodologiaViewModel {
-
-	private String periodo;
+	private Integer periodo;
 	private Indicador indicador;
 	private BooleanCondition criterio;
 	private String tipoAComparar;
-	private String valor;//TODO: antes era string, creo que no deberia molestar que sea bigDecimal
+	private String valor;
 	private String nombre;
 	private BaseDeDatos baseDeDatos = new BaseDeDatos("");
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
@@ -60,65 +57,43 @@ public class AgregarMetodologiaViewModel {
 	}
 
 	public void agregarCondicion() {
-		
 		if(periodo == null){
-			
 			throw new CondicionIncompletaException("Falta ingresar el periodo.");
-			
 		} else if(indicador == null) {
-			
 			throw new CondicionIncompletaException("Falta ingresar el indicador.");
-			
 		} else if(criterio == null) {
-			
 			throw new CondicionIncompletaException("Falta ingresar el criterio.");
-			
 		} else if(tipoAComparar == null) {
-			
 			throw new CondicionIncompletaException("Falta ingresar el tipo a comparar.");
-			
 		} else if(valor == null) {
-			
 			throw new CondicionIncompletaException("Falta ingresar el valor a comparar.");
-			
-		} 
+		}
 		
 		if(tipoAComparar.equalsIgnoreCase("constante")){
 			if(indicador.getNombre().equalsIgnoreCase("Longevidad"))
-				this.condicionesTaxativas.add(new TaxativaLongevidad(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
+				this.condicionesTaxativas.add(new TaxativaLongevidad(periodo, indicador, criterio, new BigDecimal(valor)));
 			else
-				this.condicionesTaxativas.add(new CondicionTaxativa(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
-			
+				this.condicionesTaxativas.add(new CondicionTaxativa(periodo, indicador, criterio, new BigDecimal(valor)));
 		} else if(tipoAComparar.equals("Indicador de otra empresa")) {
 			if(indicador.getNombre().equalsIgnoreCase("Longevidad"))
-				this.condicionesNoTaxativas.add(new NoTaxativaLongevidad(new Integer(periodo), indicador, criterio));
+				this.condicionesNoTaxativas.add(new NoTaxativaLongevidad(periodo, indicador, criterio));
 			else
-				this.condicionesNoTaxativas.add(new CondicionNoTaxativa(new Integer(periodo), indicador, criterio));
+				this.condicionesNoTaxativas.add(new CondicionNoTaxativa(periodo, indicador, criterio));
 		} else {
-			
-			this.condicionesTaxativas.add( new CondicionTaxativa(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
-			
+			this.condicionesTaxativas.add( new CondicionTaxativa(periodo, indicador, criterio, new BigDecimal(valor)));
 		}
-		
 	}
 
 	public void agregarMetodologia() {
-
 		if(nombre == null) {
-			
 			throw new MetodologiaSinNombreException("No se ingreso el nombre de la metodologia.");
-			
 		} else if(condicionesTaxativas.isEmpty() && condicionesNoTaxativas.isEmpty()) {
-			
-			throw new MetodologiaIncompletaException("No se agrego ninguna condicion.");
-			
+			throw new MetodologiaIncompletaException("No se agrego ninguna condicion a la metodologia.");
 		}
 		
 		Metodologia unaMetodologia = new Metodologia(nombre, condicionesTaxativas, condicionesNoTaxativas);
 		
 		repositorio.agregarMetodologia(unaMetodologia);
-		
-		
 	}
 	
 	public Indicador getIndicador() {
@@ -145,11 +120,11 @@ public class AgregarMetodologiaViewModel {
 		this.tipoAComparar = tipoAComparar;
 	}
 	
-	public String getPeriodo() {
+	public Integer getPeriodo() {
 		return periodo;
 	}
 	
-	public void setPeriodo(String periodo) {
+	public void setPeriodo(Integer periodo) {
 		this.periodo = periodo;
 	}
 	
