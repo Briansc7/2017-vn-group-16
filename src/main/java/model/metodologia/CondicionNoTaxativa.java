@@ -1,8 +1,9 @@
 package model.metodologia;
 
+import java.util.List;
+
 import org.uqbar.commons.utils.Observable;
 
-import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 import model.metodologia.condiciones.BooleanCondition;
@@ -10,27 +11,27 @@ import model.metodologia.condiciones.BooleanCondition;
 //Mismo indicador pero para otra empresa, optimizar el indicador dado
 @Observable
 public class CondicionNoTaxativa extends Condicion{
-	private Integer pesoEstimado;
 	
 	public CondicionNoTaxativa(Integer periodo, Indicador indicadorAOptimizar,
-			BooleanCondition criterioComparacion/*, Integer pesoEstimado*/) {
+			BooleanCondition criterioComparacion) {
 		super(periodo, indicadorAOptimizar, criterioComparacion);
-		this.pesoEstimado = pesoEstimado;
+	}
+	
+	@Override
+	public List<Empresa> filtrar(List<Empresa> empresas) {
+		empresas.sort((empresa1, empresa2) -> compararEmpresas(empresa1, empresa2));
+		return empresas;
 	}
 
 	// TODO No taxativa, retorna al ganador
-	public boolean compararEmpresas(Empresa empresaUno, Empresa empresaDos, BaseDeDatos baseDeDatos) {
-		boolean resultado = true;
+	private int compararEmpresas(Empresa empresaUno, Empresa empresaDos) {
+		int resultado = -1;
 		for(int i = 0; i < periodo; i++){
-			if(!(criterioComparacion.comparar(indicadorAOptimizar.getValor(2017-i, empresaUno, baseDeDatos),  
-					indicadorAOptimizar.getValor(2017-i, empresaDos, baseDeDatos))))
-				resultado = false;
+			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar.getNombre(), 2017-i, empresaUno),  
+					baseDeDatos.valorDe(indicadorAOptimizar.getNombre(), 2017-i, empresaDos))))
+				resultado = 1;
 		}
 		return resultado;
-	}
-	
-	public Integer getPesoEstimado() {
-		return pesoEstimado;
 	}
 	
 	@Override

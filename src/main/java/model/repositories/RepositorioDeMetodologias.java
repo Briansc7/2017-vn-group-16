@@ -25,19 +25,19 @@ public class RepositorioDeMetodologias {
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();
 	private AppDataI appData = AppData.getInstance();
 	
-	/*private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
+	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
 	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
 	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
 	private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
 	private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
 	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidad1), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidad2));	
-	*/
+	
 	
 	
 	//Singleton
 	private RepositorioDeMetodologias(){
 		
-		//metodologias.add(buffet);
+		metodologias.add(buffet);
 		archivarRepositorio();
 	}
 	

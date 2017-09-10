@@ -33,8 +33,11 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		new Button(panelActions)
 		.setCaption("Definir Nueva Metodologia")
 		.onClick(() -> this.agregarMetodologia());
+		
 	}
 	
+	
+
 	private void consultarMetodologias() {
 		try{
 			this.getModelObject().verificarArchivo();
@@ -55,6 +58,8 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		
 		new Label(mainPanel).setText("Seleccione el archivo de cuentas").setWidth(250);
 		new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
+		
+		
 	}
 	
 	public void consultarCuentas() {
@@ -88,4 +93,5 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		dialog.open();
 		dialog.onAccept(() -> {});
 	}
+	
 }

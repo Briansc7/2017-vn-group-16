@@ -240,9 +240,9 @@ public class BaseDeDatos {
 		this.indicadores.add(indicador);
 	}
 
-	/*public List<String> getNombreIndicadores() {
+	public List<String> getNombreIndicadores() {
 		return indicadores.stream().map(indicador -> indicador.getNombre()).collect(Collectors.toList());
-	}*/
+	}
 
 	/*public void setIndicadores(List<Indicador> indicadores) {
 		this.indicadores = indicadores;

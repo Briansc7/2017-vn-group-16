@@ -1,41 +1,32 @@
 package model.metodologia;
 
-import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 import model.metodologia.condiciones.BooleanCondition;
 
 //Comparar contra una constante u otro indicador de la misma empresa
 public class CondicionTaxativa extends Condicion {
-	protected BigDecimal valorAComparar;// Depende del tipo de comparacion, es la
-									// constante
-	private Indicador indicadorAComparar;// Nombre de otro con el que se compara el
-										// que hay que optimizar
 
-	// Dos constructores, si se hace con un Ineger se sabe que es un valor
-	// contra el que se compara
 	public CondicionTaxativa(Integer periodo, Indicador indicadorAOptimizar,
-			BooleanCondition criterioComparacion, BigDecimal _valorAComparar) {
+			BooleanCondition criterioComparacion) {
 
 		super(periodo, indicadorAOptimizar, criterioComparacion);
-		valorAComparar = _valorAComparar;
 	}
-
-	// Si se hace con un String se sabe que es otro indicador el que se usa
-	public CondicionTaxativa(Integer periodo, Indicador indicadorAOptimizar,
-			BooleanCondition criterioComparacion, Indicador _indicadorAComparar) {
-
-		super(periodo, indicadorAOptimizar, criterioComparacion);
-		indicadorAComparar = _indicadorAComparar;
+	
+	@Override
+	public List<Empresa> filtrar(List<Empresa> empresas) {
+		return empresas.stream().filter(empresa -> this.aplicarCondicion(empresa)).collect(Collectors.toList());
 	}
 
 	// TODO Retorna true si la empresa cumple la condicion
-	public boolean aplicarCondicion(Empresa unaEmpresa, BaseDeDatos baseDeDatos) {
+	public boolean aplicarCondicion(Empresa unaEmpresa) {
 		boolean resultado = true;
 		for(int i = 0; i < periodo-1; i++){
-			if(!(criterioComparacion.comparar(indicadorAOptimizar.getValor(2017-i, unaEmpresa, baseDeDatos), indicadorAOptimizar.getValor(2017-(i+1), unaEmpresa, baseDeDatos))))
+			if(!(criterioComparacion.comparar(baseDeDatos.valorDe(indicadorAOptimizar.getNombre(), 2017-i, unaEmpresa),
+					baseDeDatos.valorDe(indicadorAOptimizar.getNombre(), 2017-(i+1), unaEmpresa))))
 				resultado = false;
 		}
 		return resultado;

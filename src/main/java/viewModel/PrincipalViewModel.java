@@ -19,7 +19,7 @@ public class PrincipalViewModel {
 		try {
 			Scanner scanner = new Scanner(new File(this.path));
 			scanner.close();
-			BaseDeDatos baseDatos = new BaseDeDatos(this.path);
+			BaseDeDatos baseDatos = new BaseDeDatos(this.getPath());
 			baseDatos.leerEmpresas();
 		} catch(FileNotFoundException e){
 			e.printStackTrace();

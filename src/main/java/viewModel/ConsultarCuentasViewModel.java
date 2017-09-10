@@ -22,12 +22,12 @@ public class ConsultarCuentasViewModel {
 	
 	private String nombreEmpresaElegida = "";
 	private Empresa empresaElegida;
-	private Integer periodoElegido = 0;//FIXME: Ver si se lo puede convertir a tipo Year
+	private Integer periodoElegido;//FIXME: Ver si se lo puede convertir a tipo Year
 
 	private List<Integer> periodos = Arrays.asList();
 
 	public ConsultarCuentasViewModel(String path) throws IOException{
-		//this.periodoElegido = 0;
+		this.periodoElegido = 0;
 		this.baseDeDatos = new BaseDeDatos(path);
 		this.baseDeDatos.leerEmpresas();
 		this.baseDeDatos.leerIndicadores();
@@ -42,14 +42,21 @@ public class ConsultarCuentasViewModel {
 	
 	@Dependencies("nombreEmpresaElegida")
 	public List<Empresa> getEmpresas() throws IOException {
-			return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
+			if (/*nombreEmpresaElegida == null || */nombreEmpresaElegida.equals("")) {
+				//return null;
+				return baseDeDatos.buscarEmpresas("");
+			} else {		
+				return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
+			}
 	}
 
 	@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
 		if (this.empresaElegida == null) {
+			
 			return periodos;	
 		} else {
+			
 			periodos = this.empresaElegida.getPeriodos();//empresa elegida es solo de la vista, no del modelo
 			return periodos;
 		}
@@ -67,6 +74,7 @@ public class ConsultarCuentasViewModel {
 	
 	@Dependencies("periodoElegido")//debe ser un atributo para que pueda monitorear su cambio(mirar su get)
 	public List<IndicadorAuxiliar> getIndicadores(){
+
 		if (this.periodoElegido == 0) {
 		//	return Arrays.asList();
 			return null;

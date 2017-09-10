@@ -26,31 +26,39 @@ import model.repositories.RepositorioDeMetodologias;
 public class ConsultarMetodologiasViewModel {
 	
 private BaseDeDatos baseDeDatos;
+	
 	private String nombreMetodologiaElegida = "";	
 	private Metodologia metodologiaElegida;
+	
 	
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
 
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
+	
 	public ConsultarMetodologiasViewModel(String path) throws IOException{
 		baseDeDatos = new BaseDeDatos(path);
 		baseDeDatos.leerEmpresas();
 		baseDeDatos.leerIndicadores();
+		
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")
 	public List<Metodologia> getMetodologias() {
 		return repositorio.filtrarPorNombre(nombreMetodologiaElegida);
+			
 	}
 	
 	@Dependencies("metodologiaElegida")
 	public List<Empresa> getEmpresas() {
 			if (metodologiaElegida == null) {
+				
 				return baseDeDatos.buscarEmpresas("");
 			} else {		
+				
 				return metodologiaElegida.aplicarCondiciones(baseDeDatos.getEmpresas(), baseDeDatos);
 			}
+			
 	}
 	
 	public Metodologia getMetodologiaElegida() {

@@ -74,12 +74,12 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		try{
 			
 			this.getModelObject().agregarCondicion();
-			this.showMessageBox("Condicion agregada", MessageBox.Type.Information);
+			this.showErrorMessageBox("Condicion agregada", MessageBox.Type.Information);
 			
 		} catch (CondicionIncompletaException e) {
 			
 			e.printStackTrace();
-			showMessageBox(e.getMessage(), MessageBox.Type.Error);
+			showErrorMessageBox("La condicion no esta completa.", MessageBox.Type.Error);
 			
 		}
 		
@@ -90,23 +90,23 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		try{
 			
 			this.getModelObject().agregarMetodologia();
-			this.showMessageBox("Metodologia agregada", MessageBox.Type.Information);
+			this.showErrorMessageBox("Metodologia agregada", MessageBox.Type.Information);
 			
 		} catch (MetodologiaIncompletaException e) {
 			
 			e.printStackTrace();
-			showMessageBox(e.getMessage(), MessageBox.Type.Error);
+			showErrorMessageBox("La metodologia no tiene condiciones.", MessageBox.Type.Error);
 			
 		} catch (MetodologiaSinNombreException e) {
 			
 			e.printStackTrace();
-			showMessageBox(e.getMessage(), MessageBox.Type.Error);
+			showErrorMessageBox("Asigne un nombre a la metodologia.", MessageBox.Type.Error);
 			
 		}
 		
 	}
 	
-	protected void showMessageBox(String message, Type type) {
+	protected void showErrorMessageBox(String message, Type type) {
 		MessageBox messageBox = new MessageBox(this, type);
 		messageBox.setMessage(message);
 		messageBox.open();
