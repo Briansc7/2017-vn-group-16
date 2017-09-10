@@ -28,5 +28,5 @@ public enum Comparador {
 		}
 	};
 	
-	abstract boolean comparar(BigDecimal valorUno, BigDecimal valorDos);
+	public abstract boolean comparar(BigDecimal valorUno, BigDecimal valorDos);
 }
