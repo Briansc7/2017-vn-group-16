@@ -1,9 +1,10 @@
 package model.metodologia;
 
+import java.math.BigDecimal;
+
 import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
-import model.metodologia.condiciones.ValorAComparar;
 
 public class ValorParaXAnio implements Funcion{
 	private Indicador indicador;
@@ -12,7 +13,9 @@ public class ValorParaXAnio implements Funcion{
 		this.indicador = indicador;
 	}
 	
-	public ValorAComparar calcularValor(Empresa empresa, Integer anio, BaseDeDatos baseDeDatos){
-		return new ValorAComparar(indicador.getValor(anio, empresa, baseDeDatos));
+	public BigDecimal[] calcularValor(Empresa empresa, Integer anio, BaseDeDatos baseDeDatos){
+		BigDecimal[] resultado = new BigDecimal[1];
+		resultado[0] = indicador.getValor(anio, empresa, baseDeDatos);
+		return resultado;
 	}
 }
