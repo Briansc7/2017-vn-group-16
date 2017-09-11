@@ -2,7 +2,6 @@ package testMetodologia;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -14,20 +13,20 @@ import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
+import model.metodologia.CondicionGeneral;
 import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
 import model.metodologia.NoTaxativaLongevidad;
 import model.metodologia.TaxativaLongevidad;
-import model.metodologia.condiciones.GreaterAndEqualThan;
-import model.metodologia.condiciones.GreaterThan;
-import model.metodologia.condiciones.LessThan;
+import model.metodologia.ValorParaNAnios;
+import model.metodologia.condiciones.Comparador;
 import parser.ParseException;
 import parser.TokenMgrError;
 
 public class TestUnAnio {
 	Metodologia metodologiaBuffet;
-	CondicionNoTaxativa condicionRoe;
+	CondicionGeneral condicionRoe;
 	CondicionNoTaxativa condicionDeuda;
 	CondicionTaxativa condicionMargen;
 	TaxativaLongevidad condicionLongevidad1;
@@ -57,17 +56,23 @@ public class TestUnAnio {
 														  new Cuenta("capitalTotal", new BigDecimal(200), LocalDate.parse("2017-05-10")),
 														  new Cuenta("totalLiabilities", new BigDecimal(300), LocalDate.parse("2017-05-10")),
 														  new Cuenta("deuda", new BigDecimal(10), LocalDate.parse("2015-05-10"))));
-		
+		/*
 		condicionRoe = new CondicionNoTaxativa(1, "ROE", new GreaterThan(), 1);
 		condicionDeuda = new CondicionNoTaxativa(1, "debtEquityRatio", new LessThan(), 2);
 		condicionMargen = new CondicionTaxativa(1, "Margen", new GreaterAndEqualThan(), "margen");
 		condicionLongevidad1 = new TaxativaLongevidad(0, "", new GreaterAndEqualThan(), new BigDecimal(2));
 		condicionLongevidad2 = new NoTaxativaLongevidad(0, "", new GreaterThan(), 5);
-		
+		*/
 		indicadorEquity = new Indicador("shareholdersEquity", "capitalTotal - totalLiabilities");
 		indicadorRoe = new Indicador("roe", "2 * ingresoNeto");
 		indicadorDeuda = new Indicador("debtEquityRatio", "totalLiabilities / shareholdersEquity");
 		indicadorMargen = new Indicador("margen", "(ingresoNeto - 50 - 20 - 15) / ingresoNeto");
+		
+		condicionRoe = new CondicionConstructor()
+								.periodoDeEvaluacion(1)
+								.funcionParaObtenerValor(new ValorParaNAnios(indicadorRoe))
+								.comparador(Comparador.MAYOR)
+								.build();
 		
 		base = new BaseDeDatos("");
 		base.setEmpresas(Arrays.asList(empresaUno, empresaDos, empresaTres));
@@ -79,11 +84,10 @@ public class TestUnAnio {
 	
 	@Test
 	public void condicion1Buffet() throws ParseException, TokenMgrError{
-
-		Assert.assertTrue(condicionRoe.compararEmpresas(empresaUno, empresaDos, base));
+		Assert.assertEquals(empresaUno, condicionRoe.analizar(Arrays.asList(empresaUno, empresaDos), base).get(0));
 	}
 	
-	@Test
+	/*@Test
 	public void condicion2Buffet() throws ParseException, TokenMgrError{
 		
 		Assert.assertTrue(condicionDeuda.compararEmpresas(empresaUno, empresaDos, base));
@@ -107,5 +111,5 @@ public class TestUnAnio {
 		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidad1), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidad2));
 
 		Assert.assertEquals("google", metodologiaBuffet.aplicarCondiciones(Arrays.asList(empresaUno, empresaDos, empresaTres), base).get(0).getNombre());
-	}
+	}*/
 }

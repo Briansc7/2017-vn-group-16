@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import exceptions.EseYaExisteException;
-import exceptions.NoSeEncuentraException;
 import mockObjects.AppDataI;
+import model.metodologia.CondicionComparativa;
 import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.CondicionTaxativa;
+import model.metodologia.CondicionValorUnico;
+import model.metodologia.Longevidad;
 import model.metodologia.Metodologia;
-import model.metodologia.NoTaxativaLongevidad;
-import model.metodologia.TaxativaLongevidad;
+import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.GreaterAndEqualThan;
 import model.metodologia.condiciones.GreaterThan;
 import model.metodologia.condiciones.LessThan;
@@ -28,11 +29,11 @@ public class RepositorioDeMetodologias {
 	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
 	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
 	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
-	private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
-	private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
+	//private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
+	private CondicionValorUnico condicionLongevidad1 = new CondicionValorUnico(1, new Longevidad(), Comparador.MAYOR, BigDecimal.valueOf(10));
+	//private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
+	private CondicionComparativa condicionLongevidad2 = new CondicionComparativa(1, new Longevidad(), Comparador.MAYOROIGUAL);
 	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidad1), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidad2));	
-	
-	
 	
 	//Singleton
 	private RepositorioDeMetodologias(){

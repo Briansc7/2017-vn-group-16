@@ -8,11 +8,11 @@ import model.BaseDeDatos;
 import model.Empresa;
 import model.metodologia.condiciones.Comparador;
 
-public class CondicionParaUnValorFijo extends CondicionGeneral{
+public class CondicionValorUnico extends CondicionGeneral{
 
 	private BigDecimal valor;
 	
-	public CondicionParaUnValorFijo(Integer periodo, Funcion obtenerValor, Comparador comparador, BigDecimal valor){
+	public CondicionValorUnico(Integer periodo, Funcion obtenerValor, Comparador comparador, BigDecimal valor){
 		super(periodo, obtenerValor, comparador);
 		this.valor = valor;
 	}
@@ -22,7 +22,6 @@ public class CondicionParaUnValorFijo extends CondicionGeneral{
 	}
 	
 	private boolean filtrarEmpresa(Empresa empresa, BaseDeDatos baseDeDatos){
-		return comparador.comparar(
-				obtenerValor.calcularValor(empresa, periodo, baseDeDatos)[0], valor);
+		return comparador.comparar(obtenerValor.calcularValor(empresa, periodo, baseDeDatos)[0], valor);
 	}
 }
