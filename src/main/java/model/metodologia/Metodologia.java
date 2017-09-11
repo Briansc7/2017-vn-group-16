@@ -1,14 +1,9 @@
 package model.metodologia;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import model.BaseDeDatos;
 import model.Empresa;
-import model.metodologia.condiciones.LessThan;
 
 public class Metodologia {
 	String nombre;

@@ -8,28 +8,28 @@ import model.metodologia.CondicionValorUnico;
 import model.metodologia.Funcion;
 import model.metodologia.condiciones.Comparador;
 
-public class CondicionConstructor {
+public class CondicionBuilder {
 	private Integer periodo;
 	private Funcion obtenerValor;
 	private Comparador comparador;
 	private BigDecimal valor;
 	
-	public CondicionConstructor periodoDeEvaluacion(Integer periodo){
+	public CondicionBuilder periodoDeEvaluacion(Integer periodo){
 		this.periodo = periodo;
 		return this;
 	}
 	
-	public CondicionConstructor funcionParaObtenerValor(Funcion obtenerValor){
+	public CondicionBuilder funcionParaObtenerValor(Funcion obtenerValor){
 		this.obtenerValor = obtenerValor;
 		return this;
 	}
 
-	public CondicionConstructor comparador(Comparador comparador){
+	public CondicionBuilder comparador(Comparador comparador){
 		this.comparador = comparador;
 		return this;
 	}
 	
-	public CondicionConstructor valor(BigDecimal valor){
+	public CondicionBuilder valor(BigDecimal valor){
 		this.valor = valor;
 		return this;
 	}

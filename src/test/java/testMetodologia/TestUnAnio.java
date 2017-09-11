@@ -14,11 +14,9 @@ import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.metodologia.CondicionGeneral;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
+import model.metodologia.Consistencia;
+import model.metodologia.Longevidad;
 import model.metodologia.Metodologia;
-import model.metodologia.NoTaxativaLongevidad;
-import model.metodologia.TaxativaLongevidad;
 import model.metodologia.ValorParaNAnios;
 import model.metodologia.condiciones.Comparador;
 import parser.ParseException;
@@ -27,15 +25,15 @@ import parser.TokenMgrError;
 public class TestUnAnio {
 	Metodologia metodologiaBuffet;
 	CondicionGeneral condicionRoe;
-	CondicionNoTaxativa condicionDeuda;
-	CondicionTaxativa condicionMargen;
-	TaxativaLongevidad condicionLongevidad1;
-	NoTaxativaLongevidad condicionLongevidad2;
-	List<CondicionNoTaxativa> l;
+	CondicionGeneral condicionDeuda;
+	CondicionGeneral condicionMargen;
+	CondicionGeneral condicionLongevidadPropia;
+	CondicionGeneral condicionLongevidadComparativa;
 	BaseDeDatos base;
 	Empresa empresaUno;
 	Empresa empresaDos;
 	Empresa empresaTres;
+	List<Empresa> empresas;
 	Indicador indicadorRoe;
 	Indicador indicadorMargen;
 	Indicador indicadorDeuda;
@@ -68,14 +66,37 @@ public class TestUnAnio {
 		indicadorDeuda = new Indicador("debtEquityRatio", "totalLiabilities / shareholdersEquity");
 		indicadorMargen = new Indicador("margen", "(ingresoNeto - 50 - 20 - 15) / ingresoNeto");
 		
-		condicionRoe = new CondicionConstructor()
+		condicionRoe = new CondicionBuilder()
 								.periodoDeEvaluacion(1)
 								.funcionParaObtenerValor(new ValorParaNAnios(indicadorRoe))
 								.comparador(Comparador.MAYOR)
 								.build();
+		condicionDeuda = new CondicionBuilder()
+								.periodoDeEvaluacion(1)
+								.funcionParaObtenerValor(new ValorParaNAnios(indicadorDeuda))
+								.comparador(Comparador.MENOR)
+								.build();
+		condicionMargen = new CondicionBuilder()//TODO: falta implementar consistencia
+								.periodoDeEvaluacion(1)
+								.funcionParaObtenerValor(new Consistencia(indicadorMargen))
+								.comparador(Comparador.MAYOROIGUAL)
+//TODO: le tengo que pasar un valor?								.valor(valor)
+								.build();
+		condicionLongevidadPropia = new CondicionBuilder()
+								.periodoDeEvaluacion(1)
+								.funcionParaObtenerValor(new Longevidad())
+								.comparador(Comparador.MAYOROIGUAL)
+								.valor(new BigDecimal(2))
+								.build();
+		condicionLongevidadComparativa = new CondicionBuilder()
+								.periodoDeEvaluacion(1)
+								.funcionParaObtenerValor(new Longevidad())
+								.comparador(Comparador.MAYOR)
+								.build();
 		
 		base = new BaseDeDatos("");
-		base.setEmpresas(Arrays.asList(empresaUno, empresaDos, empresaTres));
+		empresas = Arrays.asList(empresaUno, empresaDos, empresaTres);
+		base.setEmpresas(empresas);
 		base.agregarIndicador(indicadorEquity);
 		base.agregarIndicador(indicadorRoe);
 		base.agregarIndicador(indicadorDeuda);
@@ -83,29 +104,31 @@ public class TestUnAnio {
 	}
 	
 	@Test
-	public void condicion1Buffet() throws ParseException, TokenMgrError{
-		Assert.assertEquals(empresaUno, condicionRoe.analizar(Arrays.asList(empresaUno, empresaDos), base).get(0));
+	public void condicion1Buffet() {
+		Assert.assertEquals(empresaUno, condicionRoe.analizar(empresas, base).get(0));
 	}
 	
-	/*@Test
-	public void condicion2Buffet() throws ParseException, TokenMgrError{
-		
-		Assert.assertTrue(condicionDeuda.compararEmpresas(empresaUno, empresaDos, base));
+	@Test
+	public void condicion2Buffet() {
+		Assert.assertEquals(empresaUno, condicionDeuda.analizar(empresas, base).get(0));
 	}
-	
+	/*
 	@Test
 	public void condicion3Buffet() throws ParseException, TokenMgrError{
 		
 		Assert.assertTrue(condicionMargen.aplicarCondicion(empresaUno, base));
 	}
-	
+	*/
 	@Test
-	public void condicion4Buffet() throws ParseException, TokenMgrError{
-		
-		Assert.assertTrue(condicionLongevidad1.aplicarCondicion(empresaTres, base));
-		Assert.assertTrue(condicionLongevidad2.compararEmpresas(empresaTres, empresaDos, base));
+	public void condicionLongevidadPropia() {
+		Assert.assertTrue(condicionLongevidadPropia.analizar(empresas, base).contains(empresaTres));
 	}
 	
+	@Test
+	public void condicionLongevidadComparativa() {
+		Assert.assertEquals(empresaTres, condicionLongevidadComparativa.analizar(empresas, base).get(0));
+	}
+	/*
 	@Test
 	public void metodologiaBuffet() throws ParseException, TokenMgrError{
 		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidad1), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidad2));
