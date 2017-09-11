@@ -3,3 +3,4 @@
 .project
 *bin*
 .settings
+/src/test/resources/META-INF/persistence.xml
