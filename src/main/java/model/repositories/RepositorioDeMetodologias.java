@@ -30,14 +30,13 @@ public class RepositorioDeMetodologias {
 	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
 	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
 	//private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
-	private CondicionValorUnico condicionLongevidad1 = new CondicionValorUnico(1, new Longevidad(), Comparador.MAYOR, BigDecimal.valueOf(10));
+	private CondicionValorUnico condicionLongevidadPropia = new CondicionValorUnico(1, new Longevidad(), Comparador.MAYOR, BigDecimal.valueOf(10));
 	//private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
-	private CondicionComparativa condicionLongevidad2 = new CondicionComparativa(1, new Longevidad(), Comparador.MAYOROIGUAL);
-	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidad1), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidad2));	
+	private CondicionComparativa condicionLongevidadComparativa = new CondicionComparativa(1, new Longevidad(), Comparador.MAYOROIGUAL);
+	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidadComparativa));	
 	
 	//Singleton
 	private RepositorioDeMetodologias(){
-		
 		metodologias.add(buffet);
 		archivarRepositorio();
 	}

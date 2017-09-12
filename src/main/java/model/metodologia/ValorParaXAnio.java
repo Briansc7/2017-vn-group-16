@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
-
+//TODO: se usa?
 public class ValorParaXAnio implements Funcion{
 	private Indicador indicador;
 	
