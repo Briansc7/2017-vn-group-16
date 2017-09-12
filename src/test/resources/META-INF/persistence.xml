@@ -8,7 +8,8 @@
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
-    	<class>jacklow.model.Vehiculo</class>
+    	<class>model.Cuenta</class>
+	<class>model.Atributo</class>
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
@@ -17,7 +18,7 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/prueba" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="07070707" /> 
+            <property name="hibernate.connection.password" value="1234" /> 
 
 <!-- 
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
@@ -32,7 +33,7 @@
             <property name="hibernate.show_sql" value="true" /> 
             <property name="hibernate.format_sql" value="true" /> 
             <property name="use_sql_comments" value="true" /> 
-            <property name="hibernate.hbm2ddl.auto" value="update" /> 
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" /> 
         </properties>
           
     </persistence-unit> 
