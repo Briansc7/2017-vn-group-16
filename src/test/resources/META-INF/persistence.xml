@@ -9,6 +9,7 @@
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
     	
     	<class>model.Cuenta</class>
+	<class>model.Atributo</class>
     	 
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
