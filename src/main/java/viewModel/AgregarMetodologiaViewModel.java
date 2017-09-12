@@ -8,61 +8,57 @@ import java.util.List;
 
 import org.uqbar.commons.utils.Observable;
 
-import dtos.PathFileTxtJson;
 import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
 import model.BaseDeDatos;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
+import model.Indicador;
+import model.metodologia.CondicionComparativa;
+import model.metodologia.CondicionGeneral;
+import model.metodologia.CondicionValorUnico;
+import model.metodologia.Funcion;
 import model.metodologia.Metodologia;
-import model.metodologia.NoTaxativaLongevidad;
-import model.metodologia.TaxativaLongevidad;
-import model.metodologia.condiciones.BooleanCondition;
-import model.metodologia.condiciones.EqualThan;
-import model.metodologia.condiciones.GreaterAndEqualThan;
-import model.metodologia.condiciones.GreaterThan;
-import model.metodologia.condiciones.LessAndEqualThan;
-import model.metodologia.condiciones.LessThan;
+import model.metodologia.condiciones.Comparador;
 import model.repositories.RepositorioDeMetodologias;
-import utils.AppData;
+import parser.ParseException;
+import parser.TokenMgrError;
 
 
 @Observable
 public class AgregarMetodologiaViewModel {
 
-	private String periodo;
-	private String indicador;
-	private BooleanCondition criterio;
+	private Integer periodoQueSeAnaliza;
+	private Indicador indicador;
+	private Funcion funcionAAplicar;
+	private Comparador criterio;
 	private String tipoAComparar;
-	private String valor;
+	private BigDecimal valorContraElQueSeCompara;
 	private String nombre;
 	private BaseDeDatos baseDeDatos = new BaseDeDatos("");
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
-	private List<CondicionTaxativa> condicionesTaxativas = new ArrayList<CondicionTaxativa>();
-	private List<CondicionNoTaxativa> condicionesNoTaxativas = new ArrayList<CondicionNoTaxativa>();
+	private List<CondicionGeneral> condiciones = new ArrayList<CondicionGeneral>();
 	
-	private List<BooleanCondition> criterios;// = Arrays.asList(new EqualThan(), new GreaterThan(), new GreaterAndEqualThan(), new LessThan(), new LessAndEqualThan());
+	private List<Comparador> criterios;// = Arrays.asList(new EqualThan(), new GreaterThan(), new GreaterAndEqualThan(), new LessThan(), new LessAndEqualThan());
 	private List<String> tiposParaComparar;// = Arrays.asList("constante", "indicador propio", "indicador de otra empresa");
-	private List<String> indicadores;// = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
+	private List<Indicador> indicadores;// = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
 	
-	public AgregarMetodologiaViewModel() {
+	public AgregarMetodologiaViewModel() throws ParseException, TokenMgrError {
 		this.inicializarDatos();
 	}
 	
-	private void inicializarDatos() {
+	private void inicializarDatos() throws ParseException, TokenMgrError {
 		baseDeDatos.leerIndicadores();
-		criterios = Arrays.asList(new EqualThan(), new GreaterThan(), new GreaterAndEqualThan(), new LessThan(), new LessAndEqualThan());
-		tiposParaComparar = Arrays.asList("Constante", "Indicador propio", "Indicador de otra empresa");
-		indicadores = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
-		indicadores.add("Longevidad");
+		criterios = Arrays.asList(Comparador.IGUAL, Comparador.MAYOR, Comparador.MAYOROIGUAL, Comparador.MENOR, Comparador.MENOROIGUAL);
+		tiposParaComparar = Arrays.asList("Constante", "Indicador de otra empresa");
+		indicadores = new ArrayList<Indicador>(baseDeDatos.getIndicadores());
+		indicadores.add(new Indicador("Longevidad", "1"));
 		//AppData.getInstance().setInicializacionMetodologias(new PathFileTxtJson("./Archivos del sistema/Metodologias.txt"));
 	}
 
 	public void agregarCondicion() {
 		
-		if(periodo == null){
+		if(periodoQueSeAnaliza == null){
 			
 			throw new CondicionIncompletaException("Falta ingresar el periodo.");
 			
@@ -78,28 +74,31 @@ public class AgregarMetodologiaViewModel {
 			
 			throw new CondicionIncompletaException("Falta ingresar el tipo a comparar.");
 			
-		} else if(valor == null) {
+		} else if(valorContraElQueSeCompara == null) {
 			
 			throw new CondicionIncompletaException("Falta ingresar el valor a comparar.");
 			
 		} 
 		
 		if(tipoAComparar.equalsIgnoreCase("constante")){
+			//if(indicador.seLlama("Longevidad"))
+				this.condiciones.add(new CondicionValorUnico(periodoQueSeAnaliza, funcionAAplicar, criterio, valorContraElQueSeCompara));
+			/*else
+				this.condiciones.add(new CondicionValorUnico(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
+			*/
+		} else {
+			this.condiciones.add(new CondicionComparativa(periodoQueSeAnaliza, funcionAAplicar, criterio));
+		}
+		/*if(tipoAComparar.equals("Indicador de otra empresa")) {
 			if(indicador.equalsIgnoreCase("Longevidad"))
-				this.condicionesTaxativas.add(new TaxativaLongevidad(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
+				this.condicionesNoTaxativas.add(new NoTaxativaLongevidad(periodoQueSeAnaliza, indicador, criterio, new Integer(valorContraElQueSeCompara)));
 			else
-				this.condicionesTaxativas.add(new CondicionTaxativa(new Integer(periodo), indicador, criterio, new BigDecimal(valor)));
-			
-		} else if(tipoAComparar.equals("Indicador de otra empresa")) {
-			if(indicador.equalsIgnoreCase("Longevidad"))
-				this.condicionesNoTaxativas.add(new NoTaxativaLongevidad(new Integer(periodo), indicador, criterio, new Integer(valor)));
-			else
-				this.condicionesNoTaxativas.add(new CondicionNoTaxativa(new Integer(periodo), indicador, criterio, new Integer(valor)));
+				this.condicionesNoTaxativas.add(new CondicionNoTaxativa(periodoQueSeAnaliza, indicador, criterio, new Integer(valorContraElQueSeCompara)));
 		} else {
 			
-			this.condicionesTaxativas.add( new CondicionTaxativa(new Integer(periodo), indicador, criterio, valor));
+			this.condiciones.add( new CondicionTaxativa(new Integer(periodoQueSeAnaliza), indicador, criterio, valorContraElQueSeCompara));
 			
-		}
+		}*/
 		
 	}
 
@@ -109,32 +108,32 @@ public class AgregarMetodologiaViewModel {
 			
 			throw new MetodologiaSinNombreException("No se ingreso el nombre de la metodologia.");
 			
-		} else if(condicionesTaxativas.isEmpty() && condicionesNoTaxativas.isEmpty()) {
+		} else if(condiciones.isEmpty()) {
 			
 			throw new MetodologiaIncompletaException("No se agrego ninguna condicion.");
 			
 		}
 		
-		Metodologia unaMetodologia = new Metodologia(nombre, condicionesTaxativas, condicionesNoTaxativas);
+		Metodologia unaMetodologia = new Metodologia(nombre, condiciones);
 		
 		repositorio.agregarMetodologia(unaMetodologia);
 		
 		
 	}
 	
-	public String getIndicador() {
+	public Indicador getIndicador() {
 		return indicador;
 	}
 	
-	public void setIndicador(String indicador) {
+	public void setIndicador(Indicador indicador) {
 		this.indicador = indicador;
 	}
 
-	public BooleanCondition getCriterio() {
+	public Comparador getCriterio() {
 		return criterio;
 	}
 
-	public void setCriterio(BooleanCondition criterio) {
+	public void setCriterio(Comparador criterio) {
 		this.criterio = criterio;
 	}
 
@@ -146,20 +145,20 @@ public class AgregarMetodologiaViewModel {
 		this.tipoAComparar = tipoAComparar;
 	}
 	
-	public String getPeriodo() {
-		return periodo;
+	public Integer getPeriodo() {
+		return periodoQueSeAnaliza;
 	}
 	
-	public void setPeriodo(String periodo) {
-		this.periodo = periodo;
+	public void setPeriodo(Integer periodo) {
+		this.periodoQueSeAnaliza = periodo;
 	}
 	
-	public String getValor() {
-		return valor;
+	public BigDecimal getValor() {
+		return valorContraElQueSeCompara;
 	}
 	
-	public void setValor(String valorAComparar) {
-		this.valor = valorAComparar;
+	public void setValor(BigDecimal valorAComparar) {
+		this.valorContraElQueSeCompara = valorAComparar;
 	}
 	
 	public String getNombre() {
@@ -170,11 +169,11 @@ public class AgregarMetodologiaViewModel {
 		this.nombre = nombre;
 	}
 
-	public List<BooleanCondition> getCriterios() {
+	public List<Comparador> getCriterios() {
 		return criterios;
 	}
 
-	public void setCriterios(List<BooleanCondition> criterios) {
+	public void setCriterios(List<Comparador> criterios) {
 		this.criterios = criterios;
 	}
 
@@ -186,27 +185,19 @@ public class AgregarMetodologiaViewModel {
 		this.tiposParaComparar = tiposParaComparar;
 	}
 
-	public List<String> getIndicadores() {
+	public List<Indicador> getIndicadores() {
 		return indicadores;
 	}
 
-	public void setIndicadores(List<String> indicadores) {
+	public void setIndicadores(List<Indicador> indicadores) {
 		this.indicadores = indicadores;
 	}
 	
-	public List<CondicionTaxativa> getCondicionesTaxativas() {
-		return condicionesTaxativas;
+	public List<CondicionGeneral> getCondicionesTaxativas() {
+		return condiciones;
 	}
 
-	public void setCondicionesTaxativas(List<CondicionTaxativa> condicionesTaxativas) {
-		this.condicionesTaxativas = condicionesTaxativas;
-	}
-
-	public List<CondicionNoTaxativa> getCondicionesNoTaxativas() {
-		return condicionesNoTaxativas;
-	}
-
-	public void setCondicionesNoTaxativas(List<CondicionNoTaxativa> condicionesNoTaxativas) {
-		this.condicionesNoTaxativas = condicionesNoTaxativas;
+	public void setCondicionesTaxativas(List<CondicionGeneral> condicionesTaxativas) {
+		this.condiciones = condicionesTaxativas;
 	}
 }

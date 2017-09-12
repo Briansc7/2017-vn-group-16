@@ -14,12 +14,15 @@ import org.uqbar.arena.windows.WindowOwner;
 import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
-import model.metodologia.condiciones.BooleanCondition;
+import model.Indicador;
+import model.metodologia.condiciones.Comparador;
+import parser.ParseException;
+import parser.TokenMgrError;
 import viewModel.AgregarMetodologiaViewModel;
 
 public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 
-	public AgregarMetodologiaView(WindowOwner owner) {
+	public AgregarMetodologiaView(WindowOwner owner) throws ParseException, TokenMgrError {
 		super(owner, new AgregarMetodologiaViewModel());
 	}
 
@@ -40,12 +43,12 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		new Label(tabla).setText("Valor").setHeight(60).setWidth(120);
 		
 	    new TextBox(tabla).setWidth(80).bindValueToProperty("periodo");
-	    Selector<String> selectorIndicadores = new Selector<String>(tabla);
+	    Selector<Indicador> selectorIndicadores = new Selector<Indicador>(tabla);
 	    selectorIndicadores.bindItemsToProperty("indicadores");
 	    selectorIndicadores.bindValueToProperty("indicador");
 	    
 	    
-	    Selector<BooleanCondition> selectorCriterios = new Selector<BooleanCondition>(tabla);
+	    Selector<Comparador> selectorCriterios = new Selector<Comparador>(tabla);
 	    selectorCriterios.bindItemsToProperty("criterios");
 	    selectorCriterios.bindValueToProperty("criterio");
 	    

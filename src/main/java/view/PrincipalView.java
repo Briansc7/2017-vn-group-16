@@ -9,6 +9,8 @@ import org.uqbar.arena.windows.MessageBox;
 import org.uqbar.arena.windows.SimpleWindow;
 import org.uqbar.arena.windows.WindowOwner;
 
+import parser.ParseException;
+import parser.TokenMgrError;
 import viewModel.PrincipalViewModel;
 
 public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
@@ -89,9 +91,18 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	}
 	
 	public void agregarMetodologia() {
-		Dialog<?> dialog = new AgregarMetodologiaView(this);
-		dialog.open();
-		dialog.onAccept(() -> {});
+		Dialog<?> dialog;
+		try {
+			dialog = new AgregarMetodologiaView(this);
+			dialog.open();
+			dialog.onAccept(() -> {});
+		} catch (ParseException e) {
+			e.printStackTrace();
+			throw new RuntimeException("El indicador esta mal definido");
+		} catch (TokenMgrError e) {
+			e.printStackTrace();
+			throw new RuntimeException("El indicador esta mal definido");
+		}
 	}
 	
 }

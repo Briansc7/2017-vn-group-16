@@ -3,30 +3,28 @@ package model.metodologia;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.BaseDeDatos;
 import model.Empresa;
 
 public class Metodologia {
 	String nombre;
-	List<Condicion> condiciones;
-	List<CondicionTaxativa> condicionesTaxativas;
-	List<CondicionNoTaxativa> condicionesNoTaxativas;
+	List<CondicionGeneral> condiciones;
 	//List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	
-	public Metodologia(String nombre, List<CondicionTaxativa> condicionesTaxativas,
-			List<CondicionNoTaxativa> condicionesNoTaxativas) {
-		
+	public Metodologia(String nombre, List<CondicionGeneral> condiciones) {
 		this.nombre = nombre;
-		this.condicionesTaxativas = condicionesTaxativas;
-		this.condicionesNoTaxativas = condicionesNoTaxativas;
+		this.condiciones= condiciones;
 	}
 
 	//Retorna la empresas que cumplen con todo y ordenadas
-	public List<Empresa> aplicarCondiciones(List<Empresa> empresas) {
+	public List<Empresa> aplicarCondiciones(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
 		//No alterar la lista original
 		List<Empresa> _empresas = new ArrayList<Empresa>(empresas);
 		
-		
-		return aplicarCondiciones(_empresas);
+		for(CondicionGeneral condicion:condiciones){
+			condicion.analizar(_empresas, baseDeDatos);
+		}
+		return _empresas;
 	}
 	
 	/*
@@ -47,12 +45,12 @@ public class Metodologia {
 	public String getNombre(){
 		return nombre;
 	}
-
+/*
 	public List<CondicionNoTaxativa> getCriterios() {
 		
 		return condicionesNoTaxativas;
 	}
-	
+	*/
 	@Override
 	public boolean equals(Object o){
 		if(!o.getClass().equals(Metodologia.class))

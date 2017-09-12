@@ -1,25 +1,15 @@
 package viewModel;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
 import model.Empresa;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
 import model.metodologia.Metodologia;
-import model.metodologia.NoTaxativaLongevidad;
-import model.metodologia.TaxativaLongevidad;
-import model.metodologia.condiciones.GreaterAndEqualThan;
-import model.metodologia.condiciones.GreaterThan;
-import model.metodologia.condiciones.LessThan;
 import model.repositories.RepositorioDeMetodologias;
 
 @Observable

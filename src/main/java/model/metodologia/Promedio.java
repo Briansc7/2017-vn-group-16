@@ -21,5 +21,4 @@ public class Promedio implements Funcion{
 		resultado[0] = contador.divide(BigDecimal.valueOf(periodo));
 		return resultado;
 	}
-
 }

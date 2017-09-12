@@ -64,6 +64,10 @@ public class Indicador extends Atributo{
 	public String getFormula() {
 		return formula;
 	}
+
+	public boolean seLlama(String nombre) {
+		return this.nombre.equalsIgnoreCase(nombre);
+	}
 }
 
 /*	

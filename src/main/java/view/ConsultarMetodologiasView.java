@@ -5,15 +5,12 @@ import java.io.IOException;
 import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
-import org.uqbar.arena.widgets.Selector;
 import org.uqbar.arena.widgets.TextBox;
+import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import model.Empresa;
-import model.metodologia.CondicionNoTaxativa;
 import model.metodologia.Metodologia;
-
-import org.uqbar.arena.windows.Dialog;
 import viewModel.ConsultarMetodologiasViewModel;
 
 public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewModel>{
