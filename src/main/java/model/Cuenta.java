@@ -2,26 +2,22 @@ package model;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import javax.persistence.Convert;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
-import org.uqbarproject.jpa.java8.extras.convert.LocalDateTimeConverter;
 
 @Observable
 @Entity
+@Table(name = "cuenta")
 public class Cuenta extends Atributo{
 	
-	@Id
-	@GeneratedValue
-	private Long id;
-	
+	@Column(name = "valor")
 	private BigDecimal valor;
 	
+	@Column(name = "fecha")
 	private LocalDate fecha;
 
 	public Cuenta(String nombre, BigDecimal valor, LocalDate fecha){
@@ -29,6 +25,9 @@ public class Cuenta extends Atributo{
 		this.valor = valor;
 		this.fecha = fecha;
 	}
+	
+	@SuppressWarnings("unused")
+	private Cuenta(){super();}
 	
 	public String getNombre() {
 		return nombre;

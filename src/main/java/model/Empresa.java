@@ -8,12 +8,35 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 import exceptions.NoExisteAtributoException;
 
+@Entity
+@Table(name = "empresa")
 public class Empresa {
 	
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "nombre")
 	private String nombre;
+	
+	@Column
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
+	
+	@SuppressWarnings("unused")
+	private Empresa(){}
 	
 	public Empresa(String nombre, List<Cuenta> cuentas){
 		this.nombre = nombre;

@@ -2,19 +2,33 @@ package model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
+
 import org.uqbar.commons.utils.Observable;
 
 import componentesMatematicos.Expresion;
 import parser.Parser;
 
 @Observable
+@Entity
+@Table(name = "indicador")
 public class Indicador extends Atributo{
 	
 	//parsear una sola vez, no N veces porque va a seguir dando lo mismo.
 	//vuelve a parsear muchas veces cambiando el periodo una y otra vez
 	//si empresa tiene 125 cuentas y 20 indicadores y los indicadores dependen de otros, esto se vuelve exponencial
+	
+	@Transient
+	@Column(name = "expresion")
 	private Expresion expresion;
+	@Column(name = "formula")
 	private String formula;
+	
+	@SuppressWarnings("unused")
+	private Indicador(){super();}
 	
 	//
 	public Indicador(String nombre, String formula) throws parser.ParseException, parser.TokenMgrError{
