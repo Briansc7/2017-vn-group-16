@@ -9,7 +9,7 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class Atributo {
+public abstract class Atributo {
 	
 	@Id
 	@GeneratedValue

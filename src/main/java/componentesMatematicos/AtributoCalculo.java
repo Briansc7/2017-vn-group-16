@@ -2,10 +2,19 @@ package componentesMatematicos;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.BaseDeDatos;
 import model.Empresa;
 
+@Entity
+@DiscriminatorValue("3")
 public class AtributoCalculo extends FactorLiteral{
+	private AtributoCalculo(){
+		super();
+	}
+	
 	public AtributoCalculo(String nombre){
 		super(nombre);
 	}

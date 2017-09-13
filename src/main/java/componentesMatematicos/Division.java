@@ -3,14 +3,22 @@ package componentesMatematicos;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import exceptions.NoSePuedeDividirPorCeroException;
 import model.BaseDeDatos;
 import model.Empresa;
 
+@Entity
+@DiscriminatorValue("5")
 public class Division extends Operador {
-	
+
+	private Division(){
+		super();
+	}
+
 	public Division(Expresion opIzq, Expresion opDer){
-		
 		super(opIzq, opDer);
 	}
 	

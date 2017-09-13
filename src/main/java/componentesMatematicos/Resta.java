@@ -4,13 +4,19 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.BaseDeDatos;
 import model.Empresa;
 
+@Entity
+@DiscriminatorValue("8")
 public class Resta extends Operador {
 	
+	private Resta(){super();}
+	
 	public Resta(Expresion opIzq, Expresion opDer){
-		
 		super(opIzq, opDer);
 	}
 	

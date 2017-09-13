@@ -4,13 +4,19 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.BaseDeDatos;
 import model.Empresa;
 
+@Entity
+@DiscriminatorValue("9")
 public class Suma extends Operador {
 	
+	private Suma(){super();}
+	
 	public Suma(Expresion opIzq, Expresion opDer){
-		
 		super(opIzq, opDer);
 	}
 	

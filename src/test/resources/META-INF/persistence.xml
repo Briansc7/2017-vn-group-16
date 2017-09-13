@@ -12,6 +12,18 @@
     <class>model.Cuenta</class>
 	<class>model.Atrbuto</class>
 	<class>model.Indicador</class>
+	<class>componentesMatematicos.Expresion</class>
+	<class>componentesMatematicos.AtributoCalculo</class>
+	<class>componentesMatematicos.CuentaCalculo</class>
+	<class>componentesMatematicos.Division</class>
+	<class>componentesMatematicos.Factor</class>
+	<class>componentesMatematicos.FactorLiteral</class>
+	<class>componentesMatematicos.FactorNumerico</class>
+	<class>componentesMatematicos.IndicadorCalculo</class>
+	<class>componentesMatematicos.Operador</class>
+	<class>componentesMatematicos.Producto</class>
+	<class>componentesMatematicos.Resta</class>
+	<class>componentesMatematicos.Suma</class>
 	
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
