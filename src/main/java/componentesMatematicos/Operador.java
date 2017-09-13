@@ -1,17 +1,19 @@
 package componentesMatematicos;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.OneToOne;
 
 @Entity
 @DiscriminatorValue("4")
 public abstract class Operador extends Expresion {
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	public Expresion operandoIzq;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	public Expresion operandoDer;
 	
 	public Operador(){}
