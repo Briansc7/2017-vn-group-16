@@ -7,6 +7,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import exceptions.EseYaExisteException;
 import mockObjects.AppDataI;
 import model.Metodologia;
@@ -18,7 +20,7 @@ import model.metodologia.condiciones.CondicionGeneral;
 import testMetodologia.CondicionBuilder;
 import utils.AppData;
 
-public class RepositorioDeMetodologias {
+public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	private static RepositorioDeMetodologias instance;
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();
 	private AppDataI appData = AppData.getInstance();

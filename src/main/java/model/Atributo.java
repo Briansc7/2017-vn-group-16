@@ -13,10 +13,10 @@ public abstract class Atributo {
 	
 	@Id
 	@GeneratedValue
-	@Column
+	@Column(name = "id")
 	private Long id;
 	
-	@Column
+	@Column(name = "nombre")
 	public String nombre;
 	
 	public Atributo(){}
