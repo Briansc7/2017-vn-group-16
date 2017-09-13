@@ -62,7 +62,7 @@ public class ObjetosSimplesTest implements WithGlobalEntityManager{
 		cuentaDeLaBase.setNombre("OtroNombre");
 		
 		assertEquals(cuentaCreadaPorMi.getFecha(), cuentaDeLaBase.getFecha());
-		assertEquals(cuentaCreadaPorMi.getNombre(), cuentaDeLaBase.getNombre());
+		assertEquals("OtroNombre", cuentaDeLaBase.getNombre());
 	}
 	
 	@Test
