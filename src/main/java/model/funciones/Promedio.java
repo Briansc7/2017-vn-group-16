@@ -10,8 +10,9 @@ public class Promedio extends Funcion{
 	private Indicador indicador;
 	
 	public Promedio(Indicador indicador){
-		this.indicador = indicador;
+		super(indicador);
 	}
+	
 	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos) {
 		BigDecimal contador = BigDecimal.ZERO;
 		BigDecimal[] resultado = new BigDecimal[1];

@@ -82,7 +82,7 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	public void agregarMetodologia(Metodologia metodologia) {
 		comprobarNombre(metodologia);
 		metodologias.add(metodologia);
-		archivarRepositorio();
+		//archivarRepositorio();
 	}
 
 	public void removerMetodologia(Metodologia metodologia) {

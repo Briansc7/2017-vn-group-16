@@ -35,7 +35,7 @@ public class AgregarMetodologiaViewModel {
 	private Comparador criterio;
 	private String tipoAComparar;
 	private BigDecimal valorContraElQueSeCompara;
-	private String nombre;
+	private String nombreMetodologia;
 	private BaseDeDatos baseDeDatos = new BaseDeDatos("");
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
@@ -90,7 +90,7 @@ public class AgregarMetodologiaViewModel {
 
 	public void agregarMetodologia() {
 
-		if(nombre == null) {
+		if(nombreMetodologia.equals("")) {
 			
 			throw new MetodologiaSinNombreException("No se ingreso el nombre de la metodologia.");
 			
@@ -100,7 +100,7 @@ public class AgregarMetodologiaViewModel {
 			
 		}
 		
-		Metodologia unaMetodologia = new Metodologia(nombre, condiciones);
+		Metodologia unaMetodologia = new Metodologia(nombreMetodologia, condiciones);
 		
 		repositorio.agregarMetodologia(unaMetodologia);
 	}
@@ -173,12 +173,12 @@ public class AgregarMetodologiaViewModel {
 		this.valorContraElQueSeCompara = valorAComparar;
 	}
 	
-	public String getNombre() {
-		return nombre;
+	public String getNombreMetodologia() {
+		return nombreMetodologia;
 	}
 	
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setNombreMetodologia(String nombre) {
+		this.nombreMetodologia = nombre;
 	}
 
 	public List<Comparador> getCriterios() {

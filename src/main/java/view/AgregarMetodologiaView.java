@@ -70,7 +70,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 	    new Label(mainPanel).setText("Alta de metodologia").setHeight(50);
 	    
 	    new Label(mainPanel).setText("Ingrese el nombre de la metodologia");
-	    new TextBox(mainPanel).setWidth(120).bindValueToProperty("nombre");
+	    new TextBox(mainPanel).setWidth(120).bindValueToProperty("nombreMetodologia");
 	    
 	    //new Table<Condicion>(mainPanel, Condicion.class).setNumberVisibleRows(1);
 	    
@@ -111,6 +111,8 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 			e.printStackTrace();
 			showErrorMessageBox("Asigne un nombre a la metodologia.", MessageBox.Type.Error);
 			
+		} catch (Exception e) {
+			showErrorMessageBox(e.getMessage(), MessageBox.Type.Error);
 		}
 		
 	}

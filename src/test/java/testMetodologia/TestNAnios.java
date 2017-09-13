@@ -65,16 +65,16 @@ public class TestNAnios {
 							.valor(new BigDecimal(5))
 							.build();
 	}
-	/*
+	
 	@Test
-	public void metodologiaBuffet() throws ParseException, TokenMgrError{
-		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidadComparativa));
+	public void metodologiaBuffet() {
+		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia, condicionRoe, condicionDeuda, condicionLongevidadComparativa));
 		//System.out.println(metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).size());
 		Assert.assertEquals("facebook", metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).get(0).getNombre());
 	}
 	
 	@Test
-	public void condicionUnoBuffet() throws ParseException, TokenMgrError{
+	public void condicionUnoBuffet() {
 		
-	}*/
+	}
 }

@@ -4,8 +4,14 @@ import java.math.BigDecimal;
 
 import model.BaseDeDatos;
 import model.Empresa;
+import model.Indicador;
 
 public class Longevidad extends Funcion{
+	
+	public Longevidad(){
+		super();
+	}
+
 	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos) {
 		BigDecimal[] resultado = new BigDecimal[1];
 		resultado[0] = empresa.longevidad();
