@@ -9,35 +9,57 @@ import java.util.stream.Collectors;
 
 import exceptions.EseYaExisteException;
 import mockObjects.AppDataI;
-import model.metodologia.CondicionComparativa;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
-import model.metodologia.CondicionValorUnico;
-import model.metodologia.Longevidad;
-import model.metodologia.Metodologia;
+import model.Metodologia;
+import model.funciones.Consistencia;
+import model.funciones.Longevidad;
+import model.funciones.ValorParaNAnios;
 import model.metodologia.condiciones.Comparador;
-import model.metodologia.condiciones.GreaterAndEqualThan;
-import model.metodologia.condiciones.GreaterThan;
-import model.metodologia.condiciones.LessThan;
+import model.metodologia.condiciones.CondicionGeneral;
+import testMetodologia.CondicionBuilder;
 import utils.AppData;
 
 public class RepositorioDeMetodologias {
 	private static RepositorioDeMetodologias instance;
 	private List<Metodologia> metodologias = new ArrayList<Metodologia>();
 	private AppDataI appData = AppData.getInstance();
-	
-	private CondicionNoTaxativa condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
-	private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
-	private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
+	/*
+	//private CondicionGeneral condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
+	private CondicionGeneral condicionRoe = new CondicionBuilder()
+			.periodoDeEvaluacion(2)
+			.funcionParaObtenerValor(new ValorParaNAnios(base.buscarIndicador("ROE")))
+			.comparador(Comparador.MAYOR)
+			.build();
+	//private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
+	private CondicionGeneral condicionDeuda = new CondicionBuilder()
+			.periodoDeEvaluacion(2)
+			.funcionParaObtenerValor(new ValorParaNAnios(base.buscarIndicador("debtEquityRatio")))
+			.comparador(Comparador.MENOR)
+			.build();
+	//private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
+	private CondicionGeneral condicionMargen = new CondicionBuilder()
+			.periodoDeEvaluacion(2)
+			.funcionParaObtenerValor(new Consistencia(base.buscarIndicador("margen")))
+			.comparador(Comparador.MAYOROIGUAL)
+			.build();
 	//private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
-	private CondicionValorUnico condicionLongevidadPropia = new CondicionValorUnico(1, new Longevidad(), Comparador.MAYOR, BigDecimal.valueOf(10));
+	private CondicionGeneral condicionLongevidadPropia = new CondicionBuilder()
+			.periodoDeEvaluacion(1)
+			.funcionParaObtenerValor(new Longevidad())
+			.comparador(Comparador.MAYOROIGUAL)
+			.valor(new BigDecimal(2))
+			.build();
 	//private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
-	private CondicionComparativa condicionLongevidadComparativa = new CondicionComparativa(1, new Longevidad(), Comparador.MAYOROIGUAL);
-	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia), Arrays.asList(condicionRoe, condicionDeuda, condicionLongevidadComparativa));	
-	
+	private CondicionGeneral condicionLongevidadComparativa = new CondicionBuilder()
+			.periodoDeEvaluacion(1)
+			.funcionParaObtenerValor(new Longevidad())
+			.comparador(Comparador.MAYOR)
+			.valor(new BigDecimal(5))
+			.build();
+	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia, condicionRoe, condicionDeuda, condicionLongevidadComparativa));	
+	*/
 	//Singleton
 	private RepositorioDeMetodologias(){
-		metodologias.add(buffet);
+		//metodologias.add(buffet);
 		archivarRepositorio();
 	}
 	

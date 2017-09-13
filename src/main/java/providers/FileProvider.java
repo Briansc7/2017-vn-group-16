@@ -2,20 +2,15 @@ package providers;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.google.gson.reflect.TypeToken;
 
-import utils.JsonReader;
-import utils.Archivo;
-import utils.FilesManager;
 import dtos.PathFile;
-import dtos.PathFileTxtJson;
 import exceptions.RutaDeArchivoInvalidaException;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
-import model.metodologia.Metodologia;
+import model.Metodologia;
+import utils.FilesManager;
+import utils.JsonReader;
 
 public class FileProvider implements MetodologiaProvider {
 

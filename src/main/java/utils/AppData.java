@@ -6,7 +6,7 @@ import java.util.List;
 import dtos.PathFile;
 import dtos.PathFileTxtJson;
 import mockObjects.AppDataI;
-import model.metodologia.Metodologia;
+import model.Metodologia;
 import model.repositories.RepositorioDeMetodologias;
 import providers.FileProvider;
 import providers.MetodologiaProvider;

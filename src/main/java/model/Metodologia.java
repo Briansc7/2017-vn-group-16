@@ -1,10 +1,9 @@
-package model.metodologia;
+package model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import model.BaseDeDatos;
-import model.Empresa;
+import model.metodologia.condiciones.CondicionGeneral;
 
 public class Metodologia {
 	String nombre;

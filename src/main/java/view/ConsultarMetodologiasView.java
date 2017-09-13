@@ -10,7 +10,7 @@ import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
 import model.Empresa;
-import model.metodologia.Metodologia;
+import model.Metodologia;
 import viewModel.ConsultarMetodologiasViewModel;
 
 public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewModel>{

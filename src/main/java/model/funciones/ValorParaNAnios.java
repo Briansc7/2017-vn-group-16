@@ -1,4 +1,4 @@
-package model.metodologia;
+package model.funciones;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
