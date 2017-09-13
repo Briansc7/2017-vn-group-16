@@ -12,9 +12,9 @@ import org.junit.Test;
 
 import dtos.PathFile;
 import dtos.PathFileTxtJson;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
-import model.metodologia.Metodologia;
+import model.Metodologia;
+import model.funciones.CondicionNoTaxativa;
+import model.funciones.CondicionTaxativa;
 import providers.FileProvider;
 import utils.Archivo;
 import utils.FilesManager;

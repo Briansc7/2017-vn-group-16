@@ -1,13 +1,16 @@
-package model.metodologia;
+package model.metodologia.condiciones;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.uqbar.commons.utils.Observable;
+
 import model.BaseDeDatos;
 import model.Empresa;
-import model.metodologia.condiciones.Comparador;
+import model.funciones.Funcion;
 
+@Observable
 public class CondicionValorUnico extends CondicionGeneral{
 
 	private BigDecimal valor;

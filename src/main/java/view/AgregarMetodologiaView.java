@@ -14,12 +14,16 @@ import org.uqbar.arena.windows.WindowOwner;
 import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
-import model.metodologia.condiciones.BooleanCondition;
+import model.Indicador;
+import model.funciones.Funcion;
+import model.metodologia.condiciones.Comparador;
+import parser.ParseException;
+import parser.TokenMgrError;
 import viewModel.AgregarMetodologiaViewModel;
 
 public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 
-	public AgregarMetodologiaView(WindowOwner owner) {
+	public AgregarMetodologiaView(WindowOwner owner) throws ParseException, TokenMgrError {
 		super(owner, new AgregarMetodologiaViewModel());
 	}
 
@@ -31,23 +35,28 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		new Label(mainPanel).setText("Alta de condición").setHeight(50);
 		
 		Panel tabla = new Panel(mainPanel);
-		tabla.setLayout(new ColumnLayout(5));
+		tabla.setLayout(new ColumnLayout(6));
 		
 		new Label(tabla).setText("Periodo").setWidth(120);
 		new Label(tabla).setText("Indicador").setWidth(120);
 		new Label(tabla).setText("Criterio").setWidth(120);
+		new Label(tabla).setText("Funcion").setWidth(120);
 		new Label(tabla).setText("Comparar \ncontra tipo").setHeight(60).setWidth(120);
 		new Label(tabla).setText("Valor").setHeight(60).setWidth(120);
 		
 	    new TextBox(tabla).setWidth(80).bindValueToProperty("periodo");
-	    Selector<String> selectorIndicadores = new Selector<String>(tabla);
+	    Selector<Indicador> selectorIndicadores = new Selector<Indicador>(tabla);
 	    selectorIndicadores.bindItemsToProperty("indicadores");
 	    selectorIndicadores.bindValueToProperty("indicador");
 	    
 	    
-	    Selector<BooleanCondition> selectorCriterios = new Selector<BooleanCondition>(tabla);
+	    Selector<Comparador> selectorCriterios = new Selector<Comparador>(tabla);
 	    selectorCriterios.bindItemsToProperty("criterios");
 	    selectorCriterios.bindValueToProperty("criterio");
+	    
+	    Selector<Funcion> selectorFuncion= new Selector<Funcion>(tabla);
+	    selectorFuncion.bindItemsToProperty("funciones");
+	    selectorFuncion.bindValueToProperty("funcionElegida");
 	    
 	    Selector<String> selectorTipos = new Selector<String>(tabla);
 	    selectorTipos.bindItemsToProperty("tiposParaComparar");

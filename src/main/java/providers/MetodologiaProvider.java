@@ -3,7 +3,7 @@ package providers;
 import java.util.List;
 
 import dtos.PathFile;
-import model.metodologia.Metodologia;
+import model.Metodologia;
 
 public interface MetodologiaProvider {
 	List<Metodologia> getInformationMetodologia(PathFile datosDeCarga);

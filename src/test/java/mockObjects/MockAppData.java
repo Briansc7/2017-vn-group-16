@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dtos.PathFile;
-import model.metodologia.Metodologia;
+import model.Metodologia;
 import providers.MetodologiaProvider;
 
 public class MockAppData implements AppDataI{

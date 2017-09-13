@@ -21,12 +21,6 @@ import java.util.stream.Collectors;
 import org.uqbar.commons.model.UserException;
 
 import exceptions.NoExisteAtributoException;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
-import model.metodologia.Metodologia;
-import model.metodologia.condiciones.GreaterAndEqualThan;
-import model.metodologia.condiciones.GreaterThan;
-import model.metodologia.condiciones.LessThan;
 import parser.ParseException;
 import parser.TokenMgrError;
 
@@ -156,7 +150,7 @@ public class BaseDeDatos {
 					throw new UserException("Error en la formula");
 				} catch (Exception e) {
 					e.printStackTrace();
-				}
+				} 
 			});
 			
 			br.close();

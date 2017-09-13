@@ -3,7 +3,7 @@ package mockObjects;
 import java.util.List;
 
 import dtos.PathFile;
-import model.metodologia.Metodologia;
+import model.Metodologia;
 import providers.MetodologiaProvider;
 
 public interface AppDataI {

@@ -1,4 +1,4 @@
-package model.metodologia;
+package model.funciones;
 
 import java.math.BigDecimal;
 
@@ -6,7 +6,7 @@ import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
-public class Promedio implements Funcion{
+public class Promedio extends Funcion{
 	private Indicador indicador;
 	
 	public Promedio(Indicador indicador){
@@ -21,5 +21,4 @@ public class Promedio implements Funcion{
 		resultado[0] = contador.divide(BigDecimal.valueOf(periodo));
 		return resultado;
 	}
-
 }

@@ -13,12 +13,12 @@ import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
-import model.metodologia.CondicionGeneral;
-import model.metodologia.Consistencia;
-import model.metodologia.Longevidad;
-import model.metodologia.Metodologia;
-import model.metodologia.ValorParaNAnios;
+import model.Metodologia;
+import model.funciones.Consistencia;
+import model.funciones.Longevidad;
+import model.funciones.ValorParaNAnios;
 import model.metodologia.condiciones.Comparador;
+import model.metodologia.condiciones.CondicionGeneral;
 import parser.ParseException;
 import parser.TokenMgrError;
 

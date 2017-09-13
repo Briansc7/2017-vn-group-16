@@ -2,11 +2,11 @@ package testMetodologia;
 
 import java.math.BigDecimal;
 
-import model.metodologia.CondicionComparativa;
-import model.metodologia.CondicionGeneral;
-import model.metodologia.CondicionValorUnico;
-import model.metodologia.Funcion;
+import model.funciones.Funcion;
 import model.metodologia.condiciones.Comparador;
+import model.metodologia.condiciones.CondicionComparativa;
+import model.metodologia.condiciones.CondicionGeneral;
+import model.metodologia.condiciones.CondicionValorUnico;
 
 public class CondicionBuilder {
 	private Integer periodo;

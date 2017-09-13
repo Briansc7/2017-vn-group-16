@@ -9,12 +9,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import model.BaseDeDatos;
-import model.metodologia.CondicionGeneral;
-import model.metodologia.Consistencia;
-import model.metodologia.Longevidad;
-import model.metodologia.Metodologia;
-import model.metodologia.ValorParaNAnios;
+import model.Metodologia;
+import model.funciones.Consistencia;
+import model.funciones.Longevidad;
+import model.funciones.ValorParaNAnios;
 import model.metodologia.condiciones.Comparador;
+import model.metodologia.condiciones.CondicionGeneral;
 
 public class TestNAnios {
 	Metodologia metodologiaBuffet;

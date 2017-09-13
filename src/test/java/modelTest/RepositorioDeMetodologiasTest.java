@@ -18,9 +18,9 @@ import model.repositories.RepositorioDeMetodologias;
 import utils.AppData;
 import utils.FilesManager;
 import utils.JsonCreator;
-import model.metodologia.CondicionNoTaxativa;
-import model.metodologia.CondicionTaxativa;
-import model.metodologia.Metodologia;
+import model.Metodologia;
+import model.funciones.CondicionNoTaxativa;
+import model.funciones.CondicionTaxativa;
 
 public class RepositorioDeMetodologiasTest {
 	RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();

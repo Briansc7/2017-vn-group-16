@@ -1,4 +1,4 @@
-package model.metodologia;
+package model.funciones;
 
 import java.math.BigDecimal;
 import java.util.Calendar;
@@ -7,7 +7,7 @@ import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
-public class ValorParaNAnios implements Funcion{
+public class ValorParaNAnios extends Funcion{
 	private Indicador indicador;
 	
 	public ValorParaNAnios(Indicador indicador){
