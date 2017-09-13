@@ -82,6 +82,11 @@ public class Indicador extends Atributo{
 	public boolean seLlama(String nombre) {
 		return this.nombre.equalsIgnoreCase(nombre);
 	}
+	
+	@Override
+	public String toString(){
+		return nombre;
+	}
 }
 
 /*	

@@ -7,7 +7,7 @@ import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
-public class ValorParaNAnios implements Funcion{
+public class ValorParaNAnios extends Funcion{
 	private Indicador indicador;
 	
 	public ValorParaNAnios(Indicador indicador){

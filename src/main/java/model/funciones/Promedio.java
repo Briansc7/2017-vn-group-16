@@ -6,7 +6,7 @@ import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
-public class Promedio implements Funcion{
+public class Promedio extends Funcion{
 	private Indicador indicador;
 	
 	public Promedio(Indicador indicador){

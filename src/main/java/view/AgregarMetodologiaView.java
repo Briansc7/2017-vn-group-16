@@ -15,6 +15,7 @@ import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
 import model.Indicador;
+import model.funciones.Funcion;
 import model.metodologia.condiciones.Comparador;
 import parser.ParseException;
 import parser.TokenMgrError;
@@ -34,11 +35,12 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		new Label(mainPanel).setText("Alta de condición").setHeight(50);
 		
 		Panel tabla = new Panel(mainPanel);
-		tabla.setLayout(new ColumnLayout(5));
+		tabla.setLayout(new ColumnLayout(6));
 		
 		new Label(tabla).setText("Periodo").setWidth(120);
 		new Label(tabla).setText("Indicador").setWidth(120);
 		new Label(tabla).setText("Criterio").setWidth(120);
+		new Label(tabla).setText("Funcion").setWidth(120);
 		new Label(tabla).setText("Comparar \ncontra tipo").setHeight(60).setWidth(120);
 		new Label(tabla).setText("Valor").setHeight(60).setWidth(120);
 		
@@ -51,6 +53,10 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 	    Selector<Comparador> selectorCriterios = new Selector<Comparador>(tabla);
 	    selectorCriterios.bindItemsToProperty("criterios");
 	    selectorCriterios.bindValueToProperty("criterio");
+	    
+	    Selector<Funcion> selectorFuncion= new Selector<Funcion>(tabla);
+	    selectorFuncion.bindItemsToProperty("funciones");
+	    selectorFuncion.bindValueToProperty("funcionElegida");
 	    
 	    Selector<String> selectorTipos = new Selector<String>(tabla);
 	    selectorTipos.bindItemsToProperty("tiposParaComparar");

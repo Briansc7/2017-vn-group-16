@@ -6,7 +6,7 @@ import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
-public class Consistencia implements Funcion{
+public class Consistencia extends Funcion{
 	private Indicador indicador;
 	
 	public Consistencia(Indicador indicador){
@@ -16,5 +16,4 @@ public class Consistencia implements Funcion{
 	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos) {
 		return null;
 	}
-	
 }
