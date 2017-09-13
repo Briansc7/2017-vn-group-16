@@ -7,9 +7,9 @@
   
     <persistence-unit name="db" transaction-type="RESOURCE_LOCAL">
     	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-	
-	<class>model.Empresa</class>
-    <class>model.Cuenta</class>
+	<!--
+	<class>model.Empresa</class>-->
+    <class>model.Cuenta</class><!--
 	<class>model.Atrbuto</class>
 	<class>model.Indicador</class>
 	<class>componentesMatematicos.Expresion</class>
@@ -23,7 +23,7 @@
 	<class>componentesMatematicos.Operador</class>
 	<class>componentesMatematicos.Producto</class>
 	<class>componentesMatematicos.Resta</class>
-	<class>componentesMatematicos.Suma</class>
+	<class>componentesMatematicos.Suma</class>-->
 	
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        
@@ -32,7 +32,7 @@
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" /> 
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/prueba" /> 
             <property name="hibernate.connection.username" value="root" /> 
-            <property name="hibernate.connection.password" value="1234" /> 
+            <property name="hibernate.connection.password" value="" /> <!-- Borrar pw antes de commitear -->
 
 <!-- 
             <property name="hibernate.connection.driver_class" value="org.hsqldb.jdbcDriver" /> 
