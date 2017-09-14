@@ -17,8 +17,8 @@ public class Mediana extends Funcion{
 	}
 
 	@Override
-	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos) {
-		BigDecimal[] valores = calcularValor(empresa, periodo, baseDeDatos);
+	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
+		BigDecimal[] valores = calcularValor(empresa, periodo);
 		BigDecimal[] mediana = new BigDecimal[1];
 		Integer indiceMediana;
 		BigDecimal aux;

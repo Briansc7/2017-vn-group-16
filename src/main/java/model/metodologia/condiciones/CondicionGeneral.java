@@ -48,5 +48,5 @@ public abstract class CondicionGeneral {
 		this.comparador = comparador;
 	}
 	
-	public abstract List<Empresa> analizar(List<Empresa> empresas, BaseDeDatos baseDeDatos);
+	public abstract List<Empresa> analizar(List<Empresa> empresas);
 }

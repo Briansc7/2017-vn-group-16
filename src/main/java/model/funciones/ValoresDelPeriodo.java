@@ -16,7 +16,7 @@ public class ValoresDelPeriodo extends Funcion{
 		super(indicador);
 	}
 	
-	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos){
-		return calcularValoresDelPeriodo(empresa, periodo, baseDeDatos);
+	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo){
+		return calcularValoresDelPeriodo(empresa, periodo);
 	}
 }

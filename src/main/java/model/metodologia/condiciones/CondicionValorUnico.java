@@ -26,11 +26,11 @@ public class CondicionValorUnico extends CondicionGeneral{
 		this.valorContraElQueComparar = valor;
 	}
 	
-	public List<Empresa> analizar(List<Empresa> empresas, BaseDeDatos baseDeDatos){
-		return empresas.stream().filter(empresa -> filtrarEmpresa(empresa, baseDeDatos)).collect(Collectors.toList());
+	public List<Empresa> analizar(List<Empresa> empresas){
+		return empresas.stream().filter(empresa -> filtrarEmpresa(empresa)).collect(Collectors.toList());
 	}
 	
-	private boolean filtrarEmpresa(Empresa empresa, BaseDeDatos baseDeDatos){
-		return comparador.comparar(obtenerValor.calcularValor(empresa, periodoDeEvaluacion, baseDeDatos)[0], valorContraElQueComparar);
+	private boolean filtrarEmpresa(Empresa empresa){
+		return comparador.comparar(obtenerValor.calcularValor(empresa, periodoDeEvaluacion)[0], valorContraElQueComparar);
 	}
 }

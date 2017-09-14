@@ -38,12 +38,12 @@ public class Metodologia {
 	}
 
 	//Retorna la empresas que cumplen con todo y ordenadas
-	public List<Empresa> aplicarCondiciones(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
+	public List<Empresa> aplicarCondiciones(List<Empresa> empresas) {
 		//No alterar la lista original
 		List<Empresa> _empresas = new ArrayList<Empresa>(empresas);
 		
 		for(CondicionGeneral condicion:condiciones){
-			condicion.analizar(_empresas, baseDeDatos);
+			condicion.analizar(_empresas);
 		}
 		return _empresas;
 	}

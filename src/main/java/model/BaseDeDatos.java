@@ -61,7 +61,7 @@ public class BaseDeDatos {
 	
 	public BigDecimal valorDe(String nombre, Integer periodo, Empresa empresa){
 		if(this.existeIndicador(nombre)){
-			return this.buscarIndicador(nombre).getValor(periodo, empresa, this);
+			return this.buscarIndicador(nombre).getValor(periodo, empresa);
 		} else {
 			return empresa.buscarCuenta(nombre, periodo).getValor();
 		}

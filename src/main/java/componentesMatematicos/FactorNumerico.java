@@ -22,7 +22,7 @@ public class FactorNumerico extends Factor {
 		this.valor = unValor;
 	}
 	
-	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
+	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa) {
 		return valor;
 	}
 }

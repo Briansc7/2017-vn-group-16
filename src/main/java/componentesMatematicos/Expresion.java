@@ -11,15 +11,20 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import model.BaseDeDatos;
 import model.Empresa;
+import scala.xml.dtd.impl.Base;
 
 @Entity
 @Table(name = "expresion")
 @DiscriminatorColumn(name = "tipoDeExpresion", discriminatorType=DiscriminatorType.INTEGER)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Expresion {
+	@Transient
+	BaseDeDatos base = new BaseDeDatos("");
+	
 	@Id
 	@GeneratedValue
 	@Column
@@ -27,5 +32,5 @@ public abstract class Expresion {
 	
 	public Expresion(){}
 	
-	public abstract BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos);
+	public abstract BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa);
 }

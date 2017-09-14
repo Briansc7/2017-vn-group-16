@@ -17,8 +17,8 @@ public class Sumatoria extends Funcion{
 	}
 
 	@Override
-	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos) {
-		BigDecimal[] resultado = {sumatoria(empresa, periodo, baseDeDatos)};
+	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
+		BigDecimal[] resultado = {sumatoria(empresa, periodo)};
 		return resultado;
 	}
 }

@@ -22,10 +22,10 @@ public class Division extends Operador {
 		super(opIzq, opDer);
 	}
 	
-	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
-		if(this.operandoDer.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos).compareTo(BigDecimal.ZERO) != 0){
-			return this.operandoIzq.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos)
-					.divide(this.operandoDer.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos), 2, RoundingMode.HALF_UP);
+	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa) {
+		if(this.operandoDer.getValor(unPeriodo, unaEmpresa).compareTo(BigDecimal.ZERO) != 0){
+			return this.operandoIzq.getValor(unPeriodo, unaEmpresa)
+					.divide(this.operandoDer.getValor(unPeriodo, unaEmpresa), 2, RoundingMode.HALF_UP);
 					//.round(new MathContext(2, RoundingMode.HALF_UP));
 		}
 		else throw new NoSePuedeDividirPorCeroException("No se puede dividir por 0");

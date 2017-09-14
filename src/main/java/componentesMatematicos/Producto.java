@@ -20,10 +20,10 @@ public class Producto extends Operador {
 		super(opIzq, opDer);
 	}
 	
-	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
+	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa) {
 		
-		return this.operandoIzq.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos)
-				.multiply(this.operandoDer.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos));
+		return this.operandoIzq.getValor(unPeriodo, unaEmpresa)
+				.multiply(this.operandoDer.getValor(unPeriodo, unaEmpresa));
 				//.round(new MathContext(2, RoundingMode.CEILING));
 	}
 }//

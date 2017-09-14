@@ -21,14 +21,14 @@ public class CondicionComparativa extends CondicionGeneral{
 		super(periodo, obtenerValor, comparador);
 	}
 	
-	public List<Empresa> analizar(List<Empresa> empresas, BaseDeDatos baseDeDatos){
-		return empresas.stream().sorted((empresa1, empresa2) -> compararEmpresas(empresa1, empresa2, baseDeDatos)).collect(Collectors.toList());
+	public List<Empresa> analizar(List<Empresa> empresas){
+		return empresas.stream().sorted((empresa1, empresa2) -> compararEmpresas(empresa1, empresa2)).collect(Collectors.toList());
 	}
 
-	private int compararEmpresas(Empresa empresa1, Empresa empresa2, BaseDeDatos baseDeDatos) {
+	private int compararEmpresas(Empresa empresa1, Empresa empresa2) {
 		Integer aux1=0,aux2=0;
-		BigDecimal[] valores1 = obtenerValor.calcularValor(empresa1, periodoDeEvaluacion, baseDeDatos);
-		BigDecimal[] valores2 = obtenerValor.calcularValor(empresa2, periodoDeEvaluacion, baseDeDatos);
+		BigDecimal[] valores1 = obtenerValor.calcularValor(empresa1, periodoDeEvaluacion);
+		BigDecimal[] valores2 = obtenerValor.calcularValor(empresa2, periodoDeEvaluacion);
 		
 		for(int i=0; i<periodoDeEvaluacion; i++){
 			if(comparador.comparar(valores1[i], valores2[i]))

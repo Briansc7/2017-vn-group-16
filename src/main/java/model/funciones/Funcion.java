@@ -40,7 +40,7 @@ public abstract class Funcion {
 	
 	public Funcion(){}
 	
-	public abstract BigDecimal[] calcularValor(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos);
+	public abstract BigDecimal[] calcularValor(Empresa empresa, Integer periodo);
 	
 	public void setIndicador(Indicador indicador){
 		this.indicador = indicador;
@@ -55,13 +55,13 @@ public abstract class Funcion {
 		return this.getClass().getSimpleName().equalsIgnoreCase(nombre);
 	}
 	
-	protected BigDecimal[] calcularValoresDelPeriodo(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos) {
+	protected BigDecimal[] calcularValoresDelPeriodo(Empresa empresa, Integer periodo) {
 		BigDecimal[] valoresDelPeriodo = new BigDecimal[periodo];
 		int anioActual = Calendar.getInstance().get(Calendar.YEAR);
 		
 		for(int i=0; i<periodo; i++){
 			try{
-				valoresDelPeriodo[i] = indicador.getValor(anioActual-i, empresa, baseDeDatos);
+				valoresDelPeriodo[i] = indicador.getValor(anioActual-i, empresa);
 			} catch (Exception ex) {
 				//valorAuxiliar = "*";
 				valoresDelPeriodo[i] = BigDecimal.ZERO;
@@ -70,11 +70,11 @@ public abstract class Funcion {
 		return valoresDelPeriodo;
 	}
 	
-	protected BigDecimal sumatoria(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos){
+	protected BigDecimal sumatoria(Empresa empresa, Integer periodo){
 		BigDecimal contador = BigDecimal.ZERO;
 		
 		for(int i=0; i<periodo; i++){
-			contador = contador.add(indicador.getValor(periodo-i, empresa, baseDeDatos));
+			contador = contador.add(indicador.getValor(periodo-i, empresa));
 		}
 		return contador;
 	}

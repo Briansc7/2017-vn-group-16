@@ -50,14 +50,14 @@ public class Indicador extends Atributo{
 		return this.nombre.equals(otroNombre);
 	}
 	
-	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos) {
-		return this.expresion.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
+	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa) {
+		return this.expresion.getValor(unPeriodo, unaEmpresa);
 	}
 	
-	public String getValorString(Integer unPeriodo, Empresa unaEmpresa, BaseDeDatos unaBaseDeDatos){
+	public String getValorString(Integer unPeriodo, Empresa unaEmpresa){
 		String valorAuxiliar;
 		try {
-			valorAuxiliar = String.valueOf(this.getValor(unPeriodo, unaEmpresa, unaBaseDeDatos));
+			valorAuxiliar = String.valueOf(this.getValor(unPeriodo, unaEmpresa));
 		} catch (Exception ex) {
 			//valorAuxiliar = "*";
 			valorAuxiliar = ex.getMessage();
