@@ -72,9 +72,4 @@ public class TestBuffet {
 		//System.out.println(metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).size());
 		Assert.assertEquals("google", metodologiaBuffet.aplicarCondiciones(base.getEmpresas()).get(0).getNombre());
 	}
-	
-	@Test
-	public void condicionUnoBuffet() {
-		
-	}
 }

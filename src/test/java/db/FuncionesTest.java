@@ -1,5 +1,7 @@
 package db;
 
+import static org.junit.Assert.assertEquals;
+
 import javax.persistence.EntityTransaction;
 
 import org.junit.Before;
@@ -36,6 +38,13 @@ public class FuncionesTest implements WithGlobalEntityManager{
 		entityManager().persist(promedio);
 		
 		transaction.commit();
+		
+		Funcion promedioDB = (Funcion)entityManager()
+				.createQuery("select funcion from Funcion as funcion where tipoDeFuncion = ?1")
+				.setParameter(1, "promedio")
+				.getResultList().get(0);//.find(Funcion.class, 2L);
+		
+		assertEquals(Promedio.class, promedioDB.getClass());
 	}
 	
 	@Test
@@ -47,5 +56,12 @@ public class FuncionesTest implements WithGlobalEntityManager{
 		entityManager().persist(longevidad);
 		
 		transaction.commit();
+		
+		Funcion longevidadDB = (Funcion)entityManager()
+				.createQuery("select funcion from Funcion as funcion where tipoDeFuncion = ?1")
+				.setParameter(1, "longevidad")
+				.getResultList().get(0);//= entityManager().find(Funcion.class, 1L);
+		
+		assertEquals(Longevidad.class, longevidadDB.getClass());
 	}
 }
