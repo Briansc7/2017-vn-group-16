@@ -89,8 +89,10 @@ public class ObjetosSimplesTest implements WithGlobalEntityManager{
 		entityManager().persist(empresa);
 
 		transaction.commit();
+		
+		Empresa empresaDeLaBase = (Empresa) entityManager().createQuery("from Empresa order by id desc").getResultList().get(0);
 
-		Empresa empresaDeLaBase = entityManager().find(Empresa.class, 1L);
+		//Empresa empresaDeLaBase = entityManager().find(Empresa.class, 1L);
 
 		assertEquals(3,	empresaDeLaBase.getCuentas().size());
 	}
