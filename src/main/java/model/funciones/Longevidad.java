@@ -4,10 +4,8 @@ import java.math.BigDecimal;
 
 import model.BaseDeDatos;
 import model.Empresa;
-import model.Indicador;
 
 public class Longevidad extends Funcion{
-	
 	public Longevidad(){
 		super();
 	}

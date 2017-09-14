@@ -7,8 +7,6 @@ import model.Empresa;
 import model.Indicador;
 
 public class Promedio extends Funcion{
-	private Indicador indicador;
-	
 	public Promedio(Indicador indicador){
 		super(indicador);
 	}

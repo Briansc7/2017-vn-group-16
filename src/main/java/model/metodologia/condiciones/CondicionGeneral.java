@@ -2,6 +2,16 @@ package model.metodologia.condiciones;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Entity;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.Transient;
+
 import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
@@ -9,14 +19,28 @@ import model.Empresa;
 import model.funciones.Funcion;
 
 @Observable
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipoDeCondicion")
 public abstract class CondicionGeneral {
-	protected Integer periodo;
+	
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "periodoDeEvaluacion")
+	protected Integer periodoDeEvaluacion;
+	
+	@Transient
 	protected Funcion obtenerValor;
+	
+	@Enumerated
 	protected Comparador comparador;
 	//protected BaseDeDatos baseDeDatos = BaseDeDatosMock.getDatabaseInstance();//Esto luego hay que reemplazarlo por el repositorioS
 	
 	public CondicionGeneral(Integer periodo, Funcion obtenerValor, Comparador comparador){
-		this.periodo = periodo;
+		this.periodoDeEvaluacion = periodo;
 		this.obtenerValor = obtenerValor;
 		this.comparador = comparador;
 	}

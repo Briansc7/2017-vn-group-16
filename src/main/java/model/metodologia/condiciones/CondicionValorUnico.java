@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
@@ -11,13 +15,15 @@ import model.Empresa;
 import model.funciones.Funcion;
 
 @Observable
+@Entity
+@Table(name = "condicionValorUnico")
 public class CondicionValorUnico extends CondicionGeneral{
-
-	private BigDecimal valor;
+	@Column(name = "valorContraElQueComparar")
+	private BigDecimal valorContraElQueComparar;
 	
 	public CondicionValorUnico(Integer periodo, Funcion obtenerValor, Comparador comparador, BigDecimal valor){
 		super(periodo, obtenerValor, comparador);
-		this.valor = valor;
+		this.valorContraElQueComparar = valor;
 	}
 	
 	public List<Empresa> analizar(List<Empresa> empresas, BaseDeDatos baseDeDatos){
@@ -25,6 +31,6 @@ public class CondicionValorUnico extends CondicionGeneral{
 	}
 	
 	private boolean filtrarEmpresa(Empresa empresa, BaseDeDatos baseDeDatos){
-		return comparador.comparar(obtenerValor.calcularValor(empresa, periodo, baseDeDatos)[0], valor);
+		return comparador.comparar(obtenerValor.calcularValor(empresa, periodoDeEvaluacion, baseDeDatos)[0], valorContraElQueComparar);
 	}
 }

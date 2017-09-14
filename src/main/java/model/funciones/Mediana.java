@@ -7,7 +7,6 @@ import model.Empresa;
 import model.Indicador;
 
 public class Mediana extends Funcion{
-
 	public Mediana(Indicador indicador){
 		super(indicador);
 	}
@@ -27,7 +26,6 @@ public class Mediana extends Funcion{
 			indiceMediana = (periodo-1)/2;
 			mediana[0] = valores[indiceMediana];
 		}
-		
 		return mediana;
 	}
 }

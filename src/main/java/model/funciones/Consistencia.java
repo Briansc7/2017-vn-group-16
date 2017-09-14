@@ -7,7 +7,6 @@ import model.Empresa;
 import model.Indicador;
 
 public class Consistencia extends Funcion{
-
 	public Consistencia(Indicador indicador){
 		super(indicador);
 	}

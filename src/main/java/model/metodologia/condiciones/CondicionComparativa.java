@@ -4,6 +4,9 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
@@ -11,6 +14,8 @@ import model.Empresa;
 import model.funciones.Funcion;
 
 @Observable
+@Entity
+@Table(name = "condicionComparativa")
 public class CondicionComparativa extends CondicionGeneral{
 	public CondicionComparativa(Integer periodo, Funcion obtenerValor, Comparador comparador){
 		super(periodo, obtenerValor, comparador);
@@ -22,10 +27,10 @@ public class CondicionComparativa extends CondicionGeneral{
 
 	private int compararEmpresas(Empresa empresa1, Empresa empresa2, BaseDeDatos baseDeDatos) {
 		Integer aux1=0,aux2=0;
-		//int anioActual = Calendar.getInstance().get(Calendar.YEAR);
-		BigDecimal[] valores1 = obtenerValor.calcularValor(empresa1, periodo, baseDeDatos);
-		BigDecimal[] valores2 = obtenerValor.calcularValor(empresa2, periodo, baseDeDatos);
-		for(int i=0; i<periodo; i++){
+		BigDecimal[] valores1 = obtenerValor.calcularValor(empresa1, periodoDeEvaluacion, baseDeDatos);
+		BigDecimal[] valores2 = obtenerValor.calcularValor(empresa2, periodoDeEvaluacion, baseDeDatos);
+		
+		for(int i=0; i<periodoDeEvaluacion; i++){
 			if(comparador.comparar(valores1[i], valores2[i]))
 				aux1++;
 			else

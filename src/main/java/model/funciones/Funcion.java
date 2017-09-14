@@ -43,7 +43,6 @@ public abstract class Funcion {
 				valoresDelPeriodo[i] = BigDecimal.ZERO;
 			} 
 		}
-		
 		return valoresDelPeriodo;
 	}
 	
@@ -53,7 +52,6 @@ public abstract class Funcion {
 		for(int i=0; i<periodo; i++){
 			contador = contador.add(indicador.getValor(periodo-i, empresa, baseDeDatos));
 		}
-		
 		return contador;
 	}
 }

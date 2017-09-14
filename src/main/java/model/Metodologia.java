@@ -3,10 +3,30 @@ package model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
 import model.metodologia.condiciones.CondicionGeneral;
 
+@Entity
 public class Metodologia {
+	@Id
+	@GeneratedValue
+	@Column(name = "id")
+	private Long id;
+	
+	@Column(name = "nombre")
 	String nombre;
+	
+	@Column
+	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	//@JoinColumn(name = "condiciones_id")
 	List<CondicionGeneral> condiciones;
 	//List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	

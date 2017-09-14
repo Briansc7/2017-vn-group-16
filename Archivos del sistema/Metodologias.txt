@@ -1,1 +1,1 @@
-[]
+[{"nombre":"vv","condiciones":[{"valor":1,"periodoDeEvaluacion":1,"obtenerValor":{},"comparador":"MAYOR"}]},{"nombre":"lll","condiciones":[{"valor":5,"periodoDeEvaluacion":1,"obtenerValor":{},"comparador":"MAYOR"}]}]
