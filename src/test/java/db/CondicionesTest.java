@@ -1,5 +1,7 @@
 package db;
 
+import static org.junit.Assert.*;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 
@@ -66,5 +68,9 @@ public class CondicionesTest implements WithGlobalEntityManager{
 		entityManager().persist(metodologia);
 		
 		transaction.commit();
+		
+		Metodologia metodologiaDB = entityManager().find(Metodologia.class, 1L);
+		
+		assertEquals(metodologia.getNombre(), metodologiaDB.getNombre());
 	}
 }

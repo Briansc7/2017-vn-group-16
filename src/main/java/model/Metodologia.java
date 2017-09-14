@@ -48,15 +48,6 @@ public class Metodologia {
 		return _empresas;
 	}
 	
-	/*
-	private List<Empresa> aplicarCondicionesTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
-		return empresas.stream().filter(empresa -> condicionesTaxativas.stream().allMatch(condicion -> condicion.aplicarCondicion(empresa, baseDeDatos))).collect(Collectors.toList());
-	}
-
-	private List<Empresa> aplicarCondicionesNoTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
-		empresas.sort((empresa1, empresa2)-> this.mejorPuntaje(empresa1, empresa2, baseDeDatos));
-		return empresas;
-	}*/
 	
 	@Override
 	public String toString(){
@@ -66,12 +57,7 @@ public class Metodologia {
 	public String getNombre(){
 		return nombre;
 	}
-/*
-	public List<CondicionNoTaxativa> getCriterios() {
-		
-		return condicionesNoTaxativas;
-	}
-	*/
+	
 	@Override
 	public boolean equals(Object o){
 		if(!o.getClass().equals(Metodologia.class))
@@ -81,4 +67,18 @@ public class Metodologia {
 		return other.getNombre().equals(getNombre());
 	}
 	
+	/*
+	private List<Empresa> aplicarCondicionesTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
+		return empresas.stream().filter(empresa -> condicionesTaxativas.stream().allMatch(condicion -> condicion.aplicarCondicion(empresa, baseDeDatos))).collect(Collectors.toList());
+	}
+
+	private List<Empresa> aplicarCondicionesNoTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
+		empresas.sort((empresa1, empresa2)-> this.mejorPuntaje(empresa1, empresa2, baseDeDatos));
+		return empresas;
+	}
+	public List<CondicionNoTaxativa> getCriterios() {
+		
+		return condicionesNoTaxativas;
+	}
+	 */
 }
