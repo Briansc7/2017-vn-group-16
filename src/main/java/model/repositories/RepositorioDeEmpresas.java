@@ -35,12 +35,19 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 		transaction.commit();
 	}
 	
-	public List<Empresa> obtenerEmpresas(String nombre){
-		return new ArrayList<Empresa>();
+	//Este devuelve todas las empresas de la base de datos
+	public List<Empresa> obtenerEmpresas(){
+		@SuppressWarnings("unchecked")
+		List<Empresa> empresas = entityManager()
+				.createQuery("select empresa from Empresa as empresa")
+				.getResultList();
+		return empresas;
 	}
 	
 	public Empresa obtenerEmpresa(String nombre){
-		return buscarEmpresas(nombre).get(0);
+		if(existeEmpresa(nombre))
+			return buscarEmpresas(nombre).get(0);
+		throw new EseNoExisteException("No existe una empresa de nombre: " + nombre);
 	}
 	
 	public Boolean existeEmpresa(String nombre){
@@ -53,10 +60,6 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 				.createQuery("select empresa from Empresa as empresa where empresa.nombre = ?1")
 				.setParameter(1, nombre)
 				.getResultList();
-		
-		if(empresas.size() == 0)
-			throw new EseNoExisteException("No existe una empresa de nombre: " + nombre);
-		
 		return empresas;
 	}
 }

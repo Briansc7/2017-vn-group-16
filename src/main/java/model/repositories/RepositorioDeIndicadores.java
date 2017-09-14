@@ -8,6 +8,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import exceptions.EseNoExisteException;
 import exceptions.EseYaExisteException;
+import model.Empresa;
 import model.Indicador;
 
 public class RepositorioDeIndicadores implements WithGlobalEntityManager{
@@ -32,8 +33,19 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 		transaction.commit();
 	}
 	
+	//Este devuelve todos los indicadores de la base de datos
+	public List<Indicador> obtenerEmpresas(){
+		@SuppressWarnings("unchecked")
+		List<Indicador> indicadores = entityManager()
+				.createQuery("select indicador from Indicador as indicador")
+				.getResultList();
+		return indicadores;
+	}
+	
 	public Indicador obtenerIndicador(String nombre){
-		return buscarIndicadores(nombre).get(0);
+		if(existeIndicador(nombre))
+			return buscarIndicadores(nombre).get(0);
+		throw new EseNoExisteException("No existe un indicador de nombre: " + nombre);
 	}
 	
 	public Boolean existeIndicador(String nombre){
@@ -43,13 +55,9 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 	private List<Indicador> buscarIndicadores(String nombre){
 		@SuppressWarnings("unchecked")
 		List<Indicador> indicadores = entityManager()
-		.createQuery("select indicador from Indicador as indicador where indicador.nombre = ?1")
-		.setParameter(1, nombre)
-		.getResultList();
-		
-		if(indicadores.size() == 0)
-			throw new EseNoExisteException("No existe un indicador de nombre: " + nombre);
-		
+				.createQuery("select indicador from Indicador as indicador where indicador.nombre = ?1")
+				.setParameter(1, nombre)
+				.getResultList();
 		return indicadores;
 	}
 }
