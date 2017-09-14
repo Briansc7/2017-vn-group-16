@@ -104,7 +104,7 @@ public class AgregarMetodologiaViewModel {
 		
 		Metodologia unaMetodologia = new Metodologia(nombreMetodologia, condiciones);
 		
-		repositorio.agregarMetodologia(unaMetodologia);
+		repositorio.guaradarMetodologia(unaMetodologia);
 	}
 	
 	private void verificarQueNoHayaCamposVacios(){

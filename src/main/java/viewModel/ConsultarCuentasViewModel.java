@@ -90,7 +90,7 @@ public class ConsultarCuentasViewModel {
 			List<IndicadorAuxiliar> indicadoresAuxiliares = new ArrayList<IndicadorAuxiliar>();
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValor(this.periodoElegido, this.empresaElegida, this.planilla))));
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), 111)));
-			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add(new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida, this.baseDeDatos))));
+			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add(new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida))));
 			return indicadoresAuxiliares;
 		}
 	}

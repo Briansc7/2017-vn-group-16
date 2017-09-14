@@ -105,12 +105,12 @@ public class TestUnAnio {
 	
 	@Test
 	public void condicion1Buffet() {
-		Assert.assertEquals(empresaUno, condicionRoe.analizar(empresas, base).get(0));
+		Assert.assertEquals(empresaTres, condicionRoe.analizar(empresas).get(0));
 	}
 	
 	@Test
 	public void condicion2Buffet() {
-		Assert.assertEquals(empresaUno, condicionDeuda.analizar(empresas, base).get(0));
+		Assert.assertEquals(empresaUno, condicionDeuda.analizar(empresas).get(0));
 	}
 	/*
 	@Test
@@ -121,12 +121,12 @@ public class TestUnAnio {
 	*/
 	@Test
 	public void condicionLongevidadPropia() {
-		Assert.assertTrue(condicionLongevidadPropia.analizar(empresas, base).contains(empresaTres));
+		Assert.assertTrue(condicionLongevidadPropia.analizar(empresas).contains(empresaTres));
 	}
 	
 	@Test
 	public void condicionLongevidadComparativa() {
-		Assert.assertEquals(empresaTres, condicionLongevidadComparativa.analizar(empresas, base).get(0));
+		Assert.assertEquals(empresaTres, condicionLongevidadComparativa.analizar(empresas).get(0));
 	}
 	/*
 	@Test
