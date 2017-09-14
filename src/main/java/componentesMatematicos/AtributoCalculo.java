@@ -11,6 +11,7 @@ import model.Empresa;
 @Entity
 @DiscriminatorValue("3")
 public class AtributoCalculo extends FactorLiteral{
+	@SuppressWarnings("unused")
 	private AtributoCalculo(){
 		super();
 	}
