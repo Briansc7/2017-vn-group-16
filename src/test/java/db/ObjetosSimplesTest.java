@@ -36,10 +36,12 @@ public class ObjetosSimplesTest implements WithGlobalEntityManager{
 		/*se persiste fuera de transacción ya que no es necesario abrir transacciones en los test
 		 * al final del test se va a borrar automaticamente lo persistido
 		 */
-		entityManager().persist(cuentaCreadaPorMi);
+		//entityManager().persist(cuentaCreadaPorMi);
+		
+		guardarCuenta();
 		
 		//se compara contra el último registro insertado
-		assertEquals(entityManager().createQuery("from Cuenta order by id desc").setMaxResults(1).getResultList(),cuentaCreadaPorMi);
+		assertEquals(entityManager().createQuery("from Cuenta order by id desc").getResultList().get(0),cuentaCreadaPorMi);
 	}
 	
 	@Test
