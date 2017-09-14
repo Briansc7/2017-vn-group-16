@@ -2,9 +2,14 @@ package model.funciones;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.BaseDeDatos;
 import model.Empresa;
 
+@Entity
+@DiscriminatorValue("longevidad")
 public class Longevidad extends Funcion{
 	public Longevidad(){
 		super();

@@ -2,15 +2,17 @@ package model.metodologia.condiciones;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-import javax.persistence.Transient;
+import javax.persistence.ManyToOne;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -32,7 +34,8 @@ public abstract class CondicionGeneral {
 	@Column(name = "periodoDeEvaluacion")
 	protected Integer periodoDeEvaluacion;
 	
-	@Transient
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	//@Column(name = "funcion")
 	protected Funcion obtenerValor;
 	
 	@Enumerated

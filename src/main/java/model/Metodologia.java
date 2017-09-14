@@ -11,10 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import model.metodologia.condiciones.CondicionGeneral;
 
 @Entity
+@Table(name = "metodologia")
 public class Metodologia {
 	@Id
 	@GeneratedValue
@@ -26,7 +28,7 @@ public class Metodologia {
 	
 	@Column
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	//@JoinColumn(name = "condiciones_id")
+	@JoinColumn(name = "metodologia_id")
 	List<CondicionGeneral> condiciones;
 	//List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	

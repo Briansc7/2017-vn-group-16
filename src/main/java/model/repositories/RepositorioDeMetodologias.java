@@ -14,7 +14,7 @@ import mockObjects.AppDataI;
 import model.Metodologia;
 import model.funciones.Consistencia;
 import model.funciones.Longevidad;
-import model.funciones.ValorParaNAnios;
+import model.funciones.ValoresDelPeriodo;
 import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionGeneral;
 import testMetodologia.CondicionBuilder;

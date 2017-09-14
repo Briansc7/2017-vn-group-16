@@ -28,6 +28,13 @@
 	<class>model.metodologia.condiciones.CondicionValorUnico</class>
 	<class>model.metodologia.condiciones.CondicionComparativa</class>
 	<class>model.Metodologia</class>
+	<class>model.funciones.Funcion</class>
+	<class>model.funciones.Consistencia</class>
+	<class>model.funciones.Longevidad</class>
+	<class>model.funciones.Mediana</class>
+	<class>model.funciones.Promedio</class>
+	<class>model.funciones.Sumatoria</class>
+	<class>model.funciones.ValoresDelPeriodo</class>
 	
         <properties> 
 	    <property name="hibernate.archive.autodetection" value="class"/>        

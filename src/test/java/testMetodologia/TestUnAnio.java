@@ -16,7 +16,7 @@ import model.Indicador;
 import model.Metodologia;
 import model.funciones.Consistencia;
 import model.funciones.Longevidad;
-import model.funciones.ValorParaNAnios;
+import model.funciones.ValoresDelPeriodo;
 import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionGeneral;
 import parser.ParseException;
@@ -68,12 +68,12 @@ public class TestUnAnio {
 		
 		condicionRoe = new CondicionBuilder()
 								.periodoDeEvaluacion(1)
-								.funcionParaObtenerValor(new ValorParaNAnios(indicadorRoe))
+								.funcionParaObtenerValor(new ValoresDelPeriodo(indicadorRoe))
 								.comparador(Comparador.MAYOR)
 								.build();
 		condicionDeuda = new CondicionBuilder()
 								.periodoDeEvaluacion(1)
-								.funcionParaObtenerValor(new ValorParaNAnios(indicadorDeuda))
+								.funcionParaObtenerValor(new ValoresDelPeriodo(indicadorDeuda))
 								.comparador(Comparador.MENOR)
 								.build();
 		condicionMargen = new CondicionBuilder()//TODO: falta implementar consistencia

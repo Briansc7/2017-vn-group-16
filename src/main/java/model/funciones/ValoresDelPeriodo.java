@@ -2,12 +2,17 @@ package model.funciones;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
-public class ValorParaNAnios extends Funcion{
-	public ValorParaNAnios(Indicador indicador){
+@Entity
+@DiscriminatorValue("valoresDelPeriodo")
+public class ValoresDelPeriodo extends Funcion{
+	public ValoresDelPeriodo(Indicador indicador){
 		super(indicador);
 	}
 	

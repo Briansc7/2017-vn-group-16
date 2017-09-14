@@ -2,10 +2,15 @@ package model.funciones;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
+@Entity
+@DiscriminatorValue("consistencia")
 public class Consistencia extends Funcion{
 	public Consistencia(Indicador indicador){
 		super(indicador);

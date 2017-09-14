@@ -2,10 +2,15 @@ package model.funciones;
 
 import java.math.BigDecimal;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+
 import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 
+@Entity
+@DiscriminatorValue("mediana")
 public class Mediana extends Funcion{
 	public Mediana(Indicador indicador){
 		super(indicador);

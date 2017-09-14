@@ -12,7 +12,7 @@ import model.BaseDeDatos;
 import model.Metodologia;
 import model.funciones.Consistencia;
 import model.funciones.Longevidad;
-import model.funciones.ValorParaNAnios;
+import model.funciones.ValoresDelPeriodo;
 import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionGeneral;
 
@@ -35,13 +35,13 @@ public class TestBuffet {
 		//condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
 		condicionRoe = new CondicionBuilder()
 							.periodoDeEvaluacion(2)
-							.funcionParaObtenerValor(new ValorParaNAnios(base.buscarIndicador("ROE")))
+							.funcionParaObtenerValor(new ValoresDelPeriodo(base.buscarIndicador("ROE")))
 							.comparador(Comparador.MAYOR)
 							.build();
 		//condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
 		condicionDeuda = new CondicionBuilder()
 							.periodoDeEvaluacion(2)
-							.funcionParaObtenerValor(new ValorParaNAnios(base.buscarIndicador("debtEquityRatio")))
+							.funcionParaObtenerValor(new ValoresDelPeriodo(base.buscarIndicador("debtEquityRatio")))
 							.comparador(Comparador.MENOR)
 							.build();
 		//condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
