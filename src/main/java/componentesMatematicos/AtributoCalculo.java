@@ -25,7 +25,6 @@ public class AtributoCalculo extends FactorLiteral{
 	}
 	
 	public BigDecimal getValor(Integer unPeriodo, Empresa unaEmpresa) {
-		return base.valorDe(this.nombre, unPeriodo, unaEmpresa);
-		//return unaBaseDeDatos.buscarAtributo(this.nombre, unaEmpresa).getValor(unPeriodo, unaEmpresa, unaBaseDeDatos);
+		return new CalculoDeIndicador().valorDe(this.nombre, unPeriodo, unaEmpresa);
 	}
 }

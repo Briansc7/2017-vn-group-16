@@ -6,6 +6,7 @@ import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
+import exceptions.EseYaExisteException;
 import model.Indicador;
 
 public class RepositorioDeIndicadores implements WithGlobalEntityManager{
@@ -19,17 +20,31 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 	}
 	
 	public void guardarIndicador(Indicador unIndicador){
+		if(existeIndicador(unIndicador.getNombre()))
+			throw new EseYaExisteException("Un indicador con ese nombre ya existe");
+		sobreescribirIndicador(unIndicador);
+	}
+	
+	public void sobreescribirIndicador(Indicador unIndicador){
 		transaction.begin();
 		entityManager().persist(unIndicador);
 		transaction.commit();
 	}
 	
-	public List<Indicador> obtenerIndicadores(String nombre){
+	public Indicador obtenerIndicador(String nombre){
+		return obtenerIndicadores(nombre).get(0);
+	}
+	
+	public Boolean existeIndicador(String nombre){
+		return obtenerIndicadores(nombre).size() != 0;
+	}
+	
+	private List<Indicador> obtenerIndicadores(String nombre){
 		@SuppressWarnings("unchecked")
 		List<Indicador> indicadores = entityManager()
-				.createQuery("select indicador from Indicador as indicador where indicador.nombre = ?1")
-				.setParameter(1, nombre)
-				.getResultList();
+		.createQuery("select indicador from Indicador as indicador where indicador.nombre = ?1")
+		.setParameter(1, nombre)
+		.getResultList();
 		return indicadores;
 	}
 }
