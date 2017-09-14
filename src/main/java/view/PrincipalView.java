@@ -36,6 +36,10 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		.setCaption("Definir Nueva Metodologia")
 		.onClick(() -> this.agregarMetodologia());
 		
+		new Button(panelActions)
+		.setCaption("Cargar Cuentas")
+		.onClick(() -> this.cargarCuentas());
+		
 	}
 	
 	
@@ -58,7 +62,7 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Menu principal");
 		
-		new Label(mainPanel).setText("Seleccione un arhivo .csv para agregar nuevas cuentas y empresas").setWidth(250);
+		new Label(mainPanel).setText("Seleccione el archivo de cuentas").setWidth(250);
 		new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
 		
 		
@@ -103,6 +107,12 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 			e.printStackTrace();
 			throw new RuntimeException("El indicador esta mal definido");
 		}
+	}
+	
+	public void cargarCuentas() {
+		Dialog<?> dialog = new CargarCuentasView(this);
+		dialog.open();
+		dialog.onAccept(() -> {});
 	}
 	
 }
