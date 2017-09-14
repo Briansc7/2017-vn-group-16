@@ -23,7 +23,7 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 		return instance;
 	}
 	
-	public void guaradarMetodologia(Metodologia unaMetodologia){
+	public void guardarMetodologia(Metodologia unaMetodologia){
 		if(existeMetodologia(unaMetodologia.getNombre()))
 			throw new EseYaExisteException("Ya existe una metodologia de nombre: " + unaMetodologia.getNombre());
 		sobreescribirMetodologia(unaMetodologia);
@@ -63,8 +63,8 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 		return metodologias;
 	}
 
-	public void agregarMetodologias(List<Metodologia> metodologias) {
-		metodologias.stream().forEach(metodologia -> guaradarMetodologia(metodologia));
+	public void guardarMetodologias(List<Metodologia> metodologias) {
+		metodologias.stream().forEach(metodologia -> guardarMetodologia(metodologia));
 	}
 	
 

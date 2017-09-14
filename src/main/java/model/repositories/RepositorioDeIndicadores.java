@@ -60,7 +60,7 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 		return indicadores;
 	}
 	
-	public void agregarIndicadores(List<Indicador> indicadores) {
+	public void guardarIndicadores(List<Indicador> indicadores) {
 		indicadores.stream().forEach(indicador -> guardarIndicador(indicador));
 	}
 	

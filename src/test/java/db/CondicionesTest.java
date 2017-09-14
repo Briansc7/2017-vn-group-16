@@ -1,6 +1,6 @@
 package db;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import java.math.BigDecimal;
 import java.util.Arrays;
@@ -14,7 +14,9 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import model.Metodologia;
 import model.funciones.Longevidad;
 import model.metodologia.condiciones.Comparador;
+import model.metodologia.condiciones.CondicionComparativa;
 import model.metodologia.condiciones.CondicionGeneral;
+import model.metodologia.condiciones.CondicionValorUnico;
 import testMetodologia.CondicionBuilder;
 
 public class CondicionesTest implements WithGlobalEntityManager{
@@ -48,6 +50,11 @@ public class CondicionesTest implements WithGlobalEntityManager{
 		entityManager().persist(longevidadPropia);
 		
 		transaction.commit();
+		
+		CondicionGeneral longevidadPropiaDB = entityManager().find(CondicionValorUnico.class, 2L);
+		
+		assertEquals(CondicionValorUnico.class, longevidadPropiaDB.getClass());
+
 	}
 	
 	@Test
@@ -58,6 +65,11 @@ public class CondicionesTest implements WithGlobalEntityManager{
 		entityManager().persist(longevidadComparativa);
 		
 		transaction.commit();
+		
+		CondicionGeneral longevidadComparativaDB = entityManager().find(CondicionComparativa.class, 1L);
+		
+		assertEquals(CondicionComparativa.class, longevidadComparativaDB.getClass());
+
 	}
 	
 	@Test

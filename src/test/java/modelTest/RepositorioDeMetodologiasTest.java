@@ -49,10 +49,8 @@ public class RepositorioDeMetodologiasTest {
 	
 	@Test
 	public void obtenerMetodologia(){
-		List<Metodologia> metodologias = repositorio.obtenerMetodologias("Metodologia del repositorio");
+		Metodologia metodologiaObtenida = repositorio.obtenerMetodologia("Metodologia del repositorio");
 		
-		metodologias.get(0).getNombre();
-		
-		assertEquals(1, metodologias.size());
+		metodologiaObtenida.getNombre();
 	}
 }
