@@ -54,7 +54,7 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 		return buscarMetodologia(nombre).size() != 0;
 	}
 	
-	private List<Metodologia> buscarMetodologia(String nombre){
+	public List<Metodologia> buscarMetodologia(String nombre){
 		@SuppressWarnings("unchecked")
 		List<Metodologia> metodologias = entityManager()
 				.createQuery("select metodologia from Metodologia as metodologia where metodologia.nombre = ?1")

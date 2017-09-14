@@ -70,7 +70,7 @@ public class TestBuffet {
 	public void metodologiaBuffet() {
 		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia, condicionRoe, condicionDeuda, condicionLongevidadComparativa));
 		//System.out.println(metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).size());
-		Assert.assertEquals("google", metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).get(0).getNombre());
+		Assert.assertEquals("google", metodologiaBuffet.aplicarCondiciones(base.getEmpresas()).get(0).getNombre());
 	}
 	
 	@Test

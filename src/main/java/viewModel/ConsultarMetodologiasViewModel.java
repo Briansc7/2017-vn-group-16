@@ -1,7 +1,6 @@
 package viewModel;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.uqbar.commons.utils.Dependencies;
@@ -35,7 +34,7 @@ private BaseDeDatos baseDeDatos;
 	
 	@Dependencies("nombreMetodologiaElegida")
 	public List<Metodologia> getMetodologias() {
-		return repositorio.filtrarPorNombre(nombreMetodologiaElegida);
+		return repositorio.buscarMetodologia(nombreMetodologiaElegida);
 			
 	}
 	
@@ -46,9 +45,8 @@ private BaseDeDatos baseDeDatos;
 				return baseDeDatos.buscarEmpresas("");
 			} else {		
 				
-				return metodologiaElegida.aplicarCondiciones(baseDeDatos.getEmpresas(), baseDeDatos);
+				return metodologiaElegida.aplicarCondiciones(baseDeDatos.getEmpresas());
 			}
-			
 	}
 	
 	public Metodologia getMetodologiaElegida() {
