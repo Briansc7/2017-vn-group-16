@@ -16,7 +16,9 @@ import model.Metodologia;
 import model.funciones.Consistencia;
 import model.funciones.Funcion;
 import model.funciones.Longevidad;
+import model.funciones.Mediana;
 import model.funciones.Promedio;
+import model.funciones.Sumatoria;
 import model.funciones.ValorParaNAnios;
 import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionComparativa;
@@ -55,7 +57,7 @@ public class AgregarMetodologiaViewModel {
 		tiposParaComparar = Arrays.asList("Constante", "Indicador de otra empresa");
 		indicadores = new ArrayList<Indicador>(baseDeDatos.getIndicadores());
 		//indicadores.add(new Indicador("Longevidad", "1"));
-		funciones = Arrays.asList(new Consistencia(indicador), new Longevidad(), new Promedio(indicador), new ValorParaNAnios(indicador));
+		funciones = Arrays.asList(new Consistencia(indicador), new Longevidad(), new Promedio(indicador), new ValorParaNAnios(indicador), new Sumatoria(indicador), new Mediana(indicador));
 		//AppData.getInstance().setInicializacionMetodologias(new PathFileTxtJson("./Archivos del sistema/Metodologias.txt"));
 	}
 

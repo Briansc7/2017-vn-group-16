@@ -16,7 +16,7 @@ import model.funciones.ValorParaNAnios;
 import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionGeneral;
 
-public class TestNAnios {
+public class TestBuffet {
 	Metodologia metodologiaBuffet;
 	CondicionGeneral condicionRoe;
 	CondicionGeneral condicionDeuda;
@@ -48,21 +48,21 @@ public class TestNAnios {
 		condicionMargen = new CondicionBuilder()
 							.periodoDeEvaluacion(2)
 							.funcionParaObtenerValor(new Consistencia(base.buscarIndicador("margen")))
-							.comparador(Comparador.MAYOROIGUAL)
+							.comparador(Comparador.IGUAL)
+							.valorContraElQueSeCompara(new BigDecimal(-1))
 							.build();
 		//condicionLongevidadPropia = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
 		condicionLongevidadPropia = new CondicionBuilder()
 							.periodoDeEvaluacion(1)
 							.funcionParaObtenerValor(new Longevidad())
 							.comparador(Comparador.MAYOROIGUAL)
-							.valor(new BigDecimal(2))
+							.valorContraElQueSeCompara(new BigDecimal(1))
 							.build();
 		//condicionLongevidadComparativa = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
 		condicionLongevidadComparativa = new CondicionBuilder()
 							.periodoDeEvaluacion(1)
 							.funcionParaObtenerValor(new Longevidad())
 							.comparador(Comparador.MAYOR)
-							.valor(new BigDecimal(5))
 							.build();
 	}
 	
@@ -70,7 +70,7 @@ public class TestNAnios {
 	public void metodologiaBuffet() {
 		metodologiaBuffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia, condicionRoe, condicionDeuda, condicionLongevidadComparativa));
 		//System.out.println(metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).size());
-		Assert.assertEquals("facebook", metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).get(0).getNombre());
+		Assert.assertEquals("google", metodologiaBuffet.aplicarCondiciones(base.getEmpresas(), base).get(0).getNombre());
 	}
 	
 	@Test

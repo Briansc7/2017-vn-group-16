@@ -29,7 +29,7 @@ public class CondicionBuilder {
 		return this;
 	}
 	
-	public CondicionBuilder valor(BigDecimal valor){
+	public CondicionBuilder valorContraElQueSeCompara(BigDecimal valor){
 		this.valor = valor;
 		return this;
 	}

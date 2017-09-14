@@ -21,7 +21,7 @@ private BaseDeDatos baseDeDatos;
 	private Metodologia metodologiaElegida;
 	
 	
-	private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
+	//private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
 
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	

@@ -86,7 +86,7 @@ public class TestUnAnio {
 								.periodoDeEvaluacion(1)
 								.funcionParaObtenerValor(new Longevidad())
 								.comparador(Comparador.MAYOROIGUAL)
-								.valor(new BigDecimal(2))
+								.valorContraElQueSeCompara(new BigDecimal(2))
 								.build();
 		condicionLongevidadComparativa = new CondicionBuilder()
 								.periodoDeEvaluacion(1)

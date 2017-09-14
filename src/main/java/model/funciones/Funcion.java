@@ -46,4 +46,14 @@ public abstract class Funcion {
 		
 		return valoresDelPeriodo;
 	}
+	
+	protected BigDecimal sumatoria(Empresa empresa, Integer periodo, BaseDeDatos baseDeDatos){
+		BigDecimal contador = BigDecimal.ZERO;
+		
+		for(int i=0; i<periodo; i++){
+			contador = contador.add(indicador.getValor(periodo-i, empresa, baseDeDatos));
+		}
+		
+		return contador;
+	}
 }
