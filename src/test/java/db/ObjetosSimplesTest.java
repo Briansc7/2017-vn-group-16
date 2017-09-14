@@ -16,6 +16,8 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
+import parser.ParseException;
+import parser.TokenMgrError;
 //import parser.ParseException;
 //import parser.TokenMgrError;
 
@@ -92,7 +94,7 @@ public class ObjetosSimplesTest implements WithGlobalEntityManager{
 
 		assertEquals(3,	empresaDeLaBase.getCuentas().size());
 	}
-	/*
+	
 	@Test
 	public void guardarUnIndicador() throws ParseException, TokenMgrError {
 		Indicador indicador = new Indicador("Prueba", "2");
@@ -111,7 +113,7 @@ public class ObjetosSimplesTest implements WithGlobalEntityManager{
 				.getResultList();
 		
 		assertEquals(indicador.getNombre(),indicadoresDeLaBase.get(0).getNombre());
-	}*/
+	}
 	
 	@Test
 	public void selectSimple() {
