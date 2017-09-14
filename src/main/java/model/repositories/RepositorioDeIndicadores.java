@@ -8,7 +8,6 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import exceptions.EseNoExisteException;
 import exceptions.EseYaExisteException;
-import model.Empresa;
 import model.Indicador;
 
 public class RepositorioDeIndicadores implements WithGlobalEntityManager{
@@ -59,5 +58,16 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 				.setParameter(1, nombre)
 				.getResultList();
 		return indicadores;
+	}
+	
+	public void agregarIndicadores(List<Indicador> indicadores) {
+		indicadores.stream().forEach(indicador -> guardarIndicador(indicador));
+	}
+	
+
+	public void removerIndicador(Indicador indicador) {
+		transaction.begin();
+		entityManager().remove(indicador);
+		transaction.commit();
 	}
 }

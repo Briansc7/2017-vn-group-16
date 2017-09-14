@@ -1,6 +1,5 @@
 package model.repositories;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityTransaction;
@@ -61,5 +60,16 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 				.setParameter(1, nombre)
 				.getResultList();
 		return empresas;
+	}
+	
+	public void agregarEmpresas(List<Empresa> empresas) {
+		empresas.stream().forEach(empresa -> guaradarEmpresa(empresa));
+	}
+	
+
+	public void removerEmpresa(Empresa empresa) {
+		transaction.begin();
+		entityManager().remove(empresa);
+		transaction.commit();
 	}
 }
