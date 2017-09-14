@@ -22,9 +22,6 @@ import scala.xml.dtd.impl.Base;
 @DiscriminatorColumn(name = "tipoDeExpresion", discriminatorType=DiscriminatorType.INTEGER)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Expresion {
-	@Transient
-	BaseDeDatos base = new BaseDeDatos("");
-	
 	@Id
 	@GeneratedValue
 	@Column
