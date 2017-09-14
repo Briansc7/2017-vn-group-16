@@ -2,109 +2,57 @@ package modelTest;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import dtos.PathFileTxtJson;
-import exceptions.EseYaExisteException;
-import exceptions.NoSeEncuentraException;
-import mockObjects.MockAppData;
 import model.repositories.RepositorioDeMetodologias;
-import utils.AppData;
-import utils.FilesManager;
-import utils.JsonCreator;
+import testMetodologia.CondicionBuilder;
 import model.Metodologia;
-import model.funciones.CondicionNoTaxativa;
-import model.funciones.CondicionTaxativa;
+import model.funciones.Longevidad;
+import model.metodologia.condiciones.Comparador;
+import model.metodologia.condiciones.CondicionGeneral;
 
 public class RepositorioDeMetodologiasTest {
 	RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
-	List<CondicionTaxativa> condicionesTaxativas = new ArrayList<>();
-	List<CondicionNoTaxativa> condicionesNoTaxativas = new ArrayList<>();
 	
-	Metodologia metodologia1 = new Metodologia("A", condicionesTaxativas, condicionesNoTaxativas);
-	Metodologia metodologia2 = new Metodologia("B", condicionesTaxativas, condicionesNoTaxativas);
-	Metodologia metodologia3 = new Metodologia("C", condicionesTaxativas, condicionesNoTaxativas);
-	Metodologia metodologia4 = new Metodologia("D", condicionesTaxativas, condicionesNoTaxativas);
+	CondicionGeneral longevidadPropia;
+	CondicionGeneral longevidadComparativa;
+	Metodologia metodologiaDelRepositorio;
 	
-	List<Metodologia> metodologias;
-
 	@Before
 	public void setUp() {
-		repositorio.setAppData(new MockAppData());
+		longevidadPropia = new CondicionBuilder()
+				.periodoDeEvaluacion(1)
+				.funcionParaObtenerValor(new Longevidad())
+				.comparador(Comparador.MAYOR)
+				.valorContraElQueSeCompara(BigDecimal.ONE)
+				.build();
 		
-		metodologias = new ArrayList<>(Arrays
-				.asList(metodologia1, metodologia2, metodologia3, metodologia4));
+		longevidadComparativa = new CondicionBuilder()
+				.periodoDeEvaluacion(1)
+				.funcionParaObtenerValor(new Longevidad())
+				.comparador(Comparador.MENOROIGUAL)
+				.build();
 		
-		repositorio.agregarMetodologias(metodologias);
+		metodologiaDelRepositorio = new Metodologia("Metodologia del repositorio", Arrays.asList(longevidadComparativa, longevidadPropia));
+		
+		guardarMetodologia();
 	}
-
-	@After
-	public void limpiarRepositorio() {
-		repositorio.limpiarRepositorio();
+	
+	public void guardarMetodologia(){
+		repositorio.guardarMetodologia(metodologiaDelRepositorio);
 	}
 	
 	@Test
-	public void repositorioEsSingleton() {
-		RepositorioDeMetodologias repositorio1 = RepositorioDeMetodologias.getInstance();
-		RepositorioDeMetodologias repositorio2 = RepositorioDeMetodologias.getInstance();
+	public void obtenerMetodologia(){
+		List<Metodologia> metodologias = repositorio.obtenerMetodologias("Metodologia del repositorio");
 		
-		assertEquals(repositorio1, repositorio2);
+		metodologias.get(0).getNombre();
+		
+		assertEquals(1, metodologias.size());
 	}
-	
-	@Test
-	public void agregarMetodologiasGeneraArchivo() {
-		AppData realAppData = AppData.getInstance();
-		String path = "./Archivos de prueba/ArchivoDePruebaParaTestsDeGrabacion.txt";
-		FilesManager file = new FilesManager(path);
-		repositorio.limpiarRepositorio();
-		
-		repositorio.setAppData(realAppData);
-		realAppData.setInicializacionMetodologias(
-				new PathFileTxtJson(path));
-		
-		repositorio.agregarMetodologias(metodologias);
-		String contenidoDelArchivo = file.leerArchivo();
-		file.borrarArchivo();
-		
-		//System.out.println(contenidoDelArchivo);
-		
-		assertEquals(contenidoDelArchivo, new JsonCreator().getJson(metodologias));
-	}
-
-
-	@Test
-	public void filtrarMetodologiasPorNombre() {
-		List<Metodologia> metodologia = repositorio.filtrarPorNombre("A");
-
-		assertEquals("A",metodologia.get(0).getNombre());
-	}
-	
-	@Test
-	public void getMetodologiasOrdenadasPorNombre() {
-		repositorio.limpiarRepositorio();
-		repositorio.agregarMetodologia(metodologia3);
-		repositorio.agregarMetodologia(metodologia1);
-
-		metodologias = repositorio.getOrdenadasPorNombre();
-
-		assertEquals("A",metodologias.get(0).getNombre());
-	}
-	
-	@Test(expected = EseYaExisteException.class)
-	public void agregarNombreYaExistenteDaError() {
-		Metodologia metodologia = new Metodologia("B", condicionesTaxativas, condicionesNoTaxativas);
-		
-		repositorio.agregarMetodologia(metodologia);
-	}
-	
-	/*@Test(expected = NoSeEncuentraException.class)
-	public void filtrarPorUnNombreQueNoExisteDaError() {
-		repositorio.filtrarPorNombre("404");
-	}*/
 }

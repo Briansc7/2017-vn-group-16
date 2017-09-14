@@ -40,7 +40,7 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	public List<Metodologia> obtenerMetodologias(String nombre) {
 		@SuppressWarnings("unchecked")
 		List<Metodologia> metogologias = entityManager()
-				.createQuery("select metodologia from Metodologia as metodologia where metodolgoia.nombre = ?1")
+				.createQuery("select metodologia from Metodologia as metodologia where metodologia.nombre = ?1")
 				.setParameter(1, nombre)
 				.getResultList();
 		
