@@ -28,11 +28,9 @@ public class RepositorioDeIndicadoresTest {
 	
 	@Test
 	public void obtenerIndicador(){
-		List<Indicador> indicadores = repositorio.obtenerIndicadores("Indicador del repositorio");
+		Indicador indicadorObtenido = repositorio.obtenerIndicador("Indicador del repositorio");
 		
-		indicadores.get(0).getFormula();
-		indicadores.get(0).getNombre();
-		
-		assertEquals(1, indicadores.size());
+		indicadorObtenido.getFormula();
+		indicadorObtenido.getNombre();
 	}
 }
