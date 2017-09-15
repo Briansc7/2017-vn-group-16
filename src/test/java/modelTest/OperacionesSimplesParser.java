@@ -6,7 +6,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 import parser.ParseException;
@@ -15,7 +14,6 @@ import parser.TokenMgrError;
 public class OperacionesSimplesParser {
 	Indicador resultado;
 	Empresa empresa;
-	BaseDeDatos baseDeDatos;
 	
 	@Before
 	public void initialize(){
