@@ -23,17 +23,13 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 	public void guardarIndicador(Indicador unIndicador){
 		if(existeIndicador(unIndicador.getNombre()))
 			throw new EseYaExisteException("Ya existe un indicador de nombre: " + unIndicador.getNombre());
-		sobreescribirIndicador(unIndicador);
-	}
-	
-	public void sobreescribirIndicador(Indicador unIndicador){
 		transaction.begin();
 		entityManager().persist(unIndicador);
 		transaction.commit();
 	}
 	
 	//Este devuelve todos los indicadores de la base de datos
-	public List<Indicador> obtenerEmpresas(){
+	public List<Indicador> obtenerIndicadores(){
 		@SuppressWarnings("unchecked")
 		List<Indicador> indicadores = entityManager()
 				.createQuery("select indicador from Indicador as indicador")
