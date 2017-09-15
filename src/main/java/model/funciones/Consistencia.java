@@ -14,7 +14,9 @@ public class Consistencia extends Funcion{
 	public Consistencia(Indicador indicador){
 		super(indicador);
 	}
-
+	
+	public Consistencia(){}
+	
 	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
 		BigDecimal[] valoresDelPeriodo = calcularValoresDelPeriodo(empresa, periodo);
 		BigDecimal[] resultado = new BigDecimal[1];

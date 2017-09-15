@@ -13,7 +13,7 @@ public class Longevidad extends Funcion{
 	public Longevidad(){
 		super();
 	}
-
+		
 	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
 		BigDecimal[] resultado = new BigDecimal[1];
 		resultado[0] = empresa.longevidad();

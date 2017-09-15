@@ -14,7 +14,9 @@ public class Sumatoria extends Funcion{
 	public Sumatoria(Indicador indicador){
 		super(indicador);
 	}
-
+	
+	public Sumatoria(){}
+	
 	@Override
 	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
 		BigDecimal[] resultado = {sumatoria(empresa, periodo)};

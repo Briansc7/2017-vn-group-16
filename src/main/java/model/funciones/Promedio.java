@@ -15,6 +15,8 @@ public class Promedio extends Funcion{
 		super(indicador);
 	}
 	
+	public Promedio(){}
+	
 	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
 		BigDecimal suma = sumatoria(empresa, periodo);
 		BigDecimal[] resultado = new BigDecimal[1];
