@@ -1,14 +1,19 @@
 package viewModel;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
 import model.Empresa;
+import model.Indicador;
 import model.Metodologia;
+import model.repositories.RepositorioDeEmpresas;
+import model.repositories.RepositorioDeIndicadores;
 import model.repositories.RepositorioDeMetodologias;
 
 @Observable
@@ -19,16 +24,23 @@ private BaseDeDatos baseDeDatos;
 	private String nombreMetodologiaElegida = "";	
 	private Metodologia metodologiaElegida;
 	
+	private List<Empresa> empresas= new ArrayList<Empresa>();
+	private List<Indicador> indicadores= new ArrayList<Indicador>();
 	
 	//private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
 
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
 	
-	public ConsultarMetodologiasViewModel(String path) throws IOException{
-		baseDeDatos = new BaseDeDatos(path);
-		baseDeDatos.leerEmpresas();
-		baseDeDatos.leerIndicadores();
+	public ConsultarMetodologiasViewModel() throws IOException{
+		//baseDeDatos = new BaseDeDatos(path);
+		//baseDeDatos.leerEmpresas();
+		//baseDeDatos.leerIndicadores();
+		
+		RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
+		this.setEmpresas(repositorioDeEmpresas.obtenerEmpresas());
+		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
+		this.setIndicadores(repositorioDeIndicadores.obtenerIndicadores());
 		
 	}
 	
@@ -42,10 +54,10 @@ private BaseDeDatos baseDeDatos;
 	public List<Empresa> getEmpresas() {
 			if (metodologiaElegida == null) {
 				
-				return baseDeDatos.buscarEmpresas("");
+				return this.buscarEmpresas("");
 			} else {		
 				
-				return metodologiaElegida.aplicarCondiciones(baseDeDatos.getEmpresas());
+				return metodologiaElegida.aplicarCondiciones(this.empresas);
 			}
 	}
 	
@@ -65,6 +77,20 @@ private BaseDeDatos baseDeDatos;
 	
 	public void setNombreMetodologiaElegida(String nombreMetodologiaElegida) {
 		this.nombreMetodologiaElegida = nombreMetodologiaElegida;
+	}
+	
+	public List<Empresa> buscarEmpresas(String nombre) /*throws IOException */{
+		return this.empresas.stream()
+				.filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase()))
+				.collect(Collectors.toList());
+	}
+	
+	
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+	public void setIndicadores(List<Indicador> indicadores) {
+		this.indicadores = indicadores;
 	}
 }
 

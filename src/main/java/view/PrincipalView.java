@@ -20,6 +20,11 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	
 	@Override
 	protected void addActions(Panel panelActions) {
+		
+		new Button(panelActions)
+		.setCaption("Cargar Cuentas")
+		.onClick(() -> this.cargarCuentas());
+		
 		new Button(panelActions)
 		.setCaption("Consultar cuentas")
 		.onClick(() -> this.consultarCuentas());
@@ -35,20 +40,16 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 		new Button(panelActions)
 		.setCaption("Definir Nueva Metodologia")
 		.onClick(() -> this.agregarMetodologia());
-		
-		new Button(panelActions)
-		.setCaption("Cargar Cuentas")
-		.onClick(() -> this.cargarCuentas());
-		
+			
 	}
 	
 	
 
 	private void consultarMetodologias() {
 		try{
-			this.getModelObject().verificarArchivo();
+			//this.getModelObject().verificarArchivo();
 			//ConsultarMetodologiasView consultarMetodologiasView = new ConsultarMetodologiasView(this, this.getModelObject().getPath());
-			Dialog<?> dialog = new ConsultarMetodologiasView(this, this.getModelObject().getPath());
+			Dialog<?> dialog = new ConsultarMetodologiasView(this);
 			//dialog.onCancel((consultarCuentasView.getModelObject()).borrarCuentasLeidas());
 			dialog.open();
 			dialog.onAccept(() -> {});
@@ -62,8 +63,8 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Menu principal");
 		
-		new Label(mainPanel).setText("Seleccione el archivo de cuentas").setWidth(250);
-		new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
+		//new Label(mainPanel).setText("Seleccione el archivo de cuentas").setWidth(250);
+		//new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
 		
 		
 	}

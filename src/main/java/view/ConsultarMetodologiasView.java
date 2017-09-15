@@ -18,8 +18,8 @@ import viewModel.ConsultarMetodologiasViewModel;
 
 public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewModel>{
 	
-	public ConsultarMetodologiasView(WindowOwner owner, String path) throws IOException{		
-		super(owner, new ConsultarMetodologiasViewModel(path));
+	public ConsultarMetodologiasView(WindowOwner owner) throws IOException{		
+		super(owner, new ConsultarMetodologiasViewModel());
 	}
 	
 	@Override

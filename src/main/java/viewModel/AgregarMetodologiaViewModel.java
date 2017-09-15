@@ -24,6 +24,7 @@ import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionComparativa;
 import model.metodologia.condiciones.CondicionGeneral;
 import model.metodologia.condiciones.CondicionValorUnico;
+import model.repositories.RepositorioDeIndicadores;
 import model.repositories.RepositorioDeMetodologias;
 import parser.ParseException;
 import parser.TokenMgrError;
@@ -38,7 +39,7 @@ public class AgregarMetodologiaViewModel {
 	private String tipoAComparar;
 	private BigDecimal valorContraElQueSeCompara;
 	private String nombreMetodologia;
-	private BaseDeDatos baseDeDatos = new BaseDeDatos("");
+	//private BaseDeDatos baseDeDatos = new BaseDeDatos("");
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
 	private List<CondicionGeneral> condiciones = new ArrayList<CondicionGeneral>();
@@ -52,10 +53,12 @@ public class AgregarMetodologiaViewModel {
 	}
 	
 	private void inicializarDatos() throws ParseException, TokenMgrError {
-		baseDeDatos.leerIndicadores();
+		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
+		this.setIndicadores(repositorioDeIndicadores.obtenerIndicadores());
+		//baseDeDatos.leerIndicadores();
 		criterios = Arrays.asList(Comparador.IGUAL, Comparador.MAYOR, Comparador.MAYOROIGUAL, Comparador.MENOR, Comparador.MENOROIGUAL);
 		tiposParaComparar = Arrays.asList("Constante", "Indicador de otra empresa");
-		indicadores = new ArrayList<Indicador>(baseDeDatos.getIndicadores());
+		//indicadores = new ArrayList<Indicador>(baseDeDatos.getIndicadores());
 		//indicadores.add(new Indicador("Longevidad", "1"));
 		funciones = Arrays.asList(new Consistencia(indicador), new Longevidad(), new Promedio(indicador), new ValoresDelPeriodo(indicador), new Sumatoria(indicador), new Mediana(indicador));
 		//AppData.getInstance().setInicializacionMetodologias(new PathFileTxtJson("./Archivos del sistema/Metodologias.txt"));
