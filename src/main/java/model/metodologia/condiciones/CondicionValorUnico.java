@@ -34,6 +34,6 @@ public class CondicionValorUnico extends CondicionGeneral{
 	}
 	
 	private boolean filtrarEmpresa(Empresa empresa){
-		return comparador.comparar(obtenerValor.calcularValor(empresa, periodoDeEvaluacion)[0], valorContraElQueComparar);
+		return comparador.comparar(funcion.calcularValor(empresa, periodoDeEvaluacion)[0], valorContraElQueComparar);
 	}
 }

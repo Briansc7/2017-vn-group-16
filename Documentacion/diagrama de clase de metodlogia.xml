@@ -1,0 +1,62 @@
+<diagram program="umletino" version="14.2"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>490</x><y>27</y><w>220</w><h>100</h></coordinates><panel_attributes>Metodologia
+--
+nombre
+condiciones
+--
+aplicarCondiciones(empresas)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>290</x><y>167</y><w>230</w><h>140</h></coordinates><panel_attributes>Abstract
+CondicionGeneral
+--
+periodoDeEvaluacion:Integer
+funcion:Funcion
+comparador:Comparador
+--
+analizar(empresas)
+</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>0</x><y>167</y><w>190</w><h>180</h></coordinates><panel_attributes>Enum
+Comparador
+--
+MAYOR
+MAYOROIGUAL
+MENOR
+MENOROIGUAL
+IGUAL
+--
+comparar(valorUno, valorDos)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>180</x><y>417</y><w>180</w><h>80</h></coordinates><panel_attributes>CondicionComparativa
+--
+
+--
+analizar(empresas)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>410</x><y>417</y><w>210</w><h>80</h></coordinates><panel_attributes>CondicionValorUnico
+--
+valorContraElQueComparar
+--
+analizar(empresas)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>600</x><y>207</y><w>210</w><h>120</h></coordinates><panel_attributes>Abstract
+Funcion
+--
+indicador
+--
+calcularValor(empresa, periodo)
+seLlama(nombre)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>940</x><y>477</y><w>200</w><h>70</h></coordinates><panel_attributes>Consistencia
+--
+
+--
+calcularValor(empresa, periodo)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>940</x><y>207</y><w>200</w><h>70</h></coordinates><panel_attributes>Longevidad
+--
+
+--
+calcularValor(empresa, periodo)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>940</x><y>117</y><w>200</w><h>70</h></coordinates><panel_attributes>Mediana
+--
+
+--
+calcularValor(empresa, periodo)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>940</x><y>17</y><w>200</w><h>70</h></coordinates><panel_attributes>Promedio
+--
+
+--
+calcularValor(empresa, periodo)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>940</x><y>387</y><w>200</w><h>70</h></coordinates><panel_attributes>Sumatoria
+--
+
+--
+calcularValor(empresa, periodo)</panel_attributes><additional_attributes/></element><element><id>UMLClass</id><coordinates><x>940</x><y>297</y><w>200</w><h>70</h></coordinates><panel_attributes>ValoresDelPeriodo
+--
+
+--
+calcularValor(empresa, periodo)</panel_attributes><additional_attributes/></element><element><id>Relation</id><coordinates><x>390</x><y>70</y><w>120</w><h>120</h></coordinates><panel_attributes>lt=&lt;-
+m1=*</panel_attributes><additional_attributes>10;100;10;10;100;10</additional_attributes></element><element><id>Relation</id><coordinates><x>230</x><y>300</y><w>180</w><h>140</h></coordinates><panel_attributes/><additional_attributes>160;10;160;70;10;70;10;120</additional_attributes></element><element><id>Relation</id><coordinates><x>380</x><y>300</y><w>150</w><h>140</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70;130;70;130;120</additional_attributes></element><element><id>Relation</id><coordinates><x>178</x><y>170</y><w>130</w><h>100</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>10;10;70;10;70;80;110;80</additional_attributes></element><element><id>Relation</id><coordinates><x>510</x><y>220</y><w>110</w><h>30</h></coordinates><panel_attributes>lt=&lt;-</panel_attributes><additional_attributes>90;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>210</y><w>160</w><h>300</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>10;10;80;10;80;280;140;280</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>210</y><w>160</w><h>210</h></coordinates><panel_attributes/><additional_attributes>10;10;80;10;80;190;140;190</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>210</y><w>160</w><h>120</h></coordinates><panel_attributes/><additional_attributes>10;10;80;10;80;100;140;100</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>200</y><w>160</w><h>40</h></coordinates><panel_attributes/><additional_attributes>10;20;140;20</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>120</y><w>160</w><h>120</h></coordinates><panel_attributes/><additional_attributes>10;100;80;100;80;10;140;10</additional_attributes></element><element><id>Relation</id><coordinates><x>800</x><y>20</y><w>160</w><h>220</h></coordinates><panel_attributes/><additional_attributes>10;200;80;200;80;10;140;10</additional_attributes></element></diagram>

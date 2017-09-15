@@ -35,7 +35,7 @@ public abstract class CondicionGeneral {
 	
 	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
 	//@Column(name = "funcion")
-	protected Funcion obtenerValor;
+	protected Funcion funcion;
 	
 	@Enumerated
 	protected Comparador comparador;
@@ -45,7 +45,7 @@ public abstract class CondicionGeneral {
 	
 	public CondicionGeneral(Integer periodo, Funcion obtenerValor, Comparador comparador){
 		this.periodoDeEvaluacion = periodo;
-		this.obtenerValor = obtenerValor;
+		this.funcion = obtenerValor;
 		this.comparador = comparador;
 	}
 	
