@@ -11,28 +11,31 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import exceptions.EseYaExisteException;
 import model.Cuenta;
 import model.Empresa;
 import model.repositories.RepositorioDeEmpresas;
 
 public class RepositorioDeEmpresasTest {
-	RepositorioDeEmpresas repositorio = RepositorioDeEmpresas.getInstance();
+	private RepositorioDeEmpresas repositorio = RepositorioDeEmpresas.getInstance();
+	private static boolean setUpIsDone = false;
 	
-	List <Cuenta> _cuentas = Arrays.asList(
+	private List <Cuenta> _cuentas = Arrays.asList(
 			new Cuenta("Cuenta de Prueba 1", BigDecimal.valueOf(10), LocalDate.of(2017, 8, 15)),
 			new Cuenta("Cuenta de Prueba 2", BigDecimal.valueOf(20), LocalDate.of(2017, 8, 15)),
 			new Cuenta("Cuenta de Prueba 3", BigDecimal.valueOf(30), LocalDate.of(2017, 8, 15))
 			);
-	Empresa empresa1 = new Empresa("Empresa del Repositorio 1", _cuentas);
-	Empresa empresa2 = new Empresa("Empresa del Repositorio 2", new ArrayList<Cuenta>());
-	Empresa empresa3 = new Empresa("Empresa del Repositorio 3", new ArrayList<Cuenta>());
-	List<Empresa> empresas = Arrays.asList(empresa1, empresa2, empresa3);
-	
-	//Hacer un after para vaciar el repositorio
+	private Empresa empresa1 = new Empresa("Empresa del Repositorio 1", _cuentas);
+	private Empresa empresa2 = new Empresa("Empresa del Repositorio 2", new ArrayList<Cuenta>());
+	private Empresa empresa3 = new Empresa("Empresa del Repositorio 3", new ArrayList<Cuenta>());
+	private List<Empresa> empresas = Arrays.asList(empresa1, empresa2, empresa3);
 	
 	@Before
 	public void guardarEmpresas(){
+		if(setUpIsDone)
+			return;
 		repositorio.guardarEmpresas(empresas);
+		setUpIsDone=true;
 	}
 	
 	@Test
@@ -49,5 +52,17 @@ public class RepositorioDeEmpresasTest {
 		List<Empresa> empresasObtenidas = repositorio.obtenerEmpresas();
 		
 		assertEquals(3, empresasObtenidas.size());
+	}
+	
+	@Test
+	public void obtenerEmpresaPorNombre(){
+		Empresa empresaObtenida = repositorio.obtenerEmpresa("Empresa del Repositorio 1");
+		
+		assertEquals("Empresa del Repositorio 1", empresaObtenida.getNombre());
+	}
+	
+	@Test(expected = EseYaExisteException.class)
+	public void guardarEmpresaQueYaExisteTiraExepcion(){
+		repositorio.guardarEmpresa(empresa1);
 	}
 }

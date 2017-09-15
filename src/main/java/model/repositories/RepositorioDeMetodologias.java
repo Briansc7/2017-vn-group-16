@@ -26,17 +26,13 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	public void guardarMetodologia(Metodologia unaMetodologia){
 		if(existeMetodologia(unaMetodologia.getNombre()))
 			throw new EseYaExisteException("Ya existe una metodologia de nombre: " + unaMetodologia.getNombre());
-		sobreescribirMetodologia(unaMetodologia);
-	}
-	
-	public void sobreescribirMetodologia(Metodologia unaMetodologia){
 		transaction.begin();
 		entityManager().persist(unaMetodologia);
 		transaction.commit();
 	}
 	
 	//Este devuelve todas las metodologias de la base de datos
-	public List<Metodologia> obtenerMetodologia(){
+	public List<Metodologia> obtenerMetodologias(){
 		@SuppressWarnings("unchecked")
 		List<Metodologia> metodologias = entityManager()
 				.createQuery("select metodologia from Metodologia as metodologia")

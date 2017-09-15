@@ -27,10 +27,7 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 	public void guardarEmpresa(Empresa unaEmpresa){
 		if(existeEmpresa(unaEmpresa.getNombre()))
 			throw new EseYaExisteException("Ya existe una empresa de nombre: " + unaEmpresa.getNombre());
-		sobreescribirEmpresa(unaEmpresa);
-	}
-	
-	public void sobreescribirEmpresa(Empresa unaEmpresa){
+		
 		transaction.begin();
 		entityManager().persist(unaEmpresa);
 		transaction.commit();
@@ -65,10 +62,7 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 	}
 	
 	public void guardarEmpresas(List<Empresa> empresas) {
-		transaction.begin();
-		for(Empresa empresa:empresas)
-			entityManager().persist(empresa);
-		transaction.commit();
+		empresas.stream().forEach(empresa -> guardarEmpresa(empresa));
 	}
 	
 
