@@ -20,8 +20,8 @@ import viewModel.ConsultarCuentasViewModel;
 
 public class ConsultarCuentasView extends Dialog<ConsultarCuentasViewModel>{
 	
-	public ConsultarCuentasView(WindowOwner owner, String path) throws IOException{
-		super(owner, new ConsultarCuentasViewModel(path));
+	public ConsultarCuentasView(WindowOwner owner) throws IOException{
+		super(owner, new ConsultarCuentasViewModel());
 	}
 	
 	@Override

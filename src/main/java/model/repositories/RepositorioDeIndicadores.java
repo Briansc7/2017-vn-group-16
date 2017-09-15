@@ -33,7 +33,7 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 	}
 	
 	//Este devuelve todos los indicadores de la base de datos
-	public List<Indicador> obtenerEmpresas(){
+	public List<Indicador> obtenerIndicadores(){
 		@SuppressWarnings("unchecked")
 		List<Indicador> indicadores = entityManager()
 				.createQuery("select indicador from Indicador as indicador")

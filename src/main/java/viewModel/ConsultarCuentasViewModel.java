@@ -4,38 +4,48 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 import org.uqbar.lacar.ui.model.Action;
 
-import model.BaseDeDatos;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 import model.IndicadorAuxiliar;
+import model.repositories.RepositorioDeEmpresas;
+import model.repositories.RepositorioDeIndicadores;
 
 @Observable
 public class ConsultarCuentasViewModel {
-
-	private BaseDeDatos baseDeDatos;
 	
 	private String nombreEmpresaElegida = "";
 	private Empresa empresaElegida;
 	private Integer periodoElegido;//FIXME: Ver si se lo puede convertir a tipo Year
-
+	
+	private List<Empresa> empresas= new ArrayList<Empresa>();
+	private List<Indicador> indicadores= new ArrayList<Indicador>();
+	
 	private List<Integer> periodos = Arrays.asList();
 
-	public ConsultarCuentasViewModel(String path) throws IOException{
+	public ConsultarCuentasViewModel() throws IOException{
 		this.periodoElegido = 0;
-		this.baseDeDatos = new BaseDeDatos(path);
-		this.baseDeDatos.leerEmpresas();
-		this.baseDeDatos.leerIndicadores();
+		RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
+		this.setEmpresas(repositorioDeEmpresas.obtenerEmpresas());
+		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
+		this.setIndicadores(repositorioDeIndicadores.obtenerIndicadores());
+		
+		//this.baseDeDatos = new BaseDeDatos(path);
+		//this.baseDeDatos.leerEmpresas();
+		//this.baseDeDatos.leerIndicadores();
 	}
 	
 	public Action borrarCuentasLeidas(){
-		this.baseDeDatos.borrarEmpresas();
-		this.baseDeDatos.borrarIndicadores();
+		//this.baseDeDatos.borrarEmpresas();
+		//this.baseDeDatos.borrarIndicadores();
+		this.empresas.clear();
+		this.indicadores.clear();
 		return null;
 	}
 //solo se acepta null si el framework lo devuelve. No usar nulls
@@ -43,9 +53,9 @@ public class ConsultarCuentasViewModel {
 	@Dependencies("nombreEmpresaElegida")
 	public List<Empresa> getEmpresas() {
 			if (nombreEmpresaElegida.equals("")) {
-				return baseDeDatos.buscarEmpresas("");
+				return this.buscarEmpresas("");
 			} else {		
-				return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
+				return this.buscarEmpresas(nombreEmpresaElegida);
 			}
 	}
 
@@ -83,13 +93,19 @@ public class ConsultarCuentasViewModel {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}*/
-			List<Indicador> indicadoresReales = this.baseDeDatos.getIndicadores();
+			List<Indicador> indicadoresReales = this.indicadores;
 			List<IndicadorAuxiliar> indicadoresAuxiliares = new ArrayList<IndicadorAuxiliar>();
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), indicador.getValor(this.periodoElegido, this.empresaElegida, this.planilla))));
 			//indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add( new IndicadorAuxiliar(indicador.getNombre(), 111)));
 			indicadoresReales.forEach(indicador -> indicadoresAuxiliares.add(new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(this.periodoElegido, this.empresaElegida))));
 			return indicadoresAuxiliares;
 		}
+	}
+	
+	public List<Empresa> buscarEmpresas(String nombre) /*throws IOException */{
+		return this.empresas.stream()
+				.filter(empresa -> empresa.getNombre().toUpperCase().contains(nombre.toUpperCase()))
+				.collect(Collectors.toList());
 	}
 	
 	public Integer getPeriodoElegido() {
@@ -115,6 +131,13 @@ public class ConsultarCuentasViewModel {
 	public void setEmpresaElegida(Empresa empresaElegida) {
 		this.empresaElegida = empresaElegida;
 		this.periodoElegido = 0;
+	}
+	
+	public void setEmpresas(List<Empresa> empresas) {
+		this.empresas = empresas;
+	}
+	public void setIndicadores(List<Indicador> indicadores) {
+		this.indicadores = indicadores;
 	}
 }
 //mensaje de error del parser debe ser entendible por el usuario, ej que diga error de sintaxis y si es posible de mas informacion
