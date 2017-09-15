@@ -37,7 +37,7 @@ public class Empresa {
 	
 	@Column
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-	@JoinColumn(name = "empresa_id")
+	//@JoinColumn(name = "empresa_id")
 	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
 	
 	@SuppressWarnings("unused")

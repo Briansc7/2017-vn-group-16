@@ -25,16 +25,17 @@ public class OperacionesParserConCuentas {
 	RepositorioDeEmpresas repoEmpresas;
 	
 	@Before
-	public void initialize(){
+	public void initialize() throws ParseException, TokenMgrError{
 		repoIndicadores = RepositorioDeIndicadores.getInstance();
 		repoEmpresas = RepositorioDeEmpresas.getInstance();
 		empresa = new Empresa("Facebook", Arrays.asList(new Cuenta("ebitda", new BigDecimal(500), LocalDate.parse("2015-01-21"))));
-		//repoEmpresas.guaradarEmpresa(empresa);
+		indicadorC = new Indicador("suma", "ebitda");//fb ebitda 2015
+		//repoEmpresas.guardarEmpresa(empresa);
 	}
 	
 	@Test
-	public void leerUnaCuenta() throws NumberFormatException, ParseException, TokenMgrError{
-		indicadorC = new Indicador("suma", "ebitda");//fb ebitda 2015
+	public void leerUnaCuenta() throws NumberFormatException {
+		repoEmpresas.guardarEmpresa(empresa);
 		repoIndicadores.guardarIndicador(indicadorC);
 		Assert.assertEquals(new BigDecimal(500), indicadorC.getValor(2015, empresa));
 	}

@@ -4,10 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
+
+import convertersJPA.LocalDateConverter;
 
 @Observable
 @Entity
@@ -18,6 +21,7 @@ public class Cuenta extends Atributo{
 	private BigDecimal valor;
 	
 	@Column(name = "fecha")
+	@Convert(converter = LocalDateConverter.class)
 	private LocalDate fecha;
 
 	public Cuenta(String nombre, BigDecimal valor, LocalDate fecha){

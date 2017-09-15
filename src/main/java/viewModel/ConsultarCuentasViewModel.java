@@ -41,9 +41,8 @@ public class ConsultarCuentasViewModel {
 //solo se acepta null si el framework lo devuelve. No usar nulls
 	
 	@Dependencies("nombreEmpresaElegida")
-	public List<Empresa> getEmpresas() throws IOException {
-			if (/*nombreEmpresaElegida == null || */nombreEmpresaElegida.equals("")) {
-				//return null;
+	public List<Empresa> getEmpresas() {
+			if (nombreEmpresaElegida.equals("")) {
 				return baseDeDatos.buscarEmpresas("");
 			} else {		
 				return baseDeDatos.buscarEmpresas(nombreEmpresaElegida);
@@ -53,10 +52,8 @@ public class ConsultarCuentasViewModel {
 	@Dependencies("empresaElegida")
 	public List<Integer> getPeriodos() {
 		if (this.empresaElegida == null) {
-			
 			return periodos;	
 		} else {
-			
 			periodos = this.empresaElegida.getPeriodos();//empresa elegida es solo de la vista, no del modelo
 			return periodos;
 		}
