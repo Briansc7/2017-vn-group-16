@@ -10,7 +10,6 @@ import org.uqbar.commons.utils.Observable;
 import exceptions.CondicionIncompletaException;
 import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
-import model.BaseDeDatos;
 import model.Indicador;
 import model.Metodologia;
 import model.funciones.Consistencia;

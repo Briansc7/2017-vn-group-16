@@ -36,7 +36,7 @@ public class Empresa {
 	private String nombre;
 	
 	@Column
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	//@JoinColumn(name = "empresa_id")
 	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
 	
@@ -91,8 +91,7 @@ public class Empresa {
 	public List<Integer> getPeriodos(){
 		List<Integer> periodos = new ArrayList<Integer>(
 				this.cuentas.stream()
-				.map((Cuenta cuenta)-> cuenta.getYear())//solo get year, que lo haga la cuenta
-				//usar localdate de java, hay clase llamada year
+				.map((Cuenta cuenta)-> cuenta.getYear())
 				.collect(Collectors.toSet()));
 		
 		Collections.sort(periodos);

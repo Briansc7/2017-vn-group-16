@@ -27,7 +27,7 @@ public class Metodologia {
 	String nombre;
 	
 	@Column
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "metodologia_id")
 	List<CondicionGeneral> condiciones;
 	//List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));

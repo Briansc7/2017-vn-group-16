@@ -10,7 +10,6 @@ import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
 
-import model.BaseDeDatos;
 import model.Empresa;
 import model.funciones.Funcion;
 

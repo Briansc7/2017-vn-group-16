@@ -47,10 +47,7 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 
 	private void consultarMetodologias() {
 		try{
-			//this.getModelObject().verificarArchivo();
-			//ConsultarMetodologiasView consultarMetodologiasView = new ConsultarMetodologiasView(this, this.getModelObject().getPath());
 			Dialog<?> dialog = new ConsultarMetodologiasView(this);
-			//dialog.onCancel((consultarCuentasView.getModelObject()).borrarCuentasLeidas());
 			dialog.open();
 			dialog.onAccept(() -> {});
 		}
@@ -62,16 +59,10 @@ public class PrincipalView extends SimpleWindow<PrincipalViewModel> {
 	@Override
 	protected void createFormPanel(Panel mainPanel) {
 		this.setTitle("Menu principal");
-		
-		//new Label(mainPanel).setText("Seleccione el archivo de cuentas").setWidth(250);
-		//new FileSelector(mainPanel).setCaption("Buscar archivo").bindValueToProperty("path");
-		
-		
 	}
 	
 	public void consultarCuentas() {
 		try{
-			//this.getModelObject().verificarArchivo();
 			ConsultarCuentasView consultarCuentasView = new ConsultarCuentasView(this);
 			Dialog<?> dialog = new ConsultarCuentasView(this);
 			dialog.onCancel((consultarCuentasView.getModelObject()).borrarCuentasLeidas());
