@@ -19,7 +19,6 @@ public class AppData implements AppDataI{
 	// Singleton
 	private AppData() {
 		providersMetodologia.add(new FileProvider());
-		//inicializarMetodologias();
 	}
 
 	public synchronized static AppData getInstance() {
@@ -31,13 +30,6 @@ public class AppData implements AppDataI{
 	public void guardarMetodologias(List<Metodologia> metodologias) {
 		Archivo archivo = new Archivo(inicializacionMetodologias.getPathFile());
 		archivo.archivarObjetos(metodologias);
-	}
-
-	public void inicializarMetodologias() {
-		RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
-
-		providersMetodologia.forEach(provider -> 
-		repositorio.inicializar(provider.getInformationMetodologia(inicializacionMetodologias)));
 	}
 
 	// Setters y getters
@@ -53,5 +45,11 @@ public class AppData implements AppDataI{
 	public AppData setProvidersMetodologia(List<MetodologiaProvider> providersMetodologia) {
 		this.providersMetodologia = providersMetodologia;
 		return this;
+	}
+
+	@Override
+	public void inicializarMetodologias() {
+		// TODO Auto-generated method stub
+		
 	}
 }
