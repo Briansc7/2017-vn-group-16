@@ -6,7 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-import model.BaseDeDatos;
 import model.Empresa;
 
 @Entity

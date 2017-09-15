@@ -11,11 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
-import model.BaseDeDatos;
 import model.Empresa;
-import scala.xml.dtd.impl.Base;
 
 @Entity
 @Table(name = "expresion")

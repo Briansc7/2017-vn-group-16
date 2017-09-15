@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 import org.uqbar.commons.utils.Observable;
 
-import model.BaseDeDatos;
 import model.Empresa;
 import model.funciones.Funcion;
 
@@ -17,6 +16,9 @@ import model.funciones.Funcion;
 @Entity
 @Table(name = "condicionComparativa")
 public class CondicionComparativa extends CondicionGeneral{
+	
+	protected CondicionComparativa() {}
+	
 	public CondicionComparativa(Integer periodo, Funcion obtenerValor, Comparador comparador){
 		super(periodo, obtenerValor, comparador);
 	}

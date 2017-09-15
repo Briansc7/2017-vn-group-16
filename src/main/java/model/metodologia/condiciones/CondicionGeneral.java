@@ -41,6 +41,8 @@ public abstract class CondicionGeneral {
 	protected Comparador comparador;
 	//protected BaseDeDatos baseDeDatos = BaseDeDatosMock.getDatabaseInstance();//Esto luego hay que reemplazarlo por el repositorioS
 	
+	protected CondicionGeneral() {}
+	
 	public CondicionGeneral(Integer periodo, Funcion obtenerValor, Comparador comparador){
 		this.periodoDeEvaluacion = periodo;
 		this.obtenerValor = obtenerValor;

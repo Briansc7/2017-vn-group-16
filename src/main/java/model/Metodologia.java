@@ -32,6 +32,8 @@ public class Metodologia {
 	List<CondicionGeneral> condiciones;
 	//List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	
+	private Metodologia(){};
+	
 	public Metodologia(String nombre, List<CondicionGeneral> condiciones) {
 		this.nombre = nombre;
 		this.condiciones= condiciones;
@@ -43,7 +45,7 @@ public class Metodologia {
 		List<Empresa> _empresas = new ArrayList<Empresa>(empresas);
 		
 		for(CondicionGeneral condicion:condiciones){
-			condicion.analizar(_empresas);
+			_empresas = condicion.analizar(_empresas);
 		}
 		return _empresas;
 	}

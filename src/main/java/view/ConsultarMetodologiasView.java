@@ -6,9 +6,12 @@ import org.uqbar.arena.widgets.Label;
 import org.uqbar.arena.widgets.List;
 import org.uqbar.arena.widgets.Panel;
 import org.uqbar.arena.widgets.TextBox;
+import org.uqbar.arena.widgets.tables.Column;
+import org.uqbar.arena.widgets.tables.Table;
 import org.uqbar.arena.windows.Dialog;
 import org.uqbar.arena.windows.WindowOwner;
 
+import model.Cuenta;
 import model.Empresa;
 import model.Metodologia;
 import viewModel.ConsultarMetodologiasViewModel;
@@ -35,9 +38,15 @@ public class ConsultarMetodologiasView extends Dialog<ConsultarMetodologiasViewM
 		
 		new Label(mainPanel).setText("Empresas que cumplen con la metodología:");
 		
-		List<Empresa> listaEmpresas = new List<Empresa>(mainPanel);
-		listaEmpresas.setHeight(70);
-		listaEmpresas.bindItemsToProperty("empresas");
+		Table<Empresa> tablaDeEmpresas = new Table<Empresa>(mainPanel, Empresa.class);
+		//listaEmpresas.setHeight(70);
+		tablaDeEmpresas.setNumberVisibleRows(10);
+		tablaDeEmpresas.bindItemsToProperty("empresas");
+		
+		Column<Empresa> columnaNombre= new Column<Empresa>(tablaDeEmpresas);
+		columnaNombre.setTitle("Nombre");
+		columnaNombre.setFixedSize(200);
+		columnaNombre.bindContentsToProperty("nombre");
 	}
 
 }

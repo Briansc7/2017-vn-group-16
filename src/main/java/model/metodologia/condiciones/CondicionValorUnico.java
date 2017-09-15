@@ -18,8 +18,11 @@ import model.funciones.Funcion;
 @Entity
 @Table(name = "condicionValorUnico")
 public class CondicionValorUnico extends CondicionGeneral{
+	
 	@Column(name = "valorContraElQueComparar")
 	private BigDecimal valorContraElQueComparar;
+	
+	protected CondicionValorUnico() {}
 	
 	public CondicionValorUnico(Integer periodo, Funcion obtenerValor, Comparador comparador, BigDecimal valor){
 		super(periodo, obtenerValor, comparador);

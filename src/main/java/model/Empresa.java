@@ -18,8 +18,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.uqbar.commons.utils.Observable;
+
 import exceptions.NoExisteAtributoException;
 
+@Observable
 @Entity
 @Table(name = "empresa")
 public class Empresa {
@@ -34,6 +37,7 @@ public class Empresa {
 	
 	@Column
 	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@JoinColumn(name = "empresa_id")
 	private List<Cuenta> cuentas = new ArrayList<Cuenta>();
 	
 	@SuppressWarnings("unused")
@@ -78,6 +82,10 @@ public class Empresa {
 	
 	public List<Cuenta> getCuentas() {
 		return cuentas;
+	}
+	
+	public void setCuentas(List<Cuenta> cuentas) {
+		this.cuentas = cuentas;
 	}
 	
 	public List<Integer> getPeriodos(){
