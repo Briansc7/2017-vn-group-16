@@ -9,6 +9,7 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import exceptions.EseNoExisteException;
 import exceptions.EseYaExisteException;
 import model.Empresa;
+import model.Indicador;
 
 public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 	private static RepositorioDeEmpresas instance;
@@ -21,6 +22,7 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 			instance = new RepositorioDeEmpresas();
 		return instance;
 	}
+	
 	
 	public void guardarEmpresa(Empresa unaEmpresa){
 		if(existeEmpresa(unaEmpresa.getNombre()))

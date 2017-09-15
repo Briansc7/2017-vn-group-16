@@ -12,6 +12,7 @@ import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 
 import model.BaseDeDatos;
+import model.repositories.RepositorioDeEmpresas;
 import parser.ParseException;
 import parser.TokenMgrError;
 import view.ConsultarCuentasView;
@@ -25,6 +26,8 @@ public class CargarCuentasViewModel {
 	public void cargarCuentas() throws ParseException, TokenMgrError, IOException,NullPointerException{
 		this.cargarArchivo();
 		System.out.println("Archivo cargado exitosamente");
+		this.persistirEmpresas();
+		System.out.println("Empresas persistidas exitosamente");
 	}
 	
 	public void cargarArchivo() throws NullPointerException, IOException {
@@ -45,6 +48,11 @@ public class CargarCuentasViewModel {
 		} catch(IOException e){
 			throw new IOException("El archivo seleccionado no tiene contenido");
 		}
+	}
+	
+	public void persistirEmpresas(){
+		RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
+		repositorioDeEmpresas.guardarEmpresas(datosCsv.getEmpresas());
 	}
 	
 	public String getPath() {
