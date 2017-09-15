@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import org.uqbar.commons.utils.Dependencies;
 import org.uqbar.commons.utils.Observable;
 
-import model.BaseDeDatos;
 import model.Empresa;
 import model.Indicador;
 import model.Metodologia;
@@ -19,7 +18,6 @@ import model.repositories.RepositorioDeMetodologias;
 @Observable
 public class ConsultarMetodologiasViewModel {
 	
-private BaseDeDatos baseDeDatos;
 	
 	private String nombreMetodologiaElegida = "";	
 	private Metodologia metodologiaElegida;
@@ -27,9 +25,9 @@ private BaseDeDatos baseDeDatos;
 	private List<Empresa> empresas= new ArrayList<Empresa>();
 	private List<Indicador> indicadores= new ArrayList<Indicador>();
 	
-	//private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
+	private List<Metodologia> metodologias = new ArrayList<Metodologia>();	
 
-	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
+	//private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
 	
 	public ConsultarMetodologiasViewModel() throws IOException{
@@ -41,13 +39,18 @@ private BaseDeDatos baseDeDatos;
 		this.setEmpresas(repositorioDeEmpresas.obtenerEmpresas());
 		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
 		this.setIndicadores(repositorioDeIndicadores.obtenerIndicadores());
-		
+		RepositorioDeMetodologias repositorioDeMetodologias = RepositorioDeMetodologias.getInstance();
+		this.setMetodologias(repositorioDeMetodologias.obtenerMetodologias());
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")
 	public List<Metodologia> getMetodologias() {
-		return repositorio.buscarMetodologia(nombreMetodologiaElegida);
-			
+		//return repositorio.buscarMetodologia(nombreMetodologiaElegida);
+		if (nombreMetodologiaElegida.equals("")) {
+			return this.buscarMetodologias("");
+		} else {		
+			return this.buscarMetodologias(nombreMetodologiaElegida);
+		}	
 	}
 	
 	@Dependencies("metodologiaElegida")
@@ -85,12 +88,20 @@ private BaseDeDatos baseDeDatos;
 				.collect(Collectors.toList());
 	}
 	
+	public List<Metodologia> buscarMetodologias(String nombre) /*throws IOException */{
+		return this.metodologias.stream()
+				.filter(metodologia -> metodologia.getNombre().toUpperCase().contains(nombre.toUpperCase()))
+				.collect(Collectors.toList());
+	}
 	
 	public void setEmpresas(List<Empresa> empresas) {
 		this.empresas = empresas;
 	}
 	public void setIndicadores(List<Indicador> indicadores) {
 		this.indicadores = indicadores;
+	}
+	public void setMetodologias(List<Metodologia> metodologias) {
+		this.metodologias = metodologias;
 	}
 }
 

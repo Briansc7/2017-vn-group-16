@@ -11,7 +11,6 @@ import org.uqbar.arena.windows.MessageBox.Type;
 import org.uqbar.commons.model.UserException;
 import org.uqbar.commons.utils.Observable;
 
-import model.BaseDeDatos;
 import model.repositories.RepositorioDeEmpresas;
 import parser.ParseException;
 import parser.TokenMgrError;
