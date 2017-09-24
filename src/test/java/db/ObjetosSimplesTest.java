@@ -12,6 +12,7 @@ import javax.persistence.EntityTransaction;
 
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
 import model.Cuenta;
 import model.Empresa;
@@ -19,7 +20,8 @@ import model.Indicador;
 import parser.ParseException;
 import parser.TokenMgrError;
 
-public class ObjetosSimplesTest implements WithGlobalEntityManager{
+//usar eso
+public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	
 	Cuenta cuentaCreadaPorMi = new Cuenta("Cuenta de Prueba", BigDecimal.valueOf(10), LocalDate.of(2017, 8, 15));
 	
@@ -80,13 +82,10 @@ public class ObjetosSimplesTest implements WithGlobalEntityManager{
 	
 	@Test
 	public void guardarUnaEmpresa() {
-		EntityTransaction transaction = entityManager().getTransaction();
 
-		transaction.begin();
 
 		entityManager().persist(empresa);
 
-		transaction.commit();
 		
 		Empresa empresaDeLaBase = (Empresa) entityManager().createQuery("from Empresa order by id desc").getResultList().get(0);
 

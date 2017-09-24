@@ -35,7 +35,7 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	public List<Metodologia> obtenerMetodologias(){
 		@SuppressWarnings("unchecked")
 		List<Metodologia> metodologias = entityManager()
-				.createQuery("select metodologia from Metodologia as metodologia")
+				.createQuery("from Metodologia")
 				.getResultList();
 		return metodologias;
 	}
@@ -53,8 +53,8 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	public List<Metodologia> buscarMetodologia(String nombre){
 		@SuppressWarnings("unchecked")
 		List<Metodologia> metodologias = entityManager()
-				.createQuery("select metodologia from Metodologia as metodologia where metodologia.nombre = ?1")
-				.setParameter(1, nombre)
+				.createQuery("select metodologia from Metodologia as metodologia where metodologia.nombre = :nombre")
+				.setParameter("nombre", nombre)
 				.getResultList();
 		return metodologias;
 	}
@@ -70,39 +70,4 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 		transaction.commit();
 	}
 	
-	/*
-	//private CondicionGeneral condicionRoe = new CondicionNoTaxativa(2, "ROE", new GreaterThan(), 1);
-	private CondicionGeneral condicionRoe = new CondicionBuilder()
-			.periodoDeEvaluacion(2)
-			.funcionParaObtenerValor(new ValorParaNAnios(base.buscarIndicador("ROE")))
-			.comparador(Comparador.MAYOR)
-			.build();
-	//private CondicionNoTaxativa condicionDeuda = new CondicionNoTaxativa(2, "debtEquityRatio", new LessThan(), 2);
-	private CondicionGeneral condicionDeuda = new CondicionBuilder()
-			.periodoDeEvaluacion(2)
-			.funcionParaObtenerValor(new ValorParaNAnios(base.buscarIndicador("debtEquityRatio")))
-			.comparador(Comparador.MENOR)
-			.build();
-	//private CondicionTaxativa condicionMargen = new CondicionTaxativa(2, "Margen", new GreaterAndEqualThan(), "margen");
-	private CondicionGeneral condicionMargen = new CondicionBuilder()
-			.periodoDeEvaluacion(2)
-			.funcionParaObtenerValor(new Consistencia(base.buscarIndicador("margen")))
-			.comparador(Comparador.MAYOROIGUAL)
-			.build();
-	//private TaxativaLongevidad condicionLongevidad1 = new TaxativaLongevidad(0, "longevidad", new GreaterAndEqualThan(), new BigDecimal(2));
-	private CondicionGeneral condicionLongevidadPropia = new CondicionBuilder()
-			.periodoDeEvaluacion(1)
-			.funcionParaObtenerValor(new Longevidad())
-			.comparador(Comparador.MAYOROIGUAL)
-			.valor(new BigDecimal(2))
-			.build();
-	//private NoTaxativaLongevidad condicionLongevidad2 = new NoTaxativaLongevidad(0, "longevidad", new GreaterThan(), 5);
-	private CondicionGeneral condicionLongevidadComparativa = new CondicionBuilder()
-			.periodoDeEvaluacion(1)
-			.funcionParaObtenerValor(new Longevidad())
-			.comparador(Comparador.MAYOR)
-			.valor(new BigDecimal(5))
-			.build();
-	private Metodologia buffet = new Metodologia("Buffet", Arrays.asList(condicionMargen, condicionLongevidadPropia, condicionRoe, condicionDeuda, condicionLongevidadComparativa));	
-	 */
 }

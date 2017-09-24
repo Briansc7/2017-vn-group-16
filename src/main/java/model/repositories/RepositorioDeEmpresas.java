@@ -5,20 +5,18 @@ import java.util.List;
 import javax.persistence.EntityTransaction;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 import exceptions.EseNoExisteException;
 import exceptions.EseYaExisteException;
 import model.Empresa;
 
-public class RepositorioDeEmpresas implements WithGlobalEntityManager{
-	private static RepositorioDeEmpresas instance;
-	private EntityTransaction transaction = entityManager().getTransaction();
+public class RepositorioDeEmpresas implements WithGlobalEntityManager, TransactionalOps {
+	private static RepositorioDeEmpresas instance= new RepositorioDeEmpresas() ;
 	
 	private RepositorioDeEmpresas(){}
 	
-	public synchronized static RepositorioDeEmpresas getInstance(){
-		if(instance == null)
-			instance = new RepositorioDeEmpresas();
+	public static RepositorioDeEmpresas getInstance(){
 		return instance;
 	}
 	
@@ -27,6 +25,7 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 		if(existeEmpresa(unaEmpresa.getNombre()))
 			throw new EseYaExisteException("Ya existe una empresa de nombre: " + unaEmpresa.getNombre());
 		
+		EntityTransaction transaction = entityManager().getTransaction();
 		transaction.begin();
 		entityManager().persist(unaEmpresa);
 		transaction.commit();
@@ -34,11 +33,9 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 	
 	//Este devuelve todas las empresas de la base de datos
 	public List<Empresa> obtenerEmpresas(){
-		@SuppressWarnings("unchecked")
-		List<Empresa> empresas = entityManager()
-				.createQuery("select empresa from Empresa as empresa")
+		return entityManager()
+				.createQuery("select empresa from Empresa as empresa", Empresa.class)
 				.getResultList();
-		return empresas;
 	}
 	
 	public Empresa obtenerEmpresa(String nombre){
@@ -66,8 +63,6 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager{
 	
 
 	public void removerEmpresa(Empresa empresa) {
-		transaction.begin();
-		entityManager().remove(empresa);
-		transaction.commit();
+		withTransaction(() ->  entityManager().remove(empresa));
 	}
 }

@@ -33,13 +33,12 @@ public abstract class CondicionGeneral {
 	@Column(name = "periodoDeEvaluacion")
 	protected Integer periodoDeEvaluacion;
 	
-	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	@ManyToOne( cascade = CascadeType.PERSIST)
 	//@Column(name = "funcion")
 	protected Funcion funcion;
 	
 	@Enumerated
 	protected Comparador comparador;
-	//protected BaseDeDatos baseDeDatos = BaseDeDatosMock.getDatabaseInstance();//Esto luego hay que reemplazarlo por el repositorioS
 	
 	protected CondicionGeneral() {}
 	

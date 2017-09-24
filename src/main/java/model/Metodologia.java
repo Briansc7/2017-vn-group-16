@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,14 +61,7 @@ public class Metodologia {
 		return nombre;
 	}
 	
-	@Override
-	public boolean equals(Object o){
-		if(!o.getClass().equals(Metodologia.class))
-			return false;
-		
-		Metodologia other = (Metodologia) o;
-		return other.getNombre().equals(getNombre());
-	}
+
 	
 	/*
 	private List<Empresa> aplicarCondicionesTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {

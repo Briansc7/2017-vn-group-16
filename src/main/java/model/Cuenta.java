@@ -31,7 +31,7 @@ public class Cuenta extends Atributo{
 	}
 	
 	@SuppressWarnings("unused")
-	private Cuenta(){super();}
+	private Cuenta(){}
 	
 	public String getNombre() {
 		return nombre;
@@ -48,12 +48,5 @@ public class Cuenta extends Atributo{
 	public Integer getYear() {
 		return this.fecha.getYear();
 	}
-	
-	public void setValor(BigDecimal valor) {
-		this.valor = valor;
-	}
-	
-	public void setFecha(LocalDate fecha) {
-		this.fecha = fecha;
-	}
+
 }
