@@ -4,13 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dtos.PathFile;
-import mockObjects.AppDataI;
 import model.Metodologia;
 import model.repositories.RepositorioDeMetodologias;
 import providers.FileProvider;
 import providers.MetodologiaProvider;
 
-public class AppData implements AppDataI{
+/*public class AppData implements AppDataI{
 	private static AppData instance;
 	private List<MetodologiaProvider> providersMetodologia = new ArrayList<MetodologiaProvider>();
 
@@ -52,4 +51,4 @@ public class AppData implements AppDataI{
 		// TODO Auto-generated method stub
 		return null;
 	}
-}
+}*/

@@ -1,7 +1,10 @@
 package model.funciones;
 
 import java.math.BigDecimal;
+import java.time.Year;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
@@ -37,7 +40,7 @@ public abstract class Funcion {
 	
 	public Funcion(){}
 	
-	public abstract BigDecimal[] calcularValor(Empresa empresa, Integer periodo);
+	public abstract List<BigDecimal> calcularValor(Empresa empresa, Integer periodo);
 	
 	public void setIndicador(Indicador indicador){
 		this.indicador = indicador;
@@ -52,16 +55,15 @@ public abstract class Funcion {
 		return this.getClass().getSimpleName().equalsIgnoreCase(nombre);
 	}
 	
-	protected BigDecimal[] calcularValoresDelPeriodo(Empresa empresa, Integer periodo) {
-		BigDecimal[] valoresDelPeriodo = new BigDecimal[periodo];
-		int anioActual = Calendar.getInstance().get(Calendar.YEAR);
+	protected List<BigDecimal> calcularValoresDelPeriodo(Empresa empresa, Integer periodo) {
+		List<BigDecimal> valoresDelPeriodo = new ArrayList<>();
+		int anioActual = Year.now().getValue();
 		
 		for(int i=0; i<periodo; i++){
 			try{
-				valoresDelPeriodo[i] = indicador.getValor(anioActual-i, empresa);
+				valoresDelPeriodo.set(i, indicador.getValor(anioActual-i, empresa));
 			} catch (Exception ex) {
-				//valorAuxiliar = "*";
-				valoresDelPeriodo[i] = BigDecimal.ZERO;
+				valoresDelPeriodo.set(i, BigDecimal.ZERO);
 			} 
 		}
 		return valoresDelPeriodo;

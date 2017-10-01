@@ -29,11 +29,11 @@ public class CondicionComparativa extends CondicionGeneral{
 
 	private int compararEmpresas(Empresa empresa1, Empresa empresa2) {
 		Integer aux1=0,aux2=0;
-		BigDecimal[] valores1 = funcion.calcularValor(empresa1, periodoDeEvaluacion);
-		BigDecimal[] valores2 = funcion.calcularValor(empresa2, periodoDeEvaluacion);
+		List<BigDecimal> valores1 = funcion.calcularValor(empresa1, periodoDeEvaluacion);
+		List<BigDecimal> valores2 = funcion.calcularValor(empresa2, periodoDeEvaluacion);
 		
 		for(int i=0; i<periodoDeEvaluacion; i++){
-			if(comparador.comparar(valores1[i], valores2[i]))
+			if(comparador.comparar(valores1.get(i), valores2.get(i)))
 				aux1++;
 			else
 				aux2++;

@@ -1,6 +1,9 @@
 package model.funciones;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -18,20 +21,21 @@ public class Mediana extends Funcion{
 	public Mediana(){}
 	
 	@Override
-	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
-		BigDecimal[] valores = calcularValor(empresa, periodo);
-		BigDecimal[] mediana = new BigDecimal[1];
+	public List<BigDecimal> calcularValor(Empresa empresa, Integer periodo) {
+		List<BigDecimal> valores = calcularValoresDelPeriodo(empresa, periodo);
+		Collections.sort(valores);
+		BigDecimal mediana;
 		Integer indiceMediana;
-		BigDecimal aux;
+		BigDecimal sumaAux;
 		
 		if(periodo%2 == 0){
 			indiceMediana = periodo/2;
-			aux = valores[indiceMediana].add(valores[indiceMediana-1]);
-			mediana[0] = aux.divide(aux);
+			sumaAux = valores.get(indiceMediana).add(valores.get(indiceMediana-1));
+			mediana = sumaAux.divide(new BigDecimal(2));
 		} else {
 			indiceMediana = (periodo-1)/2;
-			mediana[0] = valores[indiceMediana];
+			mediana = valores.get(indiceMediana);
 		}
-		return mediana;
+		return Arrays.asList(mediana);
 	}
 }

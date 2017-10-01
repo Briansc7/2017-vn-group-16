@@ -1,6 +1,8 @@
 package model.funciones;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -17,10 +19,10 @@ public class Promedio extends Funcion{
 	
 	public Promedio(){}
 	
-	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
+	public List<BigDecimal> calcularValor(Empresa empresa, Integer periodo) {
 		BigDecimal suma = sumatoria(empresa, periodo);
-		BigDecimal[] resultado = new BigDecimal[1];
-		resultado[0] = suma.divide(BigDecimal.valueOf(periodo));
-		return resultado;
+		BigDecimal resultado;
+		resultado = suma.divide(BigDecimal.valueOf(periodo));
+		return Arrays.asList(resultado);
 	}
 }

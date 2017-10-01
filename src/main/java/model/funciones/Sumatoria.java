@@ -1,6 +1,8 @@
 package model.funciones;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -18,8 +20,7 @@ public class Sumatoria extends Funcion{
 	public Sumatoria(){}
 	
 	@Override
-	public BigDecimal[] calcularValor(Empresa empresa, Integer periodo) {
-		BigDecimal[] resultado = {sumatoria(empresa, periodo)};
-		return resultado;
+	public List<BigDecimal> calcularValor(Empresa empresa, Integer periodo) {
+		return Arrays.asList(sumatoria(empresa, periodo));
 	}
 }
