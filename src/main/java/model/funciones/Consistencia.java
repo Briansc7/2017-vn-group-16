@@ -26,7 +26,7 @@ public class Consistencia extends Funcion{
 	    int contadorAsc = 0;
 	    int contadorDesc = 0;
 
-	    for (int i = 0; i < fin; i++) {
+	    for(int i = 0; i < fin; i++) {
 	        if(valoresDelPeriodo.get(i).compareTo(valoresDelPeriodo.get(i+1)) > 0){
 	        	contadorAsc++;
 	        } else if(valoresDelPeriodo.get(i).compareTo(valoresDelPeriodo.get(i+1)) < 0){

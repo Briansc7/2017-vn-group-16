@@ -1,0 +1,36 @@
+{{# partial "titulo" }}	
+	<title>Cuentas</title>
+{{/partial}}
+		
+{{# partial "contenido" }}	
+
+<form action="/consultoras" >
+  <div class="row">
+	  <div class="col-md-10">
+		  <input type="text" class="form-control" name="filtroNombre">
+		</div>
+		<div class="col-md-2">
+		  <input type="submit" class="form-control btn btn-default">
+		</div>
+  </div>
+</form>
+
+<div class="row">
+	<div class="col-md-12">	
+	<table class="table table-striped" >
+			<td>Nombre</td>
+			<td>Valor</td>
+		</hr>
+	{{#consultoras}}
+		<tr>
+			<td>{{nombre}}</td>
+			<td>{{valor}}</td>
+		</tr>
+	{{/consultoras}}				
+	</table>
+	</div>
+</div>
+
+{{/partial}}
+				
+{{> layout.hbs }}
