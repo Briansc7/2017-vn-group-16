@@ -1,10 +1,10 @@
 {{# partial "titulo" }}	
-	<title>Cuentas</title>
+	<title>Empresas</title>
 {{/partial}}
 		
 {{# partial "contenido" }}	
 
-<form action="/consultoras" >
+<form action="/empresas" >
   <div class="row">
 	  <div class="col-md-10">
 		  <input type="text" class="form-control" name="filtroNombre">
@@ -19,14 +19,12 @@
 	<div class="col-md-12">	
 	<table class="table table-striped" >
 			<td>Nombre</td>
-			<td>Valor</td>
 		</hr>
-	{{#consultoras}}
+	{{#empresas}}
 		<tr>
 			<td>{{nombre}}</td>
-			<td>{{valor}}</td>
 		</tr>
-	{{/consultoras}}				
+	{{/empresas}}
 	</table>
 	</div>
 </div>
