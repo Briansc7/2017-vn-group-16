@@ -1,41 +1,41 @@
 <html>
-  <head>
-    {{# block "titulo" }}
-    {{/block}}
-  </head>
-  <body>
+    <head>
+        {{# block "titulo" }}
+        {{/block}}
+    </head>
+    <body>
 
-  <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet"  href="main.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="main.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
-  <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand"href="/">Home</a>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/empresas">Empresas</a></li>
+                </ul>
+            </div>
+            <div>
+                <ul class="nav navbar-nav">
+                    <li><a href="/metodologias">Metodologias</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
     <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand"href="/">Home</a>
-      </div>
-      <div>
-          <ul class="nav navbar-nav">
-              <li><a href="/empresas">Empresas</a></li>
-          </ul>
-      </div>
-      <div>
-        <ul class="nav navbar-nav">
-          <li><a href="/metodologias">Metodologias</a></li>
-        </ul>
-      </div>
+        {{# block "contenido" }}
+        {{/block}}
     </div>
-  </nav>
 
-  <div class="container">
-  {{# block "contenido" }}
-  {{/block}}
-  </div>
-  
-  <footer class="footer">
-    <p class="text-center">
-      DDS-TP anual 2017
-    </p>
-  </footer>
-  </body>
+    <footer class="footer">
+        <p class="text-center">
+            DDS-TP anual 2017
+        </p>
+    </footer>
+    </body>
 </html>

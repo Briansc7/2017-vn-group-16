@@ -1,0 +1,22 @@
+{{# partial "titulo" }}
+    <title>Cuentas de {{empresa.nombre}}</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped" >
+                <th>Nombre</th>
+                <th>Valor</th>
+                {{#cuentas}}
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>{{valor}}</td>
+                </tr>
+                {{/cuentas}}
+            </table>
+        </div>
+    </div>
+{{/partial}}
+
+{{> layout.hbs }}

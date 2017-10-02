@@ -1,5 +1,6 @@
 package controllers;
 
+import model.Cuenta;
 import model.Empresa;
 import model.repositories.RepositorioDeEmpresas;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -41,5 +42,18 @@ public class EmpresasController implements WithGlobalEntityManager, Transactiona
 //        viewModel.put("periodos", empresa.getPeriodos());
 //        viewModel.put("")
         return new ModelAndView(empresa, "periodos.hbs");
+    }
+
+    public ModelAndView cuentasDe(Request request, Response response) {
+        long id = Long.parseLong(request.params(":id"));
+        int periodo = Integer.parseInt(request.params(":periodo"));
+
+        Empresa empresa = repositorioDeEmpresas.buscar(id);
+
+        Map<String, Object> viewModel = new HashMap<>();
+        viewModel.put("cuentas", empresa.cuentasDelPeriodo(periodo));
+        viewModel.put("empresa", empresa);
+
+        return new ModelAndView(viewModel, "cuentas.hbs");
     }
 }

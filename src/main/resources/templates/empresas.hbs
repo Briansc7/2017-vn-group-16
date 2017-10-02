@@ -1,31 +1,29 @@
-{{# partial "titulo" }}	
-	<title>Empresas</title>
+{{# partial "titulo" }}
+    <title>Empresas</title>
 {{/partial}}
 		
-{{# partial "contenido" }}	
+{{# partial "contenido" }}
+    <form action="/empresas" >
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" class="form-control" name="filtroNombre">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn btn-default">
+            </div>
+        </div>
+    </form>
 
-<form action="/empresas" >
-  <div class="row">
-	  <div class="col-md-10">
-		  <input type="text" class="form-control" name="filtroNombre">
-      </div>
-      <div class="col-md-2">
-		  <input type="submit" class="form-control btn btn-default">
-      </div>
-  </div>
-</form>
-
-<div class="row">
-    <div class="col-md-12">
-        <label>Empresas:</label>
-        <div class="list-group">
-            {{#empresas}}
+    <div class="row">
+        <div class="col-md-12">
+            <label>Empresas:</label>
+            <div class="list-group">
+                {{#empresas}}
                 <a href="/empresas/{{id}}/periodos" class="list-group-item">{{nombre}}</a>
-            {{/empresas}}
+                {{/empresas}}
+            </div>
         </div>
     </div>
-</div>
-
 {{/partial}}
 				
 {{> layout.hbs }}

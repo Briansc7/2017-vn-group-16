@@ -25,6 +25,7 @@ public class Ejecutable extends Application{
 
 		get("/empresas", empresas::listar, engine);
 		get("/empresas/:id/periodos", empresas::periododDe, engine);
+		get("/empresas/:id/periodos/:periodo/cuentas", empresas::cuentasDe, engine);
 	}
 	
 	@Override
