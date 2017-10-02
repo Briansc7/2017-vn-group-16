@@ -1,0 +1,20 @@
+{{# partial "titulo" }}
+    <title>Periodos de {{nombre}}</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+
+    <div class="row">
+        <div class="col-md-12">
+            <label>Periodos:</label>
+            <div class="list-group">
+                {{#periodos}}
+                    <a href="/empresas/{{id}}/periodos/{{this}}/cuentas" class="list-group-item">{{this}}</a>
+                {{/periodos}}
+            </div>
+        </div>
+    </div>
+
+{{/partial}}
+
+{{> layout.hbs }}

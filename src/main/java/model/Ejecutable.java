@@ -24,6 +24,7 @@ public class Ejecutable extends Application{
 		staticFileLocation("/public");
 
 		get("/empresas", empresas::listar, engine);
+		get("/empresas/:id/periodos", empresas::periododDe, engine);
 	}
 	
 	@Override

@@ -65,4 +65,11 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager, Transacti
 	public void removerEmpresa(Empresa empresa) {
 		withTransaction(() ->  entityManager().remove(empresa));
 	}
+
+	public Empresa buscar(long id) {
+		return entityManager()
+				.createQuery("from Empresa as empresa where empresa.id = :id", Empresa.class)
+				.setParameter("id", id)
+				.getSingleResult();
+	}
 }

@@ -98,4 +98,7 @@ public class Empresa {
 		return periodos;
 	}
 
+	public long getId(){
+		return id;
+	}
 }

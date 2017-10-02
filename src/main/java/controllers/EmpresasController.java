@@ -8,20 +8,21 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.lang.reflect.MalformedParameterizedTypeException;
+import java.util.*;
 
 public class EmpresasController implements WithGlobalEntityManager, TransactionalOps {
+
+    private RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
+
     public ModelAndView listar(Request request, Response response) {
         List<Empresa> empresas;
 
         String filtroNombre = request.queryParams("filtroNombre");
         if (Objects.isNull(filtroNombre) || filtroNombre.isEmpty()) {
-            empresas = RepositorioDeEmpresas.getInstance().obtenerEmpresas();
+            empresas = repositorioDeEmpresas.obtenerEmpresas();
         } else {
-            empresas = Arrays.asList(RepositorioDeEmpresas.getInstance().obtenerEmpresa(filtroNombre));
+            empresas = Arrays.asList(repositorioDeEmpresas.obtenerEmpresa(filtroNombre));
         }
 
         HashMap<String, Object> viewModel = new HashMap<>();
@@ -29,5 +30,16 @@ public class EmpresasController implements WithGlobalEntityManager, Transactiona
         viewModel.put("filtroNombre", filtroNombre);
 
         return new ModelAndView(viewModel, "empresas.hbs");
+    }
+
+    public ModelAndView periododDe(Request request, Response response) {
+        long id = Long.parseLong(request.params(":id"));
+
+        Empresa empresa = repositorioDeEmpresas.buscar(id);
+
+//        Map<String, Object> viewModel = new HashMap<>();
+//        viewModel.put("periodos", empresa.getPeriodos());
+//        viewModel.put("")
+        return new ModelAndView(empresa, "periodos.hbs");
     }
 }

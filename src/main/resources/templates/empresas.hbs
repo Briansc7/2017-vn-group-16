@@ -8,25 +8,22 @@
   <div class="row">
 	  <div class="col-md-10">
 		  <input type="text" class="form-control" name="filtroNombre">
-		</div>
-		<div class="col-md-2">
+      </div>
+      <div class="col-md-2">
 		  <input type="submit" class="form-control btn btn-default">
-		</div>
+      </div>
   </div>
 </form>
 
 <div class="row">
-	<div class="col-md-12">	
-	<table class="table table-striped" >
-			<td>Nombre</td>
-		</hr>
-	{{#empresas}}
-		<tr>
-			<td>{{nombre}}</td>
-		</tr>
-	{{/empresas}}
-	</table>
-	</div>
+    <div class="col-md-12">
+        <label>Empresas:</label>
+        <div class="list-group">
+            {{#empresas}}
+                <a href="/empresas/{{id}}/periodos" class="list-group-item">{{nombre}}</a>
+            {{/empresas}}
+        </div>
+    </div>
 </div>
 
 {{/partial}}
