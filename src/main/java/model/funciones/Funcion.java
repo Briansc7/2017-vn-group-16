@@ -3,8 +3,9 @@ package model.funciones;
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorColumn;
@@ -17,6 +18,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
 
@@ -56,25 +58,23 @@ public abstract class Funcion {
 	}
 	
 	protected List<BigDecimal> calcularValoresDelPeriodo(Empresa empresa, Integer periodo) {
-		List<BigDecimal> valoresDelPeriodo = new ArrayList<>();
-		int anioActual = Year.now().getValue();
-		
-		for(int i=0; i<periodo; i++){
-			try{
-				valoresDelPeriodo.set(i, indicador.getValor(anioActual-i, empresa));
-			} catch (Exception ex) {
-				valoresDelPeriodo.set(i, BigDecimal.ZERO);
-			} 
-		}
-		return valoresDelPeriodo;
+		Integer anioActual = Year.now().getValue();
+		List<Integer> anios = IntStream.range(anioActual-periodo+1, anioActual+1).boxed().collect(Collectors.toList());
+
+		return anios.stream().map((anio) ->this.calcularValorIndicador(empresa, anio)).collect(Collectors.toList());
 	}
-	
+
+	protected BigDecimal calcularValorIndicador(Empresa empresa, Integer anio){
+		try{
+			return indicador.getValor(anio, empresa);
+		} catch (Exception ex) {
+			return BigDecimal.ZERO;
+		}
+	}
+
 	protected BigDecimal sumatoria(Empresa empresa, Integer periodo){
-		BigDecimal contador = BigDecimal.ZERO;
-		
-		for(int i=0; i<periodo; i++){
-			contador = contador.add(indicador.getValor(periodo-i, empresa));
-		}
-		return contador;
+		return this.calcularValoresDelPeriodo(empresa, periodo)
+				.stream().reduce(BigDecimal.ZERO, (valor1, valor2) -> valor1.add(valor2));
 	}
+
 }
