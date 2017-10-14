@@ -13,16 +13,16 @@ import model.Indicador;
 @Entity
 @DiscriminatorValue("promedio")
 public class Promedio extends Funcion{
+
 	public Promedio(Indicador indicador){
 		super(indicador);
 	}
 	
-	public Promedio(){}
+	protected Promedio(){}
 	
 	public List<BigDecimal> calcularValor(Empresa empresa, Integer periodo) {
-		BigDecimal suma = sumatoria(empresa, periodo);
-		BigDecimal resultado;
-		resultado = suma.divide(BigDecimal.valueOf(periodo));
+		BigDecimal suma = this.sumatoria(empresa, periodo);
+		BigDecimal resultado = suma.divide(BigDecimal.valueOf(periodo));
 		return Arrays.asList(resultado);
 	}
 }

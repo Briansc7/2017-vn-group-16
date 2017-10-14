@@ -3,6 +3,7 @@ package model.funciones;
 import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -85,5 +86,10 @@ public abstract class Funcion {
 
 	protected boolean esDecreciente(List<BigDecimal> valores) {
 		return Ordering.natural().reverse().isOrdered(valores);
+	}
+
+	protected void quitarCeros(List<BigDecimal> valores){
+		//no tomo en cuenta periodos en los que no puedo calcular el valor del indicador
+		valores.removeAll(Arrays.asList(BigDecimal.ZERO));
 	}
 }

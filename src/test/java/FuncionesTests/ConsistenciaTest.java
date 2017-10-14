@@ -17,6 +17,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 
 public class ConsistenciaTest {
+
     Empresa empresa;
     Cuenta cuentaUno;
     Cuenta cuentaDos;
@@ -28,8 +29,6 @@ public class ConsistenciaTest {
 
     @Before
     public void initialize() throws ParseException {
-        empresa = new Empresa("empresa", Arrays.asList(cuentaUno, cuentaDos, cuentaTres));
-
         indicador = new Indicador("indicador", "cuenta");
         funcionConsistencia = new Consistencia(indicador);
         condicionConsistenciaCreciente = new CondicionBuilder()

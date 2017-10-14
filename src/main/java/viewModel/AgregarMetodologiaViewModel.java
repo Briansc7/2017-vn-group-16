@@ -55,7 +55,7 @@ public class AgregarMetodologiaViewModel {
 		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
 		this.setIndicadores(repositorioDeIndicadores.obtenerIndicadores());
 		//baseDeDatos.leerIndicadores();
-		criterios = Arrays.asList(Comparador.IGUAL, Comparador.MAYOR, Comparador.MAYOROIGUAL, Comparador.MENOR, Comparador.MENOROIGUAL);
+		criterios = Arrays.asList(Comparador.IGUAL, Comparador.MAYOR, Comparador.MAYOR_O_IGUAL, Comparador.MENOR, Comparador.MENOR_O_IGUAL);
 		tiposParaComparar = Arrays.asList("Constante", "Indicador de otra empresa");
 		//indicadores = new ArrayList<Indicador>(baseDeDatos.getIndicadores());
 		//indicadores.add(new Indicador("Longevidad", "1"));

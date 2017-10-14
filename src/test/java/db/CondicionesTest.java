@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.math.BigDecimal;
 import java.util.Arrays;
 
-import javax.persistence.EntityTransaction;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -37,7 +35,7 @@ public class CondicionesTest extends AbstractPersistenceTest implements WithGlob
 		longevidadComparativa = new CondicionBuilder()
 				.periodoDeEvaluacion(1)
 				.funcionParaObtenerValor(new Longevidad())
-				.comparador(Comparador.MENOROIGUAL)
+				.comparador(Comparador.MENOR_O_IGUAL)
 				.build();
 		
 		metodologia = new Metodologia("metodologia", Arrays.asList(longevidadComparativa, longevidadPropia));

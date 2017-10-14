@@ -43,7 +43,7 @@ public class RepositorioDeMetodologiasTest {
 		longevidadComparativa = new CondicionBuilder()
 				.periodoDeEvaluacion(1)
 				.funcionParaObtenerValor(new Longevidad())
-				.comparador(Comparador.MENOROIGUAL)
+				.comparador(Comparador.MENOR_O_IGUAL)
 				.build();
 		
 		metodologia1 = new Metodologia("Metodologia del repositorio 1", Arrays.asList(longevidadComparativa, longevidadPropia));

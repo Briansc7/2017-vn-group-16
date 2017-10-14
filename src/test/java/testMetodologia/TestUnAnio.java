@@ -20,8 +20,6 @@ import model.funciones.Longevidad;
 import model.funciones.ValoresDelPeriodo;
 import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionGeneral;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import parser.ParseException;
 import parser.TokenMgrError;
 
@@ -80,13 +78,13 @@ public class TestUnAnio  {
         condicionMargen = new CondicionBuilder()//TODO: falta implementar consistencia
                 .periodoDeEvaluacion(1)
                 .funcionParaObtenerValor(new Consistencia(indicadorMargen))
-                .comparador(Comparador.MAYOROIGUAL)
+                .comparador(Comparador.MAYOR_O_IGUAL)
 //TODO: le tengo que pasar un valor?								.valor(valor)
                 .build();
         condicionLongevidadPropia = new CondicionBuilder()
                 .periodoDeEvaluacion(1)
                 .funcionParaObtenerValor(new Longevidad())
-                .comparador(Comparador.MAYOROIGUAL)
+                .comparador(Comparador.MAYOR_O_IGUAL)
                 .valorContraElQueSeCompara(new BigDecimal(2))
                 .build();
         condicionLongevidadComparativa = new CondicionBuilder()

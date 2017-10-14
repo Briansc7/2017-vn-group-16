@@ -8,7 +8,7 @@ public enum Comparador {
 			return valorUno.compareTo(valorDos) > 0;
 		}
 	}, 
-	MAYOROIGUAL {
+	MAYOR_O_IGUAL {
 		public boolean comparar(BigDecimal valorUno, BigDecimal valorDos){
 			return valorUno.compareTo(valorDos) >= 0;
 		}
@@ -18,7 +18,7 @@ public enum Comparador {
 			return valorUno.compareTo(valorDos) < 0;
 		}
 	},
-	MENOROIGUAL {
+	MENOR_O_IGUAL {
 		public boolean comparar(BigDecimal valorUno, BigDecimal valorDos){
 			return valorUno.compareTo(valorDos) <= 0;
 		}

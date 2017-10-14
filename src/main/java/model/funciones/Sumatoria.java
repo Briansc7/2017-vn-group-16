@@ -13,14 +13,15 @@ import model.Indicador;
 @Entity
 @DiscriminatorValue("sumatoria")
 public class Sumatoria extends Funcion{
+
 	public Sumatoria(Indicador indicador){
 		super(indicador);
 	}
 	
-	public Sumatoria(){}
+	protected Sumatoria(){}
 	
 	@Override
 	public List<BigDecimal> calcularValor(Empresa empresa, Integer periodo) {
-		return Arrays.asList(sumatoria(empresa, periodo));
+		return Arrays.asList(this.sumatoria(empresa, periodo));
 	}
 }

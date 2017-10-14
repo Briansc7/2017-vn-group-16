@@ -12,13 +12,14 @@ import model.Indicador;
 @Entity
 @DiscriminatorValue("valoresDelPeriodo")
 public class ValoresDelPeriodo extends Funcion{
+
 	public ValoresDelPeriodo(Indicador indicador){
 		super(indicador);
 	}
 	
-	public ValoresDelPeriodo(){}
+	protected ValoresDelPeriodo(){}
 	
 	public List<BigDecimal> calcularValor(Empresa empresa, Integer periodo){
-		return calcularValoresDelPeriodo(empresa, periodo);
+		return this.calcularValoresDelPeriodo(empresa, periodo);
 	}
 }
