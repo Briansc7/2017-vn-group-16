@@ -78,12 +78,12 @@ public abstract class Funcion {
 				.stream().reduce(BigDecimal.ZERO, (valor1, valor2) -> valor1.add(valor2));
 	}
 
-	// el valor mas reciente esta primero
+	// el valor mas antiguo esta primero
 	protected boolean esCreciente(List<BigDecimal> valores) {
-		return Ordering.natural().reverse().isOrdered(valores);
+		return Ordering.natural().isOrdered(valores);
 	}
 
 	protected boolean esDecreciente(List<BigDecimal> valores) {
-		return Ordering.natural().isOrdered(valores);
+		return Ordering.natural().reverse().isOrdered(valores);
 	}
 }
