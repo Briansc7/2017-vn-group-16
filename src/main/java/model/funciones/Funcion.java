@@ -18,6 +18,7 @@ import javax.persistence.InheritanceType;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.common.collect.Ordering;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
@@ -77,4 +78,12 @@ public abstract class Funcion {
 				.stream().reduce(BigDecimal.ZERO, (valor1, valor2) -> valor1.add(valor2));
 	}
 
+	// el valor mas reciente esta primero
+	protected boolean esCreciente(List<BigDecimal> valores) {
+		return Ordering.natural().reverse().isOrdered(valores);
+	}
+
+	protected boolean esDecreciente(List<BigDecimal> valores) {
+		return Ordering.natural().isOrdered(valores);
+	}
 }

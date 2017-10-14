@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.persistence.EntityTransaction;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
@@ -31,48 +32,55 @@ public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithG
 			new Cuenta("Cuenta de Prueba 3", BigDecimal.valueOf(30), LocalDate.of(2017, 8, 15))
 			);
 	Empresa empresa = new Empresa("Empresa de Prueba", _cuentas);
-	
-	@Test	
-	public void persistirCuenta() {	
+
+	@Before
+	public void persistirCuenta() {
 		
 		/*se persiste fuera de transacción ya que no es necesario abrir transacciones en los test
 		 * al final del test se va a borrar automaticamente lo persistido
 		 */
 		//entityManager().persist(cuentaCreadaPorMi);
-		
-		guardarCuenta();
+
+		entityManager().persist(cuentaCreadaPorMi);//guardarCuenta();
 		
 		//se compara contra el último registro insertado
-		assertEquals(entityManager().createQuery("from Cuenta order by id desc").getResultList().get(0),cuentaCreadaPorMi);
+		//assertEquals(entityManager().createQuery("from Cuenta order by id desc").getResultList().get(0),cuentaCreadaPorMi);
 	}
 	
 	@Test
 	public void guardarUnaCuenta() {
-		guardarCuenta();
-		
-		Cuenta cuentaDeLaBase = entityManager().find(Cuenta.class, 1L);
-		
+		//guardarCuenta();
+		//entityManager().persist(cuentaCreadaPorMi);
+//		Cuenta cuentaDeLaBase = entityManager().createQuery("from Cuenta order by id desc", Cuenta.class)
+//				.getResultList().get(0);
+		Cuenta cuentaDeLaBase = entityManager()
+				.createQuery("from Cuenta as cuenta where cuenta.nombre = ?1", Cuenta.class)
+				.setParameter(1, "Cuenta de Prueba")
+				.getResultList().get(0);
+
 		cuentaDeLaBase.getFecha();
 		cuentaDeLaBase.getNombre();
 	}
-	
+
 	@Test
 	public void buscarUnaCuenta() {
-		guardarCuenta();
-		
-		entityManager().clear();
-		
-		Cuenta cuentaDeLaBase = entityManager().find(Cuenta.class, 1L);
-		
+		//guardarCuenta();
+		//entityManager().persist(cuentaCreadaPorMi);
+		Cuenta cuentaDeLaBase = entityManager().createQuery("from Cuenta order by id desc", Cuenta.class)
+				.getResultList().get(0);
+
 		cuentaDeLaBase.getFecha();
 		cuentaDeLaBase.getNombre();
 	}
 	
 	@Test
 	public void editarUnaCuenta() {
-		guardarCuenta();
-		
-		Cuenta cuentaDeLaBase = entityManager().find(Cuenta.class, 1L);
+		//guardarCuenta();
+		//entityManager().persist(cuentaCreadaPorMi);
+		Cuenta cuentaDeLaBase = entityManager()
+				.createQuery("from Cuenta as cuenta where cuenta.nombre = ?1", Cuenta.class)
+				.setParameter(1, "Cuenta de Prueba")
+				.getResultList().get(0);
 		
 		cuentaDeLaBase.setNombre("OtroNombre");
 		
@@ -83,29 +91,23 @@ public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithG
 	@Test
 	public void guardarUnaEmpresa() {
 
-
 		entityManager().persist(empresa);
-
 		
-		Empresa empresaDeLaBase = (Empresa) entityManager().createQuery("from Empresa order by id desc").getResultList().get(0);
+		Empresa empresaDeLaBase = entityManager()
+				.createQuery("from Empresa order by id desc", Empresa.class)
+				.getResultList().get(0);
 
-		assertEquals(3,	empresaDeLaBase.getCuentas().size());
+		assertEquals(3, empresaDeLaBase.getCuentas().size());
 	}
 	
 	@Test
 	public void guardarUnIndicador() throws ParseException, TokenMgrError {
 		Indicador indicador = new Indicador("Prueba", "2");
-		
-		EntityTransaction transaction = entityManager().getTransaction();
-
-		transaction.begin();
 
 		entityManager().persist(indicador);
 
-		transaction.commit();
-		
 		List<Indicador> indicadoresDeLaBase = entityManager()
-				.createQuery("select indicador from Indicador as indicador where indicador.nombre = ?1")
+				.createQuery("from Indicador as indicador where indicador.nombre = ?1", Indicador.class)
 				.setParameter(1, "Prueba")
 				.getResultList();
 		
@@ -115,31 +117,26 @@ public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithG
 	@Test
 	public void selectSimple() {
 		
-		List <Cuenta> cuentas = entityManager().createQuery("select cuenta from Cuenta as cuenta where cuenta.id = ?1")
-		.setParameter(1, 1L)
-	    .getResultList();
+		List <Cuenta> cuentas = entityManager()
+				.createQuery("from Cuenta ", Cuenta.class)
+				.getResultList();
 		
-		assertEquals(cuentas.size(), 1);
-		assertTrue(BigDecimal.valueOf(10).compareTo(cuentas.get(0).getValor()) == 0);
+		assertEquals(1, cuentas.size());
+		assertEquals(0, BigDecimal.valueOf(10).compareTo(cuentas.get(0).getValor()));
 	}
 	
 	@Test
 	public void selectComplejo() {
 		
-		List <Cuenta> cuentas = entityManager().createQuery("select cuenta from Cuenta as cuenta where cuenta.fecha = ?1")
-		.setParameter(1, LocalDate.of(2017, 8, 15))
-	    .getResultList();
+		List <Cuenta> cuentas = entityManager()
+				.createQuery("from Cuenta as cuenta where cuenta.fecha = ?1", Cuenta.class)
+				.setParameter(1, LocalDate.of(2017, 8, 15))
+				.getResultList();
 		
 		assertEquals(cuentaCreadaPorMi.getFecha(), cuentas.get(0).getFecha());
 	}
 	
-	private void guardarCuenta() {
-		EntityTransaction transaction = entityManager().getTransaction();
-		
-		transaction.begin();
-		
-		entityManager().persist(cuentaCreadaPorMi);
-		
-		transaction.commit();
-	}
+//	private void guardarCuenta() {
+//		entityManager().persist(cuentaCreadaPorMi);
+//	}
 }

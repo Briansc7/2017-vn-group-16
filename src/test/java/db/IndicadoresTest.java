@@ -7,10 +7,11 @@ import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import model.Indicador;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import parser.ParseException;
 import parser.TokenMgrError;
 
-public class IndicadoresTest implements WithGlobalEntityManager{
+public class IndicadoresTest extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	
 	Indicador indicadorSimple;
 	Indicador indicadorIntermedio;
@@ -25,34 +26,34 @@ public class IndicadoresTest implements WithGlobalEntityManager{
 	
 	@Test
 	public void guardarIndicadorSimple(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		
-		transaction.begin();
+//		EntityTransaction transaction = entityManager().getTransaction();
+//
+//		transaction.begin();
 		
 		entityManager().persist(indicadorSimple);
 		
-		transaction.commit();
+		//transaction.commit();
 	}
 	
 	@Test
 	public void guardarIndicadorIntermedio(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		
-		transaction.begin();
+//		EntityTransaction transaction = entityManager().getTransaction();
+//
+//		transaction.begin();
 		
 		entityManager().persist(indicadorIntermedio);
 		
-		transaction.commit();
+		//transaction.commit();
 	}
 	
 	@Test
 	public void guardarIndicadorComplejo(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		
-		transaction.begin();
+//		EntityTransaction transaction = entityManager().getTransaction();
+//
+//		transaction.begin();
 		
 		entityManager().persist(indicadorComplejo);
 		
-		transaction.commit();
+		//transaction.commit();
 	}
 }

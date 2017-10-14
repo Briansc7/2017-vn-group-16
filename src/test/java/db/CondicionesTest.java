@@ -17,9 +17,10 @@ import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionComparativa;
 import model.metodologia.condiciones.CondicionGeneral;
 import model.metodologia.condiciones.CondicionValorUnico;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import testMetodologia.CondicionBuilder;
 
-public class CondicionesTest implements WithGlobalEntityManager{
+public class CondicionesTest extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	CondicionGeneral longevidadPropia;
 	CondicionGeneral longevidadComparativa;
 	Metodologia metodologia;
@@ -44,12 +45,12 @@ public class CondicionesTest implements WithGlobalEntityManager{
 	
 	@Test
 	public void guardarCondicionLongevidadPropia(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		transaction.begin();
-		
+//		EntityTransaction transaction = entityManager().getTransaction();
+//		transaction.begin();
+//
 		entityManager().persist(longevidadPropia);
 		
-		transaction.commit();
+		//transaction.commit();
 		
 		CondicionGeneral longevidadPropiaDB = entityManager().find(CondicionValorUnico.class, 2L);
 		
@@ -59,12 +60,12 @@ public class CondicionesTest implements WithGlobalEntityManager{
 	
 	@Test
 	public void guardarCondicionLongevidadComparativa(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		transaction.begin();
-		
+//		EntityTransaction transaction = entityManager().getTransaction();
+//		transaction.begin();
+//
 		entityManager().persist(longevidadComparativa);
 		
-		transaction.commit();
+	//	transaction.commit();
 		
 		CondicionGeneral longevidadComparativaDB = entityManager().find(CondicionComparativa.class, 1L);
 		
@@ -74,12 +75,12 @@ public class CondicionesTest implements WithGlobalEntityManager{
 	
 	@Test
 	public void guardarMetodologia(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		transaction.begin();
+//		EntityTransaction transaction = entityManager().getTransaction();
+//		transaction.begin();
 		
 		entityManager().persist(metodologia);
 		
-		transaction.commit();
+		//transaction.commit();
 		
 		Metodologia metodologiaDB = entityManager().find(Metodologia.class, 1L);
 		

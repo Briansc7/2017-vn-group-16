@@ -12,10 +12,11 @@ import model.Indicador;
 import model.funciones.Funcion;
 import model.funciones.Longevidad;
 import model.funciones.Promedio;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import parser.ParseException;
 import parser.TokenMgrError;
 
-public class FuncionesTest implements WithGlobalEntityManager{
+public class FuncionesTest extends AbstractPersistenceTest implements WithGlobalEntityManager{
 
 	Funcion longevidad;
 	Funcion promedio;
@@ -31,13 +32,13 @@ public class FuncionesTest implements WithGlobalEntityManager{
 	
 	@Test
 	public void guardarFuncionConIndicador(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		
-		transaction.begin();
+//		EntityTransaction transaction = entityManager().getTransaction();
+//
+//		transaction.begin();
 		
 		entityManager().persist(promedio);
 		
-		transaction.commit();
+		//transaction.commit();
 		
 		Funcion promedioDB = (Funcion)entityManager()
 				.createQuery("select funcion from Funcion as funcion where tipoDeFuncion = ?1")
@@ -49,13 +50,13 @@ public class FuncionesTest implements WithGlobalEntityManager{
 	
 	@Test
 	public void guardarFuncionSinIndicador(){
-		EntityTransaction transaction = entityManager().getTransaction();
-		
-		transaction.begin();
+//		EntityTransaction transaction = entityManager().getTransaction();
+//
+//		transaction.begin();
 		
 		entityManager().persist(longevidad);
 		
-		transaction.commit();
+		//transaction.commit();
 		
 		Funcion longevidadDB = (Funcion)entityManager()
 				.createQuery("select funcion from Funcion as funcion where tipoDeFuncion = ?1")
