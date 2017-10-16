@@ -2,17 +2,16 @@ package model.repositories;
 
 import java.util.List;
 
-import javax.persistence.EntityTransaction;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import exceptions.EseNoExisteException;
 import exceptions.EseYaExisteException;
 import model.Indicador;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class RepositorioDeIndicadores implements WithGlobalEntityManager{
+public class RepositorioDeIndicadores implements WithGlobalEntityManager, TransactionalOps {
+
 	private static RepositorioDeIndicadores instance;
-	private EntityTransaction transaction = entityManager().getTransaction();
 
 	public synchronized static RepositorioDeIndicadores getInstance(){
 		if(instance == null)
@@ -23,16 +22,14 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 	public void guardarIndicador(Indicador unIndicador){
 		if(existeIndicador(unIndicador.getNombre()))
 			throw new EseYaExisteException("Ya existe un indicador de nombre: " + unIndicador.getNombre());
-		transaction.begin();
-		entityManager().persist(unIndicador);
-		transaction.commit();
+
+		withTransaction(()->entityManager().persist(unIndicador));
 	}
 	
 	//Este devuelve todos los indicadores de la base de datos
 	public List<Indicador> obtenerIndicadores(){
-		@SuppressWarnings("unchecked")
 		List<Indicador> indicadores = entityManager()
-				.createQuery("select indicador from Indicador as indicador")
+				.createQuery("select indicador from Indicador as indicador", Indicador.class)
 				.getResultList();
 		return indicadores;
 	}
@@ -48,9 +45,8 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 	}
 	
 	private List<Indicador> buscarIndicadores(String nombre){
-		@SuppressWarnings("unchecked")
 		List<Indicador> indicadores = entityManager()
-				.createQuery("select indicador from Indicador as indicador where indicador.nombre = ?1")
+				.createQuery("select indicador from Indicador as indicador where indicador.nombre = ?1", Indicador.class)
 				.setParameter(1, nombre)
 				.getResultList();
 		return indicadores;
@@ -59,11 +55,8 @@ public class RepositorioDeIndicadores implements WithGlobalEntityManager{
 	public void guardarIndicadores(List<Indicador> indicadores) {
 		indicadores.stream().forEach(indicador -> guardarIndicador(indicador));
 	}
-	
 
 	public void removerIndicador(Indicador indicador) {
-		transaction.begin();
-		entityManager().remove(indicador);
-		transaction.commit();
+		withTransaction(()->entityManager().remove(indicador));
 	}
 }

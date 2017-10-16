@@ -2,18 +2,17 @@ package model.repositories;
 
 import java.util.List;
 
-import javax.persistence.EntityTransaction;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import exceptions.EseNoExisteException;
 import exceptions.EseYaExisteException;
 import model.Metodologia;
+import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-public class RepositorioDeMetodologias implements WithGlobalEntityManager{
+public class RepositorioDeMetodologias implements WithGlobalEntityManager, TransactionalOps{
+
 	private static RepositorioDeMetodologias instance;
-	private EntityTransaction transaction = entityManager().getTransaction();
-	
+
 	//Singleton
 	private RepositorioDeMetodologias(){}
 	
@@ -26,16 +25,13 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	public void guardarMetodologia(Metodologia unaMetodologia){
 		if(existeMetodologia(unaMetodologia.getNombre()))
 			throw new EseYaExisteException("Ya existe una metodologia de nombre: " + unaMetodologia.getNombre());
-		transaction.begin();
-		entityManager().persist(unaMetodologia);
-		transaction.commit();
+		withTransaction(()->entityManager().persist(unaMetodologia));
 	}
 	
 	//Este devuelve todas las metodologias de la base de datos
 	public List<Metodologia> obtenerMetodologias(){
-		@SuppressWarnings("unchecked")
 		List<Metodologia> metodologias = entityManager()
-				.createQuery("from Metodologia")
+				.createQuery("from Metodologia", Metodologia.class)
 				.getResultList();
 		return metodologias;
 	}
@@ -51,9 +47,8 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	}
 	
 	public List<Metodologia> buscarMetodologia(String nombre){
-		@SuppressWarnings("unchecked")
 		List<Metodologia> metodologias = entityManager()
-				.createQuery("select metodologia from Metodologia as metodologia where metodologia.nombre = :nombre")
+				.createQuery("from Metodologia as metodologia where metodologia.nombre = :nombre", Metodologia.class)
 				.setParameter("nombre", nombre)
 				.getResultList();
 		return metodologias;
@@ -62,12 +57,8 @@ public class RepositorioDeMetodologias implements WithGlobalEntityManager{
 	public void guardarMetodologias(List<Metodologia> metodologias) {
 		metodologias.stream().forEach(metodologia -> guardarMetodologia(metodologia));
 	}
-	
 
 	public void removerMetodologia(Metodologia metodologia) {
-		transaction.begin();
-		entityManager().remove(metodologia);
-		transaction.commit();
+		withTransaction(() -> entityManager().remove(metodologia));
 	}
-	
 }

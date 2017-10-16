@@ -11,10 +11,12 @@ import org.junit.Test;
 import exceptions.EseYaExisteException;
 import model.Indicador;
 import model.repositories.RepositorioDeIndicadores;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import parser.ParseException;
 import parser.TokenMgrError;
 
-public class RepositorioDeIndicadoresTest {
+public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 	private RepositorioDeIndicadores repositorio = new RepositorioDeIndicadores();
 	private static boolean setUpIsDone = false;
 	

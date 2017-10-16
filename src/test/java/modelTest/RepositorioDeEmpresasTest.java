@@ -15,8 +15,10 @@ import exceptions.EseYaExisteException;
 import model.Cuenta;
 import model.Empresa;
 import model.repositories.RepositorioDeEmpresas;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 
-public class RepositorioDeEmpresasTest {
+public class RepositorioDeEmpresasTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 	private RepositorioDeEmpresas repositorio = RepositorioDeEmpresas.getInstance();
 	private static boolean setUpIsDone = false;
 	

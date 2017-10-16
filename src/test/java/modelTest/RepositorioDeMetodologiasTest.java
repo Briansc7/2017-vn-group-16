@@ -12,13 +12,15 @@ import org.junit.Test;
 
 import exceptions.EseYaExisteException;
 import model.repositories.RepositorioDeMetodologias;
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import testMetodologia.CondicionBuilder;
 import model.Metodologia;
 import model.funciones.Longevidad;
 import model.metodologia.condiciones.Comparador;
 import model.metodologia.condiciones.CondicionGeneral;
 
-public class RepositorioDeMetodologiasTest {
+public class RepositorioDeMetodologiasTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	private static boolean setUpIsDone = false;
 	
