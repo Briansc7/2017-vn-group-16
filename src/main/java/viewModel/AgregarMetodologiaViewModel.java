@@ -53,7 +53,7 @@ public class AgregarMetodologiaViewModel {
 	
 	private void inicializarDatos() throws ParseException, TokenMgrError {
 		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
-		this.setIndicadores(repositorioDeIndicadores.obtenerIndicadores());
+		this.setIndicadores(repositorioDeIndicadores.buscarTodos());
 		//baseDeDatos.leerIndicadores();
 		criterios = Arrays.asList(Comparador.IGUAL, Comparador.MAYOR, Comparador.MAYOR_O_IGUAL, Comparador.MENOR, Comparador.MENOR_O_IGUAL);
 		tiposParaComparar = Arrays.asList("Constante", "Indicador de otra empresa");

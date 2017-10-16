@@ -38,7 +38,7 @@ public class ConsultarMetodologiasViewModel {
 		RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
 		this.setEmpresas(repositorioDeEmpresas.obtenerEmpresas());
 		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
-		this.setIndicadores(repositorioDeIndicadores.obtenerIndicadores());
+		this.setIndicadores(repositorioDeIndicadores.buscarTodos());
 		RepositorioDeMetodologias repositorioDeMetodologias = RepositorioDeMetodologias.getInstance();
 		this.setMetodologias(repositorioDeMetodologias.obtenerMetodologias());
 	}

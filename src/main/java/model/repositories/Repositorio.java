@@ -20,10 +20,6 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
         withTransaction(()->this.entityManager().persist(t));
     }
 
-    private <T> String obtenerNombreDe(T t) {
-        return null;
-    }
-
     public <T> void agregarTodos(List<T> ts) {
         ts.stream().forEach(empresa -> agregar(empresa));
     }
@@ -42,10 +38,8 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
 //        }
         CriteriaBuilder criteriaBuilder = this.entityManager().getCriteriaBuilder();
         CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getTipo());
-
-        //criteria.from(clase);
-        //criteria.
         Root<T> tipo = criteria.from(getTipo());
+
         criteria.select(tipo);
         ParameterExpression<String> parametroNombre = criteriaBuilder.parameter(String.class);
         criteria.where(criteriaBuilder.like(tipo.get("nombre"), parametroNombre));
@@ -60,9 +54,11 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
         return this.entityManager().createQuery(criteria).getResultList();
     }
 
-    public <T> Boolean existe(String nombre){
+    public Boolean existe(String nombre){
         return this.buscarTodosPorNombre(nombre).size() != 0;
     }
+
+    abstract protected  <T> String obtenerNombreDe(T t);
 
     abstract public <T> Class<T> getTipo();
 

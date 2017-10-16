@@ -11,14 +11,12 @@ import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
 public class RepositorioDeMetodologias implements WithGlobalEntityManager, TransactionalOps{
 
-	private static RepositorioDeMetodologias instance;
+	private static RepositorioDeMetodologias instance = new RepositorioDeMetodologias();
 
 	//Singleton
 	private RepositorioDeMetodologias(){}
 	
-	public synchronized static RepositorioDeMetodologias getInstance(){
-		if(instance == null)
-			instance = new RepositorioDeMetodologias();
+	public static RepositorioDeMetodologias getInstance(){
 		return instance;
 	}
 	

@@ -36,7 +36,7 @@ public class AgregarIndicadorViewModel {
 		if(verificarSintaxisIndicador(partes[0].trim(), partes[1])){
 			Indicador miIndicador = new Indicador(partes[0].trim(), partes[1]);
 			RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
-			repositorioDeIndicadores.guardarIndicador(miIndicador);
+			repositorioDeIndicadores.agregar(miIndicador);
 		} else {
 			throw new RuntimeException("No se puede usar un indicador en su propia definicion");
 		}

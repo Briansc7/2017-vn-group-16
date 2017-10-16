@@ -2,6 +2,7 @@ package modelTest;
 
 import model.Indicador;
 import model.repositories.Repositorio;
+import model.repositories.RepositorioDeIndicadores;
 import org.junit.Before;
 import org.junit.Test;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class RepositorioGenericoTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
-    private Repositorio repositorio = new Repositorio();
+    private Repositorio repositorio = RepositorioDeIndicadores.getInstance();
     private static boolean setUpIsDone = false;
 
     private Indicador indicador1;
@@ -41,7 +42,7 @@ public class RepositorioGenericoTest extends AbstractPersistenceTest implements 
 
     @Test
     public void buscarUnIndicador(){
-        Indicador indicadorObtenido = repositorio.buscarUnoPorNombre(Indicador.class, "Indicador 1");
+        Indicador indicadorObtenido = repositorio.buscarUnoPorNombre("Indicador 1");
 
         indicadorObtenido.getFormula();
         indicadorObtenido.getNombre();
@@ -49,7 +50,7 @@ public class RepositorioGenericoTest extends AbstractPersistenceTest implements 
 
     @Test
     public void cantidadDeIndicadores(){
-        List<Indicador> indicadoresObtenidos = repositorio.buscarTodos(Indicador.class);
+        List<Indicador> indicadoresObtenidos = repositorio.buscarTodos();
 
         assertEquals(3, indicadoresObtenidos.size());
     }

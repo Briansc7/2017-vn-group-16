@@ -17,7 +17,7 @@ import parser.ParseException;
 import parser.TokenMgrError;
 
 public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
-	private RepositorioDeIndicadores repositorio = new RepositorioDeIndicadores();
+	private RepositorioDeIndicadores repositorio = RepositorioDeIndicadores.getInstance();
 	private static boolean setUpIsDone = false;
 	
 	private Indicador indicador1;
@@ -40,7 +40,7 @@ public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implem
 	}
 	
 	public void guardarIndicadores(){
-		repositorio.guardarIndicadores(indicadores);
+		repositorio.agregarTodos(indicadores);
 	}
 	
 	@Test
@@ -53,7 +53,7 @@ public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implem
 	
 	@Test
 	public void obtenerIndicadores(){
-		List<Indicador> indicadorsObtenidas = repositorio.obtenerIndicadores();
+		List<Indicador> indicadorsObtenidas = repositorio.buscarTodos();
 		
 		assertEquals(3, indicadorsObtenidas.size());
 	}
@@ -67,6 +67,6 @@ public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implem
 	
 	@Test(expected = EseYaExisteException.class)
 	public void guardarIndicadorQueYaExisteTiraExepcion(){
-		repositorio.guardarIndicador(indicador1);
+		repositorio.agregar(indicador1);
 	}
 }

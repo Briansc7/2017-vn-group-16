@@ -11,7 +11,7 @@ import model.Empresa;
 
 public class RepositorioDeEmpresas implements WithGlobalEntityManager, TransactionalOps {
 
-	private static RepositorioDeEmpresas instance= new RepositorioDeEmpresas() ;
+	private static RepositorioDeEmpresas instance = new RepositorioDeEmpresas() ;
 	
 	private RepositorioDeEmpresas(){}
 	
