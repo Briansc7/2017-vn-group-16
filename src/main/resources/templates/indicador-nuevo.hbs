@@ -1,0 +1,23 @@
+{{# partial "titulo" }}
+    <title>Nuevo indicador{{empresa.nombre}}</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <h1>Nuevo Indicador</h1>
+
+    <form action="/indicadores" method="POST">
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" class="form-control" name="nombre">
+        </div>
+
+        <div class="form-group">
+            <label for="formula">Formula:</label>
+            <input type="text" class="form-control" name="formula">
+        </div>
+
+        <input type="submit">
+    </form>
+{{/partial}}
+
+{{> layout.hbs }}

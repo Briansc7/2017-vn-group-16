@@ -18,18 +18,18 @@ import model.Metodologia;
 import model.funciones.Consistencia;
 import model.funciones.Longevidad;
 import model.funciones.ValoresDelPeriodo;
-import model.metodologia.condiciones.Comparador;
-import model.metodologia.condiciones.CondicionGeneral;
+import model.condiciones.Comparador;
+import model.condiciones.Condicion;
 import parser.ParseException;
 import parser.TokenMgrError;
 
 public class TestUnAnio  {
     Metodologia metodologiaBuffet;
-    CondicionGeneral condicionRoe;
-    CondicionGeneral condicionDeuda;
-    CondicionGeneral condicionMargen;
-    CondicionGeneral condicionLongevidadPropia;
-    CondicionGeneral condicionLongevidadComparativa;
+    Condicion condicionRoe;
+    Condicion condicionDeuda;
+    Condicion condicionMargen;
+    Condicion condicionLongevidadPropia;
+    Condicion condicionLongevidadComparativa;
     Empresa empresaUno;
     Empresa empresaDos;
     Empresa empresaTres;

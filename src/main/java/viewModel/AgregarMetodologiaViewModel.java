@@ -19,10 +19,10 @@ import model.funciones.Mediana;
 import model.funciones.Promedio;
 import model.funciones.Sumatoria;
 import model.funciones.ValoresDelPeriodo;
-import model.metodologia.condiciones.Comparador;
-import model.metodologia.condiciones.CondicionComparativa;
-import model.metodologia.condiciones.CondicionGeneral;
-import model.metodologia.condiciones.CondicionValorUnico;
+import model.condiciones.Comparador;
+import model.condiciones.CondicionComparativa;
+import model.condiciones.Condicion;
+import model.condiciones.CondicionValorUnico;
 import model.repositories.RepositorioDeIndicadores;
 import model.repositories.RepositorioDeMetodologias;
 import parser.ParseException;
@@ -41,7 +41,7 @@ public class AgregarMetodologiaViewModel {
 	//private BaseDeDatos baseDeDatos = new BaseDeDatos("");
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	
-	private List<CondicionGeneral> condiciones = new ArrayList<CondicionGeneral>();
+	private List<Condicion> condiciones = new ArrayList<Condicion>();
 	private List<Comparador> criterios;// = Arrays.asList(new EqualThan(), new GreaterThan(), new GreaterAndEqualThan(), new LessThan(), new LessAndEqualThan());
 	private List<String> tiposParaComparar;// = Arrays.asList("constante", "indicador propio", "indicador de otra empresa");
 	private List<Indicador> indicadores;// = new ArrayList<String>(baseDeDatos.getNombreIndicadores());
@@ -209,11 +209,11 @@ public class AgregarMetodologiaViewModel {
 		this.indicadores = indicadores;
 	}
 	
-	public List<CondicionGeneral> getCondiciones() {
+	public List<Condicion> getCondiciones() {
 		return condiciones;
 	}
 
-	public void setCondiciones(List<CondicionGeneral> condiciones) {
+	public void setCondiciones(List<Condicion> condiciones) {
 		this.condiciones = condiciones;
 	}
 	

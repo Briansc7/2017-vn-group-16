@@ -1,19 +1,15 @@
 package model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Table(name = "atributos")
+@DiscriminatorColumn(name = "tipo_de_atributo")
 public abstract class Atributo {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "nombre")

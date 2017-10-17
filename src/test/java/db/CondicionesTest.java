@@ -11,16 +11,16 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import model.Metodologia;
 import model.funciones.Longevidad;
-import model.metodologia.condiciones.Comparador;
-import model.metodologia.condiciones.CondicionComparativa;
-import model.metodologia.condiciones.CondicionGeneral;
-import model.metodologia.condiciones.CondicionValorUnico;
+import model.condiciones.Comparador;
+import model.condiciones.CondicionComparativa;
+import model.condiciones.Condicion;
+import model.condiciones.CondicionValorUnico;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import testMetodologia.CondicionBuilder;
 
 public class CondicionesTest extends AbstractPersistenceTest implements WithGlobalEntityManager{
-	CondicionGeneral longevidadPropia;
-	CondicionGeneral longevidadComparativa;
+	Condicion longevidadPropia;
+	Condicion longevidadComparativa;
 	Metodologia metodologia;
 	
 	@Before
@@ -50,7 +50,7 @@ public class CondicionesTest extends AbstractPersistenceTest implements WithGlob
 		
 		//transaction.commit();
 		
-		CondicionGeneral longevidadPropiaDB = entityManager().find(CondicionValorUnico.class, 2L);
+		Condicion longevidadPropiaDB = entityManager().find(CondicionValorUnico.class, 2L);
 		
 		assertEquals(CondicionValorUnico.class, longevidadPropiaDB.getClass());
 
@@ -65,7 +65,7 @@ public class CondicionesTest extends AbstractPersistenceTest implements WithGlob
 		
 	//	transaction.commit();
 		
-		CondicionGeneral longevidadComparativaDB = entityManager().find(CondicionComparativa.class, 1L);
+		Condicion longevidadComparativaDB = entityManager().find(CondicionComparativa.class, 1L);
 		
 		assertEquals(CondicionComparativa.class, longevidadComparativaDB.getClass());
 

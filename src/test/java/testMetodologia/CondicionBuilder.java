@@ -3,10 +3,10 @@ package testMetodologia;
 import java.math.BigDecimal;
 
 import model.funciones.Funcion;
-import model.metodologia.condiciones.Comparador;
-import model.metodologia.condiciones.CondicionComparativa;
-import model.metodologia.condiciones.CondicionGeneral;
-import model.metodologia.condiciones.CondicionValorUnico;
+import model.condiciones.Comparador;
+import model.condiciones.CondicionComparativa;
+import model.condiciones.Condicion;
+import model.condiciones.CondicionValorUnico;
 
 public class CondicionBuilder {
 	private Integer periodo;
@@ -34,7 +34,7 @@ public class CondicionBuilder {
 		return this;
 	}
 	
-	public CondicionGeneral build(){
+	public Condicion build(){
 		if(periodo == null)
 			throw new RuntimeException("falta periodo");
 		else if(obtenerValor == null)

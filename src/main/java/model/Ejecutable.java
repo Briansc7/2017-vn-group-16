@@ -2,6 +2,7 @@ package model;
 
 import controllers.EmpresasController;
 import controllers.HomeController;
+import controllers.IndicadoresController;
 import controllers.LoginController;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
@@ -20,6 +21,7 @@ public class Ejecutable extends Application{
 		
 		//new Ejecutable().start();
 		EmpresasController empresasController = new EmpresasController();
+		IndicadoresController indicadoresController = new IndicadoresController();
 		HomeController homeController = new HomeController();
 		LoginController loginController = new LoginController();
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
@@ -32,9 +34,11 @@ public class Ejecutable extends Application{
 		get("/login", loginController::mostrar, engine);
 		get("/empresas", empresasController::listar, engine);
 		get("/empresas/:id/periodos", empresasController::periododDe, engine);
-		get("/empresas/:id/periodos/:periodo/cuentas", empresasController::cuentasDe, engine);
+		get("/empresas/:id/periodos/:periodo/cuentas", empresasController::atributosDe, engine);
+		get("/indicadores/nuevo", indicadoresController::nuevo, engine);
 
 		post("/login", loginController::loguear, engine);
+		post("/indicadores", indicadoresController::agregar, engine);
 	}
 	
 	@Override

@@ -41,7 +41,7 @@ public class FuncionesTest extends AbstractPersistenceTest implements WithGlobal
 		//transaction.commit();
 		
 		Funcion promedioDB = (Funcion)entityManager()
-				.createQuery("select funcion from Funcion as funcion where tipoDeFuncion = ?1")
+				.createQuery("select funcion from Funcion as funcion where tipo_de_funcion = ?1")
 				.setParameter(1, "promedio")
 				.getResultList().get(0);//.find(Funcion.class, 2L);
 		
@@ -59,7 +59,7 @@ public class FuncionesTest extends AbstractPersistenceTest implements WithGlobal
 		//transaction.commit();
 		
 		Funcion longevidadDB = (Funcion)entityManager()
-				.createQuery("select funcion from Funcion as funcion where tipoDeFuncion = ?1")
+				.createQuery("select funcion from Funcion as funcion where tipo_de_funcion = ?1")
 				.setParameter(1, "longevidad")
 				.getResultList().get(0);//= entityManager().find(Funcion.class, 1L);
 		

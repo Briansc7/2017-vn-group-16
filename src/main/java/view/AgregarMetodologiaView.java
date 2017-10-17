@@ -16,7 +16,7 @@ import exceptions.MetodologiaIncompletaException;
 import exceptions.MetodologiaSinNombreException;
 import model.Indicador;
 import model.funciones.Funcion;
-import model.metodologia.condiciones.Comparador;
+import model.condiciones.Comparador;
 import parser.ParseException;
 import parser.TokenMgrError;
 import viewModel.AgregarMetodologiaViewModel;
@@ -32,7 +32,7 @@ public class AgregarMetodologiaView extends Dialog<AgregarMetodologiaViewModel>{
 		
 		this.setTitle("Agregar Metodologia");
 		
-		new Label(mainPanel).setText("Alta de condición").setHeight(50);
+		new Label(mainPanel).setText("Alta de condiciï¿½n").setHeight(50);
 		
 		Panel tabla = new Panel(mainPanel);
 		tabla.setLayout(new ColumnLayout(6));

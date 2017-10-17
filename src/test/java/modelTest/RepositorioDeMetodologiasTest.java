@@ -17,15 +17,15 @@ import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
 import testMetodologia.CondicionBuilder;
 import model.Metodologia;
 import model.funciones.Longevidad;
-import model.metodologia.condiciones.Comparador;
-import model.metodologia.condiciones.CondicionGeneral;
+import model.condiciones.Comparador;
+import model.condiciones.Condicion;
 
 public class RepositorioDeMetodologiasTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 	private RepositorioDeMetodologias repositorio = RepositorioDeMetodologias.getInstance();
 	private static boolean setUpIsDone = false;
 	
-	private CondicionGeneral longevidadPropia;
-	private CondicionGeneral longevidadComparativa;
+	private Condicion longevidadPropia;
+	private Condicion longevidadComparativa;
 	private Metodologia metodologia1;
 	private Metodologia metodologia2;
 	private Metodologia metodologia3;
@@ -49,8 +49,8 @@ public class RepositorioDeMetodologiasTest extends AbstractPersistenceTest imple
 				.build();
 		
 		metodologia1 = new Metodologia("Metodologia del repositorio 1", Arrays.asList(longevidadComparativa, longevidadPropia));
-		metodologia2 = new Metodologia("Metodologia del repositorio 2", new ArrayList<CondicionGeneral>());
-		metodologia3 = new Metodologia("Metodologia del repositorio 3", new ArrayList<CondicionGeneral>());
+		metodologia2 = new Metodologia("Metodologia del repositorio 2", new ArrayList<Condicion>());
+		metodologia3 = new Metodologia("Metodologia del repositorio 3", new ArrayList<Condicion>());
 		
 		metodologias = Arrays.asList(metodologia1, metodologia2, metodologia3);
 		guardarMetodologia();

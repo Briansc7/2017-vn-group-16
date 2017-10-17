@@ -46,7 +46,7 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
         criteria.select(tipo);
         ParameterExpression<String> parametroNombre = criteriaBuilder.parameter(String.class);
         criteria.where(criteriaBuilder.like(tipo.get("nombre"), parametroNombre));
-        return entityManager().createQuery(criteria).setParameter("param0", "%"+nombre+"%").getResultList();//TODO ponerle alias a param0
+        return entityManager().createQuery(criteria).setParameter("param0", /*"%"+*/nombre/*+"%"*/).getResultList();//TODO ponerle alias a param0
     }
 
     public <T> T buscarPorId(long id) {

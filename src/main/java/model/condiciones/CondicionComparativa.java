@@ -1,9 +1,10 @@
-package model.metodologia.condiciones;
+package model.condiciones;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -14,8 +15,8 @@ import model.funciones.Funcion;
 
 @Observable
 @Entity
-@Table(name = "condicionComparativa")
-public class CondicionComparativa extends CondicionGeneral{
+@DiscriminatorValue("comparativa")
+public class CondicionComparativa extends Condicion {
 	
 	protected CondicionComparativa() {}
 	

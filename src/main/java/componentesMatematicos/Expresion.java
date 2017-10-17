@@ -15,8 +15,8 @@ import javax.persistence.Table;
 import model.Empresa;
 
 @Entity
-@Table(name = "expresion")
-@DiscriminatorColumn(name = "tipoDeExpresion", discriminatorType=DiscriminatorType.INTEGER)
+@Table(name = "expresiones")
+@DiscriminatorColumn(name = "tipo_de_expresion", discriminatorType=DiscriminatorType.INTEGER)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Expresion {
 	@Id

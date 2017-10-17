@@ -51,7 +51,7 @@ public class CargarCuentasViewModel {
 	
 	public void persistirEmpresas(){
 		RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
-		repositorioDeEmpresas.guardar(datosCsv.getEmpresas());
+		repositorioDeEmpresas.guardarTodos(datosCsv.getEmpresas());
 	}
 	
 	public String getPath() {

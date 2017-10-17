@@ -1,4 +1,4 @@
-package model.metodologia.condiciones;
+package model.condiciones;
 
 import java.math.BigDecimal;
 

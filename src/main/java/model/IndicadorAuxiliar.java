@@ -10,18 +10,18 @@ public class IndicadorAuxiliar {
 	
 //	public IndicadorAuxiliar(String unNombre, int unValor){
 	public IndicadorAuxiliar(String unNombre, String unValorString){	
-		this.nombre = unNombre;
+		nombre = unNombre;
 //		this.valor = unValor;
-		this.valorString = unValorString;
+		valorString = unValorString;
 	}
 	
 	public String getNombre() {
 		return nombre;
 	}
 	
-	public int getValor() {
-		return valor;
-	}
+//	public int getValor() {
+//		return valor;
+//	}
 	
 	public String getValorString() {
 		return valorString;

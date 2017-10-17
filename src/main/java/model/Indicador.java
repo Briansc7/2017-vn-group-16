@@ -2,13 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -17,11 +11,12 @@ import parser.Parser;
 
 @Observable
 @Entity
-@Table(name = "indicador")
+@DiscriminatorValue("indicador")
 public class Indicador extends Atributo{
 	
 	@OneToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	private Expresion expresion;
+
 	@Column(name = "formula")
 	private String formula;
 	

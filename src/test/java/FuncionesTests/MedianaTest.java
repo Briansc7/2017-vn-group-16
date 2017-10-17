@@ -3,10 +3,9 @@ package FuncionesTests;
 import model.Cuenta;
 import model.Empresa;
 import model.Indicador;
-import model.funciones.Consistencia;
 import model.funciones.Mediana;
-import model.metodologia.condiciones.Comparador;
-import model.metodologia.condiciones.CondicionGeneral;
+import model.condiciones.Comparador;
+import model.condiciones.Condicion;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,8 +25,8 @@ public class MedianaTest {
     Cuenta cuentaCuatro;
     Indicador indicador;
     Mediana funcionMediana;
-    CondicionGeneral condicionConsistenciaCreciente;
-    CondicionGeneral condicionConsistenciaDecreciente;
+    Condicion condicionConsistenciaCreciente;
+    Condicion condicionConsistenciaDecreciente;
 
     @Before
     public void initialize() throws ParseException {

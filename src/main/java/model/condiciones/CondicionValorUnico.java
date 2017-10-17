@@ -1,10 +1,11 @@
-package model.metodologia.condiciones;
+package model.condiciones;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,10 +16,10 @@ import model.funciones.Funcion;
 
 @Observable
 @Entity
-@Table(name = "condicionValorUnico")
-public class CondicionValorUnico extends CondicionGeneral{
+@DiscriminatorValue("valor_unico")
+public class CondicionValorUnico extends Condicion {
 	
-	@Column(name = "valorContraElQueComparar")
+	@Column(name = "valor_contra_el_que_comparar")
 	private BigDecimal valorContraElQueComparar;
 	
 	protected CondicionValorUnico() {}

@@ -24,12 +24,11 @@ import exceptions.NoExisteAtributoException;
 
 @Observable
 @Entity
-@Table(name = "empresa")
+@Table(name = "empresas")
 public class Empresa {
 	
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
 	private Long id;
 	
 	@Column(name = "nombre")

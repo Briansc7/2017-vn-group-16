@@ -27,12 +27,11 @@ import model.Indicador;
 @Entity
 @Table(name = "funciones")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "tipoDeFuncion")
+@DiscriminatorColumn(name = "tipo_de_funcion")
 public abstract class Funcion {
 	
 	@Id
 	@GeneratedValue
-	//@Column(name = "id")
 	private Long id;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

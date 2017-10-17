@@ -3,10 +3,7 @@ package model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.uqbar.commons.utils.Observable;
 
@@ -14,7 +11,7 @@ import convertersJPA.LocalDateConverter;
 
 @Observable
 @Entity
-@Table(name = "cuenta")
+@DiscriminatorValue("cuenta")
 public class Cuenta extends Atributo{
 	
 	@Column(name = "valor")

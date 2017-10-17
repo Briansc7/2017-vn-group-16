@@ -24,9 +24,9 @@
 	<class>componentesMatematicos.Producto</class>
 	<class>componentesMatematicos.Resta</class>
 	<class>componentesMatematicos.Suma</class>
-	<class>model.metodologia.condiciones.CondicionGeneral</class>
-	<class>model.metodologia.condiciones.CondicionValorUnico</class>
-	<class>model.metodologia.condiciones.CondicionComparativa</class>
+	<class>model.condiciones.Condicion</class>
+	<class>model.condiciones.CondicionValorUnico</class>
+	<class>model.condiciones.CondicionComparativa</class>
 	<class>model.Metodologia</class>
 	<class>model.funciones.Funcion</class>
 	<class>model.funciones.Consistencia</class>

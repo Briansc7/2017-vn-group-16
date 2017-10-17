@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,10 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import model.metodologia.condiciones.CondicionGeneral;
+import model.condiciones.Condicion;
 
 @Entity
-@Table(name = "metodologia")
+@Table(name = "metodologias")
 public class Metodologia {
 	@Id
 	@GeneratedValue
@@ -30,12 +29,12 @@ public class Metodologia {
 	@Column
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "metodologia_id")
-	List<CondicionGeneral> condiciones;
+	List<Condicion> condiciones;
 	//List<Condicion> condi = Arrays.asList(new Condicion(2170, "", new LessThan()), new CondicionTaxativa(2170, "", new LessThan(), new BigDecimal(2)), new CondicionNoTaxativa(2017,"", new LessThan(), 2));
 	
 	private Metodologia(){};
 	
-	public Metodologia(String nombre, List<CondicionGeneral> condiciones) {
+	public Metodologia(String nombre, List<Condicion> condiciones) {
 		this.nombre = nombre;
 		this.condiciones= condiciones;
 	}
@@ -45,7 +44,7 @@ public class Metodologia {
 		//No alterar la lista original
 		List<Empresa> _empresas = new ArrayList<Empresa>(empresas);
 		
-		for(CondicionGeneral condicion:condiciones){
+		for(Condicion condicion:condiciones){
 			_empresas = condicion.analizar(_empresas);
 		}
 		return _empresas;
