@@ -35,8 +35,8 @@ public class OperacionesParserConCuentas {
 	
 	@Test
 	public void leerUnaCuenta() throws NumberFormatException {
-		repoEmpresas.guardarEmpresa(empresa);
-		repoIndicadores.agregar(indicadorC);
+		repoEmpresas.guardar(empresa);
+		repoIndicadores.guardar(indicadorC);
 		Assert.assertEquals(new BigDecimal(500), indicadorC.getValor(2015, empresa));
 	}
 	
@@ -44,8 +44,8 @@ public class OperacionesParserConCuentas {
 	public void leerCuenteEIndicador() throws parser.ParseException, parser.TokenMgrError, NumberFormatException, ParseException, TokenMgrError {
 		indicadorA = new Indicador("indicadorA", "ebitda * 2");
 		indicadorB = new Indicador("indicadorB","(ebitda + indicadorA) / 5");
-		repoIndicadores.agregar(indicadorA);
-		repoIndicadores.agregar(indicadorB);
+		repoIndicadores.guardar(indicadorA);
+		repoIndicadores.guardar(indicadorB);
 		
 		//Assert.assertEquals(new BigDecimal(1000), indicadorA.getValor(2015, empresa));
 		Assert.assertEquals(0, new BigDecimal(300).compareTo(indicadorB.getValor(2015, empresa)));

@@ -36,11 +36,11 @@ public class ConsultarMetodologiasViewModel {
 		//baseDeDatos.leerIndicadores();
 		
 		RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
-		this.setEmpresas(repositorioDeEmpresas.obtenerEmpresas());
+		this.setEmpresas(repositorioDeEmpresas.buscarTodos());
 		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
 		this.setIndicadores(repositorioDeIndicadores.buscarTodos());
 		RepositorioDeMetodologias repositorioDeMetodologias = RepositorioDeMetodologias.getInstance();
-		this.setMetodologias(repositorioDeMetodologias.obtenerMetodologias());
+		this.setMetodologias(repositorioDeMetodologias.buscarTodos());
 	}
 	
 	@Dependencies("nombreMetodologiaElegida")

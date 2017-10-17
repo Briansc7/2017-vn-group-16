@@ -13,37 +13,15 @@ import java.util.List;
 
 public abstract class Repositorio implements WithGlobalEntityManager, TransactionalOps {
 
-    public <T> void agregar(T t) {
+    public <T> void guardar(T t) {
         if(this.existe(this.obtenerNombreDe(t)))
             throw new EseYaExisteException("Ya existe: " + this.obtenerNombreDe(t));
 
         withTransaction(()->this.entityManager().persist(t));
     }
 
-    public <T> void agregarTodos(List<T> ts) {
-        ts.stream().forEach(empresa -> agregar(empresa));
-    }
-
-    public <T> T buscarUnoPorNombre(String nombre){
-        if(this.existe(nombre))
-            return (T) this.buscarTodosPorNombre(nombre).get(0);
-        throw new EseNoExisteException("No existe: " + nombre);
-    }
-
-    public <T> List<T> buscarTodosPorNombre(String nombre/*, String mensajeDeError*/) {
-//        try {
-//            return (T) entityManager().find(clase, id);
-//        } catch (PersistenceException e) {
-//            throw new RuntimeException(mensajeDeError);
-//        }
-        CriteriaBuilder criteriaBuilder = this.entityManager().getCriteriaBuilder();
-        CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getTipo());
-        Root<T> tipo = criteria.from(getTipo());
-
-        criteria.select(tipo);
-        ParameterExpression<String> parametroNombre = criteriaBuilder.parameter(String.class);
-        criteria.where(criteriaBuilder.like(tipo.get("nombre"), parametroNombre));
-        return entityManager().createQuery(criteria).setParameter("param0", nombre).getResultList();//TODO ponerle alias a param0
+    public <T> void guardarTodos(List<T> ts) {
+        ts.stream().forEach(empresa -> guardar(empresa));
     }
 
     public <T> List<T> buscarTodos() {
@@ -54,6 +32,39 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
         return this.entityManager().createQuery(criteria).getResultList();
     }
 
+    protected  <T> T buscarUnoPorNombre(String nombre){
+        if(this.existe(nombre))
+            return (T) this.buscarTodosPorNombre(nombre).get(0);
+        throw new EseNoExisteException("No existe: " + nombre);
+    }
+
+    public <T> List<T> buscarTodosPorNombre(String nombre) {
+        CriteriaBuilder criteriaBuilder = this.entityManager().getCriteriaBuilder();
+        CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getTipo());
+        Root<T> tipo = criteria.from(getTipo());
+
+        criteria.select(tipo);
+        ParameterExpression<String> parametroNombre = criteriaBuilder.parameter(String.class);
+        criteria.where(criteriaBuilder.like(tipo.get("nombre"), parametroNombre));
+        return entityManager().createQuery(criteria).setParameter("param0", "%"+nombre+"%").getResultList();//TODO ponerle alias a param0
+    }
+
+    public <T> T buscarPorId(long id) {
+        CriteriaBuilder criteriaBuilder = this.entityManager().getCriteriaBuilder();
+        CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getTipo());
+        Root<T> tipo = criteria.from(getTipo());
+
+        criteria.select(tipo);
+        ParameterExpression<Long> parametroId = criteriaBuilder.parameter(Long.class);
+        criteria.where(criteriaBuilder.equal(tipo.get("id"), parametroId));
+        return entityManager().createQuery(criteria).setParameter("param0", id).getSingleResult();//TODO ponerle alias a param0
+
+    }
+
+    public <T> void remover(T t) {
+        withTransaction(() ->  entityManager().remove(t));
+    }
+
     public Boolean existe(String nombre){
         return this.buscarTodosPorNombre(nombre).size() != 0;
     }
@@ -62,5 +73,5 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
 
     abstract public <T> Class<T> getTipo();
 
-    //TODO agregar buscarPorId()
+    //TODO guardar buscarPorId()
 }

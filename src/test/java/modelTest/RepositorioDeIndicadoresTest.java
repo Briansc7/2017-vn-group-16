@@ -40,12 +40,12 @@ public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implem
 	}
 	
 	public void guardarIndicadores(){
-		repositorio.agregarTodos(indicadores);
+		repositorio.guardarTodos(indicadores);
 	}
 	
 	@Test
 	public void obtenerIndicador(){
-		Indicador indicadorObtenido = repositorio.obtenerIndicador("Indicador del repositorio 1");
+		Indicador indicadorObtenido = repositorio.buscarIndicador("Indicador del repositorio 1");
 		
 		indicadorObtenido.getFormula();
 		indicadorObtenido.getNombre();
@@ -60,13 +60,13 @@ public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implem
 	
 	@Test
 	public void obtenerIndicadorPorNombre(){
-		Indicador indicadorObtenida = repositorio.obtenerIndicador("Indicador del repositorio 1");
+		Indicador indicadorObtenida = repositorio.buscarIndicador("Indicador del repositorio 1");
 		
 		assertEquals("Indicador del repositorio 1", indicadorObtenida.getNombre());
 	}
 	
 	@Test(expected = EseYaExisteException.class)
 	public void guardarIndicadorQueYaExisteTiraExepcion(){
-		repositorio.agregar(indicador1);
+		repositorio.guardar(indicador1);
 	}
 }

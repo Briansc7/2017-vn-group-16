@@ -32,7 +32,7 @@ public class ConsultarCuentasViewModel {
 	public ConsultarCuentasViewModel() throws IOException{
 		this.periodoElegido = 0;
 		RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
-		this.setEmpresas(repositorioDeEmpresas.obtenerEmpresas());
+		this.setEmpresas(repositorioDeEmpresas.buscarTodos());
 		RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
 		this.setIndicadores(repositorioDeIndicadores.buscarTodos());
 	}

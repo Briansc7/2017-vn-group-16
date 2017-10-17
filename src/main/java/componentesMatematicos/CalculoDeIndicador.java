@@ -11,7 +11,7 @@ public class CalculoDeIndicador{
 
 	public BigDecimal valorDe(String nombre, Integer unPeriodo, Empresa unaEmpresa){
 		if(repositorioIndicadores.existe(nombre))
-			return repositorioIndicadores.obtenerIndicador(nombre).getValor(unPeriodo, unaEmpresa);
+			return repositorioIndicadores.buscarIndicador(nombre).getValor(unPeriodo, unaEmpresa);
 		if(unaEmpresa.existeCuentaDel(nombre, unPeriodo))
 			return unaEmpresa.buscarCuenta(nombre, unPeriodo).getValor();
 		

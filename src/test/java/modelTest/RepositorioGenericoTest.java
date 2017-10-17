@@ -17,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 
 public class RepositorioGenericoTest extends AbstractPersistenceTest implements WithGlobalEntityManager {
 
-    private Repositorio repositorio = RepositorioDeIndicadores.getInstance();
+    private RepositorioDeIndicadores repositorio = RepositorioDeIndicadores.getInstance();
     private static boolean setUpIsDone = false;
 
     private Indicador indicador1;
@@ -35,14 +35,14 @@ public class RepositorioGenericoTest extends AbstractPersistenceTest implements 
         indicador3 = new Indicador("Indicador 3","ingresoNeto/2*2 + capitalTotal/2*2 - capitalTotal*ingresoNeto");
 
         indicadores = Arrays.asList(indicador1, indicador2, indicador3);
-        repositorio.agregarTodos(indicadores);
+        repositorio.guardarTodos(indicadores);
 
         setUpIsDone=true;
     }
 
     @Test
     public void buscarUnIndicador(){
-        Indicador indicadorObtenido = repositorio.buscarUnoPorNombre("Indicador 1");
+        Indicador indicadorObtenido = repositorio.buscarIndicador("Indicador 1");
 
         indicadorObtenido.getFormula();
         indicadorObtenido.getNombre();

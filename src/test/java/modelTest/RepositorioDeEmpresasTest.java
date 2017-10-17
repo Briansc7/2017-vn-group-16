@@ -36,13 +36,13 @@ public class RepositorioDeEmpresasTest extends AbstractPersistenceTest implement
 	public void guardarEmpresas(){
 		if(setUpIsDone)
 			return;
-		repositorio.guardarEmpresas(empresas);
+		repositorio.guardarTodos(empresas);
 		setUpIsDone=true;
 	}
 	
 	@Test
 	public void obtenerEmpresa(){
-		Empresa empresaObtenida = repositorio.obtenerEmpresa("Empresa del Repositorio 1");
+		Empresa empresaObtenida = repositorio.buscarEmpresa("Empresa del Repositorio 1");
 		
 		empresaObtenida.getNombre();
 		empresaObtenida.getCuentas();
@@ -51,20 +51,20 @@ public class RepositorioDeEmpresasTest extends AbstractPersistenceTest implement
 	
 	@Test
 	public void obtenerEmpresas(){
-		List<Empresa> empresasObtenidas = repositorio.obtenerEmpresas();
+		List<Empresa> empresasObtenidas = repositorio.buscarTodos();
 		
 		assertEquals(3, empresasObtenidas.size());
 	}
 	
 	@Test
 	public void obtenerEmpresaPorNombre(){
-		Empresa empresaObtenida = repositorio.obtenerEmpresa("Empresa del Repositorio 1");
+		Empresa empresaObtenida = repositorio.buscarEmpresa("Empresa del Repositorio 1");
 		
 		assertEquals("Empresa del Repositorio 1", empresaObtenida.getNombre());
 	}
 	
 	@Test(expected = EseYaExisteException.class)
 	public void guardarEmpresaQueYaExisteTiraExepcion(){
-		repositorio.guardarEmpresa(empresa1);
+		repositorio.guardar(empresa1);
 	}
 }

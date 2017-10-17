@@ -21,9 +21,10 @@ public class EmpresasController implements WithGlobalEntityManager, Transactiona
 
         String filtroNombre = request.queryParams("filtroNombre");
         if (Objects.isNull(filtroNombre) || filtroNombre.isEmpty()) {
-            empresas = repositorioDeEmpresas.obtenerEmpresas();
+            empresas = repositorioDeEmpresas.buscarTodos();
         } else {
-            empresas = Arrays.asList(repositorioDeEmpresas.obtenerEmpresa(filtroNombre));
+            //empresas = Arrays.asList(repositorioDeEmpresas.buscarEmpresa(filtroNombre));
+            empresas = repositorioDeEmpresas.buscarTodosPorNombre(filtroNombre);
         }
 
         HashMap<String, Object> viewModel = new HashMap<>();
@@ -36,7 +37,7 @@ public class EmpresasController implements WithGlobalEntityManager, Transactiona
     public ModelAndView periododDe(Request request, Response response) {
         long id = Long.parseLong(request.params(":id"));
 
-        Empresa empresa = repositorioDeEmpresas.buscar(id);
+        Empresa empresa = repositorioDeEmpresas.buscarPorId(id);
 
 //        Map<String, Object> viewModel = new HashMap<>();
 //        viewModel.put("periodos", empresa.getPeriodos());
@@ -48,7 +49,7 @@ public class EmpresasController implements WithGlobalEntityManager, Transactiona
         long id = Long.parseLong(request.params(":id"));
         int periodo = Integer.parseInt(request.params(":periodo"));
 
-        Empresa empresa = repositorioDeEmpresas.buscar(id);
+        Empresa empresa = repositorioDeEmpresas.buscarPorId(id);
 
         Map<String, Object> viewModel = new HashMap<>();
         viewModel.put("cuentas", empresa.cuentasDelPeriodo(periodo));

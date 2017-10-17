@@ -1,15 +1,11 @@
 package model.repositories;
 
-import java.util.List;
-
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
-import exceptions.EseNoExisteException;
-import exceptions.EseYaExisteException;
 import model.Empresa;
 
-public class RepositorioDeEmpresas implements WithGlobalEntityManager, TransactionalOps {
+public class RepositorioDeEmpresas extends Repositorio implements WithGlobalEntityManager, TransactionalOps {
 
 	private static RepositorioDeEmpresas instance = new RepositorioDeEmpresas() ;
 	
@@ -18,51 +14,18 @@ public class RepositorioDeEmpresas implements WithGlobalEntityManager, Transacti
 	public static RepositorioDeEmpresas getInstance(){
 		return instance;
 	}
-	
-	public void guardarEmpresa(Empresa unaEmpresa){
-		if(existeEmpresa(unaEmpresa.getNombre()))
-			throw new EseYaExisteException("Ya existe una empresa de nombre: " + unaEmpresa.getNombre());
-		
-		withTransaction(()->entityManager().persist(unaEmpresa));
-	}
-	
-	//Este devuelve todas las empresas de la base de datos
-	public List<Empresa> obtenerEmpresas(){
-		return entityManager()
-				.createQuery("select empresa from Empresa as empresa", Empresa.class)
-				.getResultList();
-	}
-	
-	public Empresa obtenerEmpresa(String nombre){
-		if(existeEmpresa(nombre))
-			return buscarEmpresas(nombre).get(0);
-		throw new EseNoExisteException("No existe una empresa de nombre: " + nombre);
-	}
-	
-	public Boolean existeEmpresa(String nombre){
-		return buscarEmpresas(nombre).size() != 0;
-	}
-	
-	private List<Empresa> buscarEmpresas(String nombre){
-		List<Empresa> empresas = entityManager()
-				.createQuery("select empresa from Empresa as empresa where empresa.nombre = ?1", Empresa.class)
-				.setParameter(1, nombre)
-				.getResultList();
-		return empresas;
-	}
-	
-	public void guardarEmpresas(List<Empresa> empresas) {
-		empresas.stream().forEach(empresa -> guardarEmpresa(empresa));
+
+	public Empresa buscarEmpresa(String nombre){
+		return this.buscarUnoPorNombre(nombre);
 	}
 
-	public void removerEmpresa(Empresa empresa) {
-		withTransaction(() ->  entityManager().remove(empresa));
+	@Override
+	protected <T> String obtenerNombreDe(T t) {
+		return ((Empresa)t).getNombre();
 	}
 
-	public Empresa buscar(long id) {
-		return entityManager()
-				.createQuery("from Empresa as empresa where empresa.id = :id", Empresa.class)
-				.setParameter("id", id)
-				.getSingleResult();
+	@Override
+	public Class<Empresa> getTipo() {
+		return Empresa.class;
 	}
 }
