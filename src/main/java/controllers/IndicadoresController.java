@@ -26,6 +26,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Transacti
             try {
                 repositorioDeIndicadores.guardar(new Indicador(nombre, formula));
             } catch (ParseException e) {
+                response.redirect("/formulaIncorrecta");
                 e.printStackTrace();
             }
         });

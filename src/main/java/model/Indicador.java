@@ -19,7 +19,9 @@ public class Indicador extends Atributo{
 
 	@Column(name = "formula")
 	private String formula;
-	
+
+	private Long userId;
+
 	@SuppressWarnings("unused")
 	private Indicador(){super();}
 	

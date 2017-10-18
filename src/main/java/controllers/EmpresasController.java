@@ -1,16 +1,12 @@
 package controllers;
 
-import model.Cuenta;
 import model.Empresa;
 import model.repositories.RepositorioDeEmpresas;
 import model.repositories.RepositorioDeIndicadores;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import java.lang.reflect.MalformedParameterizedTypeException;
 import java.util.*;
 
 public class EmpresasController {
