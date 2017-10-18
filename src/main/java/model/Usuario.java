@@ -26,4 +26,12 @@ public class Usuario {
     public Long getId() {
         return id;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUsername() {
+        return username;
+    }
 }

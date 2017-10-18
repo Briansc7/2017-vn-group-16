@@ -7,6 +7,7 @@ import spark.Request;
 import spark.Response;
 
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 public class LoginController implements WithGlobalEntityManager {
 
@@ -15,20 +16,32 @@ public class LoginController implements WithGlobalEntityManager {
     }
 
     public ModelAndView loguear(Request request, Response response) {
-        response.cookie("username", request.queryParams("username"));
-        response.redirect("/");
+        Usuario usuario = null;
+        try{
+            usuario = this.buscarUsuario(request.queryParams("username"));
+        } catch (NoResultException e){
+            response.redirect("/loginIncorrecto");
+        }
+        //Usuario usuario = entityManager().find(Usuario.class, userId);
+        if (!usuario.getPassword().equals(request.queryParams("password")))
+            response.redirect("/loginIncorrecto");
 
-        String userId = String.valueOf(this.buscarIdDe(request.queryParams("username")));
-        request.session(true);
-        request.session().attribute("userId", userId);
+        response.cookie("userId", String.valueOf(usuario.getId()));
+
+        response.redirect("/");
         return null;
     }
 
-    private Long buscarIdDe(String username) {
+    public ModelAndView logout(Request request, Response response){
+        response.removeCookie("userId");
+        response.redirect("/");
+        return null;
+    }
+
+    private Usuario buscarUsuario(String username) {
         return entityManager()
-                .createQuery("from Usuarios as usuario where usuario.username = :username", Usuario.class)
+                .createQuery("from Usuario as usuario where usuario.username = :username", Usuario.class)
                 .setParameter("username", username)
-                .getSingleResult()
-                .getId();
+                .getSingleResult();
     }
 }

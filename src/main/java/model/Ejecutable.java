@@ -12,6 +12,8 @@ import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import view.PrincipalView;
 
+import javax.security.auth.login.LoginException;
+
 import static spark.Spark.exception;
 import static spark.Spark.get;
 import static spark.Spark.post;
@@ -39,14 +41,23 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 		get("/empresas/:id/periodos", empresasController::periododDe, engine);
 		get("/empresas/:id/periodos/:periodo/cuentas", empresasController::atributosDe, engine);
 		get("/indicadores/nuevo", indicadoresController::nuevo, engine);
+		get("/logout", loginController::logout, engine);
+
 		get("/formulaIncorrecta", (request, response) -> {
 			throw new FormulaIncorrectaException("La formula no esta bien escrita");
+		});
+		get("/loginIncorrecto", (request, response) -> {
+			throw new LoginException("Usuario y/o password incorrectos");
 		});
 
 		post("/login", loginController::loguear, engine);
 		post("/indicadores", indicadoresController::agregar, engine);
 
 		exception(FormulaIncorrectaException.class, (e, request, response) -> {
+			response.status(400);
+			response.body(e.getMessage());
+		});
+		exception(LoginException.class, (e, request, response) -> {
 			response.status(400);
 			response.body(e.getMessage());
 		});
