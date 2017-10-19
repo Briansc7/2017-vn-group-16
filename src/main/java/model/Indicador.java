@@ -33,6 +33,13 @@ public class Indicador extends Atributo{
 		this.expresion = Parser.parsear(formula);
 	}
 	
+	public Indicador(String nombre, String formula, Usuario usuario) throws parser.ParseException, parser.TokenMgrError{
+		super(nombre);
+		this.formula = formula;
+		this.expresion = Parser.parsear(formula);
+		this.usuario = usuario;
+	}
+	
 	public boolean esIdentico(String otroNombre, String otraFormula){
 		return tieneElMismoNombre(otroNombre) && this.formula.equals(otraFormula);
 	}

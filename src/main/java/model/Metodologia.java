@@ -42,6 +42,12 @@ public class Metodologia {
 		this.nombre = nombre;
 		this.condiciones= condiciones;
 	}
+	
+	public Metodologia(String nombre, List<Condicion> condiciones, Usuario usuario) {
+		this.nombre = nombre;
+		this.condiciones= condiciones;
+		this.usuario = usuario;
+	}
 
 	//Retorna la empresas que cumplen con todo y ordenadas
 	public List<Empresa> aplicarCondiciones(List<Empresa> empresas) {
