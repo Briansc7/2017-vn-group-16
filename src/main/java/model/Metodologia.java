@@ -28,7 +28,7 @@ public class Metodologia {
 	String nombre;
 	
 	@ManyToOne( cascade = CascadeType.PERSIST)
-	private Long usuario_id;
+	protected Usuario usuario;
 	
 	@Column
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)

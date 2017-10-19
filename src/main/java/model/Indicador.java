@@ -21,7 +21,7 @@ public class Indicador extends Atributo{
 	private String formula;
 	
 	@ManyToOne( cascade = CascadeType.PERSIST)
-	private Long usuario_id;
+	protected Usuario usuario;
 
 	@SuppressWarnings("unused")
 	private Indicador(){super();}
