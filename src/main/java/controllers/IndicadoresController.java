@@ -1,6 +1,7 @@
 package controllers;
 
 import model.Indicador;
+import model.Usuario;
 import model.repositories.RepositorioDeIndicadores;
 import parser.ParseException;
 import spark.ModelAndView;
@@ -10,7 +11,9 @@ import spark.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class IndicadoresController {
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
+public class IndicadoresController implements WithGlobalEntityManager{
 
     RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
 
@@ -30,10 +33,11 @@ public class IndicadoresController {
         String nombre = request.queryParams("nombre");
         String formula = request.queryParams("formula");
         //response.removeCookie("errorFormula");
+        Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
 
         Indicador indicadorNuevo = null;
         try {
-            indicadorNuevo = new Indicador(nombre, formula);
+            indicadorNuevo = new Indicador(nombre, formula, usuario);
         } catch (ParseException e) {
             response.cookie("formulaIncorrecta", "si");
             //response.removeCookie("errorFormula");
