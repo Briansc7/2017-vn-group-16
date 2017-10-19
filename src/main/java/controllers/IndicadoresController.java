@@ -1,35 +1,47 @@
 package controllers;
 
-import model.Empresa;
 import model.Indicador;
 import model.repositories.RepositorioDeIndicadores;
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
-import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 import parser.ParseException;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class IndicadoresController implements WithGlobalEntityManager, TransactionalOps {
+import java.util.HashMap;
+import java.util.Map;
+
+public class IndicadoresController {
 
     RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
 
     public ModelAndView nuevo(Request request, Response response) {
-        return new ModelAndView(null, "indicador-nuevo.hbs");
+        Map<String, Object> model = new HashMap<>();
+
+        if(request.cookie("formulaIncorrecta") != null)
+            model.put("errorFormula", true);
+        else
+            model.put("errorFormula", false);
+
+        response.removeCookie("formulaIncorrecta");
+        return new ModelAndView(model, "indicador-nuevo.hbs");
     }
 
     public ModelAndView agregar(Request request, Response response) {
         String nombre = request.queryParams("nombre");
         String formula = request.queryParams("formula");
+        //response.removeCookie("errorFormula");
 
-        withTransaction(() -> {
-            try {
-                repositorioDeIndicadores.guardar(new Indicador(nombre, formula));
-            } catch (ParseException e) {
-                response.redirect("/formulaIncorrecta");
-                e.printStackTrace();
-            }
-        });
+        Indicador indicadorNuevo = null;
+        try {
+            indicadorNuevo = new Indicador(nombre, formula);
+        } catch (ParseException e) {
+            response.cookie("formulaIncorrecta", "si");
+            //response.removeCookie("errorFormula");
+            response.redirect("/indicadores/nuevo");
+            return null;
+        }
+
+        repositorioDeIndicadores.guardar(indicadorNuevo);
 
         response.redirect("/");
         return null;

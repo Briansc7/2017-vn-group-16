@@ -21,22 +21,25 @@ public class LoginController implements WithGlobalEntityManager {
         else
             model.put("errorLogin", false);
 
+        response.removeCookie("errorLogin");
         return new ModelAndView(model, "login.hbs");
     }
 
     public ModelAndView loguear(Request request, Response response) {
         Usuario usuario = null;
-        response.removeCookie("errorLogin");
+        //response.removeCookie("errorLogin");
         try{
             usuario = this.buscarUsuario(request.queryParams("username"));
         } catch (NoResultException e){
             response.cookie("errorLogin", "si");
             response.redirect("/login");
+            return null;
         }
         //Usuario usuario = entityManager().find(Usuario.class, userId);
         if (!usuario.getPassword().equals(request.queryParams("password"))) {
             response.cookie("errorLogin", "si");
             response.redirect("/login");
+            return null;
         }
 
         response.cookie("userId", String.valueOf(usuario.getId()));
