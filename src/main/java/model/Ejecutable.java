@@ -46,18 +46,11 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 		get("/formulaIncorrecta", (request, response) -> {
 			throw new FormulaIncorrectaException("La formula no esta bien escrita");
 		});
-		get("/loginIncorrecto", (request, response) -> {
-			throw new LoginException("Usuario y/o password incorrectos");
-		});
 
 		post("/login", loginController::loguear, engine);
 		post("/indicadores", indicadoresController::agregar, engine);
 
 		exception(FormulaIncorrectaException.class, (e, request, response) -> {
-			response.status(400);
-			response.body(e.getMessage());
-		});
-		exception(LoginException.class, (e, request, response) -> {
 			response.status(400);
 			response.body(e.getMessage());
 		});

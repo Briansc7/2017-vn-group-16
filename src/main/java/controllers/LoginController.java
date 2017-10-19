@@ -8,23 +8,36 @@ import spark.Response;
 
 import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginController implements WithGlobalEntityManager {
 
     public ModelAndView mostrar(Request request, Response response) {
-        return new ModelAndView(null, "login.hbs");
+        Map<String, Object> model = new HashMap<>();
+
+        if(request.cookie("errorLogin") != null)
+            model.put("errorLogin", true);
+        else
+            model.put("errorLogin", false);
+
+        return new ModelAndView(model, "login.hbs");
     }
 
     public ModelAndView loguear(Request request, Response response) {
         Usuario usuario = null;
+        response.removeCookie("errorLogin");
         try{
             usuario = this.buscarUsuario(request.queryParams("username"));
         } catch (NoResultException e){
-            response.redirect("/loginIncorrecto");
+            response.cookie("errorLogin", "si");
+            response.redirect("/login");
         }
         //Usuario usuario = entityManager().find(Usuario.class, userId);
-        if (!usuario.getPassword().equals(request.queryParams("password")))
-            response.redirect("/loginIncorrecto");
+        if (!usuario.getPassword().equals(request.queryParams("password"))) {
+            response.cookie("errorLogin", "si");
+            response.redirect("/login");
+        }
 
         response.cookie("userId", String.valueOf(usuario.getId()));
 
@@ -33,6 +46,7 @@ public class LoginController implements WithGlobalEntityManager {
     }
 
     public ModelAndView logout(Request request, Response response){
+        response.removeCookie("errorLogin");
         response.removeCookie("userId");
         response.redirect("/");
         return null;
