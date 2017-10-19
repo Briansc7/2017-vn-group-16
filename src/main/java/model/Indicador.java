@@ -20,7 +20,7 @@ public class Indicador extends Atributo{
 	@Column(name = "formula")
 	private String formula;
 
-	private Long userId;
+	private Long usuario_id;
 
 	@SuppressWarnings("unused")
 	private Indicador(){super();}

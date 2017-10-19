@@ -26,6 +26,8 @@ public class Metodologia {
 	@Column(name = "nombre")
 	String nombre;
 	
+	private Long usuario_id;
+	
 	@Column
 	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "metodologia_id")
