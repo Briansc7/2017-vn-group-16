@@ -2,6 +2,8 @@ package model.repositories;
 
 import exceptions.EseNoExisteException;
 import exceptions.EseYaExisteException;
+import model.Usuario;
+
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.transaction.TransactionalOps;
 
@@ -31,6 +33,8 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
 
         return this.entityManager().createQuery(criteria).getResultList();
     }
+    
+    
 
     protected  <T> T buscarUnoPorNombre(String nombre){
         if(this.existe(nombre))
@@ -49,6 +53,18 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
         return entityManager().createQuery(criteria).setParameter("param0", /*"%"+*/nombre/*+"%"*/).getResultList();//TODO ponerle alias a param0
     }
 
+    public <T> List<T> buscarTodosPorUsuario(Long usuario_id) {
+    	CriteriaBuilder criteriaBuilder = this.entityManager().getCriteriaBuilder();
+        CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getTipo());
+        Root<T> tipo = criteria.from(getTipo());
+
+        criteria.select(tipo);
+        ParameterExpression<Long> parametroUsuario = criteriaBuilder.parameter(Long.class);
+        criteria.where(criteriaBuilder.equal(tipo.get("usuario_id"), parametroUsuario));
+        return entityManager().createQuery(criteria).setParameter("param0", usuario_id).getResultList();
+    
+    }
+    
     public <T> T buscarPorId(long id) {
         CriteriaBuilder criteriaBuilder = this.entityManager().getCriteriaBuilder();
         CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getTipo());

@@ -2,6 +2,8 @@ package model.repositories;
 
 import model.Empresa;
 import model.IndicadorAuxiliar;
+import model.Usuario;
+
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import model.Indicador;
@@ -11,6 +13,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import spark.Request;
 
 public class RepositorioDeIndicadores extends Repositorio {
 
@@ -36,8 +40,8 @@ public class RepositorioDeIndicadores extends Repositorio {
 		return Indicador.class;
 	}
 
-	public List<IndicadorAuxiliar> getIndicadoresAuxiliares(Empresa empresa, Integer periodo) {
-		List<Indicador> indicadoresReales = this.buscarTodos();
+	public List<IndicadorAuxiliar> getIndicadoresAuxiliares(Empresa empresa, Integer periodo, Long usuario_id) {
+		List<Indicador> indicadoresReales = this.buscarTodos();//.buscarTodosPorUsuario(usuario_id);
 		List<IndicadorAuxiliar> indicadoresAuxiliares = indicadoresReales.stream()
 				.map(indicador -> new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(periodo, empresa)))//FIXME a veces devuelve nullpointer ex
 				.collect(Collectors.toList());

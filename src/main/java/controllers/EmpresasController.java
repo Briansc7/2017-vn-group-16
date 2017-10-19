@@ -45,13 +45,14 @@ public class EmpresasController {
     public ModelAndView atributosDe(Request request, Response response) {
         long id = Long.parseLong(request.params(":id"));
         int periodo = Integer.parseInt(request.params(":periodo"));
+        long usuario_id = Long.valueOf(request.cookie("userId"));
 
         Empresa empresa = repositorioDeEmpresas.buscarPorId(id);
 
         Map<String, Object> viewModel = new HashMap<>();
         viewModel.put("cuentas", empresa.cuentasDelPeriodo(periodo));
         viewModel.put("empresa", empresa);
-        viewModel.put("indicadores", RepositorioDeIndicadores.getInstance().getIndicadoresAuxiliares(empresa, periodo));
+        viewModel.put("indicadores", RepositorioDeIndicadores.getInstance().getIndicadoresAuxiliares(empresa, periodo, usuario_id));
 
         return new ModelAndView(viewModel, "atributos.hbs");
     }
