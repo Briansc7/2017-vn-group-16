@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -26,6 +27,7 @@ public class Metodologia {
 	@Column(name = "nombre")
 	String nombre;
 	
+	@ManyToOne( cascade = CascadeType.PERSIST)
 	private Long usuario_id;
 	
 	@Column
