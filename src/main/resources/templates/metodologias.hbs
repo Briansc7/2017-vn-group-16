@@ -1,0 +1,29 @@
+{{# partial "titulo" }}
+    <title>Metodologias</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <form action="/empresas" >
+        <div class="row">
+            <div class="col-md-10">
+                <input type="text" class="form-control" placeholder="Nombre de la metodologia" name="filtroNombre">
+            </div>
+            <div class="col-md-2">
+                <input type="submit" class="form-control btn btn-default" value="Buscar">
+            </div>
+        </div>
+    </form>
+
+    <div class="row">
+        <div class="col-md-12">
+            <label>Empresas:</label>
+            <div class="list-group">
+                {{#empresas}}
+                <a href="/empresas/{{id}}/periodos" class="list-group-item">{{nombre}}</a>
+                {{/empresas}}
+            </div>
+        </div>
+    </div>
+{{/partial}}
+				
+{{> layout.hbs }}

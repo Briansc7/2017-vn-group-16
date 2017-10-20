@@ -4,6 +4,7 @@ import controllers.EmpresasController;
 import controllers.HomeController;
 import controllers.IndicadoresController;
 import controllers.LoginController;
+import controllers.MetodologiasController;
 import exceptions.FormulaIncorrectaException;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
@@ -30,7 +31,8 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 		HomeController homeController = new HomeController();
 		LoginController loginController = new LoginController();
 		HandlebarsTemplateEngine engine = new HandlebarsTemplateEngine();
-
+		MetodologiasController metodologiasController = new MetodologiasController();
+		
 		port(8080);
 
 		staticFileLocation("/public");
@@ -43,7 +45,8 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 		get("/indicadores/nuevo", indicadoresController::nuevo, engine);
 		get("/logout", loginController::logout, engine);
 		get("indicadores", indicadoresController::listar, engine);
-
+		get("/metodologias", metodologiasController::listar, engine);
+		
 		post("/login", loginController::loguear, engine);
 		post("/indicadores", indicadoresController::agregar, engine);
 	}
