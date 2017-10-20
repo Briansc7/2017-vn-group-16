@@ -26,6 +26,7 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 	public static void main(String[] args) {
 		
 		//new Ejecutable().start();
+		
 		EmpresasController empresasController = new EmpresasController();
 		IndicadoresController indicadoresController = new IndicadoresController();
 		HomeController homeController = new HomeController();
@@ -46,9 +47,11 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 		get("/logout", loginController::logout, engine);
 		get("indicadores", indicadoresController::listar, engine);
 		get("/metodologias", metodologiasController::listar, engine);
+		get("/metodologias/:metodologia/empresas", metodologiasController::empresasDe, engine);
 		
 		post("/login", loginController::loguear, engine);
 		post("/indicadores", indicadoresController::agregar, engine);
+		
 	}
 
 	@Override
