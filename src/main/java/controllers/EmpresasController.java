@@ -21,7 +21,6 @@ import model.repositories.RepositorioDeIndicadores;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-import model.CondicionBuilder;
 
 public class EmpresasController implements WithGlobalEntityManager {
 
