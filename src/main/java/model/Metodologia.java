@@ -70,7 +70,9 @@ public class Metodologia {
 		return nombre;
 	}
 	
-
+	public Long getId() {
+		return id;
+	}
 	
 	/*
 	private List<Empresa> aplicarCondicionesTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {

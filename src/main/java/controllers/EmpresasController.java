@@ -1,16 +1,27 @@
 package controllers;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+
+import javax.persistence.EntityTransaction;
+
+import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+
 import model.Empresa;
+import model.Metodologia;
 import model.Usuario;
+import model.condiciones.Comparador;
+import model.condiciones.Condicion;
+import model.funciones.Longevidad;
 import model.repositories.RepositorioDeEmpresas;
 import model.repositories.RepositorioDeIndicadores;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
-
-import java.util.*;
-
-import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
+import model.CondicionBuilder;
 
 public class EmpresasController implements WithGlobalEntityManager {
 

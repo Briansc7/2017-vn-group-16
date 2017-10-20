@@ -23,10 +23,11 @@ public class MetodologiasController implements WithGlobalEntityManager{
 	
     public ModelAndView listar(Request request, Response response) {
         List<Metodologia> metodologias;
+        Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
 
         String filtroNombre = request.queryParams("filtroNombre");
         if (Objects.isNull(filtroNombre) || filtroNombre.isEmpty()) {
-            metodologias = repositorioDeMetodologias.buscarTodos();
+            metodologias = repositorioDeMetodologias.buscarTodosPorUsuario(usuario);//.buscarTodos();
         } else {
             //empresas = Arrays.asList(repositorioDeEmpresas.buscarEmpresa(filtroNombre));
             metodologias = repositorioDeMetodologias.buscarTodosPorNombre(filtroNombre);
@@ -43,8 +44,8 @@ public class MetodologiasController implements WithGlobalEntityManager{
     public ModelAndView empresasDe(Request request, Response response) {
         long id = Long.parseLong(request.params(":metodologia"));
         List<Empresa> empresas;
-        
-        empresas = repositorioDeEmpresas.buscarTodos();
+        Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
+        empresas = repositorioDeEmpresas.buscarTodosPorUsuario(usuario);//.buscarTodos();
         
         Metodologia metodologia = repositorioDeMetodologias.buscarPorId(id);
         //Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));

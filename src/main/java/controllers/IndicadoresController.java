@@ -55,7 +55,7 @@ public class IndicadoresController implements WithGlobalEntityManager{
         
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
 
-        Indicador indicadorNuevo = null;
+        Indicador indicadorNuevo;// = null;
         try {
             indicadorNuevo = new Indicador(nombre, formula, usuario);
         } catch (ParseException e) {
