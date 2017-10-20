@@ -45,7 +45,7 @@ public class MetodologiasController implements WithGlobalEntityManager{
         long id = Long.parseLong(request.params(":metodologia"));
         List<Empresa> empresas;
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
-        empresas = repositorioDeEmpresas.buscarTodosPorUsuario(usuario);//.buscarTodos();
+        empresas = repositorioDeEmpresas.buscarTodos();
         
         Metodologia metodologia = repositorioDeMetodologias.buscarPorId(id);
         //Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
