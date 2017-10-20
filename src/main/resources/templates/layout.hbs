@@ -7,38 +7,30 @@
 
     <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <link rel="stylesheet"  href="main.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <a class="navbar-brand"href="/">Home</a>
+                <a class="navbar-brand" href="/">Home</a>
             </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li><a href="/empresas">Empresas</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li><a href="/metodologias">Metodologias</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul class="nav navbar-nav">
-                    <li><a href="/indicadores/nuevo">Agregar indicador</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                </ul>
-            </div>
-            <div>
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-                </ul>
-            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="/empresas">Empresas</a></li>
+                <li><a href="/metodologias">Metodologias</a></li>
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Indicadores
+                        <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/indicadores">Mis indicadores</a></li>
+                        <li><a href="/indicadores/nuevo">Agregar indicador</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+            </ul>
         </div>
     </nav>
 

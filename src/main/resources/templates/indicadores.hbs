@@ -1,0 +1,22 @@
+{{# partial "titulo" }}
+    <title>Mis indicadores</title>
+{{/partial}}
+
+{{# partial "contenido" }}
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-striped" >
+                <th>Indicadores</th>
+                <th>Formula</th>
+                {{#indicadores}}
+                    <tr>
+                        <td>{{nombre}}</td>
+                        <td>{{formula}}</td>
+                    </tr>
+                {{/indicadores}}
+            </table>
+        </div>
+    </div>
+{{/partial}}
+
+{{> layout.hbs }}

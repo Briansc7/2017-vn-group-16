@@ -17,6 +17,20 @@ public class IndicadoresController implements WithGlobalEntityManager{
 
     RepositorioDeIndicadores repositorioDeIndicadores = RepositorioDeIndicadores.getInstance();
 
+    public ModelAndView listar(Request request, Response response) {
+
+        Map<String, Object> model = new HashMap<>();
+        if (request.cookie("userId") == null) {
+            response.body("Debe iniciar sesion");
+            response.redirect("/");
+            return null;
+        }
+
+        Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
+        model.put("indicadores", RepositorioDeIndicadores.getInstance().buscarTodosPorUsuario(usuario));
+        return new ModelAndView(model, "indicadores.hbs");
+    }
+
     public ModelAndView nuevo(Request request, Response response) {
         Map<String, Object> model = new HashMap<>();
 
@@ -33,6 +47,12 @@ public class IndicadoresController implements WithGlobalEntityManager{
         String nombre = request.queryParams("nombre");
         String formula = request.queryParams("formula");
         //response.removeCookie("errorFormula");
+        if (request.cookie("userId") == null) {
+            response.body("Debe iniciar sesion");
+            response.redirect("/");
+            return null;
+        }
+        
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
 
         Indicador indicadorNuevo = null;
@@ -50,4 +70,5 @@ public class IndicadoresController implements WithGlobalEntityManager{
         response.redirect("/");
         return null;
     }
+
 }

@@ -19,7 +19,6 @@ public class HomeController implements WithGlobalEntityManager {
             Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
             viewModel.put("username", usuario.getUsername());
         }
-
         return new ModelAndView(viewModel, "home.hbs");
     }
 }

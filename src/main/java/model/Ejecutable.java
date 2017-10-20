@@ -42,6 +42,7 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 		get("/empresas/:id/periodos/:periodo/cuentas", empresasController::atributosDe, engine);
 		get("/indicadores/nuevo", indicadoresController::nuevo, engine);
 		get("/logout", loginController::logout, engine);
+		get("indicadores", indicadoresController::listar, engine);
 
 		post("/login", loginController::loguear, engine);
 		post("/indicadores", indicadoresController::agregar, engine);

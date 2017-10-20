@@ -53,15 +53,15 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
         return entityManager().createQuery(criteria).setParameter("param0", /*"%"+*/nombre/*+"%"*/).getResultList();//TODO ponerle alias a param0
     }
 
-    public <T> List<T> buscarTodosPorUsuario(Long usuario_id) {
+    public <T> List<T> buscarTodosPorUsuario(Usuario usuario) {
     	CriteriaBuilder criteriaBuilder = this.entityManager().getCriteriaBuilder();
         CriteriaQuery<T> criteria = criteriaBuilder.createQuery(getTipo());
         Root<T> tipo = criteria.from(getTipo());
 
         criteria.select(tipo);
-        ParameterExpression<Long> parametroUsuario = criteriaBuilder.parameter(Long.class);
-        criteria.where(criteriaBuilder.equal(tipo.get("usuario_id"), parametroUsuario));
-        return entityManager().createQuery(criteria).setParameter("param0", usuario_id).getResultList();
+        ParameterExpression<Usuario> parametroUsuario = criteriaBuilder.parameter(Usuario.class);
+        criteria.where(criteriaBuilder.equal(tipo.get("usuario"), parametroUsuario));
+        return entityManager().createQuery(criteria).setParameter("param0", usuario).getResultList();
     
     }
     
