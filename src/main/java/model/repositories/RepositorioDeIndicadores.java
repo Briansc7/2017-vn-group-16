@@ -40,8 +40,8 @@ public class RepositorioDeIndicadores extends Repositorio {
 		return Indicador.class;
 	}
 
-	public List<IndicadorAuxiliar> getIndicadoresAuxiliares(Empresa empresa, Integer periodo, Long usuario_id) {
-		List<Indicador> indicadoresReales = this.buscarTodos();//.buscarTodosPorUsuario(usuario_id);
+	public List<IndicadorAuxiliar> getIndicadoresAuxiliares(Empresa empresa, Integer periodo, Usuario usuario) {
+		List<Indicador> indicadoresReales = this.buscarTodosPorUsuario(usuario);
 		List<IndicadorAuxiliar> indicadoresAuxiliares = indicadoresReales.stream()
 				.map(indicador -> new IndicadorAuxiliar(indicador.getNombre(), indicador.getValorString(periodo, empresa)))//FIXME a veces devuelve nullpointer ex
 				.collect(Collectors.toList());
