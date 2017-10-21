@@ -13,12 +13,11 @@ import org.uqbar.commons.utils.Observable;
 import model.Empresa;
 import model.funciones.Funcion;
 
-@Observable
 @Entity
 @DiscriminatorValue("comparativa")
 public class CondicionComparativa extends Condicion {
 	
-	protected CondicionComparativa() {}
+	public CondicionComparativa() {}
 	
 	public CondicionComparativa(Integer periodo, Funcion obtenerValor, Comparador comparador){
 		super(periodo, obtenerValor, comparador);

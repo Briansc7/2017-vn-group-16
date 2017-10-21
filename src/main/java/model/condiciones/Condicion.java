@@ -9,7 +9,6 @@ import org.uqbar.commons.utils.Observable;
 import model.Empresa;
 import model.funciones.Funcion;
 
-@Observable
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_de_condicion")

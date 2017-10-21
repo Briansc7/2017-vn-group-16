@@ -8,16 +8,14 @@ import controllers.MetodologiasController;
 import exceptions.FormulaIncorrectaException;
 import org.uqbar.arena.Application;
 import org.uqbar.arena.windows.Window;
-
+import org.uqbarproject.jpa.java8.extras.PerThreadEntityManagers;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 import view.PrincipalView;
 
 import javax.security.auth.login.LoginException;
 
-import static spark.Spark.exception;
-import static spark.Spark.get;
-import static spark.Spark.post;
+import static spark.Spark.*;
 import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
@@ -37,6 +35,8 @@ public class Ejecutable extends Application implements WithGlobalEntityManager{
 		port(8080);
 
 		staticFileLocation("/public");
+		
+		before((req, res) -> { if (PerThreadEntityManagers.getEntityManager() != null) PerThreadEntityManagers.closeEntityManager(); });
 
 		get("/", homeController::mostrar, engine);
 		get("/login", loginController::mostrar, engine);

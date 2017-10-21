@@ -1,8 +1,6 @@
 package model;
 
-import org.uqbar.commons.utils.Observable;
 
-@Observable
 public class IndicadorAuxiliar {
 	private String nombre;
 	private String valorString;

@@ -4,6 +4,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -11,11 +12,11 @@ import javax.persistence.OneToOne;
 public abstract class Operador extends Expresion {
 	
 	@OneToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	//@Column(name = "operando_izq_id")
+	@JoinColumn(name = "operando_izq_id")
 	public Expresion operandoIzq;
 
 	@OneToOne(cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
-	//@Column(name = "operando_der_id")
+	@JoinColumn(name = "operando_der_id")
 	public Expresion operandoDer;
 	
 	public Operador(){}
