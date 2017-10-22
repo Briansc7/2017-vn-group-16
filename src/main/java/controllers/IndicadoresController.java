@@ -49,7 +49,7 @@ public class IndicadoresController implements WithGlobalEntityManager{
         //response.removeCookie("errorFormula");
         if (request.cookie("userId") == null) {
             response.body("Debe iniciar sesion");
-            response.redirect("/");
+            response.redirect("/login");
             return null;
         }
         
@@ -67,7 +67,7 @@ public class IndicadoresController implements WithGlobalEntityManager{
 
         repositorioDeIndicadores.guardar(indicadorNuevo);
 
-        response.redirect("/");
+        response.redirect("/indicadores");
         return null;
     }
 

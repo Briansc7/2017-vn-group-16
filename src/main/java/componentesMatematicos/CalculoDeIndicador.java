@@ -15,6 +15,6 @@ public class CalculoDeIndicador{
 		if(unaEmpresa.existeCuentaDel(nombre, unPeriodo))
 			return unaEmpresa.buscarCuenta(nombre, unPeriodo).getValor();
 		
-		throw new NoExisteAtributoException("No existe ni el Indicador ni la Empresa: " + nombre);
+		throw new NoExisteAtributoException("No existe: " + nombre);
 	}
 }

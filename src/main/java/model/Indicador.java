@@ -9,7 +9,6 @@ import org.uqbar.commons.utils.Observable;
 import componentesMatematicos.Expresion;
 import parser.Parser;
 
-@Observable
 @Entity
 @DiscriminatorValue("indicador")
 public class Indicador extends Atributo{
