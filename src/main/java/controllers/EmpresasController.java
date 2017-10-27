@@ -49,9 +49,6 @@ public class EmpresasController implements WithGlobalEntityManager {
 
         Empresa empresa = repositorioDeEmpresas.buscarPorId(id);
 
-//        Map<String, Object> viewModel = new HashMap<>();
-//        viewModel.put("periodos", empresa.getPeriodos());
-//        viewModel.put("")
         return new ModelAndView(empresa, "periodos.hbs");
     }
 

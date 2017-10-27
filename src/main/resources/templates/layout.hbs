@@ -10,27 +10,36 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    <div class="wrapper">
     <nav class="navbar navbar-default">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="/">Home</a>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
             </div>
-            <ul class="nav navbar-nav">
-                <li><a href="/empresas">Empresas</a></li>
-                <li><a href="/metodologias">Metodologias</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Indicadores
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/indicadores">Mis indicadores</a></li>
-                        <li><a href="/indicadores/nuevo">Agregar indicador</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-            </ul>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li><a href="/empresas">Empresas</a></li>
+                    <li><a href="/metodologias">Metodologias</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Indicadores
+                            <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/indicadores">Mis indicadores</a></li>
+                            <li><a href="/indicadores/nuevo">Agregar indicador</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                    <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
 
@@ -38,7 +47,7 @@
         {{# block "contenido" }}
         {{/block}}
     </div>
-
+    </div>
     <footer class="footer">
         <p class="text-center">
             DDS-TP anual 2017

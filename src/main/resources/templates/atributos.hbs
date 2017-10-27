@@ -6,12 +6,12 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped" >
-                <th>Cuentas</th>
-                <th>Valor</th>
+                <th class="col-md-8">Cuentas</th>
+                <th class="col-md-4">Valor</th>
                 {{#cuentas}}
                 <tr>
-                    <td>{{nombre}}</td>
-                    <td>{{valor}}</td>
+                    <td class="col-md-8">{{nombre}}</td>
+                    <td class="col-md-4">{{valor}}</td>
                 </tr>
                 {{/cuentas}}
             </table>
@@ -21,12 +21,12 @@
     <div class="row">
         <div class="col-md-12">
             <table class="table table-striped" >
-                <th>Indicadores</th>
-                <th>Valor</th>
+                <th class="col-md-8">Indicadores</th>
+                <th class="col-md-4">Valor</th>
                 {{#indicadores}}
                 <tr>
-                    <td>{{nombre}}</td>
-                    <td>{{valorString}}</td>
+                    <td class="col-md-8">{{nombre}}</td>
+                    <td class="col-md-4">{{valorString}}</td>
                 </tr>
                 {{/indicadores}}
             </table>
