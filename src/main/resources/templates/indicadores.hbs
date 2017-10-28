@@ -1,37 +1,39 @@
 {{# partial "titulo" }}
     <title>Mis indicadores</title>
+    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/><!--r/bs-3.3.5/jq-2.1.4,-->
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $('#tablaIndicadores').DataTable();
+        } );
+    </script>
 {{/partial}}
 
 {{# partial "contenido" }}
-    <div class="row">
-        <div class="col-md-10">
-            <table class="table table-striped" >
-                <th>Indicadores</th>
-                <th>Formula</th>
-                {{#indicadores}}
-                    <tr>
-                        <td>{{nombre}}</td>
-                        <td>{{formula}}</td>
-                    </tr>
-                {{/indicadores}}
-            </table>
-        </div>
-    </div>
-    <div>
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="/indicadores">1</a></li>
-                <li class="page-item"><a class="page-link" href="/indicadores?pagina=2">2</a></li>
-                <li class="page-item"><a class="page-link" href="/indicadores?pagina=3">3</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+        <table id="tablaIndicadores" class="display" cellspacing="0" width="100%" >
+            <thead>
+                <tr>
+                    <th>Indicadores</th>
+                    <th>Formula</th>
+                </tr>
+            </thead>
+            <tbody>
+            {{#indicadores}}
+                <tr>
+                    <td>{{nombre}}</td>
+                    <td>{{formula}}</td>
+                </tr>
+            {{/indicadores}}
+            </tbody>
+        </table>
+{{/partial}}
+
+{{# partial "scriptFinal"}}
+    <script type="text/javascript">
+        // For demo to fit into DataTables site builder...
+        $('#tablaIndicadores')
+                .removeClass( 'display' )
+                .addClass('table table-striped table-bordered');
+    </script>
 {{/partial}}
 
 {{> layout.hbs }}

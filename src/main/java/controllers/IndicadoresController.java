@@ -9,9 +9,7 @@ import spark.Request;
 import spark.Response;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
@@ -29,15 +27,8 @@ public class IndicadoresController implements WithGlobalEntityManager{
         }
 
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
-        List<Indicador> aux;
 
-        if(request.queryParams("pagina") != null){
-            int pagina = Integer.valueOf(request.queryParams("pagina"));
-            aux = (List<Indicador>)(Object)repositorioDeIndicadores.buscarTodosPorUsuario(usuario).subList(pagina*1-1, pagina*1);
-        } else
-            aux = (List<Indicador>)(Object)repositorioDeIndicadores.buscarTodosPorUsuario(usuario).stream().limit(1).collect(Collectors.toList());
-
-        model.put("indicadores", aux);
+        model.put("indicadores", repositorioDeIndicadores.buscarTodosPorUsuario(usuario));
         return new ModelAndView(model, "indicadores.hbs");
     }
 
