@@ -83,10 +83,11 @@ public class Empresa {
 		return cuentas;
 	}
 	
-	public void setCuentas(List<Cuenta> cuentas) {
-		this.cuentas = cuentas;
+	public void agregarCuentas(List<Cuenta> cuentas){
+		//todo actualizar cuentas
+		this.cuentas.addAll(cuentas);
 	}
-	
+
 	public List<Integer> getPeriodos(){
 		List<Integer> periodos = new ArrayList<Integer>(
 				this.cuentas.stream()

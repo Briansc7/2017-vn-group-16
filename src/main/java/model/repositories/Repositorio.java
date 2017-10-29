@@ -16,8 +16,9 @@ import java.util.List;
 public abstract class Repositorio implements WithGlobalEntityManager, TransactionalOps {
 
     public <T> void guardar(T t) {
-        if(this.existe(this.obtenerNombreDe(t)))
+        if(this.existe(this.obtenerNombreDe(t))){
             throw new EseYaExisteException("Ya existe: " + this.obtenerNombreDe(t));
+        }
 
         withTransaction(()->this.entityManager().persist(t));
     }
@@ -82,7 +83,7 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
     }
 
     public Boolean existe(String nombre){
-        return this.buscarTodosPorNombre(nombre).size() != 0;
+        return this.buscarTodosPorNombre(nombre.toLowerCase()).size() != 0;
     }
 
     abstract protected  <T> String obtenerNombreDe(T t);
