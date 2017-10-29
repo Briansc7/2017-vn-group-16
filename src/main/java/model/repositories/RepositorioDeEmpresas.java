@@ -23,8 +23,7 @@ public class RepositorioDeEmpresas extends Repositorio implements WithGlobalEnti
 	public void guardar(Empresa empresa) {
 		if(this.existe(empresa.getNombre())){
 			Empresa empresaActualizada = (Empresa)this.buscarTodosPorNombre(empresa.getNombre()).get(0);
-			empresaActualizada.agregarCuentas(empresa.getCuentas());
-			withTransaction(()->this.entityManager().persist(empresaActualizada));
+			withTransaction(()->empresaActualizada.agregarCuentas(empresa.getCuentas()));
 			return;
 		}
 

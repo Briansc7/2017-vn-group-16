@@ -26,7 +26,7 @@ public class ActualizacionEmpresas extends AbstractPersistenceTest implements Wi
             new Cuenta("Cuenta de Prueba 2", BigDecimal.valueOf(20), LocalDate.of(2017, 8, 15)),
             new Cuenta("Cuenta de Prueba 3", BigDecimal.valueOf(30), LocalDate.of(2017, 8, 15))
     );
-    private Empresa empresa1 = new Empresa("Empresa del Repositorio 1", _cuentas);
+    private Empresa empresa1 = new Empresa("Empresa del Repositorio 1".toLowerCase(), _cuentas);
 
     @Before
     public void guardarEmpresas(){
@@ -50,7 +50,7 @@ public class ActualizacionEmpresas extends AbstractPersistenceTest implements Wi
                 new Cuenta("Cuenta de Prueba 5", BigDecimal.valueOf(20), LocalDate.of(2017, 8, 15)),
                 new Cuenta("Cuenta de Prueba 6", BigDecimal.valueOf(30), LocalDate.of(2017, 8, 15))
         );
-        Empresa empresaActualizada = new Empresa("Empresa del Repositorio 1", _cuentasNuevas);
+        Empresa empresaActualizada = new Empresa("Empresa del Repositorio 1".toLowerCase(), _cuentasNuevas);
         repositorio.guardar(empresaActualizada);
 
         Empresa empresaObtenida = repositorio.buscarEmpresa("Empresa del Repositorio 1");

@@ -35,6 +35,7 @@ TOKEN : { < OPERADOR : (["+","-","*","/"]){1} > }
 TOKEN : { < OPENPAR : "(" > | < CLOSEPAR : ")" > }
 TOKEN : { < NUMERO : (["0"-"9"])+ >}
 TOKEN : { < PALABRA : (["a"-"z","A"-"Z"])+ > }
+TOKEN : { < NOMBRE : <PALABRA> (" " <PALABRA>)* > }
 
 //----------------------------------Version pablistica------------------------------
 Expresion Expression() :
@@ -85,7 +86,7 @@ Expresion Primary() :
 		{ return miNumero; }
 	}
 	|
-	t=<PALABRA>
+	t=<NOMBRE>
 	{
 	  return new AtributoCalculo(t.image);
 	}

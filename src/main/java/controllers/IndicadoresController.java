@@ -58,7 +58,7 @@ public class IndicadoresController implements WithGlobalEntityManager{
 
         Indicador indicadorNuevo;// = null;
         try {
-            indicadorNuevo = new Indicador(nombre, formula, usuario);
+            indicadorNuevo = new Indicador(nombre.toLowerCase(), formula, usuario);
         } catch (ParseException e) {
             response.cookie("formulaIncorrecta", "si");
             //response.removeCookie("errorFormula");

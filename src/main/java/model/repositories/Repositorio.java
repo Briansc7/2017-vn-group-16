@@ -51,7 +51,7 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
         criteria.select(tipo);
         ParameterExpression<String> parametroNombre = criteriaBuilder.parameter(String.class);
         criteria.where(criteriaBuilder.like(tipo.get("nombre"), parametroNombre));
-        return entityManager().createQuery(criteria).setParameter("param0", /*"%"+*/nombre/*+"%"*/).getResultList();//TODO ponerle alias a param0
+        return entityManager().createQuery(criteria).setParameter("param0", nombre.toLowerCase()).getResultList();//TODO ponerle alias a param0
     }
 
     public <T> List<T> buscarTodosPorUsuario(Usuario usuario) {
@@ -83,7 +83,7 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
     }
 
     public Boolean existe(String nombre){
-        return this.buscarTodosPorNombre(nombre.toLowerCase()).size() != 0;
+        return this.buscarTodosPorNombre(nombre).size() != 0;
     }
 
     abstract protected  <T> String obtenerNombreDe(T t);
