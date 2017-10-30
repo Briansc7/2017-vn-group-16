@@ -1,5 +1,5 @@
 {{# partial "titulo" }}
-    <title>Periodos de {{nombre}}</title>
+    <title>Periodos de {{empresa.nombre}}</title>
 {{/partial}}
 
 {{# partial "contenido" }}
@@ -7,9 +7,9 @@
         <div class="col-md-12">
             <label>Periodos:</label>
             <div class="list-group">
-                {{#periodos}}
-                <a href="/empresas/{{id}}/periodos/{{this}}/cuentas" class="list-group-item">{{this}}</a>
-                {{/periodos}}
+                {{#empresa.periodos}}
+                <a href="/empresas/{{empresa.id}}/periodos/{{this}}/cuentas" class="list-group-item">{{this}}</a>
+                {{/empresa.periodos}}
             </div>
         </div>
     </div>

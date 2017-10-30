@@ -6,12 +6,11 @@ import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-import javax.persistence.EntityTransaction;
 import javax.persistence.NoResultException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class LoginController implements WithGlobalEntityManager {
+public class LoginController implements WithGlobalEntityManager, ControllerGeneral {
 
     public ModelAndView mostrar(Request request, Response response) {
         Map<String, Object> model = new HashMap<>();
@@ -22,12 +21,13 @@ public class LoginController implements WithGlobalEntityManager {
             model.put("errorLogin", false);
 
         response.removeCookie("errorLogin");
+        this.verificarLogin(model, request);
         return new ModelAndView(model, "login.hbs");
     }
 
     public ModelAndView loguear(Request request, Response response) {
         Usuario usuario = null;
-        //response.removeCookie("errorLogin");
+
         try{
             usuario = this.buscarUsuario(request.queryParams("username"));
         } catch (NoResultException e){
@@ -44,7 +44,7 @@ public class LoginController implements WithGlobalEntityManager {
 
         response.cookie("userId", String.valueOf(usuario.getId()));
 
-        response.redirect("/");
+        response.redirect("/empresas");
         return null;
     }
 

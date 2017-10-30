@@ -12,32 +12,32 @@ import model.Metodologia;
 import model.Usuario;
 import model.repositories.RepositorioDeEmpresas;
 import model.repositories.RepositorioDeMetodologias;
-import model.repositories.RepositorioDeIndicadores;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
 
-public class MetodologiasController implements WithGlobalEntityManager{
+public class MetodologiasController implements WithGlobalEntityManager, ControllerGeneral {
+
 	private RepositorioDeMetodologias repositorioDeMetodologias = RepositorioDeMetodologias.getInstance();
 	private RepositorioDeEmpresas repositorioDeEmpresas = RepositorioDeEmpresas.getInstance();
 	
     public ModelAndView listar(Request request, Response response) {
         List<Metodologia> metodologias;
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
-
         String filtroNombre = request.queryParams("filtroNombre");
+
         if (Objects.isNull(filtroNombre) || filtroNombre.isEmpty()) {
-            metodologias = repositorioDeMetodologias.buscarTodosPorUsuario(usuario);//.buscarTodos();
+            metodologias = repositorioDeMetodologias.buscarTodosPorUsuario(usuario);
         } else {
-            //empresas = Arrays.asList(repositorioDeEmpresas.buscarEmpresa(filtroNombre));
             metodologias = repositorioDeMetodologias.buscarTodosPorNombre(filtroNombre);
         }
 
-        HashMap<String, Object> viewModel = new HashMap<>();
-        viewModel.put("metodologias", metodologias);
-        viewModel.put("filtroNombre", filtroNombre);
+        HashMap<String, Object> model = new HashMap<>();
+        model.put("metodologias", metodologias);
+        model.put("filtroNombre", filtroNombre);
+        this.verificarLogin(model, request);
 
-        return new ModelAndView(viewModel, "metodologias.hbs");
+        return new ModelAndView(model, "metodologias.hbs");
     }
 
 
@@ -46,13 +46,12 @@ public class MetodologiasController implements WithGlobalEntityManager{
         List<Empresa> empresas;
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
         empresas = repositorioDeEmpresas.buscarTodos();
-        
         Metodologia metodologia = repositorioDeMetodologias.buscarPorId(id);
-        //Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
-        
-        Map<String, Object> viewModel = new HashMap<>();
-        viewModel.put("empresas", metodologia.aplicarCondiciones(empresas));
 
-        return new ModelAndView(viewModel, "empresas.hbs");
+        Map<String, Object> model = new HashMap<>();
+        model.put("empresas", metodologia.aplicarCondiciones(empresas));
+        this.verificarLogin(model, request);
+
+        return new ModelAndView(model, "empresas.hbs");
     }
 }

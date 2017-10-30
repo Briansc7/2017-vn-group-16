@@ -9,16 +9,17 @@ import spark.Response;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HomeController implements WithGlobalEntityManager {
+public class HomeController implements WithGlobalEntityManager, ControllerGeneral {
 
     public ModelAndView mostrar(Request request, Response response) {
-        Map<String, Object> viewModel = new HashMap<>();
-//        viewModel.put("userId", request.cookie("userId"));
+        Map<String, Object> model = new HashMap<>();
 
         if(request.cookie("userId")!= null){
             Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
-            viewModel.put("username", usuario.getUsername());
+            model.put("username", usuario.getUsername());
         }
-        return new ModelAndView(viewModel, "home.hbs");
+        this.verificarLogin(model, request);
+
+        return new ModelAndView(model, "home.hbs");
     }
 }

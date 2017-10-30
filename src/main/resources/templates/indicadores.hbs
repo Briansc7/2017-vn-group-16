@@ -9,22 +9,31 @@
 {{/partial}}
 
 {{# partial "contenido" }}
-        <table id="tablaIndicadores" class="display" cellspacing="0" width="100%" >
-            <thead>
-                <tr>
-                    <th>Indicadores</th>
-                    <th>Formula</th>
-                </tr>
-            </thead>
-            <tbody>
-            {{#indicadores}}
-                <tr>
-                    <td>{{nombre}}</td>
-                    <td>{{formula}}</td>
-                </tr>
-            {{/indicadores}}
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-md-12">
+
+            <p class="small">
+                Para consultar el valor de un indicador selecione una <a href="/empresas" target="_blank">empresa</a> y un periodo.
+            </p>
+
+        </div>
+    </div>
+    <table id="tablaIndicadores" class="display" cellspacing="0" width="100%" >
+        <thead>
+            <tr>
+                <th>Indicadores</th>
+                <th>Formula</th>
+            </tr>
+        </thead>
+        <tbody>
+        {{#indicadores}}
+            <tr>
+                <td>{{nombre}}</td>
+                <td>{{formula}}</td>
+            </tr>
+        {{/indicadores}}
+        </tbody>
+    </table>
 {{/partial}}
 
 {{# partial "scriptFinal"}}
