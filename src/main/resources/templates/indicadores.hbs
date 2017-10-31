@@ -1,6 +1,5 @@
 {{# partial "titulo" }}
     <title>Mis indicadores</title>
-    <!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/bs-3.3.5/jq-2.1.4,dt-1.10.8/datatables.min.css"/><!--r/bs-3.3.5/jq-2.1.4,-->
     <script type="text/javascript" charset="utf-8">
         $(document).ready(function() {
             $('#tablaIndicadores').DataTable();
@@ -9,6 +8,11 @@
 {{/partial}}
 
 {{# partial "contenido" }}
+    <div class="row">
+        <div class="titulo-tabla">
+            <h2>Mis indicadores</h2>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-12">
 
@@ -38,7 +42,6 @@
 
 {{# partial "scriptFinal"}}
     <script type="text/javascript">
-        // For demo to fit into DataTables site builder...
         $('#tablaIndicadores')
                 .removeClass( 'display' )
                 .addClass('table table-striped table-bordered');

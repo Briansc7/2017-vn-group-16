@@ -1,37 +1,51 @@
 {{# partial "titulo" }}
-    <title>Cuentas de {{empresa.nombre}}</title>
+    <title>Atributos de {{empresa.nombre}}</title>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $('#tablaAtributos').DataTable();
+        } );
+    </script>
 {{/partial}}
 
 {{# partial "contenido" }}
     <div class="row">
-        <div class="col-md-12">
-            <table class="table table-striped" >
-                <th class="col-md-8">Cuentas</th>
-                <th class="col-md-4">Valor</th>
-                {{#cuentas}}
-                <tr>
-                    <td class="col-md-8">{{nombre}}</td>
-                    <td class="col-md-4">{{valor}}</td>
-                </tr>
-                {{/cuentas}}
-            </table>
+        <div class="titulo-tabla">
+            <h2>Atributos de {{empresa.nombre}}</h2>
         </div>
     </div>
+  <div class="col-md-12">
+    <table id="tablaAtributos" class="display" cellspacing="0" width="100%" >
+        <thead>
+        <tr>
+            <th class="col-md-7">Atributo</th>
+            <th class="col-md-5">Valor</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#cuentas}}
+            <tr>
+                <td class="col-md-7">{{nombre}}</td>
+                <td class="col-md-5">{{valor}}</td>
+            </tr>
+        {{/cuentas}}
+        {{#indicadores}}
+            <tr>
+                <td class="col-md-7">{{nombre}}</td>
+                <td class="col-md-5">{{valorString}}</td>
+            </tr>
+        {{/indicadores}}
 
-    <div class="row">
-        <div class="col-md-12">
-            <table class="table table-striped" >
-                <th class="col-md-8">Indicadores</th>
-                <th class="col-md-4">Valor</th>
-                {{#indicadores}}
-                <tr>
-                    <td class="col-md-8">{{nombre}}</td>
-                    <td class="col-md-4">{{valorString}}</td>
-                </tr>
-                {{/indicadores}}
-            </table>
-        </div>
-    </div>
+        </tbody>
+    </table>
+  </div>
+{{/partial}}
+
+{{# partial "scriptFinal"}}
+    <script type="text/javascript">
+        $('#tablaAtributos')
+                .removeClass( 'display' )
+                .addClass('table table-striped table-bordered');
+    </script>
 {{/partial}}
 
 {{> layout.hbs }}

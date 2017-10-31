@@ -1,29 +1,45 @@
 {{# partial "titulo" }}
     <title>Empresas</title>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $('#tablaEmpresas').DataTable();
+        } );
+    </script>
 {{/partial}}
 		
 {{# partial "contenido" }}
-    <form action="/empresas" >
-        <div class="row">
-            <div class="col-md-10">
-                <input type="text" class="form-control" placeholder="Nombre de la empresa" name="filtroNombre">
-            </div>
-            <div class="col-md-2">
-                <input type="submit" class="form-control btn btn-default" value="Buscar">
-            </div>
-        </div>
-    </form>
-
     <div class="row">
-        <div class="col-md-12">
-            <label>Empresas:</label>
-            <div class="list-group">
-                {{#empresas}}
-                <a href="/empresas/{{id}}/periodos" class="list-group-item">{{nombre}}</a>
-                {{/empresas}}
-            </div>
+        <div class="titulo-tabla">
+            <h2>Empresas</h2>
         </div>
     </div>
+
+    <div class="col-md-12">
+    <table id="tablaEmpresas" class="display" cellspacing="0" width="100%" >
+        <thead>
+        <tr>
+            <th class="col-md-7">Empresa</th>
+            <th class="col-md-5">Consultar</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#empresas}}
+            <tr>
+                <td class="col-md-7">{{nombre}}</td>
+                <td class="col-md-5"><a href="/empresas/{{id}}/periodos"><button type="button" class="btn btn-primary">Ver periodos</button></a></td>
+            </tr>
+        {{/empresas}}
+        </tbody>
+    </table>
+    </div>
 {{/partial}}
-				
+
+{{# partial "scriptFinal"}}
+    <script type="text/javascript">
+        $('#tablaEmpresas')
+                .removeClass( 'display' )
+                .addClass('table table-striped table-bordered');
+    </script>
+{{/partial}}
+
 {{> layout.hbs }}
