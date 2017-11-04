@@ -4,8 +4,6 @@ import java.math.BigDecimal;
 
 import javax.persistence.*;
 
-import org.uqbar.commons.utils.Observable;
-
 import componentesMatematicos.Expresion;
 import parser.Parser;
 

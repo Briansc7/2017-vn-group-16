@@ -18,11 +18,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.uqbar.commons.utils.Observable;
-
 import exceptions.NoExisteAtributoException;
 
-@Observable
 @Entity
 @Table(name = "empresas")
 public class Empresa {

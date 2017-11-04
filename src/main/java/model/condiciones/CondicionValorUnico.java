@@ -7,14 +7,10 @@ import java.util.stream.Collectors;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
-
-import org.uqbar.commons.utils.Observable;
 
 import model.Empresa;
 import model.funciones.Funcion;
 
-@Observable
 @Entity
 @DiscriminatorValue("valor_unico")
 public class CondicionValorUnico extends Condicion {

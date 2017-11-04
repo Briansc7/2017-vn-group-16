@@ -4,8 +4,6 @@ import java.util.List;
 
 import javax.persistence.*;
 
-import org.uqbar.commons.utils.Observable;
-
 import model.Empresa;
 import model.funciones.Funcion;
 

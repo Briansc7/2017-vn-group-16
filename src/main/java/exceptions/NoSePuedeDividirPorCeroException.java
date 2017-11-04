@@ -1,9 +1,7 @@
 package exceptions;
 
-import org.uqbar.commons.model.UserException;
-
 @SuppressWarnings("serial")
-public class NoSePuedeDividirPorCeroException extends UserException {
+public class NoSePuedeDividirPorCeroException extends RuntimeException {
 
 	public NoSePuedeDividirPorCeroException(String mensaje) {
 		super(mensaje);

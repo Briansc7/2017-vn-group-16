@@ -1,9 +1,7 @@
 package exceptions;
 
-import org.uqbar.commons.model.UserException;
-
 @SuppressWarnings("serial")
-public class NoExisteAtributoException extends UserException {
+public class NoExisteAtributoException extends RuntimeException {
 
 	public NoExisteAtributoException(String mensaje){
 		super(mensaje);

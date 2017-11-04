@@ -1,4 +1,4 @@
-package convertersJPA;
+package converters;
 
 import java.sql.Date;
 import java.time.LocalDate;

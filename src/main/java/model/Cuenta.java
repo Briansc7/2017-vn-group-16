@@ -5,11 +5,8 @@ import java.time.LocalDate;
 
 import javax.persistence.*;
 
-import org.uqbar.commons.utils.Observable;
+import converters.LocalDateConverter;
 
-import convertersJPA.LocalDateConverter;
-
-@Observable
 @Entity
 @DiscriminatorValue("cuenta")
 public class Cuenta extends Atributo{

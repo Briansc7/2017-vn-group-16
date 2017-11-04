@@ -4,7 +4,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.After;
 import org.junit.Test;
-import org.uqbar.commons.model.UserException;
 
 import exceptions.RutaDeArchivoInvalidaException;
 import utils.FilesManager;
