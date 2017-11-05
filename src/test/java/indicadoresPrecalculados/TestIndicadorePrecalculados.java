@@ -18,7 +18,7 @@ public class TestIndicadorePrecalculados {
     public void setUp(){
         repositorio = RepositorioIndicadoresPrecalculados.getInstance();
         indicador = new IndicadorPrecalculado(
-                "indicador 2", "prueba mongo * 10", "google", 2016, new BigDecimal(2016));
+                "indicador 2", "prueba mongo * 10", 1l, "google", 2016, "2016");
     }
 /*
     @Test

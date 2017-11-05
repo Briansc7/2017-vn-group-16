@@ -30,7 +30,7 @@ public class Indicador extends Atributo{
 		this.expresion = Parser.parsear(formula);
 	}
 	
-	public Indicador(String nombre, String formula, Usuario usuario) throws parser.ParseException, parser.TokenMgrError{
+	public Indicador(String nombre, String formula, Usuario usuario) throws parser.ParseException{
 		super(nombre);
 		this.formula = formula;
 		this.expresion = Parser.parsear(formula);
@@ -67,6 +67,9 @@ public class Indicador extends Atributo{
 		return formula;
 	}
 
+	public long getIdUsuario() {
+		return usuario.getId();
+	}
 	public boolean seLlama(String nombre) {
 		return this.nombre.equalsIgnoreCase(nombre);
 	}

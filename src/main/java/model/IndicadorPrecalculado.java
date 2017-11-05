@@ -5,14 +5,16 @@ import java.math.BigDecimal;
 public class IndicadorPrecalculado {
     private String nombre;
     private String formula;
-    private String empresa;
+    private long idUsuario;
+    private String nombreEmpresa;
     private Integer periodo;
-    private BigDecimal valor;
+    private String valor;
 
-    public IndicadorPrecalculado(String nombre, String formula, String empresa, Integer periodo, BigDecimal valor) {
+    public IndicadorPrecalculado(String nombre, String formula, long idUsuario, String nombreEmpresa, Integer periodo, String valor) {
         this.nombre = nombre;
         this.formula = formula;
-        this.empresa = empresa;
+        this.idUsuario = idUsuario;
+        this.nombreEmpresa = nombreEmpresa;
         this.periodo = periodo;
         this.valor = valor;
     }

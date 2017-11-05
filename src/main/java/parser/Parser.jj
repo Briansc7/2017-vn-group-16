@@ -91,6 +91,11 @@ Expresion Primary() :
 	  return new AtributoCalculo(t.image);
 	}
 	|
+	t=<PALABRA>
+	{
+	  return new AtributoCalculo(t.image);
+	}
+	|
 	<OPENPAR> subExpresion=Expression() <CLOSEPAR>
 	{ return subExpresion; }
 }
