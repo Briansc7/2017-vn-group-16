@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import model.repositories.RepositorioIndicadoresPrecalculados;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 
 import model.Empresa;
 import model.Usuario;
 import model.repositories.RepositorioDeEmpresas;
-import model.repositories.RepositorioDeIndicadores;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -57,7 +57,7 @@ public class EmpresasController implements WithGlobalEntityManager, ControllerGe
         Map<String, Object> model = new HashMap<>();
         model.put("cuentas", empresa.cuentasDelPeriodo(periodo));
         model.put("empresa", empresa);
-        model.put("indicadores", RepositorioDeIndicadores.getInstance().getIndicadoresAuxiliares(empresa, periodo, usuario));
+        model.put("indicadores", RepositorioIndicadoresPrecalculados.getInstance().buscarTodosFiltrados(empresa, periodo, usuario));
         this.verificarLogin(model, request);
 
         return new ModelAndView(model, "atributos.hbs");

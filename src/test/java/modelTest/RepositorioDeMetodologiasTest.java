@@ -14,7 +14,7 @@ import exceptions.EseYaExisteException;
 import model.repositories.RepositorioDeMetodologias;
 import org.uqbarproject.jpa.java8.extras.WithGlobalEntityManager;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
-import testMetodologia.CondicionBuilder;
+import builders.CondicionBuilder;
 import model.Metodologia;
 import model.funciones.Longevidad;
 import model.condiciones.Comparador;

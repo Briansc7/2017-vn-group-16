@@ -18,7 +18,7 @@ public abstract class Atributo {
 	public Atributo(){}
 	
 	public Atributo(String unNombre){
-		this.nombre = unNombre;
+		this.nombre = unNombre.toLowerCase();
 	}
 	
 	public void setNombre(String nombre) {

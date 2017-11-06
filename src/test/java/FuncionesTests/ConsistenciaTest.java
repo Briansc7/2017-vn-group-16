@@ -10,7 +10,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import parser.ParseException;
-import testMetodologia.CondicionBuilder;
+import builders.CondicionBuilder;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

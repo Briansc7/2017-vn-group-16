@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import builders.CondicionBuilder;
 import model.repositories.RepositorioDeEmpresas;
 import model.repositories.RepositorioDeIndicadores;
 import org.junit.Assert;

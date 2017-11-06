@@ -1,12 +1,15 @@
 package model.repositories;
 
+import builders.IndicadorPrecalculadoBuilder;
 import com.mongodb.MongoClient;
 import exceptions.NoExisteAtributoException;
 import model.Empresa;
 import model.Indicador;
 import model.IndicadorPrecalculado;
+import model.Usuario;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
 
 import java.util.List;
 
@@ -34,7 +37,18 @@ public class RepositorioIndicadoresPrecalculados {
         return datastore.find(IndicadorPrecalculado.class).asList();
     }
 
-    //todo solo deberia actualizar los indicadores que dependen de las cuentas que actualice
+    public List<IndicadorPrecalculado> buscarTodosFiltrados(Empresa empresa, Integer periodo, Usuario usuario){
+        Query<IndicadorPrecalculado> query = datastore.createQuery(IndicadorPrecalculado.class);
+        query.and(
+                query.criteria("nombreEmpresa").equal(empresa.getNombre()),
+                query.criteria("periodo").equal(periodo),
+                query.criteria("idUsuario").equal(usuario.getId())
+        );
+
+        return query.asList();
+    }
+
+    //todo solo deberia actualizar los indicadores que dependen de las cuentas que actualice?
     public void precalcularIndicadores(/*List<Empresa> empresas*/){
         datastore.delete(datastore.createQuery(IndicadorPrecalculado.class));
         List<Empresa> empresas = RepositorioDeEmpresas.getInstance().buscarTodos();
@@ -51,28 +65,19 @@ public class RepositorioIndicadoresPrecalculados {
     }
 
     private void precalcularIndicador(Indicador indicador, Empresa empresa, Integer periodo) {
-        IndicadorPrecalculado indicadorPrecalculado;
-        //todo hacer builder
+        IndicadorPrecalculadoBuilder builder = new IndicadorPrecalculadoBuilder()
+                .nombreIndicador(indicador.getNombre())
+                .formulaIndicador(indicador.getFormula())
+                .idUsuario(indicador.getIdUsuario())
+                .nombreEmpresa(empresa.getNombre())
+                .periodoDeEvaluacion(periodo);
+
         try {
-            indicadorPrecalculado = new IndicadorPrecalculado(
-                    indicador.getNombre(),
-                    indicador.getFormula(),
-                    indicador.getIdUsuario(),
-                    empresa.getNombre(),
-                    periodo,
-                    indicador.getValorString(periodo, empresa)
-            );
+            builder.valorString(indicador.getValorString(periodo, empresa));
         } catch(NoExisteAtributoException e) {
-            indicadorPrecalculado = new IndicadorPrecalculado(
-                    indicador.getNombre(),
-                    indicador.getFormula(),
-                    indicador.getIdUsuario(),
-                    empresa.getNombre(),
-                    periodo,
-                    e.getMessage()
-            );
+            builder.valorString(e.getMessage());
         }
 
-        this.guardar(indicadorPrecalculado);
+        this.guardar(builder.build());
     }
 }

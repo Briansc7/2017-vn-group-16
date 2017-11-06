@@ -40,7 +40,7 @@ public class Empresa {
 	private Empresa(){}
 	
 	public Empresa(String nombre, List<Cuenta> cuentas){
-		this.nombre = nombre;
+		this.nombre = nombre.toLowerCase();
 		this.cuentas.addAll(cuentas);
 	}
 

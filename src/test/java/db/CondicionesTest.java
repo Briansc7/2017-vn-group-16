@@ -16,7 +16,7 @@ import model.condiciones.CondicionComparativa;
 import model.condiciones.Condicion;
 import model.condiciones.CondicionValorUnico;
 import org.uqbarproject.jpa.java8.extras.test.AbstractPersistenceTest;
-import testMetodologia.CondicionBuilder;
+import builders.CondicionBuilder;
 
 public class CondicionesTest extends AbstractPersistenceTest implements WithGlobalEntityManager{
 	Condicion longevidadPropia;

@@ -1,12 +1,11 @@
 package model;
 
-
 public class IndicadorAuxiliar {
 	private String nombre;
 	private String valorString;
 	
 	public IndicadorAuxiliar(String unNombre, String unValorString){
-		nombre = unNombre;
+		nombre = unNombre.toLowerCase();
 		valorString = unValorString;
 	}
 	

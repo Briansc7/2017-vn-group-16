@@ -1,7 +1,5 @@
 package model;
 
-import java.math.BigDecimal;
-
 public class IndicadorPrecalculado {
     private String nombre;
     private String formula;
@@ -11,13 +9,21 @@ public class IndicadorPrecalculado {
     private String valor;
 
     public IndicadorPrecalculado(String nombre, String formula, long idUsuario, String nombreEmpresa, Integer periodo, String valor) {
-        this.nombre = nombre;
+        this.nombre = nombre.toLowerCase();
         this.formula = formula;
         this.idUsuario = idUsuario;
-        this.nombreEmpresa = nombreEmpresa;
+        this.nombreEmpresa = nombreEmpresa.toLowerCase();
         this.periodo = periodo;
         this.valor = valor;
     }
 
     private IndicadorPrecalculado(){ }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getValor() {
+        return valor;
+    }
 }
