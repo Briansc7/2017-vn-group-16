@@ -43,4 +43,7 @@ public class Cuenta extends Atributo{
 		return this.fecha.getYear();
 	}
 
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
 }

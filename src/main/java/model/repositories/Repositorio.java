@@ -24,7 +24,7 @@ public abstract class Repositorio implements WithGlobalEntityManager, Transactio
     }
 
     public <T> void guardarTodos(List<T> ts) {
-        ts.stream().forEach(empresa -> guardar(empresa));
+        ts.forEach(this::guardar);
     }
 
     public <T> List<T> buscarTodos() {

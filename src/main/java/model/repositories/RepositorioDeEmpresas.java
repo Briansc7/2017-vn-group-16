@@ -19,8 +19,10 @@ public class RepositorioDeEmpresas extends Repositorio implements WithGlobalEnti
 		return this.buscarUnoPorNombre(nombre);
 	}
 
-	//@Override
-	public void guardar(Empresa empresa) {
+	@Override
+	public <T> void guardar(T t) {
+		Empresa empresa = (Empresa)t;
+
 		if(this.existe(empresa.getNombre())){
 			Empresa empresaActualizada = (Empresa)this.buscarTodosPorNombre(empresa.getNombre()).get(0);
 			withTransaction(()->empresaActualizada.agregarCuentas(empresa.getCuentas()));

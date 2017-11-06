@@ -14,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+import exceptions.ArchivoVacioException;
 import model.Cuenta;
 import model.Empresa;
 
@@ -52,6 +53,11 @@ public class DatosCsv {
 			// el forEach se usa para separar la primer fila en muchos elementos
 			// segun la coma
 
+			if(!br.ready()){
+				br.close();
+				throw new ArchivoVacioException("El archivo no tiene contenido");
+			}
+
 			br.lines().forEach(linea -> this.agregarDatosDeLinea(linea));
 
 			br.close();
@@ -70,8 +76,7 @@ public class DatosCsv {
 		if(this.existeEmpresa(p[0].trim())){
 			this.buscarEmpresa(p[0].trim()).get().getCuentas().add(new Cuenta(p[1].trim(),
 					new BigDecimal(p[2].trim()), fecha));
-		}
-		else{
+		} else {
 			this.empresas.add(new Empresa(p[0].trim().toLowerCase(),
 					Arrays.asList(new Cuenta(p[1].trim().toLowerCase(), new BigDecimal(p[2].trim()), fecha))));
 		}

@@ -81,8 +81,19 @@ public class Empresa {
 	}
 	
 	public void agregarCuentas(List<Cuenta> cuentas){
-		//todo actualizar cuentas
-		this.cuentas.addAll(cuentas);
+		cuentas.forEach(this::agregarCuenta);
+	}
+
+	private void agregarCuenta(Cuenta cuenta) {
+		if (this.existeCuentaDel(cuenta.getNombre(), cuenta.getYear())) {
+			this.actualizarCuenta(cuenta);
+		} else {
+			cuentas.add(cuenta);
+		}
+	}
+
+	private void actualizarCuenta(Cuenta cuenta) {
+		this.buscarCuenta(cuenta.getNombre(), cuenta.getYear()).setValor(cuenta.getValor());
 	}
 
 	public List<Integer> getPeriodos(){

@@ -1,4 +1,4 @@
-package FuncionesTests;
+package funcionesTests;
 
 import model.Cuenta;
 import model.Empresa;
