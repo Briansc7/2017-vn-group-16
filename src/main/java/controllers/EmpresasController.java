@@ -35,6 +35,8 @@ public class EmpresasController implements WithGlobalEntityManager, ControllerGe
         viewModel.put("filtroNombre", filtroNombre);
         this.verificarLogin(viewModel, request);
 
+        
+        
         return new ModelAndView(viewModel, "empresas.hbs");
     }
 
