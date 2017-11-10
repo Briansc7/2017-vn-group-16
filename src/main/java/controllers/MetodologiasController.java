@@ -23,6 +23,12 @@ public class MetodologiasController implements WithGlobalEntityManager, Controll
 	
     public ModelAndView listar(Request request, Response response) {
         List<Metodologia> metodologias;
+        
+        if (request.cookie("userId") == null) {
+            response.redirect("/login");
+            return null;
+        }
+        
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
         String filtroNombre = request.queryParams("filtroNombre");
 
