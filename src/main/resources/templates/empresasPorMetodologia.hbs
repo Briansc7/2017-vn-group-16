@@ -1,0 +1,43 @@
+{{# partial "titulo" }}
+    <title>Empresas Ordenadas por Metodologia</title>
+    <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
+            $('#tablaEmpresas').DataTable();
+        } );
+    </script>
+{{/partial}}
+		
+{{# partial "contenido" }}
+    <div class="row">
+        <div class="titulo-tabla">
+            <h2>Empresas según Metodología: {{miMetodologia}}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-12">
+    <table id="tablaEmpresas" class="display" cellspacing="0" width="100%" >
+        <thead>
+        <tr>
+            <th class="col-md-7">Empresa (orden descendente de mejor a peor inversion)</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#empresas}}
+            <tr>
+                <td class="col-md-7">{{nombre}}</td>
+            </tr>
+        {{/empresas}}
+        </tbody>
+    </table>
+    </div>
+{{/partial}}
+
+{{# partial "scriptFinal"}}
+    <script type="text/javascript">
+        $('#tablaEmpresas')
+                .removeClass( 'display' )
+                .addClass('table table-striped table-bordered');
+    </script>
+{{/partial}}
+
+{{> layout.hbs }}

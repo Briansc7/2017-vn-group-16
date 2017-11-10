@@ -50,8 +50,9 @@ public class MetodologiasController implements WithGlobalEntityManager, Controll
 
         Map<String, Object> model = new HashMap<>();
         model.put("empresas", metodologia.aplicarCondiciones(empresas));
+        model.put("miMetodologia", metodologia.getNombre());
         this.verificarLogin(model, request);
 
-        return new ModelAndView(model, "empresas.hbs");
+        return new ModelAndView(model, "empresasPorMetodologia.hbs");
     }
 }
