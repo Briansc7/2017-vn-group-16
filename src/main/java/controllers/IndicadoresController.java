@@ -3,6 +3,7 @@ package controllers;
 import model.Indicador;
 import model.Usuario;
 import model.repositories.RepositorioDeIndicadores;
+import model.repositories.RepositorioIndicadoresPrecalculados;
 import parser.ParseException;
 import spark.ModelAndView;
 import spark.Request;
@@ -68,6 +69,7 @@ public class IndicadoresController implements WithGlobalEntityManager, Controlle
         }
 
         repositorioDeIndicadores.guardar(indicadorNuevo);
+        RepositorioIndicadoresPrecalculados.getInstance().precalcularIndicadores();
         response.redirect("/indicadores");
         return null;
     }
