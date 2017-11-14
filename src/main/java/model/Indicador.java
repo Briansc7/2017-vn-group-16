@@ -2,9 +2,16 @@ package model;
 
 import java.math.BigDecimal;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import componentesMatematicos.Expresion;
+import exceptions.NoExisteAtributoException;
 import parser.Parser;
 
 @Entity
@@ -53,7 +60,7 @@ public class Indicador extends Atributo{
 		String valorAuxiliar;
 		try {
 			valorAuxiliar = String.valueOf(this.getValor(unPeriodo, unaEmpresa));
-		} catch (Exception ex) {
+		} catch (NoExisteAtributoException ex) {
 			valorAuxiliar = ex.getMessage();
 		}
 		return valorAuxiliar;

@@ -70,14 +70,9 @@ public class RepositorioIndicadoresPrecalculados {
                 .formulaIndicador(indicador.getFormula())
                 .idUsuario(indicador.getIdUsuario())
                 .nombreEmpresa(empresa.getNombre())
-                .periodoDeEvaluacion(periodo);
-
-        try {
-            builder.valorString(indicador.getValorString(periodo, empresa));
-        } catch(NoExisteAtributoException e) {
-            builder.valorString(e.getMessage());
-        }
-
+                .periodoDeEvaluacion(periodo)
+                .valorString(indicador.getValorString(periodo, empresa));
+            
         this.guardar(builder.build());
     }
 }
