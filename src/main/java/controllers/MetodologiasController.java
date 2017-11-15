@@ -53,7 +53,12 @@ public class MetodologiasController implements WithGlobalEntityManager, Controll
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
         empresas = repositorioDeEmpresas.buscarTodos();
         Metodologia metodologia = repositorioDeMetodologias.buscarPorId(id);
-
+        
+        if (metodologia.getUsuario().getId() != usuario.getId()) {
+            response.redirect("/");
+            return null;
+        }
+        
         Map<String, Object> model = new HashMap<>();
         model.put("empresas", metodologia.aplicarCondiciones(empresas));
         model.put("miMetodologia", metodologia.getNombre());

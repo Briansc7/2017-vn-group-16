@@ -74,6 +74,10 @@ public class Metodologia {
 		return id;
 	}
 	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
 	/*
 	private List<Empresa> aplicarCondicionesTaxativas(List<Empresa> empresas, BaseDeDatos baseDeDatos) {
 		return empresas.stream().filter(empresa -> condicionesTaxativas.stream().allMatch(condicion -> condicion.aplicarCondicion(empresa, baseDeDatos))).collect(Collectors.toList());
