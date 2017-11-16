@@ -24,8 +24,8 @@ public class BatchEjecutable {
         }
 
         RepositorioDeEmpresas.getInstance().guardarTodos(lector.getEmpresas());
-        limpiarArchivoBatch();
         RepositorioIndicadoresPrecalculados.getInstance().precalcularIndicadores(/*lector.getEmpresas()*/);
+        limpiarArchivoBatch();
 
         System.exit(0);
     }
