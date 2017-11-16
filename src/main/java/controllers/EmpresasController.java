@@ -51,6 +51,12 @@ public class EmpresasController implements WithGlobalEntityManager, ControllerGe
     }
 
     public ModelAndView atributosDe(Request request, Response response) {
+    	
+    	if (request.cookie("userId") == null) {
+            response.redirect("/login");
+            return null;
+        }
+    	
         long id = Long.parseLong(request.params(":id"));
         int periodo = Integer.parseInt(request.params(":periodo"));
         Usuario usuario = entityManager().find(Usuario.class, Long.valueOf(request.cookie("userId")));
