@@ -13,9 +13,15 @@ import static spark.Spark.*;
 import static spark.SparkBase.port;
 import static spark.SparkBase.staticFileLocation;
 
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Ejecutable implements WithGlobalEntityManager{
 	
 	public static void main(String[] args) {
+		
+		
 		
 		EmpresasController empresasController = new EmpresasController();
 		IndicadoresController indicadoresController = new IndicadoresController();
@@ -43,6 +49,22 @@ public class Ejecutable implements WithGlobalEntityManager{
 		
 		post("/login", loginController::loguear, engine);
 		post("/indicadores", indicadoresController::agregar, engine);
+		
+		// Acá se queda ejecutando el batch cada 30 segundos
+		Timer timer = new Timer();
+		timer.scheduleAtFixedRate(new TimerTask() {
+			  @Override
+			  public void run() {
+				  try {
+			            Runtime.getRuntime().exec("./unBat/activa.bat");
+			            System.out.println("Batch Ejecutado");
+			        } catch (IOException e) {
+			            e.printStackTrace();
+			        }  
+			  }
+			}, 1*30*1000, 1*30*1000);
+		
+		
 		
 	}
 
