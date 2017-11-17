@@ -76,16 +76,7 @@ public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithG
 	
 
 	
-	@Test
-	public void selectSimple() {
-		
-		List <Cuenta> cuentas = entityManager()
-				.createQuery("from Cuenta ", Cuenta.class)
-				.getResultList();
-		
-		assertEquals(1, cuentas.size());
-		assertEquals(0, BigDecimal.valueOf(10).compareTo(cuentas.get(0).getValor()));
-	}
+
 	
 	@Test
 	public void selectComplejo() {
