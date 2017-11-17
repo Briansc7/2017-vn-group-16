@@ -56,7 +56,7 @@ public class Ejecutable implements WithGlobalEntityManager{
 			  @Override
 			  public void run() {
 				  try {
-			            Runtime.getRuntime().exec("./unBat/activa.sh"); //.bat para windows, .sh para linux
+			            Runtime.getRuntime().exec("./activa.sh"); //.bat para windows, .sh para linux
 			            System.out.println("Batch Ejecutado");
 			        } catch (IOException e) {
 			            e.printStackTrace();
