@@ -10,7 +10,7 @@ import java.io.PrintWriter;
 
 public class BatchEjecutable {
 
-    private static String PATH_BATCH_EMPRESAS = "./Archivos del sistema/batch empresas.csv";
+    private static String PATH_BATCH_EMPRESAS = "../Archivos del sistema/batch empresas.csv";
 
     public static void main(String[] args) throws FileNotFoundException {
 
