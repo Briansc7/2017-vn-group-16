@@ -32,12 +32,7 @@ public class ActualizarEmpresasTest {
         setUpIsDone=true;
     }
 
-    @Test
-    public void actualizarEmpresa(){
-        repositorio.guardar(empresaActualizada);
 
-        Assert.assertEquals(1, repositorio.buscarTodos().size());
-    }
 
     @Test
     public void valorCuentaActualizado(){

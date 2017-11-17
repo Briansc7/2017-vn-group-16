@@ -71,17 +71,5 @@ public class CondicionesTest extends AbstractPersistenceTest implements WithGlob
 
 	}
 	
-	@Test
-	public void guardarMetodologia(){
-//		EntityTransaction transaction = entityManager().getTransaction();
-//		transaction.begin();
-		
-		entityManager().persist(metodologia);
-		
-		//transaction.commit();
-		
-		Metodologia metodologiaDB = entityManager().find(Metodologia.class, 1L);
-		
-		assertEquals(metodologia.getNombre(), metodologiaDB.getNombre());
-	}
+
 }

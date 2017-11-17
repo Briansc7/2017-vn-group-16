@@ -51,19 +51,9 @@ public class RepositorioDeIndicadoresTest extends AbstractPersistenceTest implem
 		indicadorObtenido.getNombre();
 	}
 	
-	@Test
-	public void obtenerIndicadores(){
-		List<Indicador> indicadorsObtenidas = repositorio.buscarTodos();
-		
-		assertEquals(3, indicadorsObtenidas.size());
-	}
+
 	
-	@Test
-	public void obtenerIndicadorPorNombre(){
-		Indicador indicadorObtenida = repositorio.buscarIndicador("Indicador del repositorio 1");
-		
-		assertEquals("Indicador del repositorio 1", indicadorObtenida.getNombre());
-	}
+
 	
 	@Test(expected = EseYaExisteException.class)
 	public void guardarIndicadorQueYaExisteTiraExepcion(){

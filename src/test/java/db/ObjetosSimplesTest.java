@@ -47,20 +47,7 @@ public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithG
 		//assertEquals(entityManager().createQuery("from Cuenta order by id desc").getResultList().get(0),cuentaCreadaPorMi);
 	}
 	
-	@Test
-	public void guardarUnaCuenta() {
-		//guardarCuenta();
-		//entityManager().persist(cuentaCreadaPorMi);
-//		Cuenta cuentaDeLaBase = entityManager().createQuery("from Cuenta order by id desc", Cuenta.class)
-//				.getResultList().get(0);
-		Cuenta cuentaDeLaBase = entityManager()
-				.createQuery("from Cuenta as cuenta where cuenta.nombre = ?1", Cuenta.class)
-				.setParameter(1, "Cuenta de Prueba")
-				.getResultList().get(0);
 
-		cuentaDeLaBase.getFecha();
-		cuentaDeLaBase.getNombre();
-	}
 
 	@Test
 	public void buscarUnaCuenta() {
@@ -73,20 +60,7 @@ public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithG
 		cuentaDeLaBase.getNombre();
 	}
 	
-	@Test
-	public void editarUnaCuenta() {
-		//guardarCuenta();
-		//entityManager().persist(cuentaCreadaPorMi);
-		Cuenta cuentaDeLaBase = entityManager()
-				.createQuery("from Cuenta as cuenta where cuenta.nombre = ?1", Cuenta.class)
-				.setParameter(1, "Cuenta de Prueba")
-				.getResultList().get(0);
-		
-		cuentaDeLaBase.setNombre("OtroNombre");
-		
-		assertEquals(cuentaCreadaPorMi.getFecha(), cuentaDeLaBase.getFecha());
-		assertEquals("OtroNombre", cuentaDeLaBase.getNombre());
-	}
+
 	
 	@Test
 	public void guardarUnaEmpresa() {
@@ -100,19 +74,7 @@ public class ObjetosSimplesTest extends AbstractPersistenceTest implements WithG
 		assertEquals(3, empresaDeLaBase.getCuentas().size());
 	}
 	
-	@Test
-	public void guardarUnIndicador() throws ParseException, TokenMgrError {
-		Indicador indicador = new Indicador("Prueba", "2");
 
-		entityManager().persist(indicador);
-
-		List<Indicador> indicadoresDeLaBase = entityManager()
-				.createQuery("from Indicador as indicador where indicador.nombre = ?1", Indicador.class)
-				.setParameter(1, "Prueba")
-				.getResultList();
-		
-		assertEquals(indicador.getNombre(),indicadoresDeLaBase.get(0).getNombre());
-	}
 	
 	@Test
 	public void selectSimple() {

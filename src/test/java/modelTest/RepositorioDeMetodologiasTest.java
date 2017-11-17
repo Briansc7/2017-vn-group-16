@@ -61,12 +61,7 @@ public class RepositorioDeMetodologiasTest extends AbstractPersistenceTest imple
 		repositorio.guardarTodos(metodologias);
 	}
 	
-	@Test
-	public void obtenerMetodologia(){
-		Metodologia metodologiaObtenida = repositorio.buscarMetodologia("Metodologia del repositorio 1");
-		
-		metodologiaObtenida.getNombre();
-	}
+
 	
 	@Test
 	public void obtenerMetodologias(){
@@ -75,15 +70,7 @@ public class RepositorioDeMetodologiasTest extends AbstractPersistenceTest imple
 		assertEquals(3, metodologiasObtenidas.size());
 	}
 	
-	@Test
-	public void obtenerMetodologiaPorNombre(){
-		Metodologia metodologiaObtenida = repositorio.buscarMetodologia("Metodologia del repositorio 1");
-		
-		assertEquals("Metodologia del repositorio 1", metodologiaObtenida.getNombre());
-	}
 	
-	@Test(expected = EseYaExisteException.class)
-	public void guardarMetodologiaQueYaExisteTiraExepcion(){
-		repositorio.guardar(metodologia1);
-	}
+	
+
 }

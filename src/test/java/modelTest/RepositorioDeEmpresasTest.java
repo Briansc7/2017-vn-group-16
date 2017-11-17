@@ -49,22 +49,8 @@ public class RepositorioDeEmpresasTest extends AbstractPersistenceTest implement
 		empresaObtenida.getPeriodos();
 	}
 	
-	@Test
-	public void obtenerEmpresas(){
-		List<Empresa> empresasObtenidas = repositorio.buscarTodos();
-		
-		assertEquals(3, empresasObtenidas.size());
-	}
+
 	
-	@Test
-	public void obtenerEmpresaPorNombre(){
-		Empresa empresaObtenida = repositorio.buscarEmpresa("Empresa del Repositorio 1");
-		
-		assertEquals("Empresa del Repositorio 1", empresaObtenida.getNombre());
-	}
-	
-	@Test(expected = EseYaExisteException.class)
-	public void guardarEmpresaQueYaExisteTiraExepcion(){
-		repositorio.guardar(empresa1);
-	}
+
+
 }

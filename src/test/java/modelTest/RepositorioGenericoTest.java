@@ -48,10 +48,5 @@ public class RepositorioGenericoTest extends AbstractPersistenceTest implements 
         indicadorObtenido.getNombre();
     }
 
-    @Test
-    public void cantidadDeIndicadores(){
-        List<Indicador> indicadoresObtenidos = repositorio.buscarTodos();
-
-        assertEquals(3, indicadoresObtenidos.size());
-    }
+ 
 }
