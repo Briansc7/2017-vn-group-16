@@ -62,7 +62,7 @@ public class Ejecutable implements WithGlobalEntityManager{
 			            e.printStackTrace();
 			        }  
 			  }
-			}, 0*30*1000, 1*30*1000);  //Primero va el tiempo que va a esperar la primera vez, segundo lo que va a tardar en repetirse
+			}, 0*30*1000, 2*60*1000);  //Primero va el tiempo que va a esperar la primera vez, segundo lo que va a tardar en repetirse
 		
 		
 		
