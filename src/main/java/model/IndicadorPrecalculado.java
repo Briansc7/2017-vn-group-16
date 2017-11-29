@@ -23,7 +23,7 @@ public class IndicadorPrecalculado {
         return nombre;
     }
 
-    public String getValor() {
+    public String getValorString() {
         return valor;
     }
 }

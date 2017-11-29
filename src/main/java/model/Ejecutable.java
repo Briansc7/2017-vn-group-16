@@ -20,9 +20,7 @@ import java.util.TimerTask;
 public class Ejecutable implements WithGlobalEntityManager{
 	
 	public static void main(String[] args) {
-		
-		
-		
+
 		EmpresasController empresasController = new EmpresasController();
 		IndicadoresController indicadoresController = new IndicadoresController();
 		HomeController homeController = new HomeController();
@@ -60,12 +58,10 @@ public class Ejecutable implements WithGlobalEntityManager{
 			            System.out.println("Batch Ejecutado");
 			        } catch (IOException e) {
 			            e.printStackTrace();
-			        }  
+			        }
 			  }
 			}, 0*30*1000, 1*30*1000);  //Primero va el tiempo que va a esperar la primera vez, segundo lo que va a tardar en repetirse
-		
-		
-		
+
 	}
 
 }

@@ -2,7 +2,6 @@ package model.repositories;
 
 import builders.IndicadorPrecalculadoBuilder;
 import com.mongodb.MongoClient;
-import exceptions.NoExisteAtributoException;
 import model.Empresa;
 import model.Indicador;
 import model.IndicadorPrecalculado;
@@ -48,8 +47,7 @@ public class RepositorioIndicadoresPrecalculados {
         return query.asList();
     }
 
-    //todo solo deberia actualizar los indicadores que dependen de las cuentas que actualice?
-    public void precalcularIndicadores(/*List<Empresa> empresas*/){
+    public void precalcularIndicadores(){
         datastore.delete(datastore.createQuery(IndicadorPrecalculado.class));
         List<Empresa> empresas = RepositorioDeEmpresas.getInstance().buscarTodos();
         empresas.forEach(this::actualizarEmpresa);
@@ -74,5 +72,9 @@ public class RepositorioIndicadoresPrecalculados {
                 .valorString(indicador.getValorString(periodo, empresa));
             
         this.guardar(builder.build());
+    }
+
+    public void setDatastore(Datastore datastore) {
+        this.datastore = datastore;
     }
 }
