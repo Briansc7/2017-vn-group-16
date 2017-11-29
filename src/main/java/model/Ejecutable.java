@@ -47,20 +47,6 @@ public class Ejecutable implements WithGlobalEntityManager{
 		
 		post("/login", loginController::loguear, engine);
 		post("/indicadores", indicadoresController::agregar, engine);
-		
-		// Acá se queda ejecutando el batch cada 30 segundos
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(new TimerTask() {
-			  @Override
-			  public void run() {
-				  try {
-			            Runtime.getRuntime().exec("./activa.sh"); //.bat para windows, .sh para linux
-			            System.out.println("Batch Ejecutado");
-			        } catch (IOException e) {
-			            e.printStackTrace();
-			        }
-			  }
-			}, 0*30*1000, 1*30*1000);  //Primero va el tiempo que va a esperar la primera vez, segundo lo que va a tardar en repetirse
 
 	}
 
